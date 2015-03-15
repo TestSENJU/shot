@@ -65,12 +65,51 @@ public class Calculation {
 	public double shootEfficiency(double hitNum, double threePointerHit, double shootNum){
 		return (hitNum+0.5*threePointerHit)/shootNum;
 	}
-	//篮板率
-	//进攻篮板率
-	//防守篮板率
-	//助攻率
-	//抢断率
-	//盖帽率
-	//失误率
-	//使用率
+	//篮板率[球员篮板数*(球队所有球员上场时间/5)/球员上场时间/(球队总篮板+对手总篮板)]
+	public double reboundRate(double reboundSingleSum, double playingTimeTeamSum,
+			double playingTimeSingleSum, double reboundTeamSum,
+			double reboundOpponentTeamSum){
+		return reboundSingleSum*(playingTimeTeamSum/5)/playingTimeSingleSum/(reboundTeamSum+reboundOpponentTeamSum);
+	}
+	//11.进攻篮板率
+	public double offensiveReboundRate(double offensiveReboundSingle, double playingTimeTeamSum,
+			double playingTimeSingleSum, double offensiveReboundTeam,
+			double offensiveReboundOpponentTeam){		
+		return offensiveReboundSingle*(playingTimeTeamSum/5)/playingTimeSingleSum/(offensiveReboundTeam+offensiveReboundOpponentTeam);
+	}
+	//12.防守篮板率
+	public double defensiveReboundRate(double defensiveReboundSingle, double playingTimeTeamSum,
+			double playingTimeSingleSum, double defensiveReboundTeam,
+			double defensiveReboundOpponentTeam){		
+		return defensiveReboundSingle*(playingTimeTeamSum/5)/playingTimeSingleSum/(defensiveReboundTeam+defensiveReboundOpponentTeam);
+	}
+	//13.助攻率
+	public double assistingRate(double assistSingle, double playingTimeSingle,
+			double playingTimeTeam, double hitTeam, double hitSingle){
+		return assistSingle/(playingTimeSingle/(playingTimeTeam/5)*hitTeam-hitSingle);
+	}
+	
+	//14.抢断率-对手进攻次数指的是进攻回合
+	public double stealRate(double stealSingle, double playingTimeTeam,
+			double playingTimeSingle, double opponentAttackRound){
+		return stealSingle*(playingTimeTeam/5)/playingTimeSingle/opponentAttackRound;
+	}
+	//TODO
+	//15.盖帽率-我觉得数据有问题，投篮出手数和三分出手数的关系看数据应该不是包含，
+	//那公式里为啥强调了是两分球出手次数？无解。。
+	public double blockShotRate(double blockShotSingle, double playingTimeTeam,
+			double playingTimeSingle, double shootNum, double threePoint){
+		return 1;
+	}
+	//16.失误率-依然是两分球出手次数的问题，姑且当做投篮数来做
+	public double muffRate(double muffSingle, double shootSingle, double freeThrowSingle){
+		return muffSingle/(shootSingle+0.44*freeThrowSingle+muffSingle);
+	}
+	//17.使用率
+	public double usage(double shootSingle, double freeThrowSingle, double muffSingle,
+			double playingTimeTeam, double playingTimeSingle, double shootTeam,
+			double freeThrowTeam, double muffTeam){
+		return (shootSingle+0.44*freeThrowSingle+muffSingle)*(playingTimeTeam/5)
+				/playingTimeSingle/(shootTeam+0.44*freeThrowTeam+muffTeam);
+	}
 }

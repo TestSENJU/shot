@@ -10,5 +10,6 @@ public interface getPlayerData {
 	
 	public ArrayList<PlayerPO> getAllPlayer();
 	
+    public ArrayList<String> getDetailedData(String playerName);
 	
 }

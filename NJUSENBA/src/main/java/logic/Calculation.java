@@ -94,16 +94,18 @@ public class Calculation {
 			double playingTimeSingle, double opponentAttackRound){
 		return stealSingle*(playingTimeTeam/5)/playingTimeSingle/opponentAttackRound;
 	}
-	//TODO
-	//15.盖帽率-我觉得数据有问题，投篮出手数和三分出手数的关系看数据应该不是包含，
-	//那公式里为啥强调了是两分球出手次数？无解。。
+
+	//15.盖帽率-投篮出手数包括三分出手数，投篮命中数包括三分命中数
+	//
 	public double blockShotRate(double blockShotSingle, double playingTimeTeam,
-			double playingTimeSingle, double shootNum, double threePoint){
-		return 1;
+			double playingTimeSingle, double shootOpponentNum, double threePointOpponent){
+		return blockShotSingle*(playingTimeTeam/5)/playingTimeSingle/(shootOpponentNum-threePointOpponent);
 	}
-	//16.失误率-依然是两分球出手次数的问题，姑且当做投篮数来做
-	public double muffRate(double muffSingle, double shootSingle, double freeThrowSingle){
-		return muffSingle/(shootSingle+0.44*freeThrowSingle+muffSingle);
+	//16.失误率
+	public double muffRate(double muffSingle, double shootSingle, 
+			double threePointSingle, double freeThrowSingle){
+		return muffSingle/((shootSingle-threePointSingle)+
+				0.44*freeThrowSingle+muffSingle);
 	}
 	//17.使用率
 	public double usage(double shootSingle, double freeThrowSingle, double muffSingle,

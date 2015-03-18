@@ -7,7 +7,6 @@ import java.util.Comparator;
 import vo.PlayerVO;
 
 public class SortAllPlayer {
-	public static ArrayList<PlayerVO> playerList;
 	//写的很冗长。。给每个属性写了个sort类。。降序就是先升序再反过来放进arrayList
 	public ArrayList<PlayerVO> ascendPlayer(int key, ArrayList<PlayerVO> ascendPlayerList){
 		//ArrayList<PlayerVO> ascendPlayerList = new ArrayList<PlayerVO>();

@@ -8,12 +8,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MyFileFilter implements FileFilter{
+public class MyFileFilterForMatches implements FileFilter{
 	private String playerName;
 	private ArrayList<String> playerDatas=new ArrayList<String>();
 	private ArrayList<String> firstTeamDatas=new ArrayList<String>();
 	private ArrayList<String> teamTime=new ArrayList<String>();
-    public MyFileFilter(String playername){
+    public MyFileFilterForMatches(String playername){
     	this.playerName=playername;
     }
     public ArrayList<String> getPlayerDatas(){
@@ -44,9 +44,9 @@ public class MyFileFilter implements FileFilter{
 			BufferedReader br=new BufferedReader(new FileReader(pathname));
 			String str;
 			
-			try {
+			try {String team="";
 				while((str=br.readLine())!=null){
-					String team="";
+					
 					if(str.length()==3){team=str;}
 					if(str.contains(playerName)){
 						find=true;

@@ -1,12 +1,7 @@
 package data.player;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+
 import java.util.ArrayList;
 
 import po.PlayerPO;
@@ -14,9 +9,10 @@ import po.Player_AllScorePO;
 import po.Player_AverageScorePO;
 
 public class getPlayerData_Impl implements getPlayerData{
-	private  String filename="C://Users//Administrator//Desktop//matches";
-	private String name="C://Users//Administrator//Desktop//players//info//";
-	private MyFileFilter filter;
+	private  String filename="E://matches";
+	private String playerFile="E://players//info//";
+	private String teamFile=	"E://teams//teams";
+	private MyFileFilterForMatches filter;
 	//返回所有player文件夹中有名字的球员PO
 	public ArrayList<PlayerPO> getAllPlayer() {
 		// TODO Auto-generated method stub
@@ -30,7 +26,7 @@ public class getPlayerData_Impl implements getPlayerData{
 	//根据名字返回球员的PO
 public PlayerPO getPlayer(String playerName) {
 		// TODO Auto-generated method stub
-	    filter=new MyFileFilter(playerName);
+	    filter=new MyFileFilterForMatches(playerName);
 		PlayerPO player=new PlayerPO();
 		player.setName(playerName);
 		//调用getAllScores方法来设定playerPO里的Player_AllScorePO scoresInAll
@@ -56,42 +52,20 @@ public PlayerPO getPlayer(String playerName) {
         			teamNum=i;
         		}
         	}
-        	String teamName=teams.get(teamNum);
-        	player.setTeam(teamName);
-        	player.setArea(getArea(teamName));
+        	
         }
+        String teamName=teams.get(teamNum);
+    	
+    	player.setTeam(teamName);
+    	player.setArea(getArea(teamName));
         return player;
 	}
 //根据球队名字返回所在的联盟
-@SuppressWarnings("resource")
+
 private String getArea(String teamName){
-	 BufferedReader br;
-	try {
-		br = new BufferedReader(
-					new InputStreamReader(new FileInputStream("E://计算与软件工程3//迭代一数据//teams//teams"),"UTF-8"));
-		 String str;
-		try {
-			while((str=br.readLine())!=null){
-				  if(str.contains("LAC")){
-					  String strs[]=str.split("│");
-					 return strs[3]+"-"+strs[4];
-				  }
-			   }
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	} catch (UnsupportedEncodingException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (FileNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+FileReaderForTeams frT=new FileReaderForTeams(teamFile);
 
-
-	  
-	return null;
+	return frT.getTeamArea(teamName);
 }
 	//返回playerPO里的Player_AllScorePO scoresInAll;//赛季总数据
 	private Player_AllScorePO getAllScores(String playerName){
@@ -125,9 +99,10 @@ private String getArea(String teamName){
 		Player_AverageScorePO averageScore=new Player_AverageScorePO();
 		double scoresAver[]=new double[14];
 		double scoresAll[]=AllScore.getScoresAll();
+		
 		for(int i=0;i<14;i++){
 			//数组里取平均
-			scoresAver[i]=scoresAll[i]/AllScore.getNumOfMatches();
+			scoresAver[i]=(double)(Math.round(scoresAll[i]/AllScore.getNumOfMatches())/100.0);;
 		}
 		averageScore.setScoresAverage(scoresAver);
 		//妈妈！这个时间一直好烦啊！！都不想管他了
@@ -141,48 +116,18 @@ private String getArea(String teamName){
 		return averageScore;
 	}
 	//根据player文件夹中的info获取球员的一些基本信息
-    @SuppressWarnings({ "resource" })
 	private String[] getPlayerBasis(String playerName){
-    	String info[]=new String[9];
-    	int i=0;
-    	BufferedReader br;
-		try {
-			br = new BufferedReader(
-					new InputStreamReader(new FileInputStream(name+playerName),"UTF-8"));
-			String str;
-	    	try {
-				while((str=br.readLine())!=null){
-					if(str.contains("│")){
-						String strs[]=str.split("│");
-						info[i]=(strs[1].substring(0, strs[1].length()-1));
-						i++;
-					}
-				}
-				String basicInfo[]=new String[8];
-				for(int j=0;j<8;j++){
-					basicInfo[j]=info[j+1];
-				}
-				return basicInfo;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				System.out.print("ioexception");
-			}
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-		System.out.print("unspportedencoding");
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.print("filenotfound");
-		} 
-    	
-
-    	return null;
+    	FileReaderForPlayers frP=new FileReaderForPlayers(playerFile);
+    	return frP.getPlayerInfo(playerName);
     }
 //以行为单位，筛选该球员每场比赛的信息
 public ArrayList<String> getDetailedData(String playerName) {
 	// TODO Auto-generated method stub
-	filter=new MyFileFilter(playerName);
-    ArrayList<String> list=filter.getPlayerDatas();	
+	filter=new MyFileFilterForMatches(playerName);
+	File root=new File("E:\\matches");
+	File files[]=root.listFiles(filter);
+    ArrayList<String> list=new ArrayList<String>();
+         	list=	filter.getPlayerDatas();	
     if(list.size()!=0){
     	return list;
     }else{

@@ -7,7 +7,7 @@ import po.TeamPO;
 import data.FileReadAndWriteBuffer;
 import data.FileSerialization;
 
-public class TeamData {
+public class TeamData implements TeamDataService {
 	static Hashtable<String, TeamPO> teamTable = new Hashtable<String, TeamPO>();
 	private static String team_serialization_path = "serialization/team";
 	public static TeamData td;

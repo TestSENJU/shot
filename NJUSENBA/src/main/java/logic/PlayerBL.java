@@ -18,15 +18,19 @@ public class PlayerBL implements PlayerService {
 		
 		return playerList;
 	}
-	//TODO 所有球员按照某一项元素的升序排列
+	// 所有球员按照某一项元素的升序排列
 	public ArrayList<PlayerVO> sort_Ascend(int key, ArrayList<PlayerVO> playerList){
-		
-		return playerList;
+		SortAllPlayer sp = new SortAllPlayer();
+		ArrayList<PlayerVO> rePlayerList = new ArrayList<PlayerVO>();
+		rePlayerList = sp.ascendPlayer(key, playerList);
+		return rePlayerList;
 	}
-	//TODO 所有球员按照某一项元素的降序排列
+	// 所有球员按照某一项元素的降序排列
 	public ArrayList<PlayerVO> sort_Descend(int key, ArrayList<PlayerVO> playerList){
-		
-		return playerList;
+		SortAllPlayer sp = new SortAllPlayer();
+		ArrayList<PlayerVO> rePlayerList = new ArrayList<PlayerVO>();
+		rePlayerList = sp.descendPlayer(key, playerList);
+		return rePlayerList;
 	}
 	//TODO 筛选部分
 	public ArrayList<PlayerVO> filter(String playerPosition, String league, String SortBy){

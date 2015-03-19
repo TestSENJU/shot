@@ -98,8 +98,9 @@ public class SortAllPlayer {
 		//Collections.sort(ascendPlayerList, new SortByName());
 		return ascendPlayerList;
 	}
+	//降序排列
 	public ArrayList<PlayerVO> descendPlayer(int key, ArrayList<PlayerVO> descendPlayerList){
-		//TODO 除了这个还有double的问题TAT
+		//
 		ArrayList<PlayerVO> deTempPlayerList = new ArrayList<PlayerVO>();
 		ArrayList<PlayerVO> deRePlayerList = new ArrayList<PlayerVO>();
 		deTempPlayerList = ascendPlayer(key, descendPlayerList);
@@ -135,34 +136,25 @@ class SortByAssistingNum implements Comparator<PlayerVO>{
 		return p1.getAssistingNum() - p2.getAssistingNum();
 	}
 }
-//double
+//
 class SortByHitRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getHitRate() > p2.getHitRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getHitRate() - p2.getHitRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByThreePointHitRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getThreePointHitRate() > p2.getThreePointHitRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getThreePointHitRate() - p2.getThreePointHitRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByFreeThrowHitRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getFreeThrowHitRate() > p2.getFreeThrowHitRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getFreeThrowHitRate() - p2.getFreeThrowHitRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
 class SortByOffensiveReboundNum implements Comparator<PlayerVO>{
@@ -197,130 +189,91 @@ class SortByFoulNum implements Comparator<PlayerVO>{
 }
 class SortByScore implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getScore() > p2.getScore()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getScore() - p2.getScore();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByEfficiency implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getEfficiency() > p2.getEfficiency()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getEfficiency() - p2.getEfficiency();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByGmScEfficiency implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getGmScEfficiency() > p2.getGmScEfficiency()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getGmScEfficiency() - p2.getGmScEfficiency();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByTrueHitRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getTrueHitRate() > p2.getTrueHitRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getTrueHitRate() - p2.getTrueHitRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByShootEfficiency implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getShootEfficiency() > p2.getShootEfficiency()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getShootEfficiency() - p2.getShootEfficiency();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByReboundRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getReboundRate() > p2.getReboundRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getReboundRate() - p2.getReboundRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByOffensiveReboundRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getOffensiveReboundRate() > p2.getOffensiveReboundRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getOffensiveReboundRate() - p2.getOffensiveReboundRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByDefensiveReboundRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getDefensiveReboundRate() > p2.getDefensiveReboundRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getDefensiveReboundRate() - p2.getDefensiveReboundRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByAssistingRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getAssistingRate() > p2.getAssistingRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getAssistingRate() - p2.getAssistingRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByStealRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getStealRate() > p2.getStealRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getStealRate() - p2.getStealRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByBlockShotRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getBlockShotRate() > p2.getBlockShotRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getBlockShotRate() - p2.getBlockShotRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByMuffRate implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getMuffRate()> p2.getMuffRate()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getMuffRate() - p2.getMuffRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-//double
+//
 class SortByUsage implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		if (p1.getUsage() > p2.getUsage()){
-			return 1;
-		} else {
-			return 0;
-		}
+		double temp = p1.getUsage() - p2.getUsage();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }

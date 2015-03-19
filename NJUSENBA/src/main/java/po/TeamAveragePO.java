@@ -38,7 +38,7 @@ package po;
  * @param score
  *            score 比赛得分
  */
-public class TeamAgeveraPO {
+public class TeamAveragePO {
 	private String teamName;
 	private int matchNum;
 	private double shotRightNum;
@@ -57,7 +57,7 @@ public class TeamAgeveraPO {
 	private double foulNum;
 	private double score;
 
-	public TeamAgeveraPO(TeamPO po) {
+	public TeamAveragePO(TeamPO po) {
 		this.teamName = po.getTeamName();
 		this.matchNum = po.getMatchNum();
 		if (this.matchNum != 0) {

@@ -2,7 +2,9 @@ package data.team;
 
 import java.io.EOFException;
 import java.util.Hashtable;
+import java.util.Set;
 
+import po.TeamAgeveraPO;
 import po.TeamPO;
 import data.FileReadAndWriteBuffer;
 import data.FileSerialization;
@@ -31,6 +33,15 @@ public class TeamData implements TeamDataService {
 			e.printStackTrace();
 		}
 		return teamTable;
+	}
+
+	public Hashtable<String, TeamAgeveraPO> getTeamAverageData() {
+		Hashtable<String, TeamAgeveraPO> polist = new Hashtable<String, TeamAgeveraPO>();
+		Set<String> keys = teamTable.keySet();
+		for (String key : keys) {
+			polist.put(key, new TeamAgeveraPO(teamTable.get(key)));
+		}
+		return null;
 	}
 
 }

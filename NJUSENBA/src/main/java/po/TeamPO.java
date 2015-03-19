@@ -38,8 +38,7 @@ import java.io.Serializable;
  * @param foulNum
  *            foul 犯规数
  * @param score
- *            score 比赛总得分
- * @param ***Average the average number of the above data 以上数据后加Average即为场均数据
+ *            score 比赛得分
  */
 public class TeamPO implements Serializable {
 
@@ -217,113 +216,6 @@ public class TeamPO implements Serializable {
 
 	public int getScore() {
 		return score;
-	}
-
-	// TODO
-
-	public int getShotRightNumAverage() {
-		if (matchNum != 0)
-			return shotRightNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getShotNumAverage() {
-		if (matchNum != 0)
-			return shotNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getThreePointShotRightNumAverage() {
-		if (matchNum != 0)
-			return threePointShotRightNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getThreePointShotNumAverage() {
-		if (matchNum != 0)
-			return threePointShotNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getPenaltyShotRightNumAverage() {
-		if (matchNum != 0)
-			return penaltyShotRightNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getPenaltyShotNumAverage() {
-		if (matchNum != 0)
-			return penaltyShotNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getOffensiveReboundNumAverage() {
-		if (matchNum != 0)
-			return offensiveReboundNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getDefensiveReboundNumAverage() {
-		if (matchNum != 0)
-			return defensiveReboundNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getReboundNumAverage() {
-		if (matchNum != 0)
-			return reboundNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getAssistNumAverage() {
-		if (matchNum != 0)
-			return assistNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getStealNumAverage() {
-		if (matchNum != 0)
-			return stealNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getBlockShotNumAverage() {
-		if (matchNum != 0)
-			return blockShotNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getFaultyNumAverage() {
-		if (matchNum != 0)
-			return faultyNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getFoulNumAverage() {
-		if (matchNum != 0)
-			return foulNum / matchNum;
-		else
-			return 0;
-	}
-
-	public int getScoreAverage() {
-		if (matchNum != 0)
-			return score / matchNum;
-		else
-			return 0;
 	}
 
 }

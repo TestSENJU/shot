@@ -13,6 +13,7 @@ public class TestMain {
 		Hashtable<String, TeamPO> table = td.getTeamData();
 		Set<String> keys = table.keySet();
 		for (String key : keys) {
+			System.out.println(key + ":" + table.get(key).getShotRightNum());
 			System.out.println(key + ":" + table.get(key).getScore());
 		}
 	}

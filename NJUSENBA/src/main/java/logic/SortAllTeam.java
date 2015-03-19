@@ -7,6 +7,7 @@ import java.util.Comparator;
 import vo.TeamVO;
 
 public class SortAllTeam {
+	//升序排列
 	public ArrayList<TeamVO> ascendTeam(int key, ArrayList<TeamVO> ascendTeamList){
 		switch(key){
 		case 0: 
@@ -96,8 +97,15 @@ public class SortAllTeam {
 		}
 		return ascendTeamList;
 	}
+	//降序排列
 	public ArrayList<TeamVO> descendTeam(int key, ArrayList<TeamVO> descendTeamList){
-		return descendTeamList;
+		ArrayList<TeamVO> ascendTemp = new ArrayList<TeamVO>();
+		ascendTemp = ascendTeam(key, descendTeamList);
+		ArrayList<TeamVO> reDeTeamList = new ArrayList<TeamVO>();
+		for(int i=0;i < descendTeamList.size();i++){
+			reDeTeamList.add(ascendTemp.get(descendTeamList.size()-i-1));
+		}
+		return reDeTeamList;
 	}
 }
 

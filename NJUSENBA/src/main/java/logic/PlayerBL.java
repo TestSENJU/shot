@@ -43,4 +43,9 @@ public class PlayerBL implements PlayerService {
 		ArrayList<PlayerPersonalInfoVO> playerInfoList = new ArrayList<PlayerPersonalInfoVO>();
 		return playerInfoList;
 	}
+	//TODO 某一球员的具体personal信息
+	public PlayerPersonalInfoVO selectedPlayerInfo(String playerName){
+		PlayerPersonalInfoVO p = new PlayerPersonalInfoVO();
+		return p;
+	}
 }

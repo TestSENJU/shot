@@ -18,4 +18,6 @@ public interface PlayerService {
 	public ArrayList<PlayerVO> filter(String playerPosition, String league, String SortBy);
 	//TODO 球员个人信息
 	public ArrayList<PlayerPersonalInfoVO> playerPersonalInfo();
+	//TODO 某一球员的具体personal信息
+	public PlayerPersonalInfoVO selectedPlayerInfo(String playerName);
 }

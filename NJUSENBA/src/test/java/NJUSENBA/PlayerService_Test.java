@@ -44,7 +44,7 @@ public class PlayerService_Test {
 	@Test
 	public void test_filter() {
 
-		assertTrue(pbl.filter(new String(), new String(), new String()) != null);
+		assertTrue(pbl.filter(new String()) != null);
 
 	}
 

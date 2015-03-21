@@ -37,6 +37,24 @@ package po;
  *            foul 犯规数
  * @param score
  *            score 比赛得分
+ * @param hitRate
+ *            命中率
+ * @param winRate
+ *            胜率
+ * @param attackRound
+ *            进攻回合
+ * @param attackEfficiency
+ *            进攻效率
+ * @param defensiveEfficiency
+ *            防守效率
+ * @param attackReboundRate
+ *            进攻篮板效率
+ * @param defensiveReboundRate
+ *            防守篮板效率
+ * @param stealRate
+ *            抢断效率
+ * @param assistingRate
+ *            助攻率
  */
 public class TeamAveragePO {
 	private String teamName;
@@ -56,6 +74,15 @@ public class TeamAveragePO {
 	private double faultyNum;
 	private double foulNum;
 	private double score;
+	private double hitRate;
+	private double winRate;
+	private double attackRound;
+	private double attackEfficiency;
+	private double defensiveEfficiency;
+	private double attackReboundRate;
+	private double defensiveReboundRate;
+	private double stealRate;
+	private double assistingRate;
 
 	public TeamAveragePO(TeamPO po) {
 		this.teamName = po.getTeamName();
@@ -97,6 +124,15 @@ public class TeamAveragePO {
 			this.foulNum = 0;
 			this.score = 0;
 		}
+		this.hitRate = po.getHitRate();
+		this.winRate = po.getWinRate();
+		this.attackRound = po.getAttackRound();
+		this.attackEfficiency = po.getAttackEfficiency();
+		this.defensiveEfficiency = po.getDefensiveEfficiency();
+		this.attackReboundRate = po.getAttackReboundRate();
+		this.defensiveReboundRate = po.getDefensiveReboundRate();
+		this.stealRate = po.getStealRate();
+		this.assistingRate = po.getAssistingRate();
 	}
 
 	public String getTeamName() {
@@ -165,6 +201,42 @@ public class TeamAveragePO {
 
 	public double getScore() {
 		return score;
+	}
+
+	public double getHitRate() {
+		return hitRate;
+	}
+
+	public double getWinRate() {
+		return winRate;
+	}
+
+	public double getAttackRound() {
+		return attackRound;
+	}
+
+	public double getAttackEfficiency() {
+		return attackEfficiency;
+	}
+
+	public double getDefensiveEfficiency() {
+		return defensiveEfficiency;
+	}
+
+	public double getAttackReboundRate() {
+		return attackReboundRate;
+	}
+
+	public double getDefensiveReboundRate() {
+		return defensiveReboundRate;
+	}
+
+	public double getStealRate() {
+		return stealRate;
+	}
+
+	public double getAssistingRate() {
+		return assistingRate;
 	}
 
 }

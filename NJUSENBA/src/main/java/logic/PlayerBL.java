@@ -33,7 +33,7 @@ public class PlayerBL implements PlayerService {
 		return rePlayerList;
 	}
 	//TODO 筛选部分
-	public ArrayList<PlayerVO> filter(String playerPosition, String league, String SortBy){
+	public ArrayList<PlayerVO> filter(String filterInfo){
 		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
 		
 		return playerList;		

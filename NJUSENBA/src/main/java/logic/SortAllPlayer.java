@@ -94,6 +94,7 @@ public class SortAllPlayer {
 			break;
 		default:
 				System.out.println("invalid input");
+				break;
 		}
 		//Collections.sort(ascendPlayerList, new SortByName());
 		return ascendPlayerList;

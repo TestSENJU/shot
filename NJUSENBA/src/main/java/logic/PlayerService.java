@@ -15,7 +15,7 @@ public interface PlayerService {
 	// 所有球员按照某一项元素的降序排列
 	public ArrayList<PlayerVO> sort_Descend(int key, ArrayList<PlayerVO> playerList);
 	//TODO 筛选部分
-	public ArrayList<PlayerVO> filter(String playerPosition, String league, String SortBy);
+	public ArrayList<PlayerVO> filter(String filterInfo);
 	//TODO 球员个人信息
 	public ArrayList<PlayerPersonalInfoVO> playerPersonalInfo();
 	//TODO 某一球员的具体personal信息

@@ -26,16 +26,16 @@ public class FileSerialization {
 		} else {
 
 		}
-		// File player_file = new File(player_serialization_path);
-		// if (!player_file.exists()) {
-		// try {
-		// player_file.createNewFile();
-		// new PlayerSerialization();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		// } else {
-		//
-		// }
+		 File player_file = new File(player_serialization_path);
+		 if (!player_file.exists()) {
+		 try {
+		 player_file.createNewFile();
+		 new PlayerSerialization();
+		 } catch (IOException e) {
+		 e.printStackTrace();
+		 }
+		 } else {
+		
+		 }
 	}
 }

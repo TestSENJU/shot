@@ -1,5 +1,7 @@
 package po;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author wyt
@@ -20,8 +22,12 @@ package po;
  * @category
  * 初始值不管是字符串还是数字全是0
  */
-public class Player_BasicInfoPO {
+public class Player_BasicInfoPO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String playerName;
 	private String[] basicInfo=new String[8];//球员基本信息，可以从player文件夹中读取的内容
 	

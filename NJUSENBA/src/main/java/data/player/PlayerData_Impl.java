@@ -35,7 +35,7 @@ public class PlayerData_Impl implements PlayerData{
 			basicinfoTable = (Hashtable<String, Player_BasicInfoPO>) FileReadAndWriteBuffer
 					.read_from_file(playerBasic_serialpath);
 		} catch (EOFException e) {
-			e.printStackTrace();
+			System.out.println("getPlayerBasic eof");
 		}
 		return basicinfoTable;
 	}
@@ -48,7 +48,7 @@ public class PlayerData_Impl implements PlayerData{
 			allScoreTable = (Hashtable<String, Player_AllScorePO>) FileReadAndWriteBuffer
 					.read_from_file(playerAll_serialpath);
 		} catch (EOFException e) {
-			System.out.println("getPlayerAll ");
+			System.out.println("getPlayerAll eof");
 		}
 		return allScoreTable;
 	}
@@ -61,7 +61,7 @@ public class PlayerData_Impl implements PlayerData{
 			averScoreTable = (Hashtable<String, Player_AverageScorePO>) FileReadAndWriteBuffer
 					.read_from_file(playerAver_serialpath);
 		} catch (EOFException e) {
-			System.out.println("getPlayerAll ");
+			System.out.println("getPlayerAll eof");
 		}
 		return averScoreTable;
 	}

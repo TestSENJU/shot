@@ -52,7 +52,7 @@ public class Player_AllScorePO implements Serializable{
 	
 	public Player_AllScorePO(String playername){
 		this.playerName=playername;
-		this.team="0";
+		this.team=null;
 		this.timeAll="0:0";
 		this.teamArea="0";
 		this.numOfFirstMatches=0;
@@ -123,51 +123,11 @@ public class Player_AllScorePO implements Serializable{
 					+":"	+(seconds-60+"");	
 		}
 	}
-	/**
-	 * 
-	 * @param time
-	 * 错误逻辑检测时间，检查是不是符合格式
-	 * @param s
-	 * 错误检查是不是每个都可以变成整型
-	 * @return
-	 */
-	public boolean checkData(String time,String[] s){
-		boolean right=true;
-		String ss[]=time.split(":");
-		if(ss.length!=2)right=false;
-		 int nums[]=new int[14];
-		for(int i=0;i<s.length;i++){
-			int num;
-			try {
-				num = Integer.parseInt(s[i]);
-				nums[i]=num;
-		        i++;
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				right=false;
-			}
-	        
-//要是格式不对了直接就返回不加这次比赛里的这一行了
- }
 
-		 if(nums[0]>nums[1]||nums[2]>nums[3]||
-				 nums[4]>nums[5]||nums[6]+nums[7]!=nums[8]){
-			 right=false;
-		 }
-		return right;
-	}
-	public void addAllScore(String strs[]){
-		 int nums[]=new int[14];
-		 int j=0;
-		 
-		 for(int i=0;i<scoresAll.length;i++){
-				int num=Integer.parseInt(strs[i]);
-		        nums[j]=num;
-		        j++;
-//要是格式不对了直接就返回不加这次比赛里的这一行了
-	 }
-			for(int i=0;i<nums.length;i++){
-				scoresAll[i]+=nums[i];
+	public void addAllScore(double[] s){
+		
+			for(int i=0;i<s.length;i++){
+				this.scoresAll[i]+=s[i];
 			}
 		}
 

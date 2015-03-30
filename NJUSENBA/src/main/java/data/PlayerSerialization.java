@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Set;
 
 import po.Player_AllScorePO;
 import po.Player_AverageScorePO;
@@ -21,7 +22,7 @@ static Hashtable<String,Player_AverageScorePO> averScoreTable=new Hashtable<Stri
 static Hashtable<String,Player_AllScorePO> allScoreTable=new Hashtable<String,Player_AllScorePO>();  
 static Hashtable<String,Player_BasicInfoPO> basicinfoTable=new Hashtable<String,Player_BasicInfoPO>(); 
 private static String teampath="teams/teams";
-private static String playerpath="players";
+private static String playerpath="players/info";
 private static String matchpath="matches";
 private static String playerAll_serialpath="serialization/playerAllScore";
 private static String playerAver_serialpath="serialization/playerAverageScore";
@@ -29,6 +30,7 @@ private static String playerBasic_serialpath="serialization/playerBasicInfo";
 
 
 public PlayerSerialization(){
+	
 	readPlayerFiles(playerpath);
 	readMatchFiles(matchpath);
 	setAverage();
@@ -37,29 +39,26 @@ public PlayerSerialization(){
 	writeFileAverScore(playerAver_serialpath);
 	writeFileBasicInfo(playerBasic_serialpath);
 }
-private static void readMatchFiles(String path){
-	File list[] = new File(path).listFiles();
-	for (int i = 0; i < list.length; i++) {
-		readOneMatch(list[i]);
-	}
-}
+
 private static void readPlayerFiles(String path){
-	String list[] = new File(playerpath).list();
+	String list[] = new File(path).list();
 	for (int i = 0; i < list.length; i++) {
 		
-			String spl = list[i].toString();;
+			String spl = list[i];
 			if (!basicinfoTable.containsKey(spl)){
 				Player_BasicInfoPO playerInfo=new Player_BasicInfoPO(spl);
 				String s[]=new String[9];
 				String ss[]=new String[8];
-				int n=0;
+				
 				BufferedReader br;
 				try {
 					br = new BufferedReader(
-							new InputStreamReader(new FileInputStream(list[i]),"UTF-8"));
+							new InputStreamReader(new FileInputStream(path+"/"+list[i]),"UTF-8"));
 					String str;
+					int n=0;
 			    	try {
 						while((str=br.readLine())!=null){
+						
 							if(str.contains("│")){
 								String strs[]=str.split("│");
 								s[n]=(strs[1].substring(0, strs[1].length()-1));
@@ -84,11 +83,6 @@ private static void readPlayerFiles(String path){
 					System.out.print("filenotfound");
 				} 			
 			}			
-			if (!allScoreTable.containsKey(spl))
-				allScoreTable.put(spl, new Player_AllScorePO(spl));
-			if (!averScoreTable.containsKey(spl)){
-				averScoreTable.put(spl, new Player_AverageScorePO(spl));	
-			}
 	}
 	
 }
@@ -100,38 +94,51 @@ private static void readTeamFiles(String path){
 	  }  
 
 }
+private static void readMatchFiles(String path){
+	File list[] = new File(path).listFiles();
+	for (int i = 0; i < list.length; i++) {
+		readOneMatch(list[i]);
+	}
+}
 @SuppressWarnings("resource")
 private static String getTeamArea(String teamName,String path){
-	String result="";
-	BufferedReader br;
-		try {
-			br = new BufferedReader(
-						new InputStreamReader(new FileInputStream(path)));
-			 String str;
+	if(teamName!=null){
+		String result="";
+		BufferedReader br;
 			try {
-				while((str=br.readLine())!=null){
-					  if(str.contains(teamName)){
-						  String strs[]=str.split(";");
-						  result= strs[3]+"-"+strs[4];
-						 
-					  }
-				   }
-			} catch (IOException e) {
+				br = new BufferedReader(
+							new InputStreamReader(new FileInputStream(path)));
+				 String str;
+				try {
+					while((str=br.readLine())!=null){
+						  if(str.contains(teamName)){
+							  String strs[]=str.split("│");
+							  result= strs[3]+"-"+strs[4];
+							 
+						  }
+					   }
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.print("io");
+				}
+			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
-				System.out.print("io");
+				System.out.print("filenotfound");
 			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.print("filenotfound");
-		}
-		return result;
+			return result;
+	}else{
+		return null;
+	}
+	
 }
 private static void setAverage(){
-	for(Iterator<String>  it=allScoreTable.keySet().iterator(); it.hasNext();){   
-        String key=(String)it.next();   
-        Player_AllScorePO value=allScoreTable.get(key);   
-        averScoreTable.get(key).setAllScore(value);;                   
-    }  
+	Set<String>keys=allScoreTable.keySet();
+	for(String key:keys){
+		Player_AverageScorePO averScore=new Player_AverageScorePO(key);
+		averScore.setAllScore(allScoreTable.get(key));
+		averScoreTable.put(key, averScore);
+	}
+
 }
 private static void readOneMatch(File file){
 	FileReader fr;
@@ -142,32 +149,49 @@ private static void readOneMatch(File file){
 		String str="";
 		String team="";
 		boolean haveTeam=false;
+
 		while((str=br.readLine())!=null){
 			if(str.length()==3){
 				team=str;
 				haveTeam=true;
 			}
 			if(haveTeam){
-				String strs[]=str.split(";");
-				//包含错误逻辑检测，如果在球员的文件夹里没有这个球员，而比赛里面直接不会把这个球员的数据加进去
-				if(basicinfoTable.contains(strs[0])){
-					String s[]=new String[14];
-					for(int i=0;i<s.length;i++){
-						s[i]=strs[i+3];
-					}
-					if(allScoreTable.get(strs[0]).checkData(strs[2], s)){
-						allScoreTable.get(strs[0]).addAllScore(s);
-						allScoreTable.get(strs[0]).addTimeAll(strs[2]);
-						if(strs[1]!=""){				
-							allScoreTable.get(strs[0]).addnumOfFirstMatches(1);
-							}
-							
-							allScoreTable.get(strs[0]).addnumOfMatches(1);
-							allScoreTable.get(strs[0]).setTeam(team);
-					}				
+				if(str.length()!=3){
+					String strs[]=str.split(";");	
+						if(checkData(strs[2], strs)){
+							double s[]=new double[14];
+							for(int i=0;i<s.length;i++){
+								s[i]=Double.parseDouble(strs[i+3]);
+							}							
+								if(allScoreTable.containsKey(strs[0])){
+									allScoreTable.get(strs[0]).addAllScore(s);
+									allScoreTable.get(strs[0]).addTimeAll(strs[2]);
+									char c[]=strs[1].toCharArray();
+									if(c.length!=0){
+										if(c[0]<='Z'&&c[0]>='A'){				
+											allScoreTable.get(strs[0]).addnumOfFirstMatches(1);
+										}
+									}								
+									allScoreTable.get(strs[0]).addnumOfMatches(1);
+									allScoreTable.get(strs[0]).setTeam(team);
+								}else{
+									Player_AllScorePO allScore_new=new Player_AllScorePO(strs[0]);
+									allScore_new.setScoresAll(s);
+									allScore_new.addnumOfMatches(1);
+									allScore_new.addTimeAll(strs[2]);
+									if(strs[1]!=null){	
+										allScore_new.addnumOfFirstMatches(1);
+									}	
+									if(basicinfoTable.containsKey(strs[0])){
+										allScoreTable.put(strs[0], allScore_new);
+									}
+								}
+						}	
+						
+					}	
 				}
+				
 			}
-		}
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		System.out.println("file not found read one match");
@@ -186,5 +210,38 @@ public void writeFileAverScore(String path){
 public void writeFileBasicInfo(String path){
 	FileReadAndWriteBuffer.write_to_file(playerBasic_serialpath, basicinfoTable);
 
+}
+/**
+ * 
+ * @param time
+ * 错误逻辑检测时间，检查是不是符合格式
+ * @param s
+ * 错误检查是不是每个都可以变成整型
+ * @return
+ */
+private static boolean checkData(String time,String[] s){
+	boolean right=true;
+	String ss[]=time.split(":");
+	if(ss.length!=2)right=false;
+	 double nums[]=new double[14];
+	for(int i=0;i<nums.length;i++){
+		double num;
+		try {
+			num = Double.parseDouble(s[i+3]);
+			nums[i]=num;
+	        i++;
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			right=false;
+		}
+        
+//要是格式不对了直接就返回不加这次比赛里的这一行了
+      }
+
+	 if(!(nums[0]>nums[1]||nums[2]>nums[3]||
+			 nums[4]>nums[5]||nums[6]+nums[7]!=nums[8])){
+		 right=false;
+	 }
+	return right;
 }
 }

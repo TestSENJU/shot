@@ -25,7 +25,7 @@ import java.io.Serializable;
  *  12犯规数
  *  13个人得分
  */
-public class Player_AverageScorePO  implements Serializable{
+public class Player_AverageScorePO implements Serializable{
 	/**
 	 * 
 	 */

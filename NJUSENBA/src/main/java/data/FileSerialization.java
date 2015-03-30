@@ -5,7 +5,10 @@ import java.io.IOException;
 
 public class FileSerialization {
 	private static String team_serialization_path = "serialization/team";
-	private static String player_serialization_path = "serialization/player";
+	private static String playerAll_serialization_path = "serialization/playerAllScore";
+	private static String playerAver_serialization_path = "serialization/playerAverageScore";
+	private static String playerBasic_serialization_path = "serialization/playerBasicInfo";
+	
 	private static FileSerialization fs;
 
 	public static synchronized FileSerialization getInstance() {
@@ -26,10 +29,14 @@ public class FileSerialization {
 		} else {
 
 		}
-		 File player_file = new File(player_serialization_path);
-		 if (!player_file.exists()) {
+		 File playerAll_file = new File(playerAll_serialization_path);
+		 File playerAver_file = new File(playerAver_serialization_path);
+		 File playerBasic_file = new File(playerBasic_serialization_path);
+		 if (!playerAll_file.exists()&&(!playerAver_file.exists())&&(!playerBasic_file.exists())) {
 		 try {
-		 player_file.createNewFile();
+			 playerAll_file.createNewFile();
+			 playerAver_file.createNewFile();
+			 playerBasic_file.createNewFile();
 		 new PlayerSerialization();
 		 } catch (IOException e) {
 		 e.printStackTrace();
@@ -37,5 +44,6 @@ public class FileSerialization {
 		 } else {
 		
 		 }
+		
 	}
 }

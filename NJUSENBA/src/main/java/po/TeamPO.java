@@ -41,6 +41,10 @@ import java.io.Serializable;
  *            score 比赛得分
  * @param hitRate
  *            命中率
+ * @param threeHitRate
+ *            三分命中率
+ * @param penaltyRate
+ *            发球命中率
  * @param winRate
  *            胜率
  * @param attackRound
@@ -58,7 +62,6 @@ import java.io.Serializable;
  * @param assistingRate
  *            助攻率
  */
-@SuppressWarnings("unused")
 public class TeamPO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -82,13 +85,13 @@ public class TeamPO implements Serializable {
 	private int faultyNum;
 	private int foulNum;
 	private int score;
-//	private double hitRate;
-//	private double winRate;
-//	private double attackRound;
-//	private double attackEfficiency;
-//	private double defensiveEfficiency;
-//	private double attackReboundRate;
-//	private double defensiveReboundRate;
+	// private double hitRate;
+	// private double winRate;
+	// private double attackRound;
+	// private double attackEfficiency;
+	// private double defensiveEfficiency;
+	// private double attackReboundRate;
+	// private double defensiveReboundRate;
 	// private double stealRate;
 	// private double assistingRate;
 
@@ -254,8 +257,22 @@ public class TeamPO implements Serializable {
 	}
 
 	public double getWinRate() {
-		if (matchNum != 0)
-			return winNum / matchNum;
+		if (getMatchNum() != 0)
+			return getWinNum() / getMatchNum();
+		else
+			return 0;
+	}
+
+	public double getThreeHitRate() {
+		if (getThreePointShotNum() != 0)
+			return getThreePointShotRightNum() / getThreePointShotNum();
+		else
+			return 0;
+	}
+
+	public double getPenaltyRate() {
+		if (getPenaltyShotNum() != 0)
+			return getPenaltyShotRightNum() / getPenaltyShotNum();
 		else
 			return 0;
 	}

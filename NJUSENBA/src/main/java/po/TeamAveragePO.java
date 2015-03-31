@@ -75,6 +75,8 @@ public class TeamAveragePO {
 	private double foulNum;
 	private double score;
 	private double hitRate;
+	private double threeHitRate;
+	private double penaltyRate;
 	private double winRate;
 	private double attackRound;
 	private double attackEfficiency;
@@ -107,6 +109,8 @@ public class TeamAveragePO {
 			this.faultyNum = po.getFaultyNum() / this.matchNum;
 			this.foulNum = po.getFoulNum() / this.matchNum;
 			this.score = po.getScore() / this.matchNum;
+
+			this.attackRound = po.getAttackRound() / this.matchNum;
 		} else {
 			this.shotRightNum = 0;
 			this.shotNum = 0;
@@ -125,8 +129,9 @@ public class TeamAveragePO {
 			this.score = 0;
 		}
 		this.hitRate = po.getHitRate();
+		this.threeHitRate = po.getThreeHitRate();
+		this.penaltyRate = po.getPenaltyRate();
 		this.winRate = po.getWinRate();
-		this.attackRound = po.getAttackRound();
 		this.attackEfficiency = po.getAttackEfficiency();
 		this.defensiveEfficiency = po.getDefensiveEfficiency();
 		this.attackReboundRate = po.getAttackReboundRate();
@@ -237,6 +242,14 @@ public class TeamAveragePO {
 
 	public double getAssistingRate() {
 		return assistingRate;
+	}
+
+	public double getThreeHitRate() {
+		return threeHitRate;
+	}
+
+	public double getPenaltyRate() {
+		return penaltyRate;
 	}
 
 }

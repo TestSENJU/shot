@@ -258,21 +258,22 @@ public class TeamPO implements Serializable {
 
 	public double getWinRate() {
 		if (getMatchNum() != 0)
-			return getWinNum() / getMatchNum();
+			return (double) getWinNum() / getMatchNum();
 		else
 			return 0;
 	}
 
 	public double getThreeHitRate() {
 		if (getThreePointShotNum() != 0)
-			return getThreePointShotRightNum() / getThreePointShotNum();
+			return (double) getThreePointShotRightNum()
+					/ getThreePointShotNum();
 		else
 			return 0;
 	}
 
 	public double getPenaltyRate() {
 		if (getPenaltyShotNum() != 0)
-			return getPenaltyShotRightNum() / getPenaltyShotNum();
+			return (double) getPenaltyShotRightNum() / getPenaltyShotNum();
 		else
 			return 0;
 	}
@@ -294,7 +295,7 @@ public class TeamPO implements Serializable {
 	public double getAttackReboundRate() {
 		if (getOffensiveReboundNum() != 0
 				&& getOpponent_defensiveRebound() != 0)
-			return getOffensiveReboundNum()
+			return (double) getOffensiveReboundNum()
 					/ (getOffensiveReboundNum() + getOpponent_defensiveRebound());
 		else
 			return 0;
@@ -303,7 +304,7 @@ public class TeamPO implements Serializable {
 	public double getDefensiveReboundRate() {
 		if (getDefensiveReboundNum() != 0
 				&& getOpponent_offensiveRebound() != 0)
-			return getDefensiveReboundNum()
+			return (double) getDefensiveReboundNum()
 					/ (getDefensiveReboundNum() + getOpponent_offensiveRebound());
 		else
 			return 0;
@@ -324,9 +325,9 @@ public class TeamPO implements Serializable {
 	}
 
 	public double getHitRate() {
-		if (getShotNum() != 0)
-			return getShotRightNum() / getShotNum();
-		else
+		if (getShotNum() != 0) {
+			return (double) getShotRightNum() / getShotNum();
+		} else
 			return 0;
 	}
 

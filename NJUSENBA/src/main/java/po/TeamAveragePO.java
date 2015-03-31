@@ -1,5 +1,7 @@
 package po;
 
+import java.io.Serializable;
+
 /**
  * @author XY
  *
@@ -56,7 +58,10 @@ package po;
  * @param assistingRate
  *            助攻率
  */
-public class TeamAveragePO {
+public class TeamAveragePO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private String teamName;
 	private int matchNum;
 	private double shotRightNum;

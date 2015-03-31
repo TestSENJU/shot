@@ -5,18 +5,18 @@ public class PlayerVO {
 	String teams;// 所属球队
 	int competeNum;// 参赛场数
 	int offensiveNum;// 先发场数
-	int reboundNum;// 篮板数
-	int assistingNum;// 助攻数
+	double reboundNum;// 篮板数
+	double assistingNum;// 助攻数
 	String playingTime;// 在场时间
 	double hitRate;// 投篮命中率
 	double threePointHitRate;// 三分命中率
 	double freeThrowHitRate;// 罚球命中率
-	int offensiveReboundNum;// 进攻篮板数
-	int defensiveReboundNum;// 防守篮板数
-	int stealNum;// 抢断数
-	int blockShotNum;// 盖帽数
-	int muffNum;// 失误数
-	int foulNum;// 犯规数
+	double offensiveReboundNum;// 进攻篮板数
+	double defensiveReboundNum;// 防守篮板数
+	double stealNum;// 抢断数
+	double blockShotNum;// 盖帽数
+	double muffNum;// 失误数
+	double foulNum;// 犯规数
 	double score;// 得分
 	double efficiency;// 效率
 	double GmScEfficiency;// GmSc效率值
@@ -32,11 +32,11 @@ public class PlayerVO {
 	double usage;// 使用率
 
 	public PlayerVO(String name, String teams, int competeNum,
-			int offensiveNum, int reboundNum, int assistingNum,
+			int offensiveNum, double reboundNum, double assistingNum,
 			String playingTime, double hitRate, double threePointHitRate,
-			double freeThrowHitRate, int offensiveReboundNum,
-			int defensiveReboundNum, int stealNum, int blockShotNum,
-			int muffNum, int foulNum, double score, double efficiency,
+			double freeThrowHitRate, double offensiveReboundNum,
+			double defensiveReboundNum, double stealNum, double blockShotNum,
+			double muffNum, double foulNum, double score, double efficiency,
 			double GmScEfficiency, double trueHitRate, double shootEfficiency,
 			double reboundRate, double offensiveReboundRate,
 			double defensiveReboundRate, double assistingRate,
@@ -108,19 +108,19 @@ public class PlayerVO {
 		this.offensiveNum = offensiveNum;
 	}
 
-	public int getReboundNum() {
+	public double getReboundNum() {
 		return reboundNum;
 	}
 
-	public void setReboundNum(int reboundNum) {
+	public void setReboundNum(double reboundNum) {
 		this.reboundNum = reboundNum;
 	}
 
-	public int getAssistingNum() {
+	public double getAssistingNum() {
 		return assistingNum;
 	}
 
-	public void setAssistingNum(int assistingNum) {
+	public void setAssistingNum(double assistingNum) {
 		this.assistingNum = assistingNum;
 	}
 
@@ -156,51 +156,51 @@ public class PlayerVO {
 		this.freeThrowHitRate = freeThrowHitRate;
 	}
 
-	public int getOffensiveReboundNum() {
+	public double getOffensiveReboundNum() {
 		return offensiveReboundNum;
 	}
 
-	public void setOffensiveReboundNum(int offensiveReboundNum) {
+	public void setOffensiveReboundNum(double offensiveReboundNum) {
 		this.offensiveReboundNum = offensiveReboundNum;
 	}
 
-	public int getDefensiveReboundNum() {
+	public double getDefensiveReboundNum() {
 		return defensiveReboundNum;
 	}
 
-	public void setDefensiveReboundNum(int defensiveReboundNum) {
+	public void setDefensiveReboundNum(double defensiveReboundNum) {
 		this.defensiveReboundNum = defensiveReboundNum;
 	}
 
-	public int getStealNum() {
+	public double getStealNum() {
 		return stealNum;
 	}
 
-	public void setStealNum(int stealNum) {
+	public void setStealNum(double stealNum) {
 		this.stealNum = stealNum;
 	}
 
-	public int getBlockShotNum() {
+	public double getBlockShotNum() {
 		return blockShotNum;
 	}
 
-	public void setBlockShotNum(int blockShotNum) {
+	public void setBlockShotNum(double blockShotNum) {
 		this.blockShotNum = blockShotNum;
 	}
 
-	public int getMuffNum() {
+	public double getMuffNum() {
 		return muffNum;
 	}
 
-	public void setMuffNum(int muffNum) {
+	public void setMuffNum(double muffNum) {
 		this.muffNum = muffNum;
 	}
 
-	public int getFoulNum() {
+	public double getFoulNum() {
 		return foulNum;
 	}
 
-	public void setFoulNum(int foulNum) {
+	public void setFoulNum(double foulNum) {
 		this.foulNum = foulNum;
 	}
 

@@ -28,7 +28,7 @@ public class mainUI {
     	jFrame.setLayout(null);
     	jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     	jFrame.setLocationRelativeTo(null);
-    	jLabel1.setBounds(0, 0, 1200, 700);
+    	jLabel1.setBounds(0, 0, 1200,700);
     	jFrame.add(jLabel1);
     	jLabel1.add(jLabel2);
     	jLabel1.setIcon(background);

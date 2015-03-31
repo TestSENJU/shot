@@ -18,11 +18,11 @@ public class selectTorPUI {
 	JLabel jLabel3=new JLabel("backgroundTeam");
 	JLabel jLabel4=new JLabel(" ");
 	JLabel jLabel5=new JLabel(" ");
-	ImageIcon background=new ImageIcon("C://nba/picture/background2.jpg");
-	ImageIcon backgroundPlayer=new ImageIcon("C://nba/picture/background2Player.jpg");
-	ImageIcon backgroundTeam=new ImageIcon("C://nba/picture/background2Team.jpg");
-	ImageIcon exit=new ImageIcon("C://nba/picture/background1Exit.jpg");
-	ImageIcon back=new ImageIcon("C://nba/picture/background2Back.jpg");
+	ImageIcon background=new ImageIcon("img/picture/background2.jpg");
+	ImageIcon backgroundPlayer=new ImageIcon("img/picture/background2Player.jpg");
+	ImageIcon backgroundTeam=new ImageIcon("img/picture/background2Team.jpg");
+	ImageIcon exit=new ImageIcon("img/picture/background1Exit.jpg");
+	ImageIcon back=new ImageIcon("img/picture/background2Back.jpg");
     public void drawSelectTorPUI(){
     	jFrame.setUndecorated(true);
     	jFrame.setVisible(true);

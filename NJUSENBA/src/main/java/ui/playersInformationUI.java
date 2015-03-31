@@ -23,16 +23,24 @@ public class playersInformationUI {
     JLabel jLabel1=new JLabel("background");
     JLabel jLabel2=new JLabel("back");
     JLabel jLabel3=new JLabel(" ");
-    ImageIcon background=new ImageIcon("C://nba/picture/playerBackground2.jpg");
-    ImageIcon back=new ImageIcon("C://nba/picture/playerBackground1Back.jpg");
-    ImageIcon exit=new ImageIcon("C://nba/picture/playerBackground1Exit.jpg");
+    JLabel jLabel4=new JLabel("player");
+    JLabel jLabel5=new JLabel("action");
+    ImageIcon background=new ImageIcon("img/picture/playerBackground2.jpg");
+    ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
+    ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
+    ImageIcon player;
+    ImageIcon action;
     String[] data={" ","赛季总数据","赛季平均数据"};
     JTextField jTextField1;
     JTextField jTextField2;
     JComboBox jComboBox=new JComboBox(data);
+    public String getSelectCondition(){
     String selectCondition=(String)jComboBox.getSelectedItem();
+    return selectCondition;
+    }
     public String[] getPlayerData(){
     	String[] playerData=null;
+    	String selectCondition=getSelectCondition();
     	if(selectCondition.equals("赛季总数据")){
     		return playerData;
     	}
@@ -73,7 +81,16 @@ public class playersInformationUI {
     	jLabel1.add(jLabel2);
     	jLabel3.setBounds(1120, 0, 80, 80);
     	jLabel1.add(jLabel3);
-        
+    	playersCheckUI checkUI=new playersCheckUI();
+        String playname=checkUI.getPlayerName();
+        player =new ImageIcon("img/players/portrait/"+playname+".png");
+        action =new ImageIcon("img/players/action/"+playname+".png");
+        jLabel4.setBounds(70, 40, 230, 185);
+        jLabel4.setIcon(player);
+        jLabel1.add(jLabel4);
+        jLabel5.setBounds(800, 0, 400, 700);
+        jLabel5.setIcon(action);
+        jLabel1.add(jLabel5);
     	jLabel2.addMouseListener(new MouseListener() {
 			
 			public void mouseReleased(MouseEvent e) {

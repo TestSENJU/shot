@@ -26,15 +26,19 @@ public class playersCheckUI {
     JComboBox jComboBox1=new JComboBox(condition);
     JComboBox jComboBox2=new JComboBox(position);
     JComboBox jComboBox3=new JComboBox(league);
-    ImageIcon background=new ImageIcon("C://nba/picture/playerBackground1.jpg");
-    ImageIcon back=new ImageIcon("C://nba/picture/playerBackground1Back.jpg");
-    ImageIcon exit=new ImageIcon("C://nba/picture/playerBackground1Exit.jpg");
-    ImageIcon search=new ImageIcon("C://nba/picture/playerBackground1Search.jpg");
-    ImageIcon check=new ImageIcon("C://nba/picture/playerBackground1Check.jpg");
+    ImageIcon background=new ImageIcon("img/picture/playerBackground1.jpg");
+    ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
+    ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
+    ImageIcon search=new ImageIcon("img/picture/playerBackground1Search.jpg");
+    ImageIcon check=new ImageIcon("img/picture/playerBackground1Check.jpg");
     JTextField jTextField=new JTextField(" ");
     public String[] getSelectCondition(){
     	String[] select={(String)jComboBox1.getSelectedItem(),(String)jComboBox2.getSelectedItem(),(String)jComboBox3.getSelectedItem()};
     	return select;
+    }
+    public String getPlayerName(){
+    	String playerName=jTextField.getText();
+    	return playerName;
     }
     public void playersCheckUI(){
     	jFrame.setUndecorated(true);

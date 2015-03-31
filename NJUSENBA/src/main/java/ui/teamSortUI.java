@@ -17,9 +17,9 @@ public class teamSortUI {
 	JLabel jLabel1= new JLabel("background");
 	JLabel jLabel2=new JLabel("back");
 	JLabel jLabel3=new JLabel(" ");
-	ImageIcon background=new ImageIcon("C://nba/picture/teamBackground3.jpg");
-	ImageIcon back=new ImageIcon("C://nba/picture/teamBackground1Back.jpg");
-	ImageIcon exit=new ImageIcon("C://nba/picture/teamBackground1Exit.jpg");
+	ImageIcon background=new ImageIcon("img/picture/teamBackground3.jpg");
+	ImageIcon back=new ImageIcon("img/picture/teamBackground1Back.jpg");
+	ImageIcon exit=new ImageIcon("img/picture/teamBackground1Exit.jpg");
 	JTextField jTextField;
     public void teamSortUI(teamSort[]){
     	jFrame.setUndecorated(true);
@@ -102,4 +102,3 @@ public class teamSortUI {
 			}
 		});
     }
-}

@@ -18,9 +18,9 @@ public class mainUI {
 	JLabel jLabel1=new JLabel("background");
 	JLabel jLabel2=new JLabel("enter");
 	JLabel jLabel3=new JLabel(" ");
-	ImageIcon background=new ImageIcon("C://nba/picture/background1.jpg");
-	ImageIcon enter=new ImageIcon("C://nba/picture/background1Enter.jpg");
-	ImageIcon exit=new ImageIcon("C://nba/picture/background1Exit.jpg");
+	ImageIcon background=new ImageIcon("img/picture/background1.jpg");
+	ImageIcon enter=new ImageIcon("img/picture/background1Enter.jpg");
+	ImageIcon exit=new ImageIcon("img/picture/background1Exit.jpg");
     public void drawMainUI(){
     	jFrame.setUndecorated(true);
     	jFrame.setVisible(true);

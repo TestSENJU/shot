@@ -18,9 +18,9 @@ public class playersBeforeFiftyUI{
 	JLabel jLabel1=new JLabel("background");
 	JLabel jLabel2=new JLabel("back");
 	JLabel jLabel3=new JLabel(" ");
-    ImageIcon background=new ImageIcon("C://nba/picture/playerBackground3.jpg");
-    ImageIcon back=new ImageIcon("C://nba/picture/playerBackground1Back.jpg");
-    ImageIcon exit=new ImageIcon("C://nba/picture/playerBackground1Exit.jpg");
+    ImageIcon background=new ImageIcon("img/picture/playerBackground3.jpg");
+    ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
+    ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
     String[] playerBeforeFifty=null;
     JTextField jTextField;
     public void playersBeforeFiftyUI(String[] playerBeforeFifty){

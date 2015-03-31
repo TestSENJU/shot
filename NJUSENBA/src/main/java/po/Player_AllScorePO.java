@@ -14,7 +14,7 @@ import java.io.Serializable;
  *   
  *  @param   numOfMatches
  *  总参赛场数
- *  @param team 
+ *  @param team ,teamArea
  *  队伍，联盟
  *  @param scoresAll
  *  0投篮命中数
@@ -27,10 +27,11 @@ import java.io.Serializable;
  *  7进攻后场篮板数
  *  8总篮板数
  *  9助攻数
- *  10盖帽数
- *  11失误数
- *  12犯规数
- *  13个人得分
+ *  10抢断数
+ *  11盖帽数
+ *  12失误数
+ *  13犯规数
+ *  14个人得分
  *
  */
 
@@ -48,7 +49,7 @@ public class Player_AllScorePO implements Serializable{
 	private String timeAll;//上场时间
 	private int numOfFirstMatches;//先发场数
 	private int numOfMatches;//参赛场数
-	private double scoresAll[]=new double[14];
+	private double scoresAll[]=new double[15];
 	
 	public Player_AllScorePO(String playername){
 		this.playerName=playername;

@@ -20,10 +20,11 @@ import java.io.Serializable;
  *  7进攻后场篮板数
  *  8总篮板数
  *  9助攻数
- *  10盖帽数
- *  11失误数
- *  12犯规数
- *  13个人得分
+*  10抢断数
+ *  11盖帽数
+ *  12失误数
+ *  13犯规数
+ *  14个人得分
  */
 public class Player_AverageScorePO implements Serializable{
 	/**
@@ -33,7 +34,7 @@ public class Player_AverageScorePO implements Serializable{
 	//场均数据；
 	String playerName;
 	private String timeAver;//上场时间
-	private double scoresAverage[]=new double[14];
+	private double scoresAverage[]=new double[15];
 	
 	public Player_AverageScorePO(String playerName){
 		this.playerName=playerName;
@@ -46,10 +47,10 @@ public void setAllScore(Player_AllScorePO AllScore){
 	if(AllScore!=null){
 		if(AllScore.getNumOfMatches()!=0){
 			this.playerName=AllScore.getPlayerName();
-			double scoresAver[]=new double[14];
+			double scoresAver[]=new double[15];
 			double scoresAll[]=AllScore.getScoresAll();
 			
-			for(int i=0;i<14;i++){
+			for(int i=0;i<scoresAll.length;i++){
 				//数组里取平均
 				scoresAver[i]=scoresAll[i]/AllScore.getNumOfMatches();
 			}

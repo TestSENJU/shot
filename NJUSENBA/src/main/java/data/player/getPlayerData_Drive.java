@@ -7,12 +7,12 @@ import po.Player_AllScorePO;
 import po.Player_AverageScorePO;
 import po.Player_BasicInfoPO;
 
- /**
-  * 
-  * @author Administrator
-  * @category basicinfo has been checked
-  *
-  */
+/**
+ * 
+ * @author wyt
+ * @category 测试球员数据部分
+ *
+ */
 public class getPlayerData_Drive {
 public static void main(String args[]){
      PlayerData pd=new PlayerData_Impl();
@@ -23,6 +23,32 @@ public static void main(String args[]){
      vt=pd.getPlayerAverage();
      
      Hashtable<String,Player_AllScorePO> at=pd.getPlayerAll(); 
+//     Player_AllScorePO playerAll=at.get("Aaron Gray");
+//     Player_AverageScorePO playerAver=vt.get("Aaron Gray");
+//     Player_BasicInfoPO playerBasic=bt.get("Aaron Gray");
+//	 String strs[]=playerBasic.getBasicInfo();
+//	 for(int i=0;i<strs.length;i++){
+//		 System.out.print(strs[i]);
+//		 //TODO
+//	 } 
+//	 double nums[]=playerAll.getScoresAll();
+//	 //输出球员的总数据
+//	 System.out.println(playerAll.getNumOfMatches());
+//	 System.out.println(playerAll.getNumOfFirstMatches());
+//	 System.out.println(playerAll.getTeam());
+//	 System.out.println(playerAll.getTeamArea());
+//	 System.out.println(playerAll.getTimeAll());
+//	 System.out.println();
+//	 for(int i=0;i<15;i++){
+//		 System.out.println(nums[i]);
+//		 }
+//	 double ss[]=playerAver.getScoresAverage();
+//	 //输出平均数据
+//	 String s=playerAver.getTimeAver();
+//	 System.out.println(s);
+//	 for(int i=0;i<ss.length;i++){
+//		 System.out.println(ss[i]);
+//	 }
      Set<String> keys = at.keySet();
      for (String key : keys) {
     	 System.out.println(at.get(key).getPlayerName());
@@ -30,14 +56,13 @@ public static void main(String args[]){
     	 String strs[]=pbip.getBasicInfo();
     	 for(int i=0;i<strs.length;i++){
     		 System.out.print(strs[i]);
+    		 //TODO
+    		 //输出球员的基本信息
     	 } 
     	 System.out.println();
     	 double nums[]=at.get(key).getScoresAll();
-    	 
+    	 //输出球员的总数据
     	 System.out.println(at.get(key).getNumOfMatches());
-//    	 if(at.get(key).getNumOfMatches()!=at.get(key).getNumOfFirstMatches()){
-//    		 System.out.println("");
-//    	 }
     	 System.out.println(at.get(key).getNumOfFirstMatches());
     	 System.out.println(at.get(key).getTeam());
     	 System.out.println(at.get(key).getTeamArea());
@@ -48,6 +73,7 @@ public static void main(String args[]){
     		 }
     	 Player_AverageScorePO aver=vt.get(key);
     	 double ss[]=aver.getScoresAverage();
+    	 //输出平均数据
     	 String s=aver.getTimeAver();
     	 System.out.println(s);
     	 for(int i=0;i<ss.length;i++){
@@ -56,6 +82,6 @@ public static void main(String args[]){
 		}
      
      
-     
+}  
 }
-}
+

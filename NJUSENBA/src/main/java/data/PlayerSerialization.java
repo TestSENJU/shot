@@ -159,7 +159,7 @@ private static void readOneMatch(File file){
 				if(str.length()!=3){
 					String strs[]=str.split(";");	
 						if(checkData(strs[2], strs)){
-							double s[]=new double[14];
+							double s[]=new double[15];
 							for(int i=0;i<s.length;i++){
 								s[i]=Double.parseDouble(strs[i+3]);
 							}							
@@ -223,7 +223,7 @@ private static boolean checkData(String time,String[] s){
 	boolean right=true;
 	String ss[]=time.split(":");
 	if(ss.length!=2)right=false;
-	 double nums[]=new double[14];
+	 double nums[]=new double[15];
 	for(int i=0;i<nums.length;i++){
 		double num;
 		try {
@@ -234,8 +234,6 @@ private static boolean checkData(String time,String[] s){
 			// TODO Auto-generated catch block
 			right=false;
 		}
-        
-//要是格式不对了直接就返回不加这次比赛里的这一行了
       }
 
 	 if(!(nums[0]>nums[1]||nums[2]>nums[3]||

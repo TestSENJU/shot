@@ -3,11 +3,12 @@ package logic;
 import java.util.ArrayList;
 
 import vo.TeamInfoVO;
+import vo.TeamStrVO;
 import vo.TeamVO;
 
 public interface TeamService {
 	//TODO 所有球队的原始总赛季数据
-	public ArrayList<TeamVO> allTeamSeasonData();
+	public ArrayList<TeamStrVO> allTeamSeasonData();
 	//TODO 所有球队的原始场均数据
 	public ArrayList<TeamVO> allTeamAverageData();
 	//所有队伍信息-升序排列

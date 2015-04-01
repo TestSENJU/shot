@@ -20,6 +20,7 @@ public class playersCheckUI {
     JLabel jLabel3=new JLabel(" ");
     JLabel jLabel4=new JLabel("search");
     JLabel jLabel5=new JLabel("check");
+    JLabel jLabel6=new JLabel("allCheck");
     String[] position={" ","前锋","中锋","后卫"};
     String[] league={" ","东部","西部","中部区","大西洋区","西北区","太平洋区","东南区","西南区"};
     String[] condition={" ","得分","篮板","助攻","得分/篮板/助攻","盖帽","抢断","犯规","失误","分钟","效率","投篮","三分","罚球","两双"};
@@ -29,8 +30,9 @@ public class playersCheckUI {
     ImageIcon background=new ImageIcon("img/picture/playerBackground1.jpg");
     ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
     ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
-    ImageIcon search=new ImageIcon("img/picture/playerBackground1Search.jpg");
-    ImageIcon check=new ImageIcon("img/picture/playerBackground1Check.jpg");
+    ImageIcon search=new ImageIcon("img/picture/playerBackground1Check.jpg");
+    ImageIcon check=new ImageIcon("img/picture/playerBackground1search.jpg");
+    ImageIcon allCheck=new ImageIcon("img/picture/playerBackground1AllCheck.jpg");
     JTextField jTextField=new JTextField(" ");
     public String[] getSelectCondition(){
     	String[] select={(String)jComboBox1.getSelectedItem(),(String)jComboBox2.getSelectedItem(),(String)jComboBox3.getSelectedItem()};
@@ -70,6 +72,9 @@ public class playersCheckUI {
     	jLabel1.add(jLabel5);
     	jTextField.setBounds(500, 100, 200, 50);
     	jLabel1.add(jTextField);
+    	jLabel6.setBounds(10, 580, 450, 50);
+    	jLabel6.setIcon(allCheck);
+    	jLabel1.add(jLabel6);
     	jLabel2.addMouseListener(new MouseListener() {
 			
 			public void mouseReleased(MouseEvent arg0) {

@@ -13,7 +13,7 @@ import vo.TeamVO;
 import data.team.TeamData;
 import data.team.TeamDataService;
 
-public class TeamBL {
+public class TeamBL implements TeamService {
 	// TODO to string
 	public ArrayList<TeamStrVO> teamToString(ArrayList<TeamVO> teamList){
 		ArrayList<TeamStrVO> team = new ArrayList<TeamStrVO>();
@@ -137,25 +137,145 @@ public class TeamBL {
 		return teamAverageToString(teamList);
 	}
 	//TODO ascend descend
-	public ArrayList<TeamStrVO> ascendTeamStr(int key, ArrayList<TeamVO> teamOrigin){
+	public ArrayList<TeamStrVO> ascendTeamStr(int key, ArrayList<TeamStrVO> teamOrigin){
 		ArrayList<TeamVO> teamList = new ArrayList<TeamVO>();
-		teamList = sort_Ascend(key, teamOrigin);
-		return teamToString(teamList);
+		for (int i=0;i < teamOrigin.size();i++) {
+			teamList.add(new TeamVO(teamOrigin.get(i).getName(),
+					Integer.parseInt(teamOrigin.get(i).getMatchSum()),
+					Integer.parseInt(teamOrigin.get(i).getHitSum()),
+					Integer.parseInt(teamOrigin.get(i).getShootSum()),
+					Integer.parseInt(teamOrigin.get(i).getThreePointHitSum()),
+					Integer.parseInt(teamOrigin.get(i).getThreePointSum()),
+					Integer.parseInt(teamOrigin.get(i).getFreeThrowHitSum()),
+					Integer.parseInt(teamOrigin.get(i).getFreeThrowSum()),
+					Integer.parseInt(teamOrigin.get(i).getOffensiveReboundSum()),
+					Integer.parseInt(teamOrigin.get(i).getDefensiveReboundSum()),
+					Integer.parseInt(teamOrigin.get(i).getReboundSum()),
+					Integer.parseInt(teamOrigin.get(i).getAssistingSum()),
+					Integer.parseInt(teamOrigin.get(i).getStealSum()),
+					Integer.parseInt(teamOrigin.get(i).getBlockShotSum()),
+					Integer.parseInt(teamOrigin.get(i).getMuffSum()),
+					Integer.parseInt(teamOrigin.get(i).getFoulSum()),
+					Double.valueOf(teamOrigin.get(i).getScore()),
+					Double.valueOf(teamOrigin.get(i).getHitRate()),
+					Double.valueOf(teamOrigin.get(i).getThreePointHitRate()),
+					Double.valueOf(teamOrigin.get(i).getFreeThrowHitRate()),
+					Double.valueOf(teamOrigin.get(i).getWinRate()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveRound()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveEfficiency()),
+					Double.valueOf(teamOrigin.get(i).getDefensiveEfficiency()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveReboundRate()),
+					Double.valueOf(teamOrigin.get(i).getDefensiveReboundRate()),
+					Double.valueOf(teamOrigin.get(i).getStealRate()),
+					Double.valueOf(teamOrigin.get(i).getAssistingRate()))
+					);
+		}
+		return teamToString(sort_Ascend(key, teamList));
 	}
-	public ArrayList<TeamStrVO> descendTeamStr(int key, ArrayList<TeamVO> teamOrigin){
+	public ArrayList<TeamStrVO> descendTeamStr(int key, ArrayList<TeamStrVO> teamOrigin){
 		ArrayList<TeamVO> teamList = new ArrayList<TeamVO>();
-		teamList = sort_Descend(key, teamOrigin);
-		return teamToString(teamList);
+		for (int i=0;i < teamOrigin.size();i++) {
+			teamList.add(new TeamVO(teamOrigin.get(i).getName(),
+					Integer.parseInt(teamOrigin.get(i).getMatchSum()),
+					Integer.parseInt(teamOrigin.get(i).getHitSum()),
+					Integer.parseInt(teamOrigin.get(i).getShootSum()),
+					Integer.parseInt(teamOrigin.get(i).getThreePointHitSum()),
+					Integer.parseInt(teamOrigin.get(i).getThreePointSum()),
+					Integer.parseInt(teamOrigin.get(i).getFreeThrowHitSum()),
+					Integer.parseInt(teamOrigin.get(i).getFreeThrowSum()),
+					Integer.parseInt(teamOrigin.get(i).getOffensiveReboundSum()),
+					Integer.parseInt(teamOrigin.get(i).getDefensiveReboundSum()),
+					Integer.parseInt(teamOrigin.get(i).getReboundSum()),
+					Integer.parseInt(teamOrigin.get(i).getAssistingSum()),
+					Integer.parseInt(teamOrigin.get(i).getStealSum()),
+					Integer.parseInt(teamOrigin.get(i).getBlockShotSum()),
+					Integer.parseInt(teamOrigin.get(i).getMuffSum()),
+					Integer.parseInt(teamOrigin.get(i).getFoulSum()),
+					Double.valueOf(teamOrigin.get(i).getScore()),
+					Double.valueOf(teamOrigin.get(i).getHitRate()),
+					Double.valueOf(teamOrigin.get(i).getThreePointHitRate()),
+					Double.valueOf(teamOrigin.get(i).getFreeThrowHitRate()),
+					Double.valueOf(teamOrigin.get(i).getWinRate()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveRound()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveEfficiency()),
+					Double.valueOf(teamOrigin.get(i).getDefensiveEfficiency()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveReboundRate()),
+					Double.valueOf(teamOrigin.get(i).getDefensiveReboundRate()),
+					Double.valueOf(teamOrigin.get(i).getStealRate()),
+					Double.valueOf(teamOrigin.get(i).getAssistingRate()))
+					);
+		}
+		return teamToString(sort_Descend(key, teamList));
 	}
-	public ArrayList<TeamStrVO> ascendTeamAStr(int key, ArrayList<TeamAverageVO> teamOrigin){
+	public ArrayList<TeamStrVO> ascendTeamAStr(int key, ArrayList<TeamStrVO> teamOrigin){
 		ArrayList<TeamAverageVO> teamList = new ArrayList<TeamAverageVO>();
-		teamList = sortA_Ascend(key, teamOrigin);
-		return teamAverageToString(teamList);
+		for (int i=0;i < teamOrigin.size();i++) {
+			teamList.add(new TeamAverageVO(teamOrigin.get(i).getName(),
+					Double.valueOf(teamOrigin.get(i).getMatchSum()),
+					Double.valueOf(teamOrigin.get(i).getHitSum()),
+					Double.valueOf(teamOrigin.get(i).getShootSum()),
+					Double.valueOf(teamOrigin.get(i).getThreePointHitSum()),
+					Double.valueOf(teamOrigin.get(i).getThreePointSum()),
+					Double.valueOf(teamOrigin.get(i).getFreeThrowHitSum()),
+					Double.valueOf(teamOrigin.get(i).getFreeThrowSum()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveReboundSum()),
+					Double.valueOf(teamOrigin.get(i).getDefensiveReboundSum()),
+					Double.valueOf(teamOrigin.get(i).getReboundSum()),
+					Double.valueOf(teamOrigin.get(i).getAssistingSum()),
+					Double.valueOf(teamOrigin.get(i).getStealSum()),
+					Double.valueOf(teamOrigin.get(i).getBlockShotSum()),
+					Double.valueOf(teamOrigin.get(i).getMuffSum()),
+					Double.valueOf(teamOrigin.get(i).getFoulSum()),
+					Double.valueOf(teamOrigin.get(i).getScore()),
+					Double.valueOf(teamOrigin.get(i).getHitRate()),
+					Double.valueOf(teamOrigin.get(i).getThreePointHitRate()),
+					Double.valueOf(teamOrigin.get(i).getFreeThrowHitRate()),
+					Double.valueOf(teamOrigin.get(i).getWinRate()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveRound()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveEfficiency()),
+					Double.valueOf(teamOrigin.get(i).getDefensiveEfficiency()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveReboundRate()),
+					Double.valueOf(teamOrigin.get(i).getDefensiveReboundRate()),
+					Double.valueOf(teamOrigin.get(i).getStealRate()),
+					Double.valueOf(teamOrigin.get(i).getAssistingRate()))
+					);
+		}
+		return teamAverageToString(sortA_Ascend(key, teamList));
 	}
-	public ArrayList<TeamStrVO> descendTeamAStr(int key, ArrayList<TeamAverageVO> teamOrigin){
+	public ArrayList<TeamStrVO> descendTeamAStr(int key, ArrayList<TeamStrVO> teamOrigin){
 		ArrayList<TeamAverageVO> teamList = new ArrayList<TeamAverageVO>();
-		teamList = sortA_Descend(key, teamOrigin);
-		return teamAverageToString(teamList);
+		for (int i=0;i < teamOrigin.size();i++) {
+			teamList.add(new TeamAverageVO(teamOrigin.get(i).getName(),
+					Double.valueOf(teamOrigin.get(i).getMatchSum()),
+					Double.valueOf(teamOrigin.get(i).getHitSum()),
+					Double.valueOf(teamOrigin.get(i).getShootSum()),
+					Double.valueOf(teamOrigin.get(i).getThreePointHitSum()),
+					Double.valueOf(teamOrigin.get(i).getThreePointSum()),
+					Double.valueOf(teamOrigin.get(i).getFreeThrowHitSum()),
+					Double.valueOf(teamOrigin.get(i).getFreeThrowSum()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveReboundSum()),
+					Double.valueOf(teamOrigin.get(i).getDefensiveReboundSum()),
+					Double.valueOf(teamOrigin.get(i).getReboundSum()),
+					Double.valueOf(teamOrigin.get(i).getAssistingSum()),
+					Double.valueOf(teamOrigin.get(i).getStealSum()),
+					Double.valueOf(teamOrigin.get(i).getBlockShotSum()),
+					Double.valueOf(teamOrigin.get(i).getMuffSum()),
+					Double.valueOf(teamOrigin.get(i).getFoulSum()),
+					Double.valueOf(teamOrigin.get(i).getScore()),
+					Double.valueOf(teamOrigin.get(i).getHitRate()),
+					Double.valueOf(teamOrigin.get(i).getThreePointHitRate()),
+					Double.valueOf(teamOrigin.get(i).getFreeThrowHitRate()),
+					Double.valueOf(teamOrigin.get(i).getWinRate()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveRound()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveEfficiency()),
+					Double.valueOf(teamOrigin.get(i).getDefensiveEfficiency()),
+					Double.valueOf(teamOrigin.get(i).getOffensiveReboundRate()),
+					Double.valueOf(teamOrigin.get(i).getDefensiveReboundRate()),
+					Double.valueOf(teamOrigin.get(i).getStealRate()),
+					Double.valueOf(teamOrigin.get(i).getAssistingRate()))
+					);
+		}
+		return teamAverageToString(sortA_Descend(key, teamList));
 	}
 	//  所有球队的原始场均数据
 	public ArrayList<TeamAverageVO> allTeamAverageData() {

@@ -30,8 +30,7 @@ public class FliterPlayerAll {
 		 * */
 		//TODO 筛选position
 		playerInfoList = player.playerPersonalInfo();
-		int length = playerList.size();
-		for (int i=0;i < length;i++){
+		for (int i=0;i < playerList.size();i++){
 			String originalP = playerInfoList.get(i).getPosition();
 			boolean sortP = false;
 			if (originalP.length()>1){

@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 public class CountLines {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		final String path = "src/main/java/data/player";
+		final String path = "src/main/java/ui";
 		final CountLines count = new CountLines(path);
 		JFrame frame = new JFrame();
 		frame.add(new JPanel() {

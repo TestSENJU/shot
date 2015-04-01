@@ -151,6 +151,7 @@ public class PlayerBL implements PlayerService {
 		rePlayerList = sap.ascendPlayer(key, playerList);
 		return rePlayerList;
 	}
+
 	public ArrayList<PlayerAverageVO> sortA_Descend(int key, ArrayList<PlayerAverageVO> playerList){
 		SortPlayerAverage sap = new SortPlayerAverage();
 		ArrayList<PlayerAverageVO> rePlayerList = new ArrayList<PlayerAverageVO>();
@@ -293,24 +294,155 @@ public class PlayerBL implements PlayerService {
 		playerList = allPlayerAverageData();
 		return playerAverageToString(playerList);
 	}
-	public ArrayList<PlayerStrVO> ascendPlayerStr(int key, ArrayList<PlayerVO> playerOrigin){
+	public ArrayList<PlayerStrVO> ascendPlayerStr(int key, ArrayList<PlayerStrVO> playerOrigin){
 		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
-		playerList = sort_Ascend(key, playerOrigin);
-		return playerToString(playerList);
+		for(int i=0;i < playerOrigin.size();i++){
+			playerList.add(new PlayerVO(playerOrigin.get(i).getName(),
+					playerOrigin.get(i).getTeams(),
+					Integer.parseInt(playerOrigin.get(i).getCompeteNum()),
+					Integer.parseInt(playerOrigin.get(i).getOffensiveNum()),
+					Double.valueOf(playerOrigin.get(i).getReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getAssistingNum()),
+					playerOrigin.get(i).getPlayingTime(),
+					Double.valueOf(playerOrigin.get(i).getHitRate()),
+					Double.valueOf(playerOrigin.get(i).getThreePointHitRate()),
+					Double.valueOf(playerOrigin.get(i).getFreeThrowHitRate()),
+					Double.valueOf(playerOrigin.get(i).getOffensiveReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getDefensiveReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getStealNum()),
+					Double.valueOf(playerOrigin.get(i).getBlockShotNum()),
+					Double.valueOf(playerOrigin.get(i).getMuffNum()),
+					Double.valueOf(playerOrigin.get(i).getFoulNum()),
+					Double.valueOf(playerOrigin.get(i).getScore()),
+					Double.valueOf(playerOrigin.get(i).getEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getGmScEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getTrueHitRate()),
+					Double.valueOf(playerOrigin.get(i).getShootEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getOffensiveReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getDefensiveReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getAssistingRate()),
+					Double.valueOf(playerOrigin.get(i).getStealRate()),
+					Double.valueOf(playerOrigin.get(i).getBlockShotRate()),
+					Double.valueOf(playerOrigin.get(i).getMuffRate()),
+					Double.valueOf(playerOrigin.get(i).getUsage()))
+					);
+		}
+		return playerToString(sort_Ascend(key, playerList));
 	}
-	public ArrayList<PlayerStrVO> descendPlayerStr(int key, ArrayList<PlayerVO> playerOrigin){
+	public ArrayList<PlayerStrVO> descendPlayerStr(int key, ArrayList<PlayerStrVO> playerOrigin){
 		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
-		playerList = sort_Descend(key, playerOrigin);
-		return playerToString(playerList);
+		for(int i=0;i < playerOrigin.size();i++){
+			playerList.add(new PlayerVO(playerOrigin.get(i).getName(),
+					playerOrigin.get(i).getTeams(),
+					Integer.parseInt(playerOrigin.get(i).getCompeteNum()),
+					Integer.parseInt(playerOrigin.get(i).getOffensiveNum()),
+					Double.valueOf(playerOrigin.get(i).getReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getAssistingNum()),
+					playerOrigin.get(i).getPlayingTime(),
+					Double.valueOf(playerOrigin.get(i).getHitRate()),
+					Double.valueOf(playerOrigin.get(i).getThreePointHitRate()),
+					Double.valueOf(playerOrigin.get(i).getFreeThrowHitRate()),
+					Double.valueOf(playerOrigin.get(i).getOffensiveReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getDefensiveReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getStealNum()),
+					Double.valueOf(playerOrigin.get(i).getBlockShotNum()),
+					Double.valueOf(playerOrigin.get(i).getMuffNum()),
+					Double.valueOf(playerOrigin.get(i).getFoulNum()),
+					Double.valueOf(playerOrigin.get(i).getScore()),
+					Double.valueOf(playerOrigin.get(i).getEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getGmScEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getTrueHitRate()),
+					Double.valueOf(playerOrigin.get(i).getShootEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getOffensiveReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getDefensiveReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getAssistingRate()),
+					Double.valueOf(playerOrigin.get(i).getStealRate()),
+					Double.valueOf(playerOrigin.get(i).getBlockShotRate()),
+					Double.valueOf(playerOrigin.get(i).getMuffRate()),
+					Double.valueOf(playerOrigin.get(i).getUsage()))
+					);
+		}
+		return playerToString(sort_Descend(key, playerList));
 	}
-	public ArrayList<PlayerStrVO> ascendPlayerAStr(int key, ArrayList<PlayerAverageVO> playerOrigin){
+/*	public ArrayList<PlayerStrVO> ascendPlayerAStr(int key, ArrayList<PlayerAverageVO> playerOrigin){
 		ArrayList<PlayerAverageVO> playerList = new ArrayList<PlayerAverageVO>();
 		playerList = sortA_Ascend(key, playerOrigin);
 		return playerAverageToString(playerList);
-	}
-	public ArrayList<PlayerStrVO> descendPlayerAStr(int key, ArrayList<PlayerAverageVO> playerOrigin){
+	}*/
+	public ArrayList<PlayerStrVO> ascendPlayerAStr(int key, ArrayList<PlayerStrVO> playerOrigin){
 		ArrayList<PlayerAverageVO> playerList = new ArrayList<PlayerAverageVO>();
-		playerList = sortA_Descend(key, playerOrigin);
-		return playerAverageToString(playerList);
+		for(int i=0;i < playerOrigin.size();i++){
+			playerList.add(new PlayerAverageVO(playerOrigin.get(i).getName(),
+					playerOrigin.get(i).getTeams(),
+					Double.valueOf(playerOrigin.get(i).getCompeteNum()),
+					Double.valueOf(playerOrigin.get(i).getOffensiveNum()),
+					Double.valueOf(playerOrigin.get(i).getReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getAssistingNum()),
+					playerOrigin.get(i).getPlayingTime(),
+					Double.valueOf(playerOrigin.get(i).getHitRate()),
+					Double.valueOf(playerOrigin.get(i).getThreePointHitRate()),
+					Double.valueOf(playerOrigin.get(i).getFreeThrowHitRate()),
+					Double.valueOf(playerOrigin.get(i).getOffensiveReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getDefensiveReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getStealNum()),
+					Double.valueOf(playerOrigin.get(i).getBlockShotNum()),
+					Double.valueOf(playerOrigin.get(i).getMuffNum()),
+					Double.valueOf(playerOrigin.get(i).getFoulNum()),
+					Double.valueOf(playerOrigin.get(i).getScore()),
+					Double.valueOf(playerOrigin.get(i).getEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getGmScEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getTrueHitRate()),
+					Double.valueOf(playerOrigin.get(i).getShootEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getOffensiveReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getDefensiveReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getAssistingRate()),
+					Double.valueOf(playerOrigin.get(i).getStealRate()),
+					Double.valueOf(playerOrigin.get(i).getBlockShotRate()),
+					Double.valueOf(playerOrigin.get(i).getMuffRate()),
+					Double.valueOf(playerOrigin.get(i).getUsage()))
+					);
+		}
+		ArrayList<PlayerAverageVO> rePlayerList = new ArrayList<PlayerAverageVO>();
+		rePlayerList = sortA_Ascend(key, playerList);
+		return playerAverageToString(rePlayerList);
+	}
+	public ArrayList<PlayerStrVO> descendPlayerAStr(int key, ArrayList<PlayerStrVO> playerOrigin){
+		ArrayList<PlayerAverageVO> playerList = new ArrayList<PlayerAverageVO>();
+		for(int i=0;i < playerOrigin.size();i++){
+			playerList.add(new PlayerAverageVO(playerOrigin.get(i).getName(),
+					playerOrigin.get(i).getTeams(),
+					Double.valueOf(playerOrigin.get(i).getCompeteNum()),
+					Double.valueOf(playerOrigin.get(i).getOffensiveNum()),
+					Double.valueOf(playerOrigin.get(i).getReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getAssistingNum()),
+					playerOrigin.get(i).getPlayingTime(),
+					Double.valueOf(playerOrigin.get(i).getHitRate()),
+					Double.valueOf(playerOrigin.get(i).getThreePointHitRate()),
+					Double.valueOf(playerOrigin.get(i).getFreeThrowHitRate()),
+					Double.valueOf(playerOrigin.get(i).getOffensiveReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getDefensiveReboundNum()),
+					Double.valueOf(playerOrigin.get(i).getStealNum()),
+					Double.valueOf(playerOrigin.get(i).getBlockShotNum()),
+					Double.valueOf(playerOrigin.get(i).getMuffNum()),
+					Double.valueOf(playerOrigin.get(i).getFoulNum()),
+					Double.valueOf(playerOrigin.get(i).getScore()),
+					Double.valueOf(playerOrigin.get(i).getEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getGmScEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getTrueHitRate()),
+					Double.valueOf(playerOrigin.get(i).getShootEfficiency()),
+					Double.valueOf(playerOrigin.get(i).getReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getOffensiveReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getDefensiveReboundRate()),
+					Double.valueOf(playerOrigin.get(i).getAssistingRate()),
+					Double.valueOf(playerOrigin.get(i).getStealRate()),
+					Double.valueOf(playerOrigin.get(i).getBlockShotRate()),
+					Double.valueOf(playerOrigin.get(i).getMuffRate()),
+					Double.valueOf(playerOrigin.get(i).getUsage()))
+					);
+		}
+		return playerAverageToString(sortA_Descend(key, playerList));
 	}
 }

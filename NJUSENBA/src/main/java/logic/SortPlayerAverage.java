@@ -8,7 +8,7 @@ import vo.PlayerAverageVO;
 
 public class SortPlayerAverage {
 	public ArrayList<PlayerAverageVO> ascendPlayer(int key, ArrayList<PlayerAverageVO> ascendPlayerList){
-		//ArrayList<PlayerAverageVO> ascendPlayerList = new ArrayList<PlayerAverageVO>();
+		
 		switch(key){
 		case 0:
 			Collections.sort(ascendPlayerList, new SortAByName());

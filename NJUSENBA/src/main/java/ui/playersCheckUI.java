@@ -1,7 +1,10 @@
 package ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -9,6 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
+import vo.PlayerStrVO;
+import logic.PlayerBL;
+import logic.PlayerService;
 
 public class playersCheckUI {
     JFrame jFrame=new JFrame("球员数据查看");
@@ -18,15 +25,15 @@ public class playersCheckUI {
     JLabel jLabel4=new JLabel("search");
     JLabel jLabel5=new JLabel("check");
     JLabel jLabel6=new JLabel("allCheck");
-    String[] position={" ","前锋","中锋","后卫"};
-    String[] league={" ","东部","西部","中部区","大西洋区","西北区","太平洋区","东南区","西南区"};
-    String[] condition={" ","得分","篮板","助攻","得分/篮板/助攻","盖帽","抢断","犯规","失误","分钟","效率","投篮","三分","罚球","两双"};
+    String[] position={" ","G","F","C"};
+    String[] league={" ","E-Southeast","E-Atlantic","E-Central","W-Southwest","W-Atlantic","W-Northwest","W-Pacific"};
+    String[] condition={" ","score","rebound","assisting","S_R_A","blockShot","steal","foul","muff","playTime","efficiency","shoot","threePoint","freeThrow","D_D"};
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	JComboBox jComboBox1=new JComboBox(condition);
+	JComboBox jComboBox1=new JComboBox(position);
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	JComboBox jComboBox2=new JComboBox(position);
+	JComboBox jComboBox2=new JComboBox(league);
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	JComboBox jComboBox3=new JComboBox(league);
+	JComboBox jComboBox3=new JComboBox(condition);
     ImageIcon background=new ImageIcon("img/picture/playerBackground1.jpg");
     ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
     ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
@@ -34,13 +41,25 @@ public class playersCheckUI {
     ImageIcon check=new ImageIcon("img/picture/playerBackground1search.jpg");
     ImageIcon allCheck=new ImageIcon("img/picture/playerBackground1AllCheck.jpg");
     JTextField jTextField=new JTextField(" ");
-    public String[] getSelectCondition(){
-    	String[] select={(String)jComboBox1.getSelectedItem(),(String)jComboBox2.getSelectedItem(),(String)jComboBox3.getSelectedItem()};
-    	return select;
-    }
     public String getPlayerName(){
     	String playerName=jTextField.getText();
     	return playerName;
+    }
+    public String getSelectContion(){
+    	String position=(String)jComboBox1.getSelectedItem();
+    	String league=(String)jComboBox2.getSelectedItem();
+    	String condition=(String)jComboBox3.getSelectedItem();
+    	String selectCondition=position+","+league+","+condition;
+    	return selectCondition;
+    }
+    public String[] getData(){
+    	PlayerService data1=new PlayerBL();
+    	ArrayList<PlayerStrVO> data2=new ArrayList<PlayerStrVO>();
+    	String condition=getSelectContion();
+    	data2=data1.filterAll(condition);
+    	for(int i=0;i<50;i++){
+    	String playerdata=data2.get(i).getName();
+    	}
     }
     public void playersCheck(){
     	jFrame.setUndecorated(true);
@@ -96,7 +115,6 @@ public class playersCheckUI {
 				// TODO Auto-generated method stub
 				
 			}
-			
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				jFrame.dispose();

@@ -1,12 +1,20 @@
 package ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
+
+import vo.TeamStrVO;
+import logic.TeamBL;
+import logic.TeamService;
 
 public class selectTeamUI {
 	JFrame jFrame=new JFrame("球队选择");
@@ -28,11 +36,16 @@ public class selectTeamUI {
 	JComboBox jComboBox1=new JComboBox(team);
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBox2=new JComboBox(condition);
-	public String[] getCondition(){
+	public String getSelect(){
 		String team=(String)jComboBox1.getSelectedItem();
-    	String condition=(String)jComboBox2.getSelectedItem();
-    	String[] teamSelect={team,condition};
-    	return teamSelect;
+		String condition=(String)jComboBox2.getSelectedItem();
+		String selectCondition=team+","+condition;
+		return selectCondition;
+	}
+	public String getData(){
+		TeamService data1=new TeamBL();
+		ArrayList<TeamStrVO> data2=new ArrayList<TeamStrVO>();
+		data2=data1.filterAll();
 	}
 	public void selectTeam(){
 		jFrame.setUndecorated(true);

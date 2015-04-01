@@ -170,7 +170,7 @@ private static void readOneMatch(File file){
 		    }else{
 		    	if(haveTeam){
 					if(checkData(str)){
-						if(team2!=null){
+						if(team2!=""){
 							list1.add(str);
 						}else{
 							list2.add(str);
@@ -182,6 +182,9 @@ private static void readOneMatch(File file){
 		ArrayList<String[]>strlist1=new ArrayList<String[]>();
 		ArrayList<String[]>strlist2=new ArrayList<String[]>();
 		
+//		System.out.print("list1"+list1.size());
+//		System.out.print("list2"+list2.size());
+//		System.out.println();
 		for(int j=0;j<list1.size();j++){
 			String strs[]=list1.get(j).split(";");
 			
@@ -271,7 +274,7 @@ private static void readOneMatch(File file){
 				}
 		}
 		for(int j=0;j<strlist2.size();j++){
-			String strs[]=strlist1.get(j);
+			String strs[]=strlist2.get(j);
 			double nums[]=new double[15];
 			for(int n=0;n<nums.length;n++){
 				nums[n]=Double.parseDouble(strs[n+3]);

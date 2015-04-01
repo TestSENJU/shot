@@ -32,13 +32,13 @@ public static void main(String args[]){
 //		 //TODO
 //	 } 
      System.out.println("sdf");
-     System.out.println(at.size());
+//     System.out.println(at.size());
      Set<String>keys=at.keySet();
      
      for(String key:keys){
     	 Player_AllScorePO playerAll=at.get(key);
     	 double nums[]=playerAll.getScoresAll();
-    	 System.out.println(nums.length);
+//    	 System.out.println(nums.length);
 //    	 if(nums==null) System.out.println("numsnull");
     	 double teamNums[]=playerAll.getTeamAll();
 //    	 if(teamNums==null) System.out.println("teamnull");

@@ -9,9 +9,12 @@ import po.TeamPO;
 import data.FileReadAndWriteBuffer;
 import data.FileSerialization;
 
+@SuppressWarnings("unused")
 public class TeamData implements TeamDataService {
 	static Hashtable<String, TeamPO> teamTable = new Hashtable<String, TeamPO>();
+	static Hashtable<String, TeamAveragePO> teamAverageTable = new Hashtable<String, TeamAveragePO>();
 	private static String team_serialization_path = "serialization/team";
+	private static String teamAverage_serialization_path = "serialization/teamAverage";
 	public static TeamData td;
 
 	public static synchronized TeamData getInstance() {
@@ -35,13 +38,15 @@ public class TeamData implements TeamDataService {
 		return teamTable;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Hashtable<String, TeamAveragePO> getTeamAverageData() {
-		Hashtable<String, TeamAveragePO> polist = new Hashtable<String, TeamAveragePO>();
-		Set<String> keys = teamTable.keySet();
-		for (String key : keys) {
-			polist.put(key, new TeamAveragePO(teamTable.get(key)));
+		try {
+			teamAverageTable = (Hashtable<String, TeamAveragePO>) FileReadAndWriteBuffer
+					.read_from_file(teamAverage_serialization_path);
+		} catch (EOFException e) {
+			e.printStackTrace();
 		}
-		return null;
+		return teamAverageTable;
 	}
 
 }

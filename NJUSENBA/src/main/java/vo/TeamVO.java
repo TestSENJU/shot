@@ -25,7 +25,8 @@ public class TeamVO {
 	double offensiveRound;// 进攻回合
 	double offensiveEfficiency;// 进攻效率
 	double defensiveEfficiency;// 防守效率
-	double reboundRate;// 篮板效率
+	double offensiveReboundRate;// 进攻篮板效率
+	double defensiveReboundRate;// 防守篮板效率
 	double stealRate;// 抢断效率
 	double assistingRate;// 助攻率
 
@@ -36,7 +37,8 @@ public class TeamVO {
 			int muffSum, int foulSum, double score, double hitRate,
 			double threePointHitRate, double freeThrowHitRate, double winRate,
 			double offensiveRound, double offensiveEfficiency,
-			double defensiveEfficiency, double reboundRate, double stealRate,
+			double defensiveEfficiency, double offensiveReboundRate,
+			double defensiveReboundRate, double stealRate,
 			double assistingRate) {
 		this.name = name;
 		this.matchSum = matchSum;
@@ -62,7 +64,8 @@ public class TeamVO {
 		this.offensiveRound = offensiveRound;
 		this.offensiveEfficiency = offensiveEfficiency;
 		this.defensiveEfficiency = defensiveEfficiency;
-		this.reboundRate = reboundRate;
+		this.offensiveReboundRate = offensiveReboundRate;
+		this.defensiveReboundRate = defensiveReboundRate;
 		this.stealRate = stealRate;
 		this.assistingRate = assistingRate;
 	}
@@ -262,12 +265,22 @@ public class TeamVO {
 		this.defensiveEfficiency = defensiveEfficiency;
 	}
 
-	public double getReboundRate() {
-		return reboundRate;
+
+
+	public double getOffensiveReboundRate() {
+		return offensiveReboundRate;
 	}
 
-	public void setReboundRate(double reboundRate) {
-		this.reboundRate = reboundRate;
+	public void setOffensiveReboundRate(double offensiveReboundRate) {
+		this.offensiveReboundRate = offensiveReboundRate;
+	}
+
+	public double getDefensiveReboundRate() {
+		return defensiveReboundRate;
+	}
+
+	public void setDefensiveReboundRate(double defensiveReboundRate) {
+		this.defensiveReboundRate = defensiveReboundRate;
 	}
 
 	public double getStealRate() {

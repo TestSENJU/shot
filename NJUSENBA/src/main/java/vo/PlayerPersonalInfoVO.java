@@ -3,6 +3,7 @@ package vo;
 public class PlayerPersonalInfoVO {
 	String name;// 球员姓名
 	String jerseyNum;// 球衣号码
+	String position;//位置
 	String height;// 身高
 	String weight;// 体重
 	String birthday;// 生日
@@ -10,11 +11,13 @@ public class PlayerPersonalInfoVO {
 	String lengthOfPlayer;// 球龄
 	String graduateSchool;// 毕业学校
 
-	public PlayerPersonalInfoVO(String name, String jerseyNum, String height,
+	public PlayerPersonalInfoVO(String name, String jerseyNum, String position, 
+			String height,
 			String weight, String birthday, String age, String lengthOfPlayer,
 			String graduateSchool) {
 		this.name = name;
 		this.jerseyNum = jerseyNum;
+		this.position = position;
 		this.height = height;
 		this.weight = weight;
 		this.birthday = birthday;
@@ -30,6 +33,14 @@ public class PlayerPersonalInfoVO {
 	}
 	public void setName(String name){
 		this.name = name;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
 	public String getJerseyNum() {

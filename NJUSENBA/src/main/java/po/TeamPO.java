@@ -39,6 +39,28 @@ import java.io.Serializable;
  *            foul 犯规数
  * @param score
  *            score 比赛得分
+ * @param hitRate
+ *            命中率
+ * @param threeHitRate
+ *            三分命中率
+ * @param penaltyRate
+ *            发球命中率
+ * @param winRate
+ *            胜率
+ * @param attackRound
+ *            进攻回合
+ * @param attackEfficiency
+ *            进攻效率
+ * @param defensiveEfficiency
+ *            防守效率
+ * @param attackReboundRate
+ *            进攻篮板效率
+ * @param defensiveReboundRate
+ *            防守篮板效率
+ * @param stealRate
+ *            抢断效率
+ * @param assistingRate
+ *            助攻率
  */
 public class TeamPO implements Serializable {
 
@@ -46,6 +68,8 @@ public class TeamPO implements Serializable {
 
 	private String teamName;
 	private int matchNum;
+	private int winNum;
+
 	private int shotRightNum;
 	private int shotNum;
 	private int threePointShotRightNum;
@@ -61,6 +85,20 @@ public class TeamPO implements Serializable {
 	private int faultyNum;
 	private int foulNum;
 	private int score;
+	// private double hitRate;
+	// private double winRate;
+	// private double attackRound;
+	// private double attackEfficiency;
+	// private double defensiveEfficiency;
+	// private double attackReboundRate;
+	// private double defensiveReboundRate;
+	// private double stealRate;
+	// private double assistingRate;
+
+	private int opponent_defensiveRebound;
+	private int opponent_offensiveRebound;
+	private double opponent_attackRound;
+	private int opponent_score;
 
 	public TeamPO(String teamName) {
 		this.teamName = teamName;
@@ -216,6 +254,134 @@ public class TeamPO implements Serializable {
 
 	public int getScore() {
 		return score;
+	}
+
+	public double getWinRate() {
+		if (getMatchNum() != 0)
+			return (double) getWinNum() / getMatchNum();
+		else
+			return 0;
+	}
+
+	public double getThreeHitRate() {
+		if (getThreePointShotNum() != 0)
+			return (double) getThreePointShotRightNum()
+					/ getThreePointShotNum();
+		else
+			return 0;
+	}
+
+	public double getPenaltyRate() {
+		if (getPenaltyShotNum() != 0)
+			return (double) getPenaltyShotRightNum() / getPenaltyShotNum();
+		else
+			return 0;
+	}
+
+	public double getAttackEfficiency() {
+		if (getAttackRound() != 0)
+			return getScore() / getAttackRound();
+		else
+			return 0;
+	}
+
+	public double getDefensiveEfficiency() {
+		if (getOpponent_attackRound() != 0)
+			return getOpponent_score() / getOpponent_attackRound();
+		else
+			return 0;
+	}
+
+	public double getAttackReboundRate() {
+		if (getOffensiveReboundNum() != 0
+				&& getOpponent_defensiveRebound() != 0)
+			return (double) getOffensiveReboundNum()
+					/ (getOffensiveReboundNum() + getOpponent_defensiveRebound());
+		else
+			return 0;
+	}
+
+	public double getDefensiveReboundRate() {
+		if (getDefensiveReboundNum() != 0
+				&& getOpponent_offensiveRebound() != 0)
+			return (double) getDefensiveReboundNum()
+					/ (getDefensiveReboundNum() + getOpponent_offensiveRebound());
+		else
+			return 0;
+	}
+
+	public double getStealRate() {
+		if (getOpponent_attackRound() != 0)
+			return getStealNum() / getOpponent_attackRound();
+		else
+			return 0;
+	}
+
+	public double getAssistingRate() {
+		if (getAttackRound() != 0)
+			return getAssistNum() / getAttackRound();
+		else
+			return 0;
+	}
+
+	public double getHitRate() {
+		if (getShotNum() != 0) {
+			return (double) getShotRightNum() / getShotNum();
+		} else
+			return 0;
+	}
+
+	public double getAttackRound() {
+		if (offensiveReboundNum != 0 && opponent_defensiveRebound != 0) {
+			return shotNum
+					+ 0.4
+					* penaltyShotNum
+					- 1.07
+					* (offensiveReboundNum
+							/ (offensiveReboundNum + opponent_defensiveRebound) * (shotNum - shotRightNum))
+					+ 1.07 * faultyNum;
+		} else
+			return 0;
+	}
+
+	public void setOpponent_defensiveRebound(int opponent_defensiveRebound) {
+		this.opponent_defensiveRebound = opponent_defensiveRebound;
+	}
+
+	public void setOpponent_offensiveRebound(int opponent_offensiveRebound) {
+		this.opponent_offensiveRebound = opponent_offensiveRebound;
+	}
+
+	public void setOpponent_attackRound(double opponent_attackRound) {
+		this.opponent_attackRound = opponent_attackRound;
+	}
+
+	public void setOpponent_score(int opponent_score) {
+		this.opponent_score = opponent_score;
+	}
+
+	public int getOpponent_defensiveRebound() {
+		return opponent_defensiveRebound;
+	}
+
+	public int getOpponent_offensiveRebound() {
+		return opponent_offensiveRebound;
+	}
+
+	public double getOpponent_attackRound() {
+		return opponent_attackRound;
+	}
+
+	public int getOpponent_score() {
+		return opponent_score;
+	}
+
+	public int getWinNum() {
+		return winNum;
+	}
+
+	public void setWinNum(int winNum) {
+		this.winNum = winNum;
 	}
 
 }

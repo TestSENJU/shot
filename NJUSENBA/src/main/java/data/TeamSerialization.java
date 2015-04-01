@@ -6,14 +6,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Hashtable;
+import java.util.Set;
 
+import po.TeamAveragePO;
 import po.TeamPO;
 
 public class TeamSerialization {
 	static Hashtable<String, TeamPO> teamTable = new Hashtable<String, TeamPO>();
+	static Hashtable<String, TeamAveragePO> teamAverageTable = new Hashtable<String, TeamAveragePO>();
 	private static String team_path = "teams";
 	private static String match_path = "matches";
 	private static String team_serialization_path = "serialization/team";
+	private static String teamAverage_serialization_path = "serialization/teamAverage";
 
 	private static TeamSerialization ts;
 
@@ -57,17 +61,33 @@ public class TeamSerialization {
 				boolean isfirst = false;
 				TeamPO team1 = null;
 				TeamPO team2 = null;
+				double team1_attackRound = 0.0;
+				double team2_attackRound = 0.0;
+				int team1_offensiveRebound = 0;
+				int team2_offensiveRebound = 0;
+				int team1_defensiveRebound = 0;
+				int team2_defensiveRebound = 0;
 				while ((temp = br.readLine()) != null) {
 					String[] strspl = temp.split(";");
 					if (strspl.length == 3) {
 						String[] strsplname = strspl[1].split("-");
 						if (teamTable.containsKey(strsplname[0])) {
 							team1 = teamTable.get(strsplname[0]);
+							team1_attackRound = team1.getAttackRound();
+							team1_offensiveRebound = team1
+									.getOffensiveReboundNum();
+							team1_defensiveRebound = team1
+									.getDefensiveReboundNum();
 						} else {
 							break;
 						}
 						if (teamTable.containsKey(strsplname[1])) {
 							team2 = teamTable.get(strsplname[1]);
+							team2_attackRound = team2.getAttackRound();
+							team2_offensiveRebound = team2
+									.getOffensiveReboundNum();
+							team2_defensiveRebound = team2
+									.getDefensiveReboundNum();
 						} else {
 							break;
 						}
@@ -77,8 +97,18 @@ public class TeamSerialization {
 						String[] strsplscore = strspl[2].split("-");
 						team1.setScore(team1.getScore()
 								+ Integer.parseInt(strsplscore[0]));
+						team1.setOpponent_score(team1.getOpponent_score()
+								+ Integer.parseInt(strsplscore[1]));
 						team2.setScore(team2.getScore()
 								+ Integer.parseInt(strsplscore[1]));
+						team2.setOpponent_score(team2.getOpponent_score()
+								+ Integer.parseInt(strsplscore[0]));
+						if (Integer.parseInt(strsplscore[0]) > Integer
+								.parseInt(strsplscore[1])) {
+							team1.setWinNum(team1.getWinNum() + 1);
+						} else {
+							team2.setWinNum(team2.getWinNum() + 1);
+						}
 					}
 					if (strspl.length == 1) {
 						isfirst = !isfirst;
@@ -116,7 +146,6 @@ public class TeamSerialization {
 								+ Integer.parseInt(strspl[15]));
 						team1.setFoulNum(team1.getFoulNum()
 								+ Integer.parseInt(strspl[16]));
-
 					}
 					if (isfirst == false && strspl.length == 18) {
 						team2.setShotRightNum(team2.getShotRightNum()
@@ -153,6 +182,26 @@ public class TeamSerialization {
 								+ Integer.parseInt(strspl[16]));
 					}
 				}
+				team1.setOpponent_attackRound(team1.getOpponent_attackRound()
+						+ team2.getAttackRound() - team2_attackRound);
+				team1.setOpponent_defensiveRebound(team1
+						.getOpponent_defensiveRebound()
+						+ team2.getDefensiveReboundNum()
+						- team2_defensiveRebound);
+				team1.setOpponent_offensiveRebound(team1
+						.getOpponent_offensiveRebound()
+						+ team2.getOffensiveReboundNum()
+						- team2_offensiveRebound);
+				team2.setOpponent_attackRound(team2.getOpponent_attackRound()
+						+ team1.getAttackRound() - team1_attackRound);
+				team2.setOpponent_defensiveRebound(team2
+						.getOpponent_defensiveRebound()
+						+ team1.getDefensiveReboundNum()
+						- team1_defensiveRebound);
+				team2.setOpponent_offensiveRebound(team2
+						.getOpponent_offensiveRebound()
+						+ team1.getOffensiveReboundNum()
+						- team1_offensiveRebound);
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
@@ -172,5 +221,11 @@ public class TeamSerialization {
 	public void writeFile(String path) {
 		FileReadAndWriteBuffer
 				.write_to_file(team_serialization_path, teamTable);
+		Set<String> keys = teamTable.keySet();
+		for (String key : keys) {
+			teamAverageTable.put(key, new TeamAveragePO(teamTable.get(key)));
+		}
+		FileReadAndWriteBuffer.write_to_file(teamAverage_serialization_path,
+				teamAverageTable);
 	}
 }

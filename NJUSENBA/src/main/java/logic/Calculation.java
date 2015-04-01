@@ -3,17 +3,17 @@ package logic;
 public class Calculation {
 	/**球队部分*/
 	//1.计算命中率
-	public double hitRate(double shootNum, double hitNum){
-		return hitNum/shootNum;
+	public double hitRate(int shootNum, int hitNum){
+		return (double)hitNum/shootNum;
 	}
 	//1.计算胜率
-	public double winRate(double winSum, double matchSum){
-		return winSum/matchSum;
+	public double winRate(int winSum, int matchSum){
+		return (double)winSum/matchSum;
 	}
 	//2.计算进攻回合
-	public double attackRound(double shootNum, double hitNum, double freeThrow,
-			double offensiveRebound, double defensiveRebound, double muffNum){
-		return shootNum+0.4*freeThrow-
+	public double attackRound(int shootNum, int hitNum, int freeThrow,
+			int offensiveRebound, int defensiveRebound, int muffNum){
+		return (double)shootNum+0.4*freeThrow-
 				1.07*(offensiveRebound/(offensiveRebound+defensiveRebound)*(shootNum-hitNum))
 				+1.07*muffNum;
 	}

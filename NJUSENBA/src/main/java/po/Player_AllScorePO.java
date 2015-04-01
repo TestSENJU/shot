@@ -1,25 +1,87 @@
 package po;
 
-public class Player_AllScorePO {
+import java.io.Serializable;
+
+/**
+ * 
+ * @author wyt
+ * 
+ * @param timeAll
+ *   总上场时间
+ *   
+ *   @param numOfFirstMatches
+ *   总先发场数
+ *   
+ *  @param   numOfMatches
+ *  总参赛场数
+ *  @param team 
+ *  队伍，联盟
+ *  @param scoresAll
+ *  0投篮命中数
+ *  1投篮出手数
+ *  2三分命中数
+ *  3三分出手数
+ *  4罚球命中数
+ *  5罚球出手数
+ *  6进攻前场篮板数
+ *  7进攻后场篮板数
+ *  8总篮板数
+ *  9助攻数
+ *  10盖帽数
+ *  11失误数
+ *  12犯规数
+ *  13个人得分
+ *
+ */
+
+public class Player_AllScorePO implements Serializable{
 
 
-//总数据
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//总数据
+	String playerName;
+	private String team;
+	private String teamArea;
 	private String timeAll;//上场时间
 	private int numOfFirstMatches;//先发场数
 	private int numOfMatches;//参赛场数
 	private double scoresAll[]=new double[14];
 	
-	public Player_AllScorePO(){
-		timeAll="0:0";
-		numOfFirstMatches=0;
-		 numOfMatches=0;
+	public Player_AllScorePO(String playername){
+		this.playerName=playername;
+		this.team=null;
+		this.timeAll="0:0";
+		this.teamArea="0";
+		this.numOfFirstMatches=0;
+		this.numOfMatches=0;
 		for(int i=0;i<scoresAll.length;i++){
-			scoresAll[i]=0;
+			this.scoresAll[i]=0;
 		}
 	}
-	public void addFirstMatch(){
-		this.numOfFirstMatches++;
+	public String getTeam() {
+		return team;
 	}
+	public void setTeam(String team) {
+		this.team = team;
+	}
+	
+	public String getTeamArea() {
+		return teamArea;
+	}
+	public void setTeamArea(String teamArea) {
+		this.teamArea = teamArea;
+	}
+	public String getPlayerName() {
+		return playerName;
+	}
+
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+
 	public void addnumOfMatches(int num){
 		this.numOfMatches+=num;
 	}
@@ -51,6 +113,7 @@ public class Player_AllScorePO {
 	public void addTimeAll(String timeAllAdd){
 		String strs[]=timeAllAdd.split(":");
 		String ss[]=this.timeAll.split(":");
+
 		int seconds=Integer.parseInt(ss[1])+Integer.parseInt(strs[1]);
 		if(seconds<60){
 			this.timeAll=(Integer.parseInt(ss[0])+Integer.parseInt(strs[0])+"")
@@ -59,13 +122,14 @@ public class Player_AllScorePO {
 			this.timeAll=(Integer.parseInt(ss[0])+Integer.parseInt(strs[0])+1+"")
 					+":"	+(seconds-60+"");	
 		}
+	}
+
+	public void addAllScore(double[] s){
 		
-	}
-	public void addAllScore(String strs[]){
-		for(int i=0;i<scoresAll.length;i++){
-			scoresAll[i]+=Integer.parseInt(strs[i]);
+			for(int i=0;i<s.length;i++){
+				this.scoresAll[i]+=s[i];
+			}
 		}
-	}
 
 	public double[] getScoresAll() {
 		return scoresAll;

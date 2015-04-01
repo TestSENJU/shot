@@ -1,6 +1,5 @@
 package ui;
 
-import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,14 +9,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.WindowConstants;
-import javax.swing.table.DefaultTableModel;
 
 public class allPlayersInformation {
 	 JFrame jFrame=new JFrame("所有球员信息");
 	 String[] data={" ","赛季总数据","赛季平均数据"};
-	 JComboBox jComboBox=new JComboBox(data);
+	 @SuppressWarnings({ "unchecked", "rawtypes" })
+	JComboBox jComboBox=new JComboBox(data);
 	 JTable jTable;
 	 JLabel jLabel1=new JLabel();
 	 JLabel jLabel2=new JLabel();
@@ -97,7 +95,7 @@ public class allPlayersInformation {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				selectTeamUI ui=new selectTeamUI();
-				ui.selectTeamUI();
+				ui.selectTeam();
 			}
 		});
     	jLabel3.addMouseListener(new MouseListener() {

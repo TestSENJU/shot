@@ -1,12 +1,8 @@
 package ui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
@@ -70,7 +66,7 @@ public class selectTorPUI {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				playersCheckUI ui=new playersCheckUI();
-				ui.playersCheckUI();
+				ui.playersCheck();
 				jFrame.dispose();
 			}
 		});
@@ -99,7 +95,7 @@ public class selectTorPUI {
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				selectTeamUI sTeamUI=new selectTeamUI();
-				sTeamUI.selectTeamUI();
+				sTeamUI.selectTeam();
 				jFrame.dispose();
 			}
 		});

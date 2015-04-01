@@ -1,12 +1,8 @@
 package ui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,9 +24,9 @@ public class selectTeamUI {
 	ImageIcon allTeam=new ImageIcon("img/picture/allTeamInformation.jpg");
 	String[] team={" ","马刺队","老鹰队","骑士队","猛龙","公牛队","奇才队","雄鹿队","步行者队","热火队","凯尔特人队","黄蜂队","篮网队","活塞队","魔术队","76人队","尼克斯队","勇士队","灰熊队","开拓者队","火箭队","快船队","小牛队","鹈鹕队","雷霆队","太阳队","爵士队","掘金队","国王队","湖人队","森林狼队"};
 	String[] condition={" ","比赛场数","投篮命中数","投篮出手次数","三分命中数","三分出手数","罚球命中数","罚球出手数","进攻篮板数","防守篮板数","篮板数","助攻数","抢断数","盖帽数","失误数","犯规数","比赛得分","投篮命中率","三分命中率","罚球命中率","胜率","进攻回合","进攻效率","防守效率","篮板效率","抢断效率","助攻率"};
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBox1=new JComboBox(team);
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBox2=new JComboBox(condition);
 	public String[] getCondition(){
 		String team=(String)jComboBox1.getSelectedItem();
@@ -38,7 +34,7 @@ public class selectTeamUI {
     	String[] teamSelect={team,condition};
     	return teamSelect;
 	}
-	public void selectTeamUI(){
+	public void selectTeam(){
 		jFrame.setUndecorated(true);
 		jFrame.setVisible(true);
     	jFrame.setSize(1200, 700);
@@ -93,7 +89,7 @@ public class selectTeamUI {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				teamInformationUI ui=new teamInformationUI();
-				ui.teamInformationUI();
+				ui.teamInformation();
 				jFrame.dispose();
 			}
 		});
@@ -123,7 +119,7 @@ public class selectTeamUI {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				teamSortUI ui=new teamSortUI();
-				ui.teamSortUI();
+				ui.teamSort();
 
 			}
 		});
@@ -214,7 +210,7 @@ public class selectTeamUI {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				allTeamInformation ui=new allTeamInformation();
-				ui.allTeamInformation();
+				ui.allTeamInformationUI();
 			}
 		});
 	}

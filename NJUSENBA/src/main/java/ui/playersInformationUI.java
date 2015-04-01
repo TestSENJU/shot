@@ -1,22 +1,15 @@
 package ui;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import javax.swing.plaf.ViewportUI;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
 
 public class playersInformationUI {
     JFrame jFrame=new JFrame("球员信息查看");
@@ -33,7 +26,8 @@ public class playersInformationUI {
     String[] data={" ","赛季总数据","赛季平均数据"};
     JTextField jTextField1;
     JTextField jTextField2;
-    JComboBox jComboBox=new JComboBox(data);
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	JComboBox jComboBox=new JComboBox(data);
     public String getSelectCondition(){
     String selectCondition=(String)jComboBox.getSelectedItem();
     return selectCondition;
@@ -117,7 +111,7 @@ public class playersInformationUI {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				playersCheckUI ui=new playersCheckUI();
-				ui.playersCheckUI();
+				ui.playersCheck();
 			}
 		});
     	jLabel3.addMouseListener(new MouseListener() {

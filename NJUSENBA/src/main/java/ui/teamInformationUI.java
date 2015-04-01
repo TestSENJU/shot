@@ -3,12 +3,10 @@ package ui;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
@@ -20,7 +18,8 @@ public class teamInformationUI {
 	JLabel jLabel3=new JLabel(" ");
 	JLabel jLabel4=new JLabel("team");
 	String[] select={" ","赛季总数据","赛季场均数据"};
-    JComboBox jComboBox=new JComboBox(select);
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	JComboBox jComboBox=new JComboBox(select);
     ImageIcon background=new ImageIcon("img/picture/teamBackground2.jpg");
     ImageIcon back=new ImageIcon("img/picture/teamBackground1Back.jpg");
     ImageIcon exit=new ImageIcon("img/picture/teamBackground1Exit.jpg");
@@ -42,7 +41,7 @@ public class teamInformationUI {
     	else 
     		return null;
     }
-    public void teamInformationUI(){
+    public void teamInformation(){
     	jFrame.setUndecorated(true);
     	jFrame.setVisible(true);
     	jFrame.setSize(1200, 700);
@@ -109,7 +108,7 @@ public class teamInformationUI {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				selectTeamUI ui=new selectTeamUI();
-				ui.selectTeamUI();
+				ui.selectTeam();
 			}
 		});
     	jLabel3.addMouseListener(new MouseListener() {
@@ -139,9 +138,5 @@ public class teamInformationUI {
 				jFrame.dispose();
 			}
 		});
-    }
-    public static void main(String[]args){
-    	teamInformationUI ui=new teamInformationUI();
-    	ui.teamInformationUI();
     }
 }

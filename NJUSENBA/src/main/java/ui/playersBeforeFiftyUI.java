@@ -1,6 +1,5 @@
 package ui;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -8,8 +7,6 @@ import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
@@ -22,7 +19,7 @@ public class playersBeforeFiftyUI{
     ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
     ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
     JTextField jTextField;
-    public void playersBeforeFiftyUI(){
+    public void playersBeforeFifty(){
     	jFrame.setUndecorated(true);
     	jFrame.setVisible(true);
     	jFrame.setSize(1200, 700);
@@ -72,7 +69,7 @@ public class playersBeforeFiftyUI{
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				playersCheckUI ui=new playersCheckUI();
-				ui.playersCheckUI();
+				ui.playersCheck();
 			}
 		});
     	jLabel3.addMouseListener(new MouseListener() {

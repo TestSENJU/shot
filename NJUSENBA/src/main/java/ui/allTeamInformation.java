@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,7 +22,8 @@ public class allTeamInformation {
 	ImageIcon exit=new ImageIcon("img/picture/teamBackground1Exit.jpg");
 	String[] select={" ","赛季总数据","赛季场均数据"};
 	JTable jTable;
-    JComboBox jComboBox=new JComboBox(select);
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	JComboBox jComboBox=new JComboBox(select);
     JScrollPane jScrollPane;
     public String getSelectCondition(){
     	String selectCondition=(String)jComboBox.getSelectedItem();
@@ -39,7 +41,7 @@ public class allTeamInformation {
 		 else 
 			 return null;
 	 }
-    public void allTeamInformation(){
+    public void allTeamInformationUI(){
     	jFrame.setUndecorated(true);
     	jFrame.setSize(1200, 700);
     	jFrame.setLayout(null);
@@ -90,7 +92,7 @@ public class allTeamInformation {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				selectTeamUI ui=new selectTeamUI();
-				ui.selectTeamUI();
+				ui.selectTeam();
 			}
 		});
     	 jLabel3.addMouseListener(new MouseListener() {

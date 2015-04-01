@@ -1,12 +1,9 @@
 package ui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,9 +21,12 @@ public class playersCheckUI {
     String[] position={" ","前锋","中锋","后卫"};
     String[] league={" ","东部","西部","中部区","大西洋区","西北区","太平洋区","东南区","西南区"};
     String[] condition={" ","得分","篮板","助攻","得分/篮板/助攻","盖帽","抢断","犯规","失误","分钟","效率","投篮","三分","罚球","两双"};
-    JComboBox jComboBox1=new JComboBox(condition);
-    JComboBox jComboBox2=new JComboBox(position);
-    JComboBox jComboBox3=new JComboBox(league);
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	JComboBox jComboBox1=new JComboBox(condition);
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	JComboBox jComboBox2=new JComboBox(position);
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	JComboBox jComboBox3=new JComboBox(league);
     ImageIcon background=new ImageIcon("img/picture/playerBackground1.jpg");
     ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
     ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
@@ -42,7 +42,7 @@ public class playersCheckUI {
     	String playerName=jTextField.getText();
     	return playerName;
     }
-    public void playersCheckUI(){
+    public void playersCheck(){
     	jFrame.setUndecorated(true);
     	jFrame.setVisible(true);
     	jFrame.setSize(1200, 700);
@@ -186,7 +186,7 @@ public class playersCheckUI {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				playersBeforeFiftyUI ui=new playersBeforeFiftyUI();
-				ui.playersBeforeFiftyUI();
+				ui.playersBeforeFifty();
 			}
 		});
     	jLabel6.addMouseListener(new MouseListener() {
@@ -223,9 +223,5 @@ public class playersCheckUI {
 				jFrame.dispose();
 			}
 		});
-    }
-    public static void main(String[]args){
-    	playersCheckUI ui=new playersCheckUI();
-    	ui.playersCheckUI();
     }
 }

@@ -2,8 +2,8 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -13,8 +13,10 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
 
 import vo.PlayerStrVO;
+import logic.PlayerBL;
 import logic.PlayerService;
 
 public class allPlayersInformation {
@@ -22,6 +24,8 @@ public class allPlayersInformation {
 	 String[] data={" ","赛季总数据","赛季平均数据"};
 	 @SuppressWarnings({ "unchecked", "rawtypes" })
 	JComboBox jComboBox=new JComboBox(data);
+	 DefaultTableModel table;
+	 JScrollPane jsp;
 	 JTable jTable;
 	 JLabel jLabel1=new JLabel();
 	 JLabel jLabel2=new JLabel();
@@ -29,8 +33,12 @@ public class allPlayersInformation {
 	 ImageIcon background=new ImageIcon("img/picture/playerBackground.jpg");
 	 ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
 	 ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
-	 JScrollPane jScrollPane;
+	 private String[] title=new String[]{"球员名称","所属球队","参赛场数","先发场数","篮板数","助攻数","在场时间","投篮命中率","三分命中率","罚球命中率",
+			 "进攻篮板数","防守篮板数","抢断数","盖帽数","失误数","犯规数","得分","效率","GmSc效率值"," 真实命中率","投篮效率","篮板率",
+			 "进攻篮板率","防守篮板率","助攻率","抢断率","盖帽率","失误率","使用率"};
+
 	public void allPlayersInformationUI(){
+		
 		jFrame.setUndecorated(true);
     	jFrame.setSize(1200, 700);
     	jFrame.setLayout(null);
@@ -41,8 +49,45 @@ public class allPlayersInformation {
     	jFrame.add(jLabel1);
     	jComboBox.setBounds(800, 10, 200, 50);
     	jLabel1.add(jComboBox);
-    	final String[][] playerData = null;
-    	jComboBox.addActionListener(new ActionListener() {
+    	
+    	table=new DefaultTableModel(null,title);
+		jTable=new JTable(table);
+		jsp=new JScrollPane(jTable);
+    	jTable=new JTable(897, 15);
+    	jTable.setBounds(2, 82,1196,618);
+        jLabel1.add(jsp);
+    	jsp.setBounds(0, 80, 1200, 600);
+    	jFrame.setVisible(true);
+    	jLabel2.setIcon(back);
+    	jLabel3.setIcon(exit);
+    	jLabel2.setBounds(0, 0, 50, 35);
+    	jLabel1.add(jLabel2);
+    	jLabel3.setBounds(1120, 0, 80, 80);
+    	jLabel1.add(jLabel3);
+    	
+    	setListener();    	
+	}
+//	public static void main(String[]args){
+//		allPlayersInformation ui=new allPlayersInformation();
+//		ui.allPlayersInformationUI();
+//	}
+	public void setListener(){
+jLabel2.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				jFrame.dispose();
+				selectTeamUI ui=new selectTeamUI();
+				ui.selectTeam();
+			}
+		});
+    	jLabel3.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){
+				jFrame.dispose();
+			}
+		});
+jComboBox.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -53,188 +98,86 @@ public class allPlayersInformation {
 					case 0:
 						break;
 					case 1:{
-						PlayerService data1=null;
+						//TODO
+						while(table.getRowCount()>0){      
+							table.removeRow(table.getRowCount()-1); }
+						PlayerService data1=new PlayerBL();
 						ArrayList<PlayerStrVO> data2=new ArrayList<PlayerStrVO>();
 						data2=data1.playerAll();
 						for(int i=0;i<448;i++){
-							playerData[i][0]=data2.get(0).getName();
+							String[] playerData=new String[29];
+							playerData[0]=data2.get(i).getName();
+							playerData[1]=data2.get(i).getTeams();
+							playerData[2]=data2.get(i).getCompeteNum();
+							playerData[3]=data2.get(i).getOffensiveNum();
+							playerData[4]=data2.get(i).getReboundNum();
+							playerData[5]=data2.get(i).getAssistingNum();
+							playerData[6]=data2.get(i).getPlayingTime();
+							playerData[7]=data2.get(i).getHitRate();
+							playerData[8]=data2.get(i).getThreePointHitRate();
+							playerData[9]=data2.get(i).getFreeThrowHitRate();
+							playerData[10]=data2.get(i).getOffensiveReboundNum();
+							playerData[11]=data2.get(i).getDefensiveReboundNum();
+							playerData[12]=data2.get(i).getStealNum();
+							playerData[13]=data2.get(i).getBlockShotNum();
+							playerData[14]=data2.get(i).getMuffNum();
+							playerData[15]=data2.get(i).getFoulNum();
+							playerData[16]=data2.get(i).getScore();
+							playerData[17]=data2.get(i).getEfficiency();
+							playerData[18]=data2.get(i).getGmScEfficiency();
+							playerData[19]=data2.get(i).getTrueHitRate();
+							playerData[20]=data2.get(i).getShootEfficiency();
+							playerData[21]=data2.get(i).getReboundRate();
+							playerData[22]=data2.get(i).getOffensiveReboundRate();
+							playerData[23]=data2.get(i).getDefensiveReboundRate();
+							playerData[24]=data2.get(i).getAssistingRate();
+							playerData[25]=data2.get(i).getStealRate();
+							playerData[26]=data2.get(i).getBlockShotRate();
+							playerData[27]=data2.get(i).getMuffRate();
+							playerData[28]=data2.get(i).getUsage();
+						table.addRow(playerData);
 						}
-						for(int i=0;i<448;i++){
-							playerData[i][1]=data2.get(1).getTeams();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][2]=data2.get(2).getCompeteNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][3]=data2.get(3).getOffensiveNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][4]=data2.get(4).getReboundNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][5]=data2.get(5).getAssistingNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][6]=data2.get(6).getPlayingTime();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][7]=data2.get(7).getHitRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][8]=data2.get(8).getThreePointHitRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][9]=data2.get(9).getFreeThrowHitRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][10]=data2.get(10).getOffensiveReboundNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][11]=data2.get(11).getDefensiveReboundNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][12]=data2.get(12).getStealNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][13]=data2.get(13).getBlockShotNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][14]=data2.get(14).getMuffNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][15]=data2.get(15).getFoulNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][16]=data2.get(16).getScore();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][17]=data2.get(17).getEfficiency();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][18]=data2.get(18).getGmScEfficiency();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][19]=data2.get(19).getTrueHitRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][20]=data2.get(20).getShootEfficiency();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][21]=data2.get(21).getReboundRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][22]=data2.get(22).getOffensiveReboundRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][23]=data2.get(23).getDefensiveReboundRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][24]=data2.get(24).getAssistingRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][25]=data2.get(25).getStealRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][26]=data2.get(26).getBlockShotRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][27]=data2.get(27).getMuffRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][28]=data2.get(28).getUsage();
-						}
-					;break;
+					
+					break;
 					}
 					case 2:{
-						PlayerService data3=null;
+						while(table.getRowCount()>0){      
+							table.removeRow(table.getRowCount()-1); }
+						PlayerService data3=new PlayerBL();
 						ArrayList<PlayerStrVO> data4=new ArrayList<PlayerStrVO>();
 						data4=data3.playerAverage();
 						for(int i=0;i<448;i++){
-							playerData[i][0]=data4.get(0).getName();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][1]=data4.get(1).getTeams();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][2]=data4.get(2).getCompeteNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][3]=data4.get(3).getOffensiveNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][4]=data4.get(4).getReboundNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][5]=data4.get(5).getAssistingNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][6]=data4.get(6).getPlayingTime();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][7]=data4.get(7).getHitRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][8]=data4.get(8).getThreePointHitRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][9]=data4.get(9).getFreeThrowHitRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][10]=data4.get(10).getOffensiveReboundNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][11]=data4.get(11).getDefensiveReboundNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][12]=data4.get(12).getStealNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][13]=data4.get(13).getBlockShotNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][14]=data4.get(14).getMuffNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][15]=data4.get(15).getFoulNum();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][16]=data4.get(16).getScore();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][17]=data4.get(17).getEfficiency();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][18]=data4.get(18).getGmScEfficiency();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][19]=data4.get(19).getTrueHitRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][20]=data4.get(20).getShootEfficiency();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][21]=data4.get(21).getReboundRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][22]=data4.get(22).getOffensiveReboundRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][23]=data4.get(23).getDefensiveReboundRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][24]=data4.get(24).getAssistingRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][25]=data4.get(25).getStealRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][26]=data4.get(26).getBlockShotRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][27]=data4.get(27).getMuffRate();
-						}
-						for(int i=0;i<448;i++){
-							playerData[i][28]=data4.get(28).getUsage();
+							String playerData[]=new String[29];
+							playerData[0]=data4.get(i).getName();
+							playerData[1]=data4.get(i).getTeams();
+							playerData[2]=data4.get(i).getCompeteNum();
+							playerData[3]=data4.get(i).getOffensiveNum();
+							playerData[4]=data4.get(i).getReboundNum();
+							playerData[5]=data4.get(i).getAssistingNum();
+							playerData[6]=data4.get(i).getPlayingTime();
+							playerData[7]=data4.get(i).getHitRate();
+							playerData[8]=data4.get(i).getThreePointHitRate();
+							playerData[9]=data4.get(i).getFreeThrowHitRate();
+							playerData[10]=data4.get(i).getOffensiveReboundNum();
+							playerData[11]=data4.get(i).getDefensiveReboundNum();
+							playerData[12]=data4.get(i).getStealNum();
+							playerData[13]=data4.get(i).getBlockShotNum();
+							playerData[14]=data4.get(i).getMuffNum();
+							playerData[15]=data4.get(i).getFoulNum();
+							playerData[16]=data4.get(i).getScore();
+							playerData[17]=data4.get(i).getEfficiency();
+							playerData[18]=data4.get(i).getGmScEfficiency();
+							playerData[19]=data4.get(i).getTrueHitRate();
+							playerData[20]=data4.get(i).getShootEfficiency();
+							playerData[21]=data4.get(i).getReboundRate();
+							playerData[22]=data4.get(i).getOffensiveReboundRate();
+							playerData[23]=data4.get(i).getDefensiveReboundRate();
+							playerData[24]=data4.get(i).getAssistingRate();
+							playerData[25]=data4.get(i).getStealRate();
+							playerData[26]=data4.get(i).getBlockShotRate();
+							playerData[27]=data4.get(i).getMuffRate();
+							playerData[28]=data4.get(i).getUsage();
+							table.addRow(playerData);
 						}
 					;break;
 					}
@@ -242,88 +185,5 @@ public class allPlayersInformation {
 			}
 		}
 		});
-    	jTable=new JTable(897, 15);
-    	jTable.setBounds(2, 82,1196,618);
-    	jLabel1.add(jTable);
-    	jScrollPane=new JScrollPane(jTable);
-        jLabel1.add(jScrollPane);
-    	jScrollPane.setBounds(0, 80, 1200, 600);
-    	jFrame.setVisible(true);
-    	jLabel2.setIcon(back);
-    	jLabel3.setIcon(exit);
-    	jLabel2.setBounds(0, 0, 50, 35);
-    	jLabel1.add(jLabel2);
-    	jLabel3.setBounds(1120, 0, 80, 80);
-    	jLabel1.add(jLabel3);
-    	jLabel2.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jFrame.dispose();
-				selectTeamUI ui=new selectTeamUI();
-				ui.selectTeam();
-			}
-		});
-    	jLabel3.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jFrame.dispose();
-			}
-		});
-	}
-	public static void main(String[]args){
-		allPlayersInformation ui=new allPlayersInformation();
-		ui.allPlayersInformationUI();
 	}
 }

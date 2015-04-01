@@ -20,8 +20,10 @@ public interface PlayerService {
 	public ArrayList<PlayerStrVO> ascendPlayerAStr(int key, ArrayList<PlayerAverageVO> playerOrigin);
 	//所有球员场均数据降序
 	public ArrayList<PlayerStrVO> descendPlayerAStr(int key, ArrayList<PlayerAverageVO> playerOrigin);
-	//TODO 筛选部分
-	public ArrayList<PlayerVO> filter(String filterInfo);
+	//TODO 筛选部分 - 筛选所有球员赛季总数据
+	public ArrayList<PlayerStrVO> filterAll(String filterInfo);
+	// 筛选球员场均数据
+	public ArrayList<PlayerStrVO> filterAverage(String filterInfo);
 	//TODO 所有球员个人信息
 	public ArrayList<PlayerPersonalInfoVO> playerPersonalInfo();
 	// 某一球员的具体personal信息

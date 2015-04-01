@@ -41,6 +41,10 @@ import java.io.Serializable;
  *            score 比赛得分
  * @param hitRate
  *            命中率
+ * @param threeHitRate
+ *            三分命中率
+ * @param penaltyRate
+ *            发球命中率
  * @param winRate
  *            胜率
  * @param attackRound
@@ -58,7 +62,6 @@ import java.io.Serializable;
  * @param assistingRate
  *            助攻率
  */
-@SuppressWarnings("unused")
 public class TeamPO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -82,13 +85,13 @@ public class TeamPO implements Serializable {
 	private int faultyNum;
 	private int foulNum;
 	private int score;
-//	private double hitRate;
-//	private double winRate;
-//	private double attackRound;
-//	private double attackEfficiency;
-//	private double defensiveEfficiency;
-//	private double attackReboundRate;
-//	private double defensiveReboundRate;
+	// private double hitRate;
+	// private double winRate;
+	// private double attackRound;
+	// private double attackEfficiency;
+	// private double defensiveEfficiency;
+	// private double attackReboundRate;
+	// private double defensiveReboundRate;
 	// private double stealRate;
 	// private double assistingRate;
 
@@ -254,8 +257,23 @@ public class TeamPO implements Serializable {
 	}
 
 	public double getWinRate() {
-		if (matchNum != 0)
-			return winNum / matchNum;
+		if (getMatchNum() != 0)
+			return (double) getWinNum() / getMatchNum();
+		else
+			return 0;
+	}
+
+	public double getThreeHitRate() {
+		if (getThreePointShotNum() != 0)
+			return (double) getThreePointShotRightNum()
+					/ getThreePointShotNum();
+		else
+			return 0;
+	}
+
+	public double getPenaltyRate() {
+		if (getPenaltyShotNum() != 0)
+			return (double) getPenaltyShotRightNum() / getPenaltyShotNum();
 		else
 			return 0;
 	}
@@ -277,7 +295,7 @@ public class TeamPO implements Serializable {
 	public double getAttackReboundRate() {
 		if (getOffensiveReboundNum() != 0
 				&& getOpponent_defensiveRebound() != 0)
-			return getOffensiveReboundNum()
+			return (double) getOffensiveReboundNum()
 					/ (getOffensiveReboundNum() + getOpponent_defensiveRebound());
 		else
 			return 0;
@@ -286,7 +304,7 @@ public class TeamPO implements Serializable {
 	public double getDefensiveReboundRate() {
 		if (getDefensiveReboundNum() != 0
 				&& getOpponent_offensiveRebound() != 0)
-			return getDefensiveReboundNum()
+			return (double) getDefensiveReboundNum()
 					/ (getDefensiveReboundNum() + getOpponent_offensiveRebound());
 		else
 			return 0;
@@ -307,9 +325,9 @@ public class TeamPO implements Serializable {
 	}
 
 	public double getHitRate() {
-		if (getShotNum() != 0)
-			return getShotRightNum() / getShotNum();
-		else
+		if (getShotNum() != 0) {
+			return (double) getShotRightNum() / getShotNum();
+		} else
 			return 0;
 	}
 

@@ -1,7 +1,12 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
 
+import po.Player_AllScorePO;
+import data.player.PlayerData;
+import data.player.PlayerData_Impl;
 import vo.PlayerPersonalInfoVO;
 import vo.PlayerVO;
 
@@ -50,35 +55,75 @@ public class FliterPlayer {
 			}
 		}
 		//TODO 筛选分区
-		//TODO 筛选排序条件-暂时都按照num不是rate-shoot shi efficiency
+		PlayerData pd = new PlayerData_Impl();
+		Hashtable<String, Player_AllScorePO> playAllList = pd.getPlayerAll();
+		Set<String> keys = playAllList.keySet();
+		for (int i=0;i < playerList.size();i++){
+			for (String key : keys) {
+				if(playerList.get(i).getName().equals(playAllList.get(key).getPlayerName())){
+					if(!playAllList.get(key).getTeamArea().equals(league)){
+						playerList.remove(i);
+					}
+				}
+			}
+		}
+		//TODO 筛选排序条件-暂时都按照num不是rate;shoot shi efficiency
 		int key = -1;
 		switch (sortBy){
 		case "score": key = 16;
 		case "rebound": key = 4;
 		case "assisting": key = 5;
-		case "S_R_A": 
+		case "S_R_A": key = 29;
 		case "blockShot": key = 13;
 		case "steal": key = 12;
 		case "foul": key = 15;
 		case "muff": key = 14;
-		case "playTime": 
+		case "playTime": key = 1;
 		case "efficiency": key = 17;
 		case "shoot": key = 20;
 		case "threePoint": key = 8;  
 		case "freeThrow": key = 9;
 		case "D_D": 
+			for (int i=0;i < playerList.size();i++) {
+				if(!sortDD(playerList.get(i))){
+					playerList.remove(i);
+				}
+			}
 		default: 
 			System.out.println("invalid sortBy.");
 			break;
 		}
-		player.sort_Ascend(0, playerList);
+		player.sort_Ascend(key, playerList);
 		return playerList;
 	}
 	
-	public boolean sortPosition(String originalP, String position ){
+/*	public boolean sortPosition(String originalP, String position ){
 		return true;
 	}
 	public boolean sortLeague(){
 		return true;
+	}*/
+	public boolean sortDD(PlayerVO pvo){
+		int counter = 0;
+		if(pvo.getScore() > 10){
+			counter++;
+		}
+		if(pvo.getReboundNum() > 10){
+			counter++;
+		}
+		if(pvo.getAssistingNum() > 10){
+			counter++;
+		}
+		if(pvo.getStealNum() > 10){
+			counter++;
+		}
+		if(pvo.getBlockShotNum() > 10){
+			counter++;
+		}
+		if (counter>=2) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

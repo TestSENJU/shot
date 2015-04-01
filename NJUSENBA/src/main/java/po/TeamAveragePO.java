@@ -1,5 +1,7 @@
 package po;
 
+import java.io.Serializable;
+
 /**
  * @author XY
  *
@@ -56,7 +58,10 @@ package po;
  * @param assistingRate
  *            助攻率
  */
-public class TeamAveragePO {
+public class TeamAveragePO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	private String teamName;
 	private int matchNum;
 	private double shotRightNum;
@@ -75,6 +80,8 @@ public class TeamAveragePO {
 	private double foulNum;
 	private double score;
 	private double hitRate;
+	private double threeHitRate;
+	private double penaltyRate;
 	private double winRate;
 	private double attackRound;
 	private double attackEfficiency;
@@ -88,25 +95,29 @@ public class TeamAveragePO {
 		this.teamName = po.getTeamName();
 		this.matchNum = po.getMatchNum();
 		if (this.matchNum != 0) {
-			this.shotRightNum = po.getShotRightNum() / this.matchNum;
-			this.shotNum = po.getShotNum() / this.matchNum;
-			this.threePointShotRightNum = po.getThreePointShotRightNum()
+			this.shotRightNum = (double) po.getShotRightNum() / this.matchNum;
+			this.shotNum = (double) po.getShotNum() / this.matchNum;
+			this.threePointShotRightNum = (double) po
+					.getThreePointShotRightNum() / this.matchNum;
+			this.threePointShotNum = (double) po.getThreePointShotNum()
 					/ this.matchNum;
-			this.threePointShotNum = po.getThreePointShotNum() / this.matchNum;
-			this.penaltyShotRightNum = po.getPenaltyShotRightNum()
+			this.penaltyShotRightNum = (double) po.getPenaltyShotRightNum()
 					/ this.matchNum;
-			this.penaltyShotNum = po.getPenaltyShotNum() / this.matchNum;
-			this.offensiveReboundNum = po.getOffensiveReboundNum()
+			this.penaltyShotNum = (double) po.getPenaltyShotNum()
 					/ this.matchNum;
-			this.defensiveReboundNum = po.getDefensiveReboundNum()
+			this.offensiveReboundNum = (double) po.getOffensiveReboundNum()
 					/ this.matchNum;
-			this.reboundNum = po.getReboundNum() / this.matchNum;
-			this.assistNum = po.getAssistNum() / this.matchNum;
-			this.stealNum = po.getStealNum() / this.matchNum;
-			this.blockShotNum = po.getBlockShotNum() / this.matchNum;
-			this.faultyNum = po.getFaultyNum() / this.matchNum;
-			this.foulNum = po.getFoulNum() / this.matchNum;
-			this.score = po.getScore() / this.matchNum;
+			this.defensiveReboundNum = (double) po.getDefensiveReboundNum()
+					/ this.matchNum;
+			this.reboundNum = (double) po.getReboundNum() / this.matchNum;
+			this.assistNum = (double) po.getAssistNum() / this.matchNum;
+			this.stealNum = (double) po.getStealNum() / this.matchNum;
+			this.blockShotNum = (double) po.getBlockShotNum() / this.matchNum;
+			this.faultyNum = (double) po.getFaultyNum() / this.matchNum;
+			this.foulNum = (double) po.getFoulNum() / this.matchNum;
+			this.score = (double) po.getScore() / this.matchNum;
+
+			this.attackRound = (double) po.getAttackRound() / this.matchNum;
 		} else {
 			this.shotRightNum = 0;
 			this.shotNum = 0;
@@ -125,8 +136,9 @@ public class TeamAveragePO {
 			this.score = 0;
 		}
 		this.hitRate = po.getHitRate();
+		this.threeHitRate = po.getThreeHitRate();
+		this.penaltyRate = po.getPenaltyRate();
 		this.winRate = po.getWinRate();
-		this.attackRound = po.getAttackRound();
 		this.attackEfficiency = po.getAttackEfficiency();
 		this.defensiveEfficiency = po.getDefensiveEfficiency();
 		this.attackReboundRate = po.getAttackReboundRate();
@@ -237,6 +249,14 @@ public class TeamAveragePO {
 
 	public double getAssistingRate() {
 		return assistingRate;
+	}
+
+	public double getThreeHitRate() {
+		return threeHitRate;
+	}
+
+	public double getPenaltyRate() {
+		return penaltyRate;
 	}
 
 }

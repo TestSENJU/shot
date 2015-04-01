@@ -83,12 +83,14 @@ public class SortAllTeam {
 			Collections.sort(ascendTeamList, new TeamSortByDefensiveEfficiency());
 			break;
 		case 24:
-			Collections.sort(ascendTeamList, new TeamSortByReboundRate());
+			Collections.sort(ascendTeamList, new TeamSortByOfReboundRate());
 			break;
 		case 25:
+			Collections.sort(ascendTeamList, new TeamSortByDeReboundRate());
+		case 26:
 			Collections.sort(ascendTeamList, new TeamSortByStealRate());
 			break;
-		case 26:
+		case 27:
 			Collections.sort(ascendTeamList, new TeamSortByAssistingRate());
 			break;
 		default:
@@ -237,9 +239,15 @@ class TeamSortByDefensiveEfficiency implements Comparator<TeamVO> {
 		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }
-class TeamSortByReboundRate implements Comparator<TeamVO> {
+class TeamSortByOfReboundRate implements Comparator<TeamVO> {
 	public int compare(TeamVO t1, TeamVO t2) {
-		double temp = t1.getReboundRate() - t2.getReboundRate();
+		double temp = t1.getOffensiveReboundRate() - t2.getOffensiveReboundRate();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
+	}
+}
+class TeamSortByDeReboundRate implements Comparator<TeamVO> {
+	public int compare(TeamVO t1, TeamVO t2) {
+		double temp = t1.getDefensiveReboundRate() - t2.getDefensiveReboundRate();
 		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }

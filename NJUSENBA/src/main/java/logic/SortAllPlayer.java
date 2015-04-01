@@ -14,6 +14,8 @@ public class SortAllPlayer {
 		case 0:
 			Collections.sort(ascendPlayerList, new SortByName());
 			break;
+		case 1:
+			Collections.sort(ascendPlayerList, new SortByPlayTime());
 		case 2:
 			Collections.sort(ascendPlayerList, new SortByCompeteNum());
 			break;
@@ -92,6 +94,9 @@ public class SortAllPlayer {
 		case 28:
 			Collections.sort(ascendPlayerList, new SortByUsage());
 			break;
+		case 29:
+			Collections.sort(ascendPlayerList, new SortBySRA());
+			break;
 		default:
 				System.out.println("invalid input");
 				break;
@@ -117,6 +122,23 @@ class SortByName implements Comparator<PlayerVO> {
 		return p1.getName().compareTo(p2.getName());
 	}
 }
+class SortByPlayTime implements Comparator<PlayerVO>{
+	public int compare(PlayerVO p1, PlayerVO p2) {
+		String time1 = p1.getPlayingTime();
+		String time2 = p2.getPlayingTime();
+		String[] temp1 = time1.split(":");
+		String[] temp2 = time2.split(":");
+		if(Integer.parseInt(temp1[0])>Integer.parseInt(temp2[0])){
+			return 1;
+		} else if (Integer.parseInt(temp1[0])<Integer.parseInt(temp2[0])){
+			return 0;
+		} else if (Integer.parseInt(temp1[0])==Integer.parseInt(temp2[0])){
+			return Integer.parseInt(temp1[0])-Integer.parseInt(temp2[0]);
+		} else {
+			return 0;
+		}
+	}
+}
 class SortByCompeteNum implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
 		return p1.getCompeteNum() - p2.getCompeteNum();
@@ -129,12 +151,14 @@ class SortByOffensiveNum implements Comparator<PlayerVO>{
 }
 class SortByReboundNum implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		return p1.getReboundNum() - p2.getReboundNum();
+		double temp = p1.getReboundNum() - p2.getReboundNum();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0);
 	}
 }
 class SortByAssistingNum implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		return p1.getAssistingNum() - p2.getAssistingNum();
+		double temp = p1.getAssistingNum() - p2.getAssistingNum();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0);
 	}
 }
 //
@@ -160,32 +184,38 @@ class SortByFreeThrowHitRate implements Comparator<PlayerVO>{
 }
 class SortByOffensiveReboundNum implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		return p1.getOffensiveReboundNum() - p2.getOffensiveReboundNum();
+		double temp = p1.getOffensiveReboundNum() - p2.getOffensiveReboundNum();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0);
 	}
 }
 class SortByDefensiveReboundNum implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		return p1.getDefensiveReboundNum() - p2.getDefensiveReboundNum();
+		double temp = p1.getDefensiveReboundNum() - p2.getDefensiveReboundNum();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0);
 	}
 }
 class SortByStealNum implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		return p1.getStealNum() - p2.getStealNum();
+		double temp = p1.getStealNum() - p2.getStealNum();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0);
 	}
 }
 class SortByBlockShotNum implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		return p1.getBlockShotNum() - p2.getBlockShotNum();
+		double temp = p1.getBlockShotNum() - p2.getBlockShotNum();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0);
 	}
 }
 class SortByMuffNum implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		return p1.getMuffNum() - p2.getMuffNum();
+		double temp = p1.getMuffNum() - p2.getMuffNum();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0);
 	}
 }
 class SortByFoulNum implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
-		return p1.getFoulNum() - p2.getFoulNum();
+		double temp = p1.getFoulNum() - p2.getFoulNum();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0);
 	}
 }
 class SortByScore implements Comparator<PlayerVO>{
@@ -275,6 +305,14 @@ class SortByMuffRate implements Comparator<PlayerVO>{
 class SortByUsage implements Comparator<PlayerVO>{
 	public int compare(PlayerVO p1, PlayerVO p2) {
 		double temp = p1.getUsage() - p2.getUsage();
+		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
+	}
+}
+//
+class SortBySRA implements Comparator<PlayerVO>{
+	public int compare(PlayerVO p1, PlayerVO p2) {
+		double temp = p1.getScore()+p1.getReboundNum()+p1.getAssistingNum()
+				-p2.getScore()-p2.getReboundNum()-p2.getAssistingNum();
 		return temp > 0 ? 1:(temp < 0 ? -1 : 0); 
 	}
 }

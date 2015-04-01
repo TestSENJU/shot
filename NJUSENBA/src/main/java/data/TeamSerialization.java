@@ -6,14 +6,18 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Hashtable;
+import java.util.Set;
 
+import po.TeamAveragePO;
 import po.TeamPO;
 
 public class TeamSerialization {
 	static Hashtable<String, TeamPO> teamTable = new Hashtable<String, TeamPO>();
+	static Hashtable<String, TeamAveragePO> teamAverageTable = new Hashtable<String, TeamAveragePO>();
 	private static String team_path = "teams";
 	private static String match_path = "matches";
 	private static String team_serialization_path = "serialization/team";
+	private static String teamAverage_serialization_path = "serialization/teamAverage";
 
 	private static TeamSerialization ts;
 
@@ -217,5 +221,11 @@ public class TeamSerialization {
 	public void writeFile(String path) {
 		FileReadAndWriteBuffer
 				.write_to_file(team_serialization_path, teamTable);
+		Set<String> keys = teamTable.keySet();
+		for (String key : keys) {
+			teamAverageTable.put(key, new TeamAveragePO(teamTable.get(key)));
+		}
+		FileReadAndWriteBuffer.write_to_file(teamAverage_serialization_path,
+				teamAverageTable);
 	}
 }

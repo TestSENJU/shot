@@ -182,9 +182,6 @@ private static void readOneMatch(File file){
 		ArrayList<String[]>strlist1=new ArrayList<String[]>();
 		ArrayList<String[]>strlist2=new ArrayList<String[]>();
 		
-//		System.out.print("list1"+list1.size());
-//		System.out.print("list2"+list2.size());
-//		System.out.println();
 		for(int j=0;j<list1.size();j++){
 			String strs[]=list1.get(j).split(";");
 			

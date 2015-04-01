@@ -38,13 +38,9 @@ public static void main(String args[]){
      for(String key:keys){
     	 Player_AllScorePO playerAll=at.get(key);
     	 double nums[]=playerAll.getScoresAll();
-//    	 System.out.println(nums.length);
-//    	 if(nums==null) System.out.println("numsnull");
     	 double teamNums[]=playerAll.getTeamAll();
-//    	 if(teamNums==null) System.out.println("teamnull");
     	 double competeNums[]=playerAll.getCompeteAll();
-//    	 if(competeNums==null) System.out.println("competenull");
-    	 
+  	 
     	 //输出球员的总数据
 
     	 System.out.println("总参赛场数"+playerAll.getNumOfMatches());

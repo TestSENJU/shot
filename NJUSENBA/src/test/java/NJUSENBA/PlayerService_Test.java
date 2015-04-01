@@ -8,45 +8,68 @@ import logic.PlayerService;
 
 import org.junit.Test;
 
+import vo.PlayerAverageVO;
 import vo.PlayerVO;
 
 public class PlayerService_Test {
 	PlayerService pbl;
 
 	@Test
-	public void test_allPlayerSeasonData() {
+	public void test_playerAll() {
 
-		assertTrue(pbl.allPlayerSeasonData() != null);
-
-	}
-
-	@Test
-	public void test_allPlayerAverageData() {
-
-		assertTrue(pbl.allPlayerAverageData() != null);
+		assertTrue(pbl.playerAll() != null);
 
 	}
 
 	@Test
-	public void test_sort_Ascend() {
+	public void test_playerAverage() {
 
-		assertTrue(pbl.sort_Ascend(0, new ArrayList<PlayerVO>()) != null);
-
-	}
-
-	@Test
-	public void test_sort_Descend() {
-
-		assertTrue(pbl.sort_Descend(0, new ArrayList<PlayerVO>()) != null);
+		assertTrue(pbl.playerAverage() != null);
 
 	}
 
 	@Test
-	public void test_filter() {
+	public void test_ascendPlayerStr() {
 
-		assertTrue(pbl.filter(new String()) != null);
+		assertTrue(pbl.ascendPlayerStr(0, new ArrayList<PlayerVO>()) != null);
 
 	}
+
+	@Test
+	public void test_descendPlayerStr() {
+
+		assertTrue(pbl.descendPlayerStr(0, new ArrayList<PlayerVO>()) != null);
+
+	}
+	
+	@Test
+	public void test_ascendPlayerAStr() {
+
+		assertTrue(pbl.ascendPlayerAStr(0, new ArrayList<PlayerAverageVO>()) != null);
+
+	}
+
+	@Test
+	public void test_descendPlayerAStr() {
+
+		assertTrue(pbl.descendPlayerAStr(0, new ArrayList<PlayerAverageVO>()) != null);
+
+	}
+
+	@Test
+	public void test_filterAll() {
+
+		assertTrue(pbl.filterAll(new String()) != null);
+
+	}
+	
+	@Test
+	public void test_filterAverage() {
+
+		assertTrue(pbl.filterAverage(new String()) != null);
+
+	}
+
 
 	@Test
 	public void test_playerPersonalInfo() {

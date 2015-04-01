@@ -5,18 +5,17 @@ import java.util.Hashtable;
 import java.util.Set;
 
 import po.Player_AllScorePO;
+import vo.PlayerAverageVO;
+import vo.PlayerPersonalInfoVO;
 import data.player.PlayerData;
 import data.player.PlayerData_Impl;
-import vo.PlayerPersonalInfoVO;
-import vo.PlayerVO;
 
-public class FliterPlayer {
-	
-	public ArrayList<PlayerVO> filterSortBy(String position, String league, String sortBy){
-		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
+public class FliterPlayerAverage {
+	public ArrayList<PlayerAverageVO> filterSortBy(String position, String league, String sortBy){
+		ArrayList<PlayerAverageVO> playerList = new ArrayList<PlayerAverageVO>();
 		ArrayList<PlayerPersonalInfoVO> playerInfoList = new ArrayList<PlayerPersonalInfoVO>();
 		PlayerBL player = new PlayerBL();
-		playerList = player.allPlayerSeasonData();
+		playerList = player.allPlayerAverageData();
 		/*球员的球队会有很多也许，
 		所在球队不在同一个区的话，暂时按照只要包含筛选条件的分区就可以
 		position as above*/
@@ -30,8 +29,7 @@ public class FliterPlayer {
 		 * */
 		//TODO 筛选position
 		playerInfoList = player.playerPersonalInfo();
-		int length = playerList.size();
-		for (int i=0;i < length;i++){
+		for (int i=0;i < playerList.size();i++){
 			String originalP = playerInfoList.get(i).getPosition();
 			boolean sortP = false;
 			if (originalP.length()>1){
@@ -64,6 +62,7 @@ public class FliterPlayer {
 					if(!playAllList.get(key).getTeamArea().equals(league)){
 						playerList.remove(i);
 					}
+					break;
 				}
 			}
 		}
@@ -93,7 +92,7 @@ public class FliterPlayer {
 			System.out.println("invalid sortBy.");
 			break;
 		}
-		player.sort_Ascend(key, playerList);
+		player.sortA_Ascend(key, playerList);
 		return playerList;
 	}
 	
@@ -103,21 +102,21 @@ public class FliterPlayer {
 	public boolean sortLeague(){
 		return true;
 	}*/
-	public boolean sortDD(PlayerVO pvo){
+	public boolean sortDD(PlayerAverageVO pavo){
 		int counter = 0;
-		if(pvo.getScore() > 10){
+		if(pavo.getScore() > 10){
 			counter++;
 		}
-		if(pvo.getReboundNum() > 10){
+		if(pavo.getReboundNum() > 10){
 			counter++;
 		}
-		if(pvo.getAssistingNum() > 10){
+		if(pavo.getAssistingNum() > 10){
 			counter++;
 		}
-		if(pvo.getStealNum() > 10){
+		if(pavo.getStealNum() > 10){
 			counter++;
 		}
-		if(pvo.getBlockShotNum() > 10){
+		if(pavo.getBlockShotNum() > 10){
 			counter++;
 		}
 		if (counter>=2) {

@@ -10,9 +10,6 @@ import vo.PlayerAverageVO;
 import vo.PlayerPersonalInfoVO;
 import vo.PlayerStrVO;
 import vo.PlayerVO;
-import vo.TeamAverageVO;
-import vo.TeamStrVO;
-import vo.TeamVO;
 import data.player.PlayerData;
 import data.player.PlayerData_Impl;
 
@@ -104,12 +101,19 @@ public class PlayerBL implements PlayerService {
 		return rePlayerList;
 	}
 	// 筛选部分
-	public ArrayList<PlayerVO> filter(String filterInfo){
+	public ArrayList<PlayerStrVO> filterAll(String filterInfo){
 		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
 		String[] info = filterInfo.split(",");
-		FliterPlayer fp = new FliterPlayer();
+		FliterPlayerAll fp = new FliterPlayerAll();
 		playerList = fp.filterSortBy(info[0],info[1],info[2]);
-		return playerList;		
+		return playerToString(playerList);		
+	}
+	public ArrayList<PlayerStrVO> filterAverage(String filterInfo){
+		ArrayList<PlayerAverageVO> playerList = new ArrayList<PlayerAverageVO>();
+		String[] info = filterInfo.split(",");
+		FliterPlayerAverage fpa = new FliterPlayerAverage();
+		playerList = fpa.filterSortBy(info[0], info[1], info[2]);
+		return playerAverageToString(playerList);
 	}
 	// 球员个人信息
 	public ArrayList<PlayerPersonalInfoVO> playerPersonalInfo(){

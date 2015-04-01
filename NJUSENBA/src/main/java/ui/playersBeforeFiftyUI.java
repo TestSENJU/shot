@@ -21,9 +21,8 @@ public class playersBeforeFiftyUI{
     ImageIcon background=new ImageIcon("img/picture/playerBackground3.jpg");
     ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
     ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
-    String[] playerBeforeFifty=null;
     JTextField jTextField;
-    public void playersBeforeFiftyUI(String[] playerBeforeFifty){
+    public void playersBeforeFiftyUI(){
     	jFrame.setUndecorated(true);
     	jFrame.setVisible(true);
     	jFrame.setSize(1200, 700);
@@ -39,6 +38,7 @@ public class playersBeforeFiftyUI{
     	jLabel1.add(jLabel2);
     	jLabel3.setBounds(1120, 0, 80, 80);
     	jLabel1.add(jLabel3);
+    	jTextField.setOpaque(false);
     	for(int i=0;i<10;i++){
     		for(int j=0;i<5;j++){
     			jTextField=new JTextField();

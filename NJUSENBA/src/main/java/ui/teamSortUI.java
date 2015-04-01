@@ -21,7 +21,11 @@ public class teamSortUI {
 	ImageIcon back=new ImageIcon("img/picture/teamBackground1Back.jpg");
 	ImageIcon exit=new ImageIcon("img/picture/teamBackground1Exit.jpg");
 	JTextField jTextField;
-    public void teamSortUI(teamSort[]){
+	public String[] getPlayerSort(){
+		String[] playerSort=null;
+		return playerSort;
+	}
+    public void teamSortUI(){
     	jFrame.setUndecorated(true);
     	jFrame.setVisible(true);
     	jFrame.setSize(1200, 700);
@@ -38,6 +42,7 @@ public class teamSortUI {
     	jLabel3.setBounds(1120, 0, 80, 80);
     	jLabel1.add(jLabel3);
     	jTextField.setOpaque(false);
+    	String[] teamSort=getPlayerSort();
     	for(int i=0;i<6;i++){
     		for(int j=0;j<5;j++){
     		jTextField.setBounds(10+200*j, 120+80*i, 200, 80);
@@ -102,3 +107,4 @@ public class teamSortUI {
 			}
 		});
     }
+}

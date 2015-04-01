@@ -13,7 +13,7 @@ import data.team.TeamData;
 import data.team.TeamDataService;
 
 public class TeamBL {
-	// TODO 所有球队的原始总赛季数据
+	// 所有球队的原始总赛季数据
 	public ArrayList<TeamVO> allTeamSeasonData() {
 		ArrayList<TeamVO> teamList = new ArrayList<TeamVO>();
 		TeamDataService tds = new TeamData();
@@ -53,7 +53,7 @@ public class TeamBL {
 		return teamList;
 	}
 
-	// TODO 所有球队的原始场均数据
+	//  所有球队的原始场均数据
 	public ArrayList<TeamAverageVO> allTeamAverageData() {
 		ArrayList<TeamAverageVO> teamList = new ArrayList<TeamAverageVO>();
 		TeamDataService tds = new TeamData();

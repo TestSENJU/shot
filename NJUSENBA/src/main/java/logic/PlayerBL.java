@@ -94,20 +94,12 @@ public class PlayerBL implements PlayerService {
 		playerList = fp.filterSortBy(info[0],info[1],info[2]);
 		return playerList;		
 	}
-	//TODO 球员个人信息
+	// 球员个人信息
 	public ArrayList<PlayerPersonalInfoVO> playerPersonalInfo(){
 		ArrayList<PlayerPersonalInfoVO> playerInfoList = new ArrayList<PlayerPersonalInfoVO>();
 		PlayerData pd = new PlayerData_Impl();
 		Hashtable<String,Player_BasicInfoPO> playPersonalInfo = pd.getPlayerBasic();
 		Set<String> keys = playPersonalInfo.keySet();
-		/** 0 Number
-		 * 1 Position
-		 * 2 height
-		 * 3 weight
-		 * 4 birth
-		 * 5 age
-		 * 6 exp
-		 * 7 school*/
 		for (String key : keys){
 			String[] info = playPersonalInfo.get(key).getBasicInfo();
 			playerInfoList.add(new PlayerPersonalInfoVO(playPersonalInfo.get(key).getPlayerName(),

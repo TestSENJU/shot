@@ -6,7 +6,9 @@ import java.util.Set;
 
 import po.Player_AllScorePO;
 import po.Player_BasicInfoPO;
+import vo.PlayerAverageVO;
 import vo.PlayerPersonalInfoVO;
+import vo.PlayerStrVO;
 import vo.PlayerVO;
 import data.player.PlayerData;
 import data.player.PlayerData_Impl;
@@ -67,9 +69,9 @@ public class PlayerBL implements PlayerService {
 		return playerList;
 	}
 	//TODO 所有队员的所有原始场均数据
-	public ArrayList<PlayerVO> allPlayerAverageData(){
-		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
-		
+	public ArrayList<PlayerAverageVO> allPlayerAverageData(){
+		ArrayList<PlayerAverageVO> playerList = new ArrayList<PlayerAverageVO>();
+	
 		return playerList;
 	}
 	// 所有球员按照某一项元素的升序排列
@@ -86,13 +88,32 @@ public class PlayerBL implements PlayerService {
 		rePlayerList = sp.descendPlayer(key, playerList);
 		return rePlayerList;
 	}
+	public ArrayList<PlayerAverageVO> sortA_Ascend(int key, ArrayList<PlayerAverageVO> playerList){
+		SortPlayerAverage sap = new SortPlayerAverage();
+		ArrayList<PlayerAverageVO> rePlayerList = new ArrayList<PlayerAverageVO>();
+		rePlayerList = sap.ascendPlayer(key, playerList);
+		return rePlayerList;
+	}
+	public ArrayList<PlayerAverageVO> sortA_Descend(int key, ArrayList<PlayerAverageVO> playerList){
+		SortPlayerAverage sap = new SortPlayerAverage();
+		ArrayList<PlayerAverageVO> rePlayerList = new ArrayList<PlayerAverageVO>();
+		rePlayerList = sap.descendPlayer(key, playerList);
+		return rePlayerList;
+	}
 	// 筛选部分
-	public ArrayList<PlayerVO> filter(String filterInfo){
+	public ArrayList<PlayerStrVO> filterAll(String filterInfo){
 		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
 		String[] info = filterInfo.split(",");
-		FliterPlayer fp = new FliterPlayer();
+		FliterPlayerAll fp = new FliterPlayerAll();
 		playerList = fp.filterSortBy(info[0],info[1],info[2]);
-		return playerList;		
+		return playerToString(playerList);		
+	}
+	public ArrayList<PlayerStrVO> filterAverage(String filterInfo){
+		ArrayList<PlayerAverageVO> playerList = new ArrayList<PlayerAverageVO>();
+		String[] info = filterInfo.split(",");
+		FliterPlayerAverage fpa = new FliterPlayerAverage();
+		playerList = fpa.filterSortBy(info[0], info[1], info[2]);
+		return playerAverageToString(playerList);
 	}
 	// 球员个人信息
 	public ArrayList<PlayerPersonalInfoVO> playerPersonalInfo(){
@@ -110,7 +131,128 @@ public class PlayerBL implements PlayerService {
 	}
 	//TODO 某一球员的具体personal信息
 	public PlayerPersonalInfoVO selectedPlayerInfo(String playerName){
-		PlayerPersonalInfoVO p = new PlayerPersonalInfoVO();
-		return p;
+		PlayerPersonalInfoVO ppiv = new PlayerPersonalInfoVO();
+		PlayerData pd = new PlayerData_Impl();
+		Hashtable<String, Player_BasicInfoPO> playPersonalInfo = pd.getPlayerBasic();
+		Set<String> keys = playPersonalInfo.keySet();
+		for(String key : keys){
+			if(playerName.equals(playPersonalInfo.get(key).getPlayerName())){
+				String[] info = playPersonalInfo.get(key).getBasicInfo();
+				ppiv.setName(playerName);
+				ppiv.setJerseyNum(info[0]);
+				ppiv.setPosition(info[1]);
+				ppiv.setHeight(info[2]);
+				ppiv.setWeight(info[3]);
+				ppiv.setBirthday(info[4]);
+				ppiv.setAge(info[5]);
+				ppiv.setLengthOfPlayer(info[6]);
+				ppiv.setGraduateSchool(info[7]);
+				break;
+			}
+		}
+		return ppiv;
+	}
+	//TODO to string
+	public ArrayList<PlayerStrVO> playerToString(ArrayList<PlayerVO> playerList){
+		ArrayList<PlayerStrVO> player = new ArrayList<PlayerStrVO>();
+		for(int i=0;i < playerList.size();i++){
+			player.add(new PlayerStrVO(playerList.get(i).getName(),
+					playerList.get(i).getTeams(),
+					Integer.toString(playerList.get(i).getCompeteNum()),
+					Integer.toString(playerList.get(i).getOffensiveNum()),
+					Double.toString(playerList.get(i).getReboundNum()),
+					Double.toString(playerList.get(i).getAssistingNum()),
+					playerList.get(i).getPlayingTime(),
+					Double.toString(playerList.get(i).getHitRate()),
+					Double.toString(playerList.get(i).getThreePointHitRate()),
+					Double.toString(playerList.get(i).getFreeThrowHitRate()),
+					Double.toString(playerList.get(i).getOffensiveReboundNum()),
+					Double.toString(playerList.get(i).getDefensiveReboundNum()),
+					Double.toString(playerList.get(i).getStealNum()),
+					Double.toString(playerList.get(i).getBlockShotNum()),
+					Double.toString(playerList.get(i).getMuffNum()),
+					Double.toString(playerList.get(i).getFoulNum()),
+					Double.toString(playerList.get(i).getScore()),
+					Double.toString(playerList.get(i).getEfficiency()),
+					Double.toString(playerList.get(i).getGmScEfficiency()),
+					Double.toString(playerList.get(i).getTrueHitRate()),
+					Double.toString(playerList.get(i).getShootEfficiency()),
+					Double.toString(playerList.get(i).getReboundRate()),
+					Double.toString(playerList.get(i).getOffensiveReboundRate()),
+					Double.toString(playerList.get(i).getDefensiveReboundRate()),
+					Double.toString(playerList.get(i).getAssistingRate()),
+					Double.toString(playerList.get(i).getStealRate()),
+					Double.toString(playerList.get(i).getBlockShotRate()),
+					Double.toString(playerList.get(i).getMuffRate()),
+					Double.toString(playerList.get(i).getUsage()))
+					);
+		}
+		return player;
+	}
+	public ArrayList<PlayerStrVO> playerAverageToString(ArrayList<PlayerAverageVO> playerList){
+		ArrayList<PlayerStrVO> player = new ArrayList<PlayerStrVO>();
+		for(int i=0;i < playerList.size();i++){
+			player.add(new PlayerStrVO(playerList.get(i).getName(),
+					playerList.get(i).getTeams(),
+					Double.toString(playerList.get(i).getCompeteNum()),
+					Double.toString(playerList.get(i).getOffensiveNum()),
+					Double.toString(playerList.get(i).getReboundNum()),
+					Double.toString(playerList.get(i).getAssistingNum()),
+					playerList.get(i).getPlayingTime(),
+					Double.toString(playerList.get(i).getHitRate()),
+					Double.toString(playerList.get(i).getThreePointHitRate()),
+					Double.toString(playerList.get(i).getFreeThrowHitRate()),
+					Double.toString(playerList.get(i).getOffensiveReboundNum()),
+					Double.toString(playerList.get(i).getDefensiveReboundNum()),
+					Double.toString(playerList.get(i).getStealNum()),
+					Double.toString(playerList.get(i).getBlockShotNum()),
+					Double.toString(playerList.get(i).getMuffNum()),
+					Double.toString(playerList.get(i).getFoulNum()),
+					Double.toString(playerList.get(i).getScore()),
+					Double.toString(playerList.get(i).getEfficiency()),
+					Double.toString(playerList.get(i).getGmScEfficiency()),
+					Double.toString(playerList.get(i).getTrueHitRate()),
+					Double.toString(playerList.get(i).getShootEfficiency()),
+					Double.toString(playerList.get(i).getReboundRate()),
+					Double.toString(playerList.get(i).getOffensiveReboundRate()),
+					Double.toString(playerList.get(i).getDefensiveReboundRate()),
+					Double.toString(playerList.get(i).getAssistingRate()),
+					Double.toString(playerList.get(i).getStealRate()),
+					Double.toString(playerList.get(i).getBlockShotRate()),
+					Double.toString(playerList.get(i).getMuffRate()),
+					Double.toString(playerList.get(i).getUsage()))
+					);
+		}
+		return player;
+	}
+	public ArrayList<PlayerStrVO> playerAll(){
+		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
+		playerList = allPlayerSeasonData();
+		return playerToString(playerList);
+	}
+	public ArrayList<PlayerStrVO> playerAverage(){
+		ArrayList<PlayerAverageVO> playerList = new ArrayList<PlayerAverageVO>();
+		playerList = allPlayerAverageData();
+		return playerAverageToString(playerList);
+	}
+	public ArrayList<PlayerStrVO> ascendPlayerStr(int key, ArrayList<PlayerVO> playerOrigin){
+		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
+		playerList = sort_Ascend(key, playerOrigin);
+		return playerToString(playerList);
+	}
+	public ArrayList<PlayerStrVO> descendPlayerStr(int key, ArrayList<PlayerVO> playerOrigin){
+		ArrayList<PlayerVO> playerList = new ArrayList<PlayerVO>();
+		playerList = sort_Descend(key, playerOrigin);
+		return playerToString(playerList);
+	}
+	public ArrayList<PlayerStrVO> ascendPlayerAStr(int key, ArrayList<PlayerAverageVO> playerOrigin){
+		ArrayList<PlayerAverageVO> playerList = new ArrayList<PlayerAverageVO>();
+		playerList = sortA_Ascend(key, playerOrigin);
+		return playerAverageToString(playerList);
+	}
+	public ArrayList<PlayerStrVO> descendPlayerAStr(int key, ArrayList<PlayerAverageVO> playerOrigin){
+		ArrayList<PlayerAverageVO> playerList = new ArrayList<PlayerAverageVO>();
+		playerList = sortA_Descend(key, playerOrigin);
+		return playerAverageToString(playerList);
 	}
 }

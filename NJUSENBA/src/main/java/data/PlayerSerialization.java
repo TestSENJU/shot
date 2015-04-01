@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
@@ -147,51 +148,165 @@ private static void readOneMatch(File file){
 		@SuppressWarnings("resource")
 		BufferedReader br=new BufferedReader(fr);
 		String str="";
-		String team="";
 		boolean haveTeam=false;
-
+		String team1="";
+		String team2="";
+		String teamTime1="0:0";
+		String teamTime2="0:0";
+        int i=0;
+        ArrayList<String> list1=new ArrayList<String>();
+        ArrayList<String>list2=new ArrayList<String>();
+        double[] nums1=new double[]{0,0,0,0,0,0,0,0};
+        double[] nums2=new double[]{0,0,0,0,0,0,0,0};
 		while((str=br.readLine())!=null){
 			if(str.length()==3){
-				team=str;
-				haveTeam=true;
-			}
-			if(haveTeam){
-				if(str.length()!=3){
-					String strs[]=str.split(";");	
-						if(checkData(strs[2], strs)){
-							double s[]=new double[14];
-							for(int i=0;i<s.length;i++){
-								s[i]=Double.parseDouble(strs[i+3]);
-							}							
-								if(allScoreTable.containsKey(strs[0])){
-									allScoreTable.get(strs[0]).addAllScore(s);
-									allScoreTable.get(strs[0]).addTimeAll(strs[2]);
-									char c[]=strs[1].toCharArray();
-									if(c.length!=0){
-										if(c[0]<='Z'&&c[0]>='A'){				
-											allScoreTable.get(strs[0]).addnumOfFirstMatches(1);
-										}
-									}								
-									allScoreTable.get(strs[0]).addnumOfMatches(1);
-									allScoreTable.get(strs[0]).setTeam(team);
-								}else{
-									Player_AllScorePO allScore_new=new Player_AllScorePO(strs[0]);
-									allScore_new.setScoresAll(s);
-									allScore_new.addnumOfMatches(1);
-									allScore_new.addTimeAll(strs[2]);
-									if(strs[1]!=null){	
-										allScore_new.addnumOfFirstMatches(1);
-									}	
-									if(basicinfoTable.containsKey(strs[0])){
-										allScoreTable.put(strs[0], allScore_new);
-									}
-								}
-						}	
-						
+				if(i==0){
+					team1=str;
+					haveTeam=true;
+					i++;
+				}else{
+					team2=str;
+				}			
+		    }else{
+		    	if(haveTeam){
+					if(checkData(str)){
+						if(team2!=""){
+							list1.add(str);
+						}else{
+							list2.add(str);
+						}
 					}	
 				}
-				
+		    }		
+		}
+		ArrayList<String[]>strlist1=new ArrayList<String[]>();
+		ArrayList<String[]>strlist2=new ArrayList<String[]>();
+		
+		for(int j=0;j<list1.size();j++){
+			String strs[]=list1.get(j).split(";");
+			
+			String s[]=teamTime1.split(":");
+			String ss[]=strs[2].split(":");
+
+			int seconds=Integer.parseInt(ss[1])+Integer.parseInt(s[1]);
+			if(seconds<60){
+				teamTime1=(Integer.parseInt(ss[0])+Integer.parseInt(s[0])+"")
+						+":"	+(seconds+"");	
+			}else{
+				teamTime1=(Integer.parseInt(ss[0])+Integer.parseInt(s[0])+1+"")
+						+":"	+(seconds-60+"");	
+			}			
+			nums1[0]+=Double.parseDouble(strs[3]);
+			nums1[1]+=Double.parseDouble(strs[4]);
+			nums1[2]+=Double.parseDouble(strs[6]);
+			nums1[3]+=Double.parseDouble(strs[8]);
+			nums1[4]+=Double.parseDouble(strs[9]);
+			nums1[5]+=Double.parseDouble(strs[10]);
+			nums1[6]+=Double.parseDouble(strs[11]);
+			nums1[7]=Double.parseDouble(strs[15]);
+			
+			strlist1.add(strs);
+			
+		}			
+		for(int j=0;j<list2.size();j++){
+			String strs[]=list2.get(j).split(";");
+			String s[]=teamTime2.split(":");
+			String ss[]=strs[2].split(":");
+
+			int seconds=Integer.parseInt(ss[1])+Integer.parseInt(s[1]);
+			if(seconds<60){
+				teamTime2=(Integer.parseInt(ss[0])+Integer.parseInt(s[0])+"")
+						+":"	+(seconds+"");	
+			}else{
+				teamTime2=(Integer.parseInt(ss[0])+Integer.parseInt(s[0])+1+"")
+						+":"	+(seconds-60+"");	
 			}
+			
+			nums2[0]+=Double.parseDouble(strs[3]);
+			nums2[1]+=Double.parseDouble(strs[4]);
+			nums2[2]+=Double.parseDouble(strs[6]);
+			nums2[3]+=Double.parseDouble(strs[8]);
+			nums2[4]+=Double.parseDouble(strs[9]);
+			nums2[5]+=Double.parseDouble(strs[10]);
+			nums2[6]+=Double.parseDouble(strs[11]);
+			nums2[7]=Double.parseDouble(strs[15]);
+			
+			strlist2.add(strs);
+		}
+		for(int j=0;j<strlist1.size();j++){
+			String strs[]=strlist1.get(j);
+			double nums[]=new double[15];
+			for(int n=0;n<nums.length;n++){
+				nums[n]=Double.parseDouble(strs[n+3]);
+			}							
+				if(allScoreTable.containsKey(strs[0])){
+					allScoreTable.get(strs[0]).addAllScore(nums);
+					allScoreTable.get(strs[0]).addTimeAll(strs[2]);
+					char c[]=strs[1].toCharArray();
+					if(c.length!=0){
+						if(c[0]<='Z'&&c[0]>='A'){				
+							allScoreTable.get(strs[0]).addnumOfFirstMatches(1);
+						}
+					}								
+					allScoreTable.get(strs[0]).addnumOfMatches(1);
+					allScoreTable.get(strs[0]).setTeam(team1);
+					allScoreTable.get(strs[0]).addTeamAll(nums1);
+					allScoreTable.get(strs[0]).addCompeteAll(nums2);
+					allScoreTable.get(strs[0]).addTimeTeam(teamTime1);
+				}else{
+					Player_AllScorePO allScore_new=new Player_AllScorePO(strs[0]);
+					allScore_new.setScoresAll(nums);
+					allScore_new.addnumOfMatches(1);
+					allScore_new.addTimeAll(strs[2]);
+					allScore_new.setTeam(team1);
+					allScore_new.addTeamAll(nums1);
+					allScore_new.addCompeteAll(nums2);
+					allScore_new.addTimeTeam(teamTime1);
+					if(strs[1]!=null){	
+						allScore_new.addnumOfFirstMatches(1);
+					}	
+					if(basicinfoTable.containsKey(strs[0])){
+						allScoreTable.put(strs[0], allScore_new);
+					}
+				}
+		}
+		for(int j=0;j<strlist2.size();j++){
+			String strs[]=strlist2.get(j);
+			double nums[]=new double[15];
+			for(int n=0;n<nums.length;n++){
+				nums[n]=Double.parseDouble(strs[n+3]);
+			}							
+				if(allScoreTable.containsKey(strs[0])){
+					allScoreTable.get(strs[0]).addAllScore(nums);
+					allScoreTable.get(strs[0]).addTimeAll(strs[2]);
+					char c[]=strs[1].toCharArray();
+					if(c.length!=0){
+						if(c[0]<='Z'&&c[0]>='A'){				
+							allScoreTable.get(strs[0]).addnumOfFirstMatches(1);
+						}
+					}								
+					allScoreTable.get(strs[0]).addnumOfMatches(1);
+					allScoreTable.get(strs[0]).setTeam(team2);
+					allScoreTable.get(strs[0]).addTeamAll(nums2);
+					allScoreTable.get(strs[0]).addCompeteAll(nums1);
+					allScoreTable.get(strs[0]).addTimeTeam(teamTime2);
+				}else{
+					Player_AllScorePO allScore_new=new Player_AllScorePO(strs[0]);
+					allScore_new.setScoresAll(nums);
+					allScore_new.addnumOfMatches(1);
+					allScore_new.addTimeAll(strs[2]);
+					allScore_new.setTeam(team2);
+					allScore_new.addTeamAll(nums2);
+					allScore_new.addCompeteAll(nums1);
+					allScore_new.addTimeTeam(teamTime2);
+					if(strs[1]!=null){	
+						allScore_new.addnumOfFirstMatches(1);
+					}	
+					if(basicinfoTable.containsKey(strs[0])){
+						allScoreTable.put(strs[0], allScore_new);
+					}
+				}
+		}
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
 		System.out.println("file not found read one match");
@@ -212,33 +327,28 @@ public void writeFileBasicInfo(String path){
 
 }
 /**
- * 
- * @param time
- * 错误逻辑检测时间，检查是不是符合格式
+ *
  * @param s
- * 错误检查是不是每个都可以变成整型
+ * 错误检查是不是每个都可以变成整型  错误逻辑检测时间，检查是不是符合格式
  * @return
  */
-private static boolean checkData(String time,String[] s){
+private static boolean checkData(String s){
 	boolean right=true;
-	String ss[]=time.split(":");
+	String strs[]=s.split(";");
+	String ss[]=strs[2].split(":");
 	if(ss.length!=2)right=false;
-	 double nums[]=new double[14];
+	 double nums[]=new double[15];
 	for(int i=0;i<nums.length;i++){
 		double num;
 		try {
-			num = Double.parseDouble(s[i+3]);
+			num = Double.parseDouble(strs[i+3]);
 			nums[i]=num;
-	        i++;
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			right=false;
 		}
-        
-//要是格式不对了直接就返回不加这次比赛里的这一行了
       }
-
-	 if(!(nums[0]>nums[1]||nums[2]>nums[3]||
+	 if((nums[0]>nums[1]||nums[2]>nums[3]||
 			 nums[4]>nums[5]||nums[6]+nums[7]!=nums[8])){
 		 right=false;
 	 }

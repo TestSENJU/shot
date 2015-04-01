@@ -14,7 +14,7 @@ import java.io.Serializable;
  *   
  *  @param   numOfMatches
  *  总参赛场数
- *  @param team 
+ *  @param team ,teamArea
  *  队伍，联盟
  *  @param scoresAll
  *  0投篮命中数
@@ -27,19 +27,38 @@ import java.io.Serializable;
  *  7进攻后场篮板数
  *  8总篮板数
  *  9助攻数
- *  10盖帽数
- *  11失误数
- *  12犯规数
- *  13个人得分
- *
+ *  10抢断数
+ *  11盖帽数
+ *  12失误数
+ *  13犯规数
+ *  14个人得分
+ *@param teamAll
+ *球队
+ *0所有球员总出手次数 即投篮出手数之和
+ *1总进球数 即投篮命中数之和
+ *2总三分球出手次数
+ *3罚球次数 即罚球出手次数之和
+ *4总进攻篮板数
+ *5总防守篮板数
+ *6总篮板数 即3和4之和
+ *7失误次数
+
+ *@param timeTeam
+ *球队总时间
+ *@param competeAll
+ *0对手所有球员总出手次数，即投篮出手数之和
+ *1对手所有球员投篮命中数之和
+ *2对手球员总三分出手次数只和
+ *3对手总罚球数 即罚球出手次数之和
+ *4对手总进攻篮板数之和
+ *5对手总防守篮板数之和
+ *6对手总篮板数
+ *7对手总失误数
  */
 
 public class Player_AllScorePO implements Serializable{
 
-
-/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	//总数据
 	String playerName;
@@ -48,7 +67,12 @@ public class Player_AllScorePO implements Serializable{
 	private String timeAll;//上场时间
 	private int numOfFirstMatches;//先发场数
 	private int numOfMatches;//参赛场数
-	private double scoresAll[]=new double[14];
+	private double scoresAll[]=new double[15];
+	private double[] teamAll=new double[8];
+	private String timeTeam;
+	private double[] competeAll=new double[8];
+//	private String timeCompete;
+	
 	
 	public Player_AllScorePO(String playername){
 		this.playerName=playername;
@@ -60,6 +84,54 @@ public class Player_AllScorePO implements Serializable{
 		for(int i=0;i<scoresAll.length;i++){
 			this.scoresAll[i]=0;
 		}
+		this.timeTeam="0:0";
+		for(int i=0;i<teamAll.length;i++){
+			this.teamAll[i]=0;
+		}
+		for(int i=0;i<competeAll.length;i++){
+			this.competeAll[i]=0;
+		}
+	}
+	public void addTeamAll(double nums[]){
+		for(int i=0;i<nums.length;i++){
+			this.teamAll[i]+=nums[i];
+		}
+	}
+	public void addTimeTeam(String s){
+		String strs[]=s.split(":");
+		String ss[]=this.timeTeam.split(":");
+
+		int seconds=Integer.parseInt(ss[1])+Integer.parseInt(strs[1]);
+		if(seconds<60){
+			this.timeTeam=(Integer.parseInt(ss[0])+Integer.parseInt(strs[0])+"")
+					+":"	+(seconds+"");	
+		}else{
+			this.timeTeam=(Integer.parseInt(ss[0])+Integer.parseInt(strs[0])+1+"")
+					+":"	+(seconds-60+"");	
+		}
+	}
+	public void addCompeteAll(double s[]){
+		for(int i=0;i<s.length;i++){
+			this.competeAll[i]+=s[i];
+		}
+	}
+	public double[] getTeamAll() {
+		return teamAll;
+	}
+	public void setTeamAll(double[] teamAll) {
+		this.teamAll = teamAll;
+	}
+	public String getTimeTeam() {
+		return timeTeam;
+	}
+	public void setTimeTeam(String timeTeam) {
+		this.timeTeam = timeTeam;
+	}
+	public double[] getCompeteAll() {
+		return competeAll;
+	}
+	public void setCompeteAll(double[] competeAll) {
+		this.competeAll = competeAll;
 	}
 	public String getTeam() {
 		return team;

@@ -1,8 +1,8 @@
 package ui;
 
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -18,65 +18,65 @@ public class playersBeforeFiftyUI{
     ImageIcon background=new ImageIcon("img/picture/playerBackground3.jpg");
     ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
     ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
-    playersCheckUI ui=new playersCheckUI();
-    String[] playerNameData=ui.getData();
-    JTextField jTextField=new JTextField(playerNameData[0]);
-    JTextField jTextField1=new JTextField(playerNameData[1]);
-    JTextField jTextField2=new JTextField(playerNameData[2]);
-    JTextField jTextField3=new JTextField(playerNameData[3]);
-    JTextField jTextField4=new JTextField(playerNameData[4]);
-    JTextField jTextField5=new JTextField(playerNameData[5]);
-    JTextField jTextField6=new JTextField(playerNameData[6]);
-    JTextField jTextField7=new JTextField(playerNameData[7]);
-    JTextField jTextField8=new JTextField(playerNameData[8]);
-    JTextField jTextField9=new JTextField(playerNameData[9]);
-    
-    JTextField jTextField10=new JTextField(playerNameData[10]);
-    JTextField jTextField11=new JTextField(playerNameData[11]);
-    JTextField jTextField12=new JTextField(playerNameData[12]);
-    JTextField jTextField13=new JTextField(playerNameData[13]);
-    JTextField jTextField14=new JTextField(playerNameData[14]);
-    JTextField jTextField15=new JTextField(playerNameData[15]);
-    JTextField jTextField16=new JTextField(playerNameData[16]);
-    JTextField jTextField17=new JTextField(playerNameData[17]);
-    JTextField jTextField18=new JTextField(playerNameData[18]);
-    JTextField jTextField19=new JTextField(playerNameData[19]);
-    
-    JTextField jTextField20=new JTextField(playerNameData[20]);
-    JTextField jTextField21=new JTextField(playerNameData[21]);
-    JTextField jTextField22=new JTextField(playerNameData[22]);
-    JTextField jTextField23=new JTextField(playerNameData[23]);
-    JTextField jTextField24=new JTextField(playerNameData[24]);
-    JTextField jTextField25=new JTextField(playerNameData[25]);
-    JTextField jTextField26=new JTextField(playerNameData[26]);
-    JTextField jTextField27=new JTextField(playerNameData[27]);
-    JTextField jTextField28=new JTextField(playerNameData[28]);
-    JTextField jTextField29=new JTextField(playerNameData[29]);
-    
-    JTextField jTextField30=new JTextField(playerNameData[30]);
-    JTextField jTextField31=new JTextField(playerNameData[31]);
-    JTextField jTextField32=new JTextField(playerNameData[32]);
-    JTextField jTextField33=new JTextField(playerNameData[33]);
-    JTextField jTextField34=new JTextField(playerNameData[34]);
-    JTextField jTextField35=new JTextField(playerNameData[35]);
-    JTextField jTextField36=new JTextField(playerNameData[36]);
-    JTextField jTextField37=new JTextField(playerNameData[37]);
-    JTextField jTextField38=new JTextField(playerNameData[38]);
-    JTextField jTextField39=new JTextField(playerNameData[39]);
-    
-    JTextField jTextField40=new JTextField(playerNameData[40]);
-    JTextField jTextField41=new JTextField(playerNameData[41]);
-    JTextField jTextField42=new JTextField(playerNameData[42]);
-    JTextField jTextField43=new JTextField(playerNameData[43]);
-    JTextField jTextField44=new JTextField(playerNameData[44]);
-    JTextField jTextField45=new JTextField(playerNameData[45]);
-    JTextField jTextField46=new JTextField(playerNameData[46]);
-    JTextField jTextField47=new JTextField(playerNameData[47]);
-    JTextField jTextField48=new JTextField(playerNameData[48]);
-    JTextField jTextField49=new JTextField(playerNameData[49]);
-    public void playersBeforeFifty(){
+  
+   
+    public  playersBeforeFiftyUI(String playerNameData[]){
+    	    JTextField jTextField=new JTextField(playerNameData[0]);
+    	    JTextField jTextField1=new JTextField(playerNameData[1]);
+    	    JTextField jTextField2=new JTextField(playerNameData[2]);
+    	    JTextField jTextField3=new JTextField(playerNameData[3]);
+    	    JTextField jTextField4=new JTextField(playerNameData[4]);
+    	    JTextField jTextField5=new JTextField(playerNameData[5]);
+    	    JTextField jTextField6=new JTextField(playerNameData[6]);
+    	    JTextField jTextField7=new JTextField(playerNameData[7]);
+    	    JTextField jTextField8=new JTextField(playerNameData[8]);
+    	    JTextField jTextField9=new JTextField(playerNameData[9]);
+    	    
+    	    JTextField jTextField10=new JTextField(playerNameData[10]);
+    	    JTextField jTextField11=new JTextField(playerNameData[11]);
+    	    JTextField jTextField12=new JTextField(playerNameData[12]);
+    	    JTextField jTextField13=new JTextField(playerNameData[13]);
+    	    JTextField jTextField14=new JTextField(playerNameData[14]);
+    	    JTextField jTextField15=new JTextField(playerNameData[15]);
+    	    JTextField jTextField16=new JTextField(playerNameData[16]);
+    	    JTextField jTextField17=new JTextField(playerNameData[17]);
+    	    JTextField jTextField18=new JTextField(playerNameData[18]);
+    	    JTextField jTextField19=new JTextField(playerNameData[19]);
+    	    
+    	    JTextField jTextField20=new JTextField(playerNameData[20]);
+    	    JTextField jTextField21=new JTextField(playerNameData[21]);
+    	    JTextField jTextField22=new JTextField(playerNameData[22]);
+    	    JTextField jTextField23=new JTextField(playerNameData[23]);
+    	    JTextField jTextField24=new JTextField(playerNameData[24]);
+    	    JTextField jTextField25=new JTextField(playerNameData[25]);
+    	    JTextField jTextField26=new JTextField(playerNameData[26]);
+    	    JTextField jTextField27=new JTextField(playerNameData[27]);
+    	    JTextField jTextField28=new JTextField(playerNameData[28]);
+    	    JTextField jTextField29=new JTextField(playerNameData[29]);
+    	    
+    	    JTextField jTextField30=new JTextField(playerNameData[30]);
+    	    JTextField jTextField31=new JTextField(playerNameData[31]);
+    	    JTextField jTextField32=new JTextField(playerNameData[32]);
+    	    JTextField jTextField33=new JTextField(playerNameData[33]);
+    	    JTextField jTextField34=new JTextField(playerNameData[34]);
+    	    JTextField jTextField35=new JTextField(playerNameData[35]);
+    	    JTextField jTextField36=new JTextField(playerNameData[36]);
+    	    JTextField jTextField37=new JTextField(playerNameData[37]);
+    	    JTextField jTextField38=new JTextField(playerNameData[38]);
+    	    JTextField jTextField39=new JTextField(playerNameData[39]);
+    	    
+    	    JTextField jTextField40=new JTextField(playerNameData[40]);
+    	    JTextField jTextField41=new JTextField(playerNameData[41]);
+    	    JTextField jTextField42=new JTextField(playerNameData[42]);
+    	    JTextField jTextField43=new JTextField(playerNameData[43]);
+    	    JTextField jTextField44=new JTextField(playerNameData[44]);
+    	    JTextField jTextField45=new JTextField(playerNameData[45]);
+    	    JTextField jTextField46=new JTextField(playerNameData[46]);
+    	    JTextField jTextField47=new JTextField(playerNameData[47]);
+    	    JTextField jTextField48=new JTextField(playerNameData[48]);
+    	    JTextField jTextField49=new JTextField(playerNameData[49]);
     	jFrame.setUndecorated(true);
-    	jFrame.setVisible(true);
+    	jFrame.setVisible(false);
     	jFrame.setSize(1200, 700);
     	jFrame.setLayout(null);
     	jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -295,61 +295,24 @@ public class playersBeforeFiftyUI{
     	jTextField49.setBounds(1030, 610, 150, 50);
     	jTextField49.setFont(new Font("宋体", Font.BOLD, 30));
     	jLabel1.add(jTextField49);
-    	jLabel2.addMouseListener(new MouseListener() {
-			
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+    	jLabel2.addMouseListener(new MouseAdapter() {
 			
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				playersCheckUI ui=new playersCheckUI();
-				ui.playersCheck();
+			ui.open();
 			}
 		});
-    	jLabel3.addMouseListener(new MouseListener() {
-			
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+    	jLabel3.addMouseListener(new MouseAdapter() {
+	
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 			}
 		});
+    }
+    public void open(){
+    	jFrame.setVisible(true);
     }
 }

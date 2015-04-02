@@ -79,7 +79,7 @@ jLabel2.addMouseListener(new MouseAdapter() {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				playersCheckUI ui=new playersCheckUI();
-				ui.playersCheck();
+				ui.open();
 			}
 		});
     	jLabel3.addMouseListener(new MouseAdapter() {

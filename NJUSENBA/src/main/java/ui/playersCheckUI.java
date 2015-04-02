@@ -2,15 +2,15 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import vo.PlayerStrVO;
@@ -18,13 +18,8 @@ import logic.PlayerBL;
 import logic.PlayerService;
 
 public class playersCheckUI {
-	JFrame jFrame = new JFrame("球员数据查看");
-	JLabel jLabel1 = new JLabel("background");
-	JLabel jLabel2 = new JLabel("back");
-	JLabel jLabel3 = new JLabel(" ");
-	JLabel jLabel4 = new JLabel("search");
-	JLabel jLabel5 = new JLabel("check");
-	JLabel jLabel6 = new JLabel("allCheck");
+	JFrame jFrame;
+	JLabel jLabel1;
 	String[] position = { " ", "G", "F", "C" };
 	String[] league = { " ", "E-Southeast", "E-Atlantic", "E-Central",
 			"W-Southwest", "W-Atlantic", "W-Northwest", "W-Pacific" };
@@ -41,18 +36,29 @@ public class playersCheckUI {
 			"blockShotRate", "muffRate", "usage" };
 	String[] playerClassify = {"总赛季数据","场均数据"};
 	String[] shengjiangxu={"升序","降序"};
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	JComboBox jComboBox1 = new JComboBox(position);
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	JComboBox jComboBox2 = new JComboBox(league);
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	JComboBox jComboBox3 = new JComboBox(condition);
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	JComboBox jComboBoxSortCondition = new JComboBox(sort);
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	JComboBox jComboBoxClassify = new JComboBox(playerClassify);
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	JComboBox jComboBoxAD=new JComboBox(shengjiangxu);
+	DefaultComboBoxModel<String> model1;
+	DefaultComboBoxModel<String> model2;
+	DefaultComboBoxModel<String> model3;
+	DefaultComboBoxModel<String> model4;
+	DefaultComboBoxModel<String> model5;
+	DefaultComboBoxModel<String> model6;
+	JComboBox<String> jComboBox1;
+	JComboBox<String> jComboBox3;
+	JComboBox<String> jComboBox2;
+	JComboBox<String> jComboBoxSortCondition;
+	JComboBox<String> jComboBoxClassify;
+	JComboBox <String>jComboBoxAD;
+	JLabel jLabel2 ;
+	JLabel jLabel3;
+	JLabel jLabel4;
+	JLabel jLabel5;
+	JLabel jLabel6;
+	private String conditionSe;
+	private String positionSe;
+	private String leagueSe;
+	private String sortSe;
+	private String shengjiangSe;
+	private int classify;
 	ImageIcon background = new ImageIcon("img/picture/playerBackground1.jpg");
 	ImageIcon back = new ImageIcon("img/picture/playerBackground1Back.jpg");
 	ImageIcon exit = new ImageIcon("img/picture/playerBackground1Exit.jpg");
@@ -60,14 +66,162 @@ public class playersCheckUI {
 	ImageIcon check = new ImageIcon("img/picture/playerBackground1search.jpg");
 	ImageIcon allCheck = new ImageIcon(
 			"img/picture/playerBackground1AllCheck.jpg");
-
-	public String getSelectContion() {
-		String position = (String) jComboBox1.getSelectedItem();
-		String league = (String) jComboBox2.getSelectedItem();
-		String condition = (String) jComboBox3.getSelectedItem();
-		String selectCondition = position + "," + league + "," + condition;
-		return selectCondition;
+	public playersCheckUI(){
+		 jFrame = new JFrame("球员数据查看");
+		 jLabel1 = new JLabel("background");
+		 jLabel2 = new JLabel("back");
+		 jLabel3 = new JLabel(" ");
+		 jLabel4 = new JLabel("search");
+		 jLabel5 = new JLabel("check");
+		 jLabel6 = new JLabel("allCheck");
+		
+		 model1=new DefaultComboBoxModel<String>(position);
+		jComboBox1 = new JComboBox<String>(model1);
+		jComboBox2 = new JComboBox<String>(league);
+		jComboBox3 = new JComboBox<String>(condition);
+		 jComboBoxSortCondition = new JComboBox<String>(sort);
+		 jComboBoxClassify = new JComboBox<String>(playerClassify);
+		 //TODO
+		 jComboBoxAD=new JComboBox<String>(shengjiangxu);
+	
+			jFrame.setUndecorated(true);
+			
+			jFrame.setSize(1200, 700);
+			jFrame.setLayout(null);
+			jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+			jFrame.setLocationRelativeTo(null);
+			jLabel1.setIcon(background);
+			jLabel2.setIcon(back);
+			jLabel3.setIcon(exit);
+			jLabel4.setIcon(search);
+			jLabel5.setIcon(check);
+			jComboBox1.setBounds(400, 220, 200, 50);
+			jLabel1.add(jComboBox1);
+			jComboBox2.setBounds(400, 330, 200, 50);
+			jLabel1.add(jComboBox2);
+			jComboBox3.setBounds(400, 430, 200, 50);
+			jLabel1.add(jComboBox3);
+			jComboBoxSortCondition.setBounds(500, 30, 200, 30);
+			jLabel1.add(jComboBoxSortCondition);
+			jComboBoxAD.setBounds(500, 100, 200, 30);
+			jLabel1.add(jComboBoxAD);
+			jComboBoxClassify.setBounds(500, 150, 200, 30);
+			jLabel1.add(jComboBoxClassify);
+			jLabel1.setBounds(0, 0, 1200, 700);
+			jFrame.add(jLabel1);
+			jLabel2.setBounds(0, 0, 50, 35);
+			jLabel1.add(jLabel2);
+			jLabel3.setBounds(1120, 0, 80, 80);
+			jLabel1.add(jLabel3);
+			jLabel4.setBounds(750, 100, 140, 60);
+			jLabel1.add(jLabel4);
+			jLabel5.setBounds(750, 320, 130, 60);
+			jLabel1.add(jLabel5);
+			jLabel6.setBounds(10, 580, 450, 50);
+			jLabel6.setIcon(allCheck);
+			jLabel1.add(jLabel6);
+			jFrame.setVisible(false);
+			setListener();
 	}
+public void open(){
+	jFrame.setVisible(true);
+}
+	public void setListener(){
+		jComboBoxAD.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				sortSe=(String)jComboBoxAD.getSelectedItem();
+			}
+			
+		});
+		jComboBoxSortCondition.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				shengjiangSe=(String)jComboBoxSortCondition.getSelectedItem();
+			}
+		});
+		jComboBoxClassify.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				classify=jComboBoxClassify.getSelectedIndex();
+			}
+		});
+		jLabel2.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				selectTorPUI ui=new selectTorPUI();
+				ui.drawSelectTorPUI();
+			}
+		});
+		jLabel4.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				jFrame.dispose();
+							
+				String[] playerNameData = getSortBy(classify);
+				playersBeforeFiftyUI ui = new playersBeforeFiftyUI(playerNameData);
+				ui.open();
+			}
+		});
+		jLabel3.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				jFrame.dispose();
+			}
+		});
+		jLabel5.addMouseListener(new MouseAdapter() {
+
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				jFrame.dispose();
+				String selectCondition = positionSe + "," + leagueSe + "," + conditionSe;
+							
+				String[] playerNameData = getData(selectCondition);
+				playersBeforeFiftyUI ui = new playersBeforeFiftyUI(playerNameData);
+				ui.open();
+			}
+		});
+		jLabel6.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				allPlayersInformation ui = new allPlayersInformation();
+				ui.allPlayersInformationUI();
+				jFrame.dispose();
+			}
+		});
+		jComboBox1.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				positionSe=(String)jComboBox1.getSelectedItem();
+			}
+			
+		});
+		jComboBox2.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				leagueSe=(String)jComboBox2.getSelectedItem();
+			}
+			
+		});
+		jComboBox3.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				conditionSe=(String)jComboBox3.getSelectedItem();
+			}
+			
+		});
+		
+	}
+	
 
 	public String[] getSortBy(int classify){
 		int key = -1;
@@ -150,10 +304,9 @@ public class playersCheckUI {
     	return playerName;
     }
 
-	public String[] getData() {
+	public String[] getData(String condition) {
 		PlayerService data1 = new PlayerBL();
 		ArrayList<PlayerStrVO> data2 = new ArrayList<PlayerStrVO>();
-		String condition = getSelectContion();
 		data2 = data1.filterAll(condition);
 		// TODO
 		if (data2.size() > 50) {
@@ -169,192 +322,5 @@ public class playersCheckUI {
 			}
 			return playerDataless;
 		}
-	}
-
-	public void playersCheck() {
-		jFrame.setUndecorated(true);
-		jFrame.setVisible(true);
-		jFrame.setSize(1200, 700);
-		jFrame.setLayout(null);
-		jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		jFrame.setLocationRelativeTo(null);
-		jLabel1.setIcon(background);
-		jLabel2.setIcon(back);
-		jLabel3.setIcon(exit);
-		jLabel4.setIcon(search);
-		jLabel5.setIcon(check);
-		jComboBox1.setBounds(400, 220, 200, 50);
-		jLabel1.add(jComboBox1);
-		jComboBox2.setBounds(400, 330, 200, 50);
-		jLabel1.add(jComboBox2);
-		jComboBox3.setBounds(400, 430, 200, 50);
-		jLabel1.add(jComboBox3);
-		jComboBoxSortCondition.setBounds(500, 40, 200, 50);
-		jLabel1.add(jComboBoxSortCondition);
-		jComboBoxAD.setBounds(500, 120, 200, 50);
-		jLabel1.add(jComboBoxAD);
-		jLabel1.setBounds(0, 0, 1200, 700);
-		jFrame.add(jLabel1);
-		jLabel2.setBounds(0, 0, 50, 35);
-		jLabel1.add(jLabel2);
-		jLabel3.setBounds(1120, 0, 80, 80);
-		jLabel1.add(jLabel3);
-		jLabel4.setBounds(750, 100, 140, 60);
-		jLabel1.add(jLabel4);
-		jLabel5.setBounds(750, 320, 130, 60);
-		jLabel1.add(jLabel5);
-		jLabel6.setBounds(10, 580, 450, 50);
-		jLabel6.setIcon(allCheck);
-		jLabel1.add(jLabel6);
-		jLabel2.addMouseListener(new MouseListener() {
-
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				jFrame.dispose();
-				selectTorPUI ui = new selectTorPUI();
-				ui.drawSelectTorPUI();
-			}
-		});
-		jLabel3.addMouseListener(new MouseListener() {
-
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jFrame.dispose();
-			}
-		});
-		jLabel4.addMouseListener(new MouseListener() {
-
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				jFrame.dispose();
-				playersBeforeFiftyUI ui = new playersBeforeFiftyUI();
-				String[] playerNameData = getSortBy(jComboBoxClassify.getSelectedIndex());
-				ui.playersBeforeFifty();
-			}
-		});
-		jLabel5.addMouseListener(new MouseListener() {
-
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jFrame.dispose();
-				playersBeforeFiftyUI ui = new playersBeforeFiftyUI();
-				String[] playerNameData = getData();
-				ui.playersBeforeFifty();
-			}
-		});
-		jLabel6.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				allPlayersInformation ui = new allPlayersInformation();
-				ui.allPlayersInformationUI();
-				jFrame.dispose();
-			}
-		});
 	}
 }

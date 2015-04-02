@@ -66,7 +66,7 @@ public class selectTorPUI {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				playersCheckUI ui=new playersCheckUI();
-				ui.playersCheck();
+				ui.open();
 				jFrame.dispose();
 			}
 		});

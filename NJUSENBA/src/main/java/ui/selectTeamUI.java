@@ -32,12 +32,15 @@ public class selectTeamUI {
 	String[] team={" ","马刺队","老鹰队","骑士队","猛龙","公牛队","奇才队","雄鹿队","步行者队","热火队","凯尔特人队","黄蜂队","篮网队","活塞队","魔术队","76人队","尼克斯队","勇士队","灰熊队","开拓者队","火箭队","快船队","小牛队","鹈鹕队","雷霆队","太阳队","爵士队","掘金队","国王队","湖人队","森林狼队"};
 	String[] condition={" ","比赛场数","投篮命中数","投篮出手次数","三分命中数","三分出手数","罚球命中数","罚球出手数","进攻篮板数","防守篮板数","篮板数","助攻数","抢断数","盖帽数","失误数","犯规数","比赛得分","投篮命中率","三分命中率","罚球命中率","胜率","进攻回合","进攻效率","防守效率","进攻篮板效率","防守篮板效率","抢断效率","助攻率"};
 	String[] teamClassify = {"赛季总数据","场均数据"};
+	String[] shengjiangxu={"升序","降序"};
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBox1=new JComboBox(team);
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBox2=new JComboBox(condition);
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBoxTeamClassify = new JComboBox(teamClassify);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	JComboBox jComboBoxAD= new JComboBox(shengjiangxu);
 	public int getSelect(){
 		int key = -1;
 		String condition=(String)jComboBox2.getSelectedItem();
@@ -103,7 +106,7 @@ public class selectTeamUI {
 		}
 		return key;
 	}
-	public String[] getData(){
+	public String[] getData(int AD){
 		int key = getSelect();
 		TeamService ts=new TeamBL();
 		ArrayList<TeamStrVO> datateam=new ArrayList<TeamStrVO>();
@@ -111,7 +114,15 @@ public class selectTeamUI {
 		datateam = ts.allTeamStr();
 		String[] dataName = new String[datateam.size()];
 		ArrayList<TeamStrVO> Reteam=new ArrayList<TeamStrVO>();
-		Reteam = ts.ascendTeamStr(key, datateam);
+		if (AD==0) {
+			Reteam = ts.ascendTeamStr(key, datateam);			
+		} else if (AD==1) {
+			Reteam = ts.descendTeamStr(key, datateam);
+		} else {
+			System.out.println("default ascend.");
+			Reteam = ts.ascendTeamStr(key, datateam);
+		}
+
 		for (int i=0;i < datateam.size();i++){
 			dataName[i] = Reteam.get(i).getName();
 		}
@@ -121,7 +132,15 @@ public class selectTeamUI {
 			datateam=ts.allTeamAverStr();
 			String[] dataName=new String[datateam.size()];
 			ArrayList<TeamStrVO> Reteam=new ArrayList<TeamStrVO>();
-			Reteam=ts.ascendTeamAStr(key, datateam);
+			if (AD==0) {
+				Reteam=ts.ascendTeamAStr(key, datateam);
+			} else if (AD==1) {
+				Reteam=ts.descendTeamAStr(key, datateam);
+			} else {
+				System.out.println("default ascend.");
+				Reteam=ts.ascendTeamAStr(key, datateam);
+			}
+			
 		for(int i=0;i<datateam.size();i++){
 			dataName[i]=Reteam.get(i).getName();
 		}
@@ -159,7 +178,9 @@ public class selectTeamUI {
     	jLabel1.add(jComboBox2);
     	jComboBoxTeamClassify.setBounds(450, 500, 200, 50);
     	jLabel1.add(jComboBoxTeamClassify);
-    	jLabel6.setBounds(20, 550, 450, 50);
+    	jComboBoxAD.setBounds(450, 570, 200, 50);
+    	jLabel6.setBounds(20, 640, 450, 50);
+    	jLabel1.add(jComboBoxAD);
     	jLabel6.setIcon(allTeam);
     	jLabel1.add(jLabel6);
     	jLabel2.addMouseListener(new MouseListener() {
@@ -217,7 +238,13 @@ public class selectTeamUI {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				teamSortUI ui=new teamSortUI();
-				ui.teamSort();
+				int AD = 0;
+				if (jComboBoxAD.getSelectedItem().toString().equals("升序")) {
+					AD = 0;
+				} else if (jComboBoxAD.getSelectedItem().toString().equals("降序")) {
+					AD = 1;
+				}
+				ui.teamSort(AD);
 
 			}
 		});

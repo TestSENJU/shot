@@ -57,8 +57,19 @@ public class playersCheckUI {
     	ArrayList<PlayerStrVO> data2=new ArrayList<PlayerStrVO>();
     	String condition=getSelectContion();
     	data2=data1.filterAll(condition);
-    	for(int i=0;i<50;i++){
-    	String playerdata=data2.get(i).getName();
+    	//TODO
+    	if(data2.size()>50) {
+    		String[] playerData=new String[50];
+    		for(int i=0;i<50;i++){
+        		playerData[i]=data2.get(i).getName();
+        	}
+    		return playerData;
+    	} else {
+    		String[] playerDataless = new String[data2.size()];
+    		for (int i=0;i < data2.size();i++) {
+    			playerDataless[i] = data2.get(i).getName();
+    		}
+    		return playerDataless;
     	}
     }
     public void playersCheck(){

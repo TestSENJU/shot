@@ -1,13 +1,16 @@
 package launch;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Set;
 
+import data.player.PlayerData;
+import data.player.PlayerData_Impl;
+import po.Player_AllScorePO;
 import logic.PlayerBL;
 import logic.PlayerService;
-import logic.TeamBL;
-import logic.TeamService;
+import vo.PlayerPersonalInfoVO;
 import vo.PlayerStrVO;
-import vo.TeamStrVO;
 
 public class Start {
 
@@ -15,10 +18,27 @@ public class Start {
 		// TODO Auto-generated method stub
 		PlayerService ps = new PlayerBL();
 		ArrayList<PlayerStrVO> playerList = new ArrayList<PlayerStrVO>();
-		playerList = ps.filterAll("G,E-Southest,score");
+		playerList = ps.filterAll("C,W-Southwest,score");
 		for(int i=0;i < playerList.size();i++){
 			System.out.println(playerList.get(i).getName());
 		}
+		/*playerList = ps.filterAll("G,E-Southest,score");
+		for(int i=0;i < playerList.size();i++){
+			System.out.println(playerList.get(i).getName());
+		}*/
+/*		ArrayList<PlayerPersonalInfoVO> playPerson = new ArrayList<PlayerPersonalInfoVO>();
+		playPerson = ps.playerPersonalInfo();
+		playerList = ps.playerAll();
+		PlayerData pd = new PlayerData_Impl();
+		Hashtable<String, Player_AllScorePO> playAllList = pd.getPlayerAll();
+		Set<String> keys = playAllList.keySet();
+		for (String key : keys) {
+			System.out.println(playAllList.get(key).getPlayerName() + ";;;;" + playAllList.get(key).getTeamArea());
+		}
+		for (int i=0;i < playPerson.size();i++) {
+			System.out.println(playPerson.get(i).getName() + "====" + playPerson.get(i).getPosition());
+		}
+*/
 		/*ArrayList<TeamStrVO> teamList = new ArrayList<TeamStrVO>();
 		teamList = ts.allTeamAverStr();
 		for (int i=0;i < teamList.size();i++) {

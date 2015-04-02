@@ -313,7 +313,8 @@ public class playersCheckUI {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				playersBeforeFiftyUI ui = new playersBeforeFiftyUI();
-				ui.playersBeforeFifty();
+				String[] playerNameData = getData();
+				ui.playersBeforeFifty(playerNameData);
 			}
 		});
 		jLabel6.addMouseListener(new MouseListener() {

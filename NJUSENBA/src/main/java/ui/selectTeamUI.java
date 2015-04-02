@@ -114,7 +114,15 @@ public class selectTeamUI {
 		datateam = ts.allTeamStr();
 		String[] dataName = new String[datateam.size()];
 		ArrayList<TeamStrVO> Reteam=new ArrayList<TeamStrVO>();
-		Reteam = ts.ascendTeamStr(key, datateam);
+		if (AD==0) {
+			Reteam = ts.ascendTeamStr(key, datateam);			
+		} else if (AD==1) {
+			Reteam = ts.descendTeamStr(key, datateam);
+		} else {
+			System.out.println("default ascend.");
+			Reteam = ts.ascendTeamStr(key, datateam);
+		}
+
 		for (int i=0;i < datateam.size();i++){
 			dataName[i] = Reteam.get(i).getName();
 		}
@@ -124,7 +132,15 @@ public class selectTeamUI {
 			datateam=ts.allTeamAverStr();
 			String[] dataName=new String[datateam.size()];
 			ArrayList<TeamStrVO> Reteam=new ArrayList<TeamStrVO>();
-			Reteam=ts.ascendTeamAStr(key, datateam);
+			if (AD==0) {
+				Reteam=ts.ascendTeamAStr(key, datateam);
+			} else if (AD==1) {
+				Reteam=ts.descendTeamAStr(key, datateam);
+			} else {
+				System.out.println("default ascend.");
+				Reteam=ts.ascendTeamAStr(key, datateam);
+			}
+			
 		for(int i=0;i<datateam.size();i++){
 			dataName[i]=Reteam.get(i).getName();
 		}

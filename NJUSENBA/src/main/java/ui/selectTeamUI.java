@@ -106,7 +106,7 @@ public class selectTeamUI {
 		}
 		return key;
 	}
-	public String[] getData(){
+	public String[] getData(int AD){
 		int key = getSelect();
 		TeamService ts=new TeamBL();
 		ArrayList<TeamStrVO> datateam=new ArrayList<TeamStrVO>();
@@ -222,7 +222,13 @@ public class selectTeamUI {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				teamSortUI ui=new teamSortUI();
-				ui.teamSort();
+				int AD = 0;
+				if (jComboBoxAD.getSelectedItem().toString().equals("升序")) {
+					AD = 0;
+				} else if (jComboBoxAD.getSelectedItem().toString().equals("降序")) {
+					AD = 1;
+				}
+				ui.teamSort(AD);
 
 			}
 		});

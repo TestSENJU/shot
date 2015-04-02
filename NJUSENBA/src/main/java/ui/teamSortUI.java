@@ -19,39 +19,44 @@ public class teamSortUI {
 	ImageIcon background=new ImageIcon("img/picture/teamBackground3.jpg");
 	ImageIcon back=new ImageIcon("img/picture/teamBackground1Back.jpg");
 	ImageIcon exit=new ImageIcon("img/picture/teamBackground1Exit.jpg");
-	selectTeamUI getdata=new selectTeamUI();
-	String[] teamData=getdata.getData();
-	JTextField jTextField=new JTextField(teamData[0]);
-	JTextField jTextField1=new JTextField(teamData[1]);
-	JTextField jTextField2=new JTextField(teamData[2]);
-	JTextField jTextField3=new JTextField(teamData[3]);
-	JTextField jTextField4=new JTextField(teamData[4]);
-	JTextField jTextField5=new JTextField(teamData[5]);
-	JTextField jTextField6=new JTextField(teamData[6]);
-	JTextField jTextField7=new JTextField(teamData[7]);
-	JTextField jTextField8=new JTextField(teamData[8]);
-	JTextField jTextField9=new JTextField(teamData[9]);
-	JTextField jTextField10=new JTextField(teamData[10]);
-	JTextField jTextField11=new JTextField(teamData[11]);
-	JTextField jTextField12=new JTextField(teamData[12]);
-	JTextField jTextField13=new JTextField(teamData[13]);
-	JTextField jTextField14=new JTextField(teamData[14]);
-	JTextField jTextField15=new JTextField(teamData[15]);
-	JTextField jTextField16=new JTextField(teamData[16]);
-	JTextField jTextField17=new JTextField(teamData[17]);
-	JTextField jTextField18=new JTextField(teamData[18]);
-	JTextField jTextField19=new JTextField(teamData[19]);
-	JTextField jTextField20=new JTextField(teamData[20]);
-	JTextField jTextField21=new JTextField(teamData[21]);
-	JTextField jTextField22=new JTextField(teamData[22]);
-	JTextField jTextField23=new JTextField(teamData[23]);
-	JTextField jTextField24=new JTextField(teamData[24]);
-	JTextField jTextField25=new JTextField(teamData[25]);
-	JTextField jTextField26=new JTextField(teamData[26]);
-	JTextField jTextField27=new JTextField(teamData[27]);
-	JTextField jTextField28=new JTextField(teamData[28]);
-	JTextField jTextField29=new JTextField(teamData[29]);
-    public void teamSort(){
+	
+    public void teamSort(int AD){
+    	
+    	//
+    	selectTeamUI getdata=new selectTeamUI();
+    	String[] teamData=getdata.getData(AD);
+    	JTextField jTextField=new JTextField(teamData[0]);
+    	JTextField jTextField1=new JTextField(teamData[1]);
+    	JTextField jTextField2=new JTextField(teamData[2]);
+    	JTextField jTextField3=new JTextField(teamData[3]);
+    	JTextField jTextField4=new JTextField(teamData[4]);
+    	JTextField jTextField5=new JTextField(teamData[5]);
+    	JTextField jTextField6=new JTextField(teamData[6]);
+    	JTextField jTextField7=new JTextField(teamData[7]);
+    	JTextField jTextField8=new JTextField(teamData[8]);
+    	JTextField jTextField9=new JTextField(teamData[9]);
+    	JTextField jTextField10=new JTextField(teamData[10]);
+    	JTextField jTextField11=new JTextField(teamData[11]);
+    	JTextField jTextField12=new JTextField(teamData[12]);
+    	JTextField jTextField13=new JTextField(teamData[13]);
+    	JTextField jTextField14=new JTextField(teamData[14]);
+    	JTextField jTextField15=new JTextField(teamData[15]);
+    	JTextField jTextField16=new JTextField(teamData[16]);
+    	JTextField jTextField17=new JTextField(teamData[17]);
+    	JTextField jTextField18=new JTextField(teamData[18]);
+    	JTextField jTextField19=new JTextField(teamData[19]);
+    	JTextField jTextField20=new JTextField(teamData[20]);
+    	JTextField jTextField21=new JTextField(teamData[21]);
+    	JTextField jTextField22=new JTextField(teamData[22]);
+    	JTextField jTextField23=new JTextField(teamData[23]);
+    	JTextField jTextField24=new JTextField(teamData[24]);
+    	JTextField jTextField25=new JTextField(teamData[25]);
+    	JTextField jTextField26=new JTextField(teamData[26]);
+    	JTextField jTextField27=new JTextField(teamData[27]);
+    	JTextField jTextField28=new JTextField(teamData[28]);
+    	JTextField jTextField29=new JTextField(teamData[29]);
+    	
+    	//
     	jFrame.setUndecorated(true);
     	jFrame.setVisible(true);
     	jFrame.setSize(1200, 700);
@@ -252,6 +257,7 @@ public class teamSortUI {
     }
     public static void main(String[]args){
     	teamSortUI ui=new teamSortUI();
-    	ui.teamSort();
+    	int AD = 0;
+    	ui.teamSort(AD);
     }
 }

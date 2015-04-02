@@ -25,8 +25,9 @@ public class allPlayersInformation {
 	 @SuppressWarnings({ "unchecked", "rawtypes" })
 	JComboBox jComboBox=new JComboBox(data);
 	 DefaultTableModel table;
-	 JScrollPane jsp;
 	 JTable jTable;
+	 JScrollPane jsp;
+
 	 JLabel jLabel1=new JLabel();
 	 JLabel jLabel2=new JLabel();
 	 JLabel jLabel3=new JLabel();
@@ -42,6 +43,7 @@ public class allPlayersInformation {
 		jFrame.setUndecorated(true);
     	jFrame.setSize(1200, 700);
     	jFrame.setLayout(null);
+    	jFrame.setVisible(true);
     	jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     	jFrame.setLocationRelativeTo(null);
       	jLabel1.setBounds(0, 0, 1200, 700);
@@ -52,19 +54,17 @@ public class allPlayersInformation {
     	
     	table=new DefaultTableModel(null,title);
 		jTable=new JTable(table);
-		jsp=new JScrollPane(jTable);
-    	jTable=new JTable(897, 15);
-    	jTable.setBounds(2, 82,1196,618);
+		jTable.setBounds(2, 82,1196,618);
+		jsp=new JScrollPane(jTable);   	
         jLabel1.add(jsp);
     	jsp.setBounds(0, 80, 1200, 600);
-    	jFrame.setVisible(true);
     	jLabel2.setIcon(back);
     	jLabel3.setIcon(exit);
     	jLabel2.setBounds(0, 0, 50, 35);
     	jLabel1.add(jLabel2);
     	jLabel3.setBounds(1120, 0, 80, 80);
     	jLabel1.add(jLabel3);
-    	
+    	jLabel1.setVisible(true);
     	setListener();    	
 	}
 //	public static void main(String[]args){
@@ -78,8 +78,8 @@ jLabel2.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
-				selectTeamUI ui=new selectTeamUI();
-				ui.selectTeam();
+				playersCheckUI ui=new playersCheckUI();
+				ui.playersCheck();
 			}
 		});
     	jLabel3.addMouseListener(new MouseAdapter() {
@@ -104,7 +104,7 @@ jComboBox.addActionListener(new ActionListener() {
 						PlayerService data1=new PlayerBL();
 						ArrayList<PlayerStrVO> data2=new ArrayList<PlayerStrVO>();
 						data2=data1.playerAll();
-						for(int i=0;i<448;i++){
+						for(int i=0;i<data2.size();i++){
 							String[] playerData=new String[29];
 							playerData[0]=data2.get(i).getName();
 							playerData[1]=data2.get(i).getTeams();

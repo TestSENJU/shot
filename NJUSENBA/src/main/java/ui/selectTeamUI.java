@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
+import vo.TeamAverageVO;
 import vo.TeamStrVO;
 import logic.TeamBL;
 import logic.TeamService;
@@ -106,6 +107,7 @@ public class selectTeamUI {
 		int key = getSelect();
 		TeamService ts=new TeamBL();
 		ArrayList<TeamStrVO> datateam=new ArrayList<TeamStrVO>();
+		if(jComboBoxTeamClassify.getSelectedItem().equals("赛季总数据")){
 		datateam = ts.allTeamStr();
 		String[] dataName = new String[datateam.size()];
 		ArrayList<TeamStrVO> Reteam=new ArrayList<TeamStrVO>();
@@ -114,6 +116,19 @@ public class selectTeamUI {
 			dataName[i] = Reteam.get(i).getName();
 		}
 		return dataName;
+		}
+		else if(jComboBoxTeamClassify.getSelectedItem().equals("赛季平均数据")){
+			datateam=ts.allTeamAverStr();
+			String[] dataName=new String[datateam.size()];
+			ArrayList<TeamStrVO> Reteam=new ArrayList<TeamStrVO>();
+			Reteam=ts.ascendTeamAStr(key, datateam);
+		for(int i=0;i<datateam.size();i++){
+			dataName[i]=Reteam.get(i).getName();
+		}
+		return dataName;
+		}
+		else 
+			return null;
 	}
 	public void selectTeam(){
 		jFrame.setUndecorated(true);

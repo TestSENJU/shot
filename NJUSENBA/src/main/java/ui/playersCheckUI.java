@@ -40,6 +40,7 @@ public class playersCheckUI {
 			"defensiveReboundRate", "assistingRate", "stealRate",
 			"blockShotRate", "muffRate", "usage" };
 	String[] playerClassify = {"总赛季数据","场均数据"};
+	String[] shengjiangxu={"升序","降序"};
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBox1 = new JComboBox(position);
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -50,6 +51,8 @@ public class playersCheckUI {
 	JComboBox jComboBoxSortCondition = new JComboBox(sort);
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBoxClassify = new JComboBox(playerClassify);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	JComboBox jComboBoxAD=new JComboBox(shengjiangxu);
 	ImageIcon background = new ImageIcon("img/picture/playerBackground1.jpg");
 	ImageIcon back = new ImageIcon("img/picture/playerBackground1Back.jpg");
 	ImageIcon exit = new ImageIcon("img/picture/playerBackground1Exit.jpg");
@@ -186,8 +189,10 @@ public class playersCheckUI {
 		jLabel1.add(jComboBox2);
 		jComboBox3.setBounds(400, 430, 200, 50);
 		jLabel1.add(jComboBox3);
-		jComboBoxSortCondition.setBounds(500, 100, 200, 50);
+		jComboBoxSortCondition.setBounds(500, 40, 200, 50);
 		jLabel1.add(jComboBoxSortCondition);
+		jComboBoxAD.setBounds(500, 120, 200, 50);
+		jLabel1.add(jComboBoxAD);
 		jLabel1.setBounds(0, 0, 1200, 700);
 		jFrame.add(jLabel1);
 		jLabel2.setBounds(0, 0, 50, 35);
@@ -284,7 +289,7 @@ public class playersCheckUI {
 				jFrame.dispose();
 				playersBeforeFiftyUI ui = new playersBeforeFiftyUI();
 				String[] playerNameData = getSortBy(jComboBoxClassify.getSelectedIndex());
-				ui.playersBeforeFifty(playerNameData);
+				ui.playersBeforeFifty();
 			}
 		});
 		jLabel5.addMouseListener(new MouseListener() {
@@ -314,7 +319,7 @@ public class playersCheckUI {
 				jFrame.dispose();
 				playersBeforeFiftyUI ui = new playersBeforeFiftyUI();
 				String[] playerNameData = getData();
-				ui.playersBeforeFifty(playerNameData);
+				ui.playersBeforeFifty();
 			}
 		});
 		jLabel6.addMouseListener(new MouseListener() {

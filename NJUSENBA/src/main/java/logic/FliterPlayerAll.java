@@ -61,8 +61,11 @@ public class FliterPlayerAll {
 			for (String key : keys) {
 				if(playerList.get(i).getName().equals(playAllList.get(key).getPlayerName())){
 					if(!playAllList.get(key).getTeamArea().equals(league)){
+						//TODO
+						System.out.println("remove "+playerList.get(i).getName());
 						playerList.remove(i);
 					}
+					break;
 				}
 			}
 		}
@@ -85,6 +88,8 @@ public class FliterPlayerAll {
 		case "D_D": 
 			for (int i=0;i < playerList.size();i++) {
 				if(!sortDD(playerList.get(i))){
+					//TODO
+					System.out.println("remove "+playerList.get(i).getName());
 					playerList.remove(i);
 				}
 			}

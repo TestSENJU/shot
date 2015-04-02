@@ -28,29 +28,59 @@ public class playersCheckUI {
     String[] position={" ","G","F","C"};
     String[] league={" ","E-Southeast","E-Atlantic","E-Central","W-Southwest","W-Atlantic","W-Northwest","W-Pacific"};
     String[] condition={" ","score","rebound","assisting","S_R_A","blockShot","steal","foul","muff","playTime","efficiency","shoot","threePoint","freeThrow","D_D"};
+    String[] sort={"name",
+    		"teams",
+    		"competeNum",
+    		"offensiveNum",
+    		"reboundNum",
+    		"assistingNum",
+    		"playingTime",
+    		"hitRate",
+    		"threePointHitRate",
+    		"freeThrowHitRate",
+    		"offensiveReboundNum",
+    		"defensiveReboundNum",
+    		"stealNum",
+    		"blockShotNum",
+    		"muffNum",
+    		"foulNum",
+    		"score",
+    		"efficiency",
+    		"GmScEfficiency",
+    		"trueHitRate",
+    		"shootEfficiency",
+    		"reboundRate",
+    		"offensiveReboundRate",
+    	    "defensiveReboundRate",
+    		"assistingRate",
+    		"stealRate",
+    		"blockShotRate",
+    		"muffRate",
+    		"usage"};
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBox1=new JComboBox(position);
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBox2=new JComboBox(league);
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	JComboBox jComboBox3=new JComboBox(condition);
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	JComboBox jComboBoxSortCondition=new JComboBox(sort);
     ImageIcon background=new ImageIcon("img/picture/playerBackground1.jpg");
     ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
     ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
     ImageIcon search=new ImageIcon("img/picture/playerBackground1Check.jpg");
     ImageIcon check=new ImageIcon("img/picture/playerBackground1search.jpg");
     ImageIcon allCheck=new ImageIcon("img/picture/playerBackground1AllCheck.jpg");
-    JTextField jTextField=new JTextField(" ");
-    public String getPlayerName(){
-    	String playerName=jTextField.getText();
-    	return playerName;
-    }
     public String getSelectContion(){
     	String position=(String)jComboBox1.getSelectedItem();
     	String league=(String)jComboBox2.getSelectedItem();
     	String condition=(String)jComboBox3.getSelectedItem();
     	String selectCondition=position+","+league+","+condition;
     	return selectCondition;
+    }
+    public String getSortBy(){
+    	String sortcondition=(String)jComboBoxSortCondition.getSelectedItem();
+    	return sortcondition;
     }
     public String[] getData(){
     	PlayerService data1=new PlayerBL();
@@ -90,6 +120,8 @@ public class playersCheckUI {
     	jLabel1.add(jComboBox2);
     	jComboBox3.setBounds(400, 430, 200, 50);
     	jLabel1.add(jComboBox3);
+    	jComboBoxSortCondition.setBounds(500, 100, 200, 50);
+    	jLabel1.add(jComboBoxSortCondition);
         jLabel1.setBounds(0, 0, 1200, 700);
         jFrame.add(jLabel1);
     	jLabel2.setBounds(0, 0, 50, 35);
@@ -100,8 +132,6 @@ public class playersCheckUI {
     	jLabel1.add(jLabel4);
     	jLabel5.setBounds(750, 320, 130, 60);
     	jLabel1.add(jLabel5);
-    	jTextField.setBounds(500, 100, 200, 50);
-    	jLabel1.add(jTextField);
     	jLabel6.setBounds(10, 580, 450, 50);
     	jLabel6.setIcon(allCheck);
     	jLabel1.add(jLabel6);

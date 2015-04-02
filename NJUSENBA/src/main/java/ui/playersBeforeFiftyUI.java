@@ -19,7 +19,7 @@ public class playersBeforeFiftyUI{
     ImageIcon back=new ImageIcon("img/picture/playerBackground1Back.jpg");
     ImageIcon exit=new ImageIcon("img/picture/playerBackground1Exit.jpg");
     JTextField jTextField;
-    public void playersBeforeFifty(){
+    public void playersBeforeFifty(String[] playerNameData){
     	jFrame.setUndecorated(true);
     	jFrame.setVisible(true);
     	jFrame.setSize(1200, 700);

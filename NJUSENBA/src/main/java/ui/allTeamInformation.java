@@ -72,7 +72,7 @@ public class allTeamInformation {
   				// TODO Auto-generated method stub
   				jFrame.dispose();
   				selectTeamUI ui=new selectTeamUI();
-  				ui.selectTeam();
+  				ui.open();
   			}
   		});
       	 jLabel3.addMouseListener(new MouseAdapter() {

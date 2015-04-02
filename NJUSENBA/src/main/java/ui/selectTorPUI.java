@@ -95,7 +95,7 @@ public class selectTorPUI {
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				selectTeamUI sTeamUI=new selectTeamUI();
-				sTeamUI.selectTeam();
+				sTeamUI.open();;
 				jFrame.dispose();
 			}
 		});

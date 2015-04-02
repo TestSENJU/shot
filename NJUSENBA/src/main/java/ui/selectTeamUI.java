@@ -2,8 +2,8 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -12,9 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
-import org.omg.PortableServer.POAPackage.AdapterAlreadyExists;
 
-import vo.TeamAverageVO;
 import vo.TeamStrVO;
 import logic.TeamBL;
 import logic.TeamService;
@@ -45,9 +43,114 @@ public class selectTeamUI {
 	JComboBox jComboBoxTeamClassify = new JComboBox(teamClassify);
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	JComboBox jComboBoxAD= new JComboBox(shengjiangxu);
+	private String conditionSe;
+	private String teamClassifySe;
+	private String shengjiangxuSe;
+	public selectTeamUI(){
+		jFrame.setUndecorated(true);
+		jFrame.setVisible(false);
+    	jFrame.setSize(1200, 700);
+    	jFrame.setLayout(null);
+    	jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    	jFrame.setLocationRelativeTo(null);
+    	jLabel1.setBounds(0, 0, 1200, 700);
+    	jLabel1.setIcon(background);
+    	jLabel2.setIcon(inquiry);
+    	jLabel3.setIcon(check);
+    	jLabel4.setIcon(back);
+    	jLabel5.setIcon(exit);
+    	jLabel1.add(jLabel4);
+    	jFrame.add(jLabel1);
+    	jLabel2.setBounds(885, 150, 150, 60);
+    	jLabel1.add(jLabel2);
+    	jLabel3.setBounds(900, 420, 150, 60);
+    	jLabel1.add(jLabel3);
+    	jLabel4.setBounds(0,0,70,40);
+    	jLabel1.add(jLabel4);
+    	jLabel5.setBounds(1120, 0, 80, 80);
+    	jLabel1.add(jLabel5);
+    	jComboBox1.setBounds(450, 150, 200, 50);
+    	jLabel1.add(jComboBox1);
+    	jComboBox2.setBounds(450, 420, 200, 50);
+    	jLabel1.add(jComboBox2);
+    	jComboBoxTeamClassify.setBounds(450, 500, 200, 50);
+    	jLabel1.add(jComboBoxTeamClassify);
+    	jComboBoxAD.setBounds(450, 570, 200, 50);
+    	jLabel6.setBounds(20, 640, 450, 50);
+    	jLabel1.add(jComboBoxAD);
+    	jLabel6.setIcon(allTeam);
+    	jLabel1.add(jLabel6);
+    setListener();
+	}
+	public void open(){
+		jFrame.setVisible(true);
+	}
+	public void setListener(){
+
+		jComboBox2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				conditionSe=(String) jComboBox2.getSelectedItem();
+			}
+		});
+		jComboBoxTeamClassify.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				teamClassifySe=(String)jComboBoxTeamClassify.getSelectedItem();
+			}
+		});
+		jComboBoxAD.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				shengjiangxuSe=(String)jComboBoxAD.getSelectedItem();
+			}
+		});
+
+    	jLabel3.addMouseListener(new MouseAdapter() {
+		
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				jFrame.dispose();
+				teamSortUI ui=new teamSortUI();
+				int AD = 0;
+				if (shengjiangxuSe.equals("升序")) {
+					AD = 0;
+				} else if (shengjiangxuSe.equals("降序")) {
+					AD = 1;
+				}
+				ui.teamSort(getData(AD));
+                ui.open();
+			}
+		});
+    	jLabel4.addMouseListener(new MouseAdapter() {
+	
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				jFrame.dispose();
+				selectTorPUI ui=new selectTorPUI();
+				ui.drawSelectTorPUI();
+			}
+		});
+    	jLabel5.addMouseListener(new MouseAdapter() {
+		
+			
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				jFrame.dispose();
+			}
+		});
+    	jLabel6.addMouseListener(new MouseAdapter() {
+	
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				jFrame.dispose();
+				allTeamInformation ui=new allTeamInformation();
+				ui.allTeamInformationUI();
+			}
+		});
+	}
 	public int getSelect(){
 		int key = -1;
-		String condition=(String)jComboBox2.getSelectedItem();
+		
 		if (condition.equals(" ")) {
 			key = 0;
 		} else if (condition.equals("比赛场数")) {
@@ -114,7 +217,7 @@ public class selectTeamUI {
 		int key = getSelect();
 		TeamService ts=new TeamBL();
 		ArrayList<TeamStrVO> datateam=new ArrayList<TeamStrVO>();
-		if(jComboBoxTeamClassify.getSelectedItem().equals("赛季总数据")){
+		if(teamClassifySe.equals("赛季总数据")){
 		datateam = ts.allTeamStr();
 		String[] dataName = new String[datateam.size()];
 		ArrayList<TeamStrVO> Reteam=new ArrayList<TeamStrVO>();
@@ -132,7 +235,7 @@ public class selectTeamUI {
 		}
 		return dataName;
 		}
-		else if(jComboBoxTeamClassify.getSelectedItem().equals("赛季平均数据")){
+		else if(teamClassifySe.equals("赛季平均数据")){
 			datateam=ts.allTeamAverStr();
 			String[] dataName=new String[datateam.size()];
 			ArrayList<TeamStrVO> Reteam=new ArrayList<TeamStrVO>();
@@ -152,195 +255,5 @@ public class selectTeamUI {
 		}
 		else 
 			return null;
-	}
-	public void selectTeam(){
-		jFrame.setUndecorated(true);
-		jFrame.setVisible(true);
-    	jFrame.setSize(1200, 700);
-    	jFrame.setLayout(null);
-    	jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    	jFrame.setLocationRelativeTo(null);
-    	jLabel1.setBounds(0, 0, 1200, 700);
-    	jLabel1.setIcon(background);
-    	jLabel2.setIcon(inquiry);
-    	jLabel3.setIcon(check);
-    	jLabel4.setIcon(back);
-    	jLabel5.setIcon(exit);
-    	jLabel1.add(jLabel4);
-    	jFrame.add(jLabel1);
-    	jLabel2.setBounds(885, 150, 150, 60);
-    	jLabel1.add(jLabel2);
-    	jLabel3.setBounds(900, 420, 150, 60);
-    	jLabel1.add(jLabel3);
-    	jLabel4.setBounds(0,0,70,40);
-    	jLabel1.add(jLabel4);
-    	jLabel5.setBounds(1120, 0, 80, 80);
-    	jLabel1.add(jLabel5);
-    	jComboBox1.setBounds(450, 150, 200, 50);
-    	jLabel1.add(jComboBox1);
-    	jComboBox2.setBounds(450, 420, 200, 50);
-    	jLabel1.add(jComboBox2);
-    	jComboBoxTeamClassify.setBounds(450, 500, 200, 50);
-    	jLabel1.add(jComboBoxTeamClassify);
-    	jComboBoxAD.setBounds(450, 570, 200, 50);
-    	jLabel6.setBounds(20, 640, 450, 50);
-    	jLabel1.add(jComboBoxAD);
-    	jLabel6.setIcon(allTeam);
-    	jLabel1.add(jLabel6);
-    	jLabel2.addMouseListener(new MouseListener() {
-			
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				teamInformationUI ui=new teamInformationUI();
-				ui.teamInformation();
-				jFrame.dispose();
-			}
-		});
-    	jLabel3.addMouseListener(new MouseListener() {
-			
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jFrame.dispose();
-				teamSortUI ui=new teamSortUI();
-				int AD = 0;
-				if (jComboBoxAD.getSelectedItem().toString().equals("升序")) {
-					AD = 0;
-				} else if (jComboBoxAD.getSelectedItem().toString().equals("降序")) {
-					AD = 1;
-				}
-				ui.teamSort(AD);
-
-			}
-		});
-    	jLabel4.addMouseListener(new MouseListener() {
-			
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				jFrame.dispose();
-				selectTorPUI ui=new selectTorPUI();
-				ui.drawSelectTorPUI();
-			}
-		});
-    	jLabel5.addMouseListener(new MouseListener() {
-			
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				jFrame.dispose();
-			}
-		});
-    	jLabel6.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				jFrame.dispose();
-				allTeamInformation ui=new allTeamInformation();
-				ui.allTeamInformationUI();
-			}
-		});
 	}
 }

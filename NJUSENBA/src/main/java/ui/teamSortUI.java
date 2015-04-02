@@ -1,9 +1,9 @@
 package ui;
 
-import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -20,11 +20,8 @@ public class teamSortUI {
 	ImageIcon back=new ImageIcon("img/picture/teamBackground1Back.jpg");
 	ImageIcon exit=new ImageIcon("img/picture/teamBackground1Exit.jpg");
 	
-    public void teamSort(int AD){
-    	
-    	//
-    	selectTeamUI getdata=new selectTeamUI();
-    	String[] teamData=getdata.getData(AD);
+    public void teamSort(String teamData[]){
+  
     	JTextField jTextField=new JTextField(teamData[0]);
     	JTextField jTextField1=new JTextField(teamData[1]);
     	JTextField jTextField2=new JTextField(teamData[2]);
@@ -58,7 +55,7 @@ public class teamSortUI {
     	
     	//
     	jFrame.setUndecorated(true);
-    	jFrame.setVisible(true);
+    	jFrame.setVisible(false);
     	jFrame.setSize(1200, 700);
     	jFrame.setLayout(null);
     	jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -198,56 +195,16 @@ public class teamSortUI {
     	jTextField29.setBounds(1030, 545, 150, 50);
     	jTextField29.setFont(new Font("宋体", Font.BOLD, 30));
     	jLabel1.add(jTextField29);
-    	jLabel2.addMouseListener(new MouseListener() {
-			
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+    	jLabel2.addMouseListener(new MouseAdapter() {
 			
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				jFrame.dispose();
 				selectTeamUI ui=new selectTeamUI();
-				ui.selectTeam();
+				ui.open();;
 			}
 		});
-    	jLabel3.addMouseListener(new MouseListener() {
-			
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
+    	jLabel3.addMouseListener(new MouseAdapter() {
 			
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
@@ -255,9 +212,7 @@ public class teamSortUI {
 			}
 		});
     }
-    public static void main(String[]args){
-    	teamSortUI ui=new teamSortUI();
-    	int AD = 0;
-    	ui.teamSort(AD);
+    public void open(){
+    	jFrame.setVisible(true);
     }
 }

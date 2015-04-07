@@ -29,34 +29,6 @@ public class PlayerService_Test {
 	}
 
 	@Test
-	public void test_ascendPlayerStr() {
-
-		assertTrue(pbl.ascendPlayerStr(0, new ArrayList<PlayerVO>()) != null);
-
-	}
-
-	@Test
-	public void test_descendPlayerStr() {
-
-		assertTrue(pbl.descendPlayerStr(0, new ArrayList<PlayerVO>()) != null);
-
-	}
-	
-	@Test
-	public void test_ascendPlayerAStr() {
-
-		assertTrue(pbl.ascendPlayerAStr(0, new ArrayList<PlayerAverageVO>()) != null);
-
-	}
-
-	@Test
-	public void test_descendPlayerAStr() {
-
-		assertTrue(pbl.descendPlayerAStr(0, new ArrayList<PlayerAverageVO>()) != null);
-
-	}
-
-	@Test
 	public void test_filterAll() {
 
 		assertTrue(pbl.filterAll(new String()) != null);

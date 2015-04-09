@@ -22,5 +22,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="E:/TSS/软工三/batik-all-1.7.jar"/>
+	<classpathentry kind="lib" path="E:/TSS/软工三/xml-apis-ext-1.3.04.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

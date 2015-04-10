@@ -5,7 +5,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -21,8 +20,6 @@ import sound.PlaySE;
 
 public class SvgPanel {
 
-		static ImageIcon a = new ImageIcon("img/a.jpg");
-		static ImageIcon first = new ImageIcon("img/first.jpg");
 		JSVGCanvas svgCanvas1 = new JSVGCanvas();
 		JSVGCanvas svgCanvas2 = new JSVGCanvas();
 		JSVGCanvas svgCanvas3 = new JSVGCanvas();
@@ -38,7 +35,7 @@ public class SvgPanel {
 		}
 		
 		public void showSvg() {
-			land = new LandingPanel("img/tablebg.jpg");
+			land = new LandingPanel(AllImages.IMG_BG);
 			land.setOpaque(false);
 			land.setBounds(0, 0, Controller.f.getWidth(), Controller.f.getHeight());
 			land.setLayout(null);

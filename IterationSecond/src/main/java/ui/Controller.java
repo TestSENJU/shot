@@ -2,44 +2,37 @@ package ui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 import sound.PlaySE;
 
 public class Controller {
 
-	public static MyFrame f = new MyFrame(900,618);
+	public static MyFrame f = new MyFrame(1000,700);
 	public static LandingPanel land;
-	
-	static ImageIcon first = new ImageIcon("img/tablebg.jpg");
-	
+		
 	public void layout() {
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setTitle("NBA Data Analysis System");
-		Image frameicon = f.getToolkit().createImage("img/frameIcon.jpg");
-		f.setIconImage(frameicon);
+		//Image frameicon = f.getToolkit().createImage("img/frameIcon.jpg");
+		f.setIconImage(AllImages.IMG_FRAMEICON);
 		
 		//beginning
-		land = new LandingPanel("img/tablebg.jpg");
+		land = new LandingPanel(AllImages.IMG_BG);
 		land.setOpaque(false);
 		land.setBounds(0, 0, f.getWidth(), f.getHeight());
 		land.setLayout(null);
 		
-		//销售人员只能使用进货管理、销售管理、和客户管理功能
-		JButton Hello = new JButton();
-		Hello.setBounds(320, 250, 260, 40);
-		Hello.setBorderPainted(true);
-		Hello.setContentAreaFilled(false);
+		JLabel Hello = new JLabel();
+		Hello.setBounds(380, 250, 260, 40);
 		Hello.setText("Hello, NBA fans");
-		Hello.setFont(new Font("微软雅黑", Font.PLAIN, 23));
+		Hello.setFont(new Font("微软雅黑", Font.PLAIN, 30));
 		Hello.setForeground(Color.WHITE);
 		//Hello.setIcon(hello);
 		Hello.addMouseListener(new HelloListener());
@@ -53,11 +46,14 @@ public class Controller {
 	
 	class HelloListener implements MouseListener {
 		public void mouseClicked(MouseEvent e) {
-			SvgPanel sp = new SvgPanel();
-			sp.showSvg();
+			PlaySE se = new PlaySE("music/click.wav");
+			new Thread(se).start();
+			land.setVisible(false);
+			HotInfoPanel hip = new HotInfoPanel();
+			hip.init();
 		}
 		public void mouseEntered(MouseEvent e) {
-			PlaySE se = new PlaySE("music/enter.wav");
+			PlaySE se = new PlaySE("music/click3.wav");
 			new Thread(se).start();
 		}
 		public void mouseExited(MouseEvent e) {	

@@ -10,7 +10,10 @@ public class todayHotspotPlayer {
 //篮板
 	public playerInformationVO getHotspotPlayer(String condition){
 		if(condition.equals("得分")){
-			ArrayList<playerMatchDataVO> list=new ArrayList<playerMatchDataVO>();
+			ArrayList scoreList=new ArrayList();
+			playerMatchDataVO playerMatchData=new playerMatchDataVO();
+			if(playerMatchData.getScore())
+			for(int i=0;i<)
 			Collections.sort(list,new sortByScore);
 			
 		}

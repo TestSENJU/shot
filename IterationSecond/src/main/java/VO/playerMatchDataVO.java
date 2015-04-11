@@ -1,5 +1,5 @@
 package VO;
-
+//单场比赛数据
 public class playerMatchDataVO {
 	double reboundNum;// 篮板数
 	double assistingNum;// 助攻数

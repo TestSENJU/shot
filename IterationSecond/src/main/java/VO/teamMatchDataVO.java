@@ -1,7 +1,6 @@
 package VO;
-
+//单场比赛数据
 public class teamMatchDataVO {
-	double matchSum;// 比赛场数
 	double hitSum;// 投篮命中数
 	double shootSum;// 投篮出手次数
 	double threePointHitSum;// 三分命中次数

@@ -6,16 +6,15 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import ui.InitailizePanel.CloseListener;
-import ui.InitailizePanel.MinListener;
-
 public class PlayerPanel {
+	/**
+	 * @param 展示所有球员基本信息的表格界面
+	 *         ->点击表格球员头像可以进入球员具体信息界面
+	 * @author forIris
+	 * @version  June 12, 2015 11:41:31 AM
+	 * **/
 	private JPanel playerPanel;
 
-	private JButton close;
-	private JButton min;
-	private JButton test;
-	
 	public JPanel init(){
 		playerPanel = new JPanel();
 		playerPanel.setOpaque(false);

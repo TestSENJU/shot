@@ -7,12 +7,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class TeamPanel {
+	/**
+	 * @param 展示所有球队信息的界面
+	 *           ->只展示所有球队的队徽和名称点击可以进入详细信息界面
+	 * @author forIris
+	 * @version  June 12, 2015 11:41:31 AM
+	 * **/
 	private JPanel teamPanel;
 
-	private JButton close;
-	private JButton min;
-	private JButton test;
-	
 	public JPanel init(){
 		teamPanel = new JPanel();
 		teamPanel.setOpaque(false);

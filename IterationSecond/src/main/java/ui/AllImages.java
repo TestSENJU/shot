@@ -23,24 +23,28 @@ public class AllImages {
 	public static final ImageIcon IMG_MIN = new ImageIcon("img/min.png");
 	/**       *****************最小化frame图标 30x30***************       **/
 	public static final ImageIcon IMG_MIN_RED = new ImageIcon("img/MIN_RED.png");
-	/**       *****************hotPanel logo图标 120x120***************       **/
+	/**       *****************initailizePanel logo图标 120x120***************       **/
 	public static final ImageIcon IMG_LOGO = new ImageIcon("img/logo.png");
-	/**       *****************hotPanel hot图标 80x80***************       **/
+	/**       *****************initailizePanel hot图标 80x80***************       **/
 	public static final ImageIcon IMG_HOT = new ImageIcon("img/hot.png");
-	/**       *****************hotPanel player图标 80x80***************       **/
+	/**       *****************initailizePanel player图标 80x80***************       **/
 	public static final ImageIcon IMG_PLAYER = new ImageIcon("img/player.png");
-	/**       *****************hotPanel team图标 80x80***************       **/
+	/**       *****************initailizePanel team图标 80x80***************       **/
 	public static final ImageIcon IMG_TEAM = new ImageIcon("img/team.png");	
-	/**       *****************hotPanel statistic图标 80x80***************       **/
+	/**       *****************initailizePanel statistic图标 80x80***************       **/
 	public static final ImageIcon IMG_STATISTIC = new ImageIcon("img/statistic.png");
-	/**       *****************hotPanel search图标 80x80***************       **/
+	/**       *****************initailizePanel search图标 80x80***************       **/
 	public static final ImageIcon IMG_SEARCH = new ImageIcon("img/search.png");	
-	/**       *****************hotPanel about us图标 80x80***************       **/
+	/**       *****************initailizePanel about us图标 80x80***************       **/
 	public static final ImageIcon IMG_ABOUTUS = new ImageIcon("img/aboutUS.png");	
-	/**       *****************系统初始化背景图片***************       **/
-	/**       *****************系统初始化背景图片***************       **/
-	/**       *****************系统初始化背景图片***************       **/
-	/**       *****************系统初始化背景图片***************       **/
+	/**       *****************hotInfoPanel 当天热点球员button 100x40***************       **/
+	public static final ImageIcon IMG_TODAYHOTPLAYER = new ImageIcon("img/todayhotplayer.png");
+	/**       *****************hotInfoPanel 赛季热点球员button 100x40***************       **/
+	public static final ImageIcon IMG_SEASONHOTPLAYER = new ImageIcon("img/hotseasonplayer.png");
+	/**       *****************hotInfoPanel 赛季热点球队button 100x40***************       **/
+	public static final ImageIcon IMG_SEASONHOTTEAM = new ImageIcon("img/hotseasonteam.png");
+	/**       *****************hotInfoPanel 进步最快球员button 100x40***************       **/
+	public static final ImageIcon IMG_BESTPLAYER = new ImageIcon("img/bestplayer.png");
 	/**       *****************系统初始化背景图片***************       **/
 	/**       *****************系统初始化背景图片***************       **/
 }

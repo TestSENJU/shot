@@ -1,7 +1,5 @@
 package ui;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -12,7 +10,11 @@ import javax.swing.JPanel;
 import sound.PlayWave;
 
 public class InitailizePanel {
-
+	/** 
+	 * @param 进入系统后的初始化界面-real Controller
+	 * @author forIris
+	 * @version  June 12, 2015 11:41:31 AM
+	 * **/
 	private LandingPanel land;
 	private JPanel infoPanel;
 	private JButton logo;
@@ -22,14 +24,10 @@ public class InitailizePanel {
 	private JButton statistic;
 	private JButton search;
 	private JButton aboutus;
-	private JButton back;
 	private JButton close;
 	private JButton min;
 	private int width = 80;
 	private int height = 80;
-	private int fontsize = 20;
-	private int playerCounter = 0;
-	private int teamCounter = 0;
 
 	public InitailizePanel() {
 	}
@@ -134,6 +132,11 @@ public class InitailizePanel {
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
 			//TODO
+			infoPanel.removeAll();
+			HotInfoPanel hp = new HotInfoPanel();
+			JPanel h = hp.init();
+			infoPanel.add(h, 0);
+			infoPanel.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();

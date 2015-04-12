@@ -44,9 +44,9 @@ public class SvgPanel {
 			svgPanel.setBounds(0, 0, 500, 618);
 			svgPanel.setOpaque(false);
 			
-			File f1 = new File("svg/ATL.svg");
-			File f2 = new File("svg/BKN.svg");
-			File f3 = new File("svg/BOS.svg");
+			File f1 = new File("teamImg/ATL.svg");
+			File f2 = new File("teamImg/BKN.svg");
+			File f3 = new File("teamImg/BOS.svg");
 			
 			svgCanvas1.setBounds(120, 30, 100, 100);
 			svgCanvas1.setURI(f1.toURI().toString());

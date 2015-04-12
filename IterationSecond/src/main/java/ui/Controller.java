@@ -13,7 +13,11 @@ import javax.swing.WindowConstants;
 import sound.PlayWave;
 
 public class Controller {
-
+	/** 
+	 * @param 初始化frame - 系统首界面 - 无法返回这一界面
+	 * @author forIris
+	 * @version  June 12, 2015 11:41:31 AM
+	 * **/
 	public static MyFrame f = new MyFrame(1000,700);
 	public static LandingPanel land;
 	private JButton close;

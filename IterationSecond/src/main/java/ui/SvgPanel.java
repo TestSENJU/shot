@@ -16,7 +16,7 @@ import org.apache.batik.swing.svg.GVTTreeBuilderEvent;
 import org.apache.batik.swing.svg.SVGDocumentLoaderAdapter;
 import org.apache.batik.swing.svg.SVGDocumentLoaderEvent;
 
-import sound.PlaySE;
+import sound.PlayWave;
 
 public class SvgPanel {
 
@@ -140,14 +140,14 @@ public class SvgPanel {
 		
 		class BackListener implements MouseListener {
 			public void mouseClicked(MouseEvent e) {
+				PlayWave.startClickSound();
 				land.setVisible(false);
 				land.removeAll();
 				Controller c = new Controller();
 				c.layout();
 			}
 			public void mouseEntered(MouseEvent e) {
-				PlaySE se = new PlaySE("music/enter.wav");
-				new Thread(se).start();
+				PlayWave.startMoveButtonSound();
 			}
 
 			public void mouseExited(MouseEvent e) {

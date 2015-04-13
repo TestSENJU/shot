@@ -1,12 +1,17 @@
 package ui;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 public class HotInfoPanel {
 	/**
@@ -46,6 +51,11 @@ public class HotInfoPanel {
 	 * @version  June 12, 2015 11:41:31 AM
 	 * **/
 	private JPanel hotPanel;
+	public IComboBox c;
+	private String[] columnName = null;
+	private Object[][] columnValues = null;
+	private JScrollPane scrollPane;
+	
 	public JPanel init(){
 		hotPanel = new JPanel();
 		hotPanel.setOpaque(false);
@@ -90,25 +100,73 @@ public class HotInfoPanel {
 		//hotPlayerSeason.addMouseListener(new HotInfoListener());
 		hotPanel.add(bestPlayer, 0);
 		
-		String lookAndFeel = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
-		try {
-			UIManager.setLookAndFeel(lookAndFeel);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
-		}
-		String[] conditionInfo = {"score","rebound","assisting","blockShot","steal","6","7","8"};
-		JComboBox<String> c = new JComboBox<String>(conditionInfo);
-		c.setBounds(30, 180, 100, 30);
-		c.setBackground(Color.BLACK);
-		c.setForeground(Color.WHITE);
+		Object[] conditionInfo = {"score","rebound","assisting","blockShot","steal"};
+		c = new IComboBox(conditionInfo);
+		c.setBounds(50, 100, 100, 30);
+		c.addActionListener(new ActionListener() {		
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println(c.getSelectedItem());
+			}
+		});;
 		hotPanel.add(c, 0);
 		
+		columnName = new String[] { "球员名称", "所属球队", "球员位置", "数据" };
+		columnValues = new Object[30][columnName.length];
+		for (int i = 0; i < 30; i++) {
+
+			columnValues[i][0] = i;
+			columnValues[i][1] = i;
+			columnValues[i][2] = i;
+			columnValues[i][3] = i;
+		}
+		JTable topFive = new MyTable(columnValues, columnName);
+		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		topFive.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		topFive.setForeground(Color.white);
+		topFive.setRowHeight(35);
+		topFive.setBounds(40, 150, 1000-130-80, 480);
+		topFive.setOpaque(false);
+
+		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		
+	    scrollPane = new JScrollPane();
+	    scrollPane.setColumnHeaderView(topFive.getTableHeader());	//设置头部（HeaderView部分）  
+	    scrollPane.getColumnHeader().setOpaque(false);	//再取出头部，并设置为透明  
+	    
+	    scrollPane.setViewportView(topFive);	//装载表格  
+	    scrollPane.setOpaque(false);
+	    scrollPane.getViewport().setOpaque(false);
+	    scrollPane.getVerticalScrollBar().setUI(new IScrollBarUI());
+        scrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
+	    
+	    hotPanel.add(scrollPane);
+		scrollPane.setBounds(40, 150, 1000-130-80, 480);
+		scrollPane.setOpaque(false);
+		hotPanel.setLayout(null);
 		return hotPanel;
+	}
+	class ComboBoxListener implements MouseListener{
+
+		public void mouseClicked(MouseEvent e) {
+			System.out.println("0"+c.getSelectedItem());
+		}
+
+		public void mouseEntered(MouseEvent e) {
+			System.out.println("1"+c.getSelectedItem());
+		}
+
+		public void mouseExited(MouseEvent e) {
+			
+		}
+
+		public void mousePressed(MouseEvent e) {
+			
+		}
+
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

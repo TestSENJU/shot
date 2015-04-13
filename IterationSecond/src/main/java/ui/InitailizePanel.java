@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import sound.PlayWave;
+import ui.hot.HotInfoPanel;
+import ui.player.PlayerPanel;
+import ui.team.TeamPanel;
 
 public class InitailizePanel {
 	/** 
@@ -16,7 +19,7 @@ public class InitailizePanel {
 	 * @version  June 12, 2015 11:41:31 AM
 	 * **/
 	private LandingPanel land;
-	private JPanel infoPanel;
+	public static JPanel infoPanel;
 	private JButton logo;
 	private JButton hot;
 	private JButton team;

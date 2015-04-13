@@ -12,7 +12,7 @@ import javax.sound.sampled.SourceDataLine;
 /**
  * 
  * @author  forIris
- * @since 2014 / 3 / 17 2:56 AM
+ * @since 2015 / 4 / 13 6:57 PM
  */
 public class PlayWave extends Thread {
 

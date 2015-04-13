@@ -8,9 +8,11 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import sound.PlayWave;
+import ui.hot.HotInfoPanel;
 
 public class Controller {
 	/** 
@@ -83,6 +85,9 @@ public class Controller {
 			land.setVisible(false);
 			InitailizePanel hip = new InitailizePanel();
 			hip.init();
+			HotInfoPanel hp = new HotInfoPanel();
+			JPanel h = hp.init();
+			InitailizePanel.infoPanel.add(h, 0);
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();

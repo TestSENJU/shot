@@ -32,7 +32,7 @@ public class IComboBoxRenderer implements ListCellRenderer<Object> {
 		}
 		list.setSelectionBackground(Color.WHITE);//XUtil.defaultComboBoxColor
 		list.setBorder(null);
-		renderer.setFont(new Font("Arial", Font.PLAIN, 13));//XUtil.defaultComboBoxFont
+		renderer.setFont(new Font("微软雅黑", Font.PLAIN, 13));//XUtil.defaultComboBoxFont
 		renderer.setHorizontalAlignment(JLabel.LEFT);
 		return renderer;
 	}

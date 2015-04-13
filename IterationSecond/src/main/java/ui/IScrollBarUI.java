@@ -16,7 +16,7 @@ import javax.swing.JScrollBar;
 import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-class IScrollBarUI extends BasicScrollBarUI {
+public class IScrollBarUI extends BasicScrollBarUI {
 
     private static final float ARC_NUMBER = 20.0f;
 
@@ -34,7 +34,7 @@ class IScrollBarUI extends BasicScrollBarUI {
         g2.translate(thumbBounds.x, thumbBounds.y);
 
         Shape arcRect = new RoundRectangle2D.Float(0.0f, 0.0f, (float) w, (float) h, ARC_NUMBER, ARC_NUMBER);
-        //Ìî³ä¹ö¶¯Ìõ¾ØĞÎ
+        //å¡«å……æ»šåŠ¨æ¡çŸ©å½¢
         Paint arcRectPaint = null;
         if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
             arcRectPaint = new GradientPaint(0, 0, new Color(225, 225, 225),
@@ -45,10 +45,10 @@ class IScrollBarUI extends BasicScrollBarUI {
         }
         g2.setPaint(arcRectPaint);
         g2.fill(arcRect);
-        //»­¹ö¶¯Ìõ¾ØĞÎ±ß¿ò
+        //ç”»æ»šåŠ¨æ¡çŸ©å½¢è¾¹æ¡†
         g2.setColor(new Color(150, 150, 150));
         g2.draw(arcRect);
-        //»­¹ö¶¯Ìõ¾ØĞÎÄÚÈ¦±ß¿ò
+        //ç”»æ»šåŠ¨æ¡çŸ©å½¢å†…åœˆè¾¹æ¡†
         g2.setColor(new Color(230, 230, 230));
         Rectangle bounds = arcRect.getBounds();
         g2.drawRoundRect(bounds.x + 1, bounds.y + 1, bounds.width - 2, bounds.height - 2, (int) ARC_NUMBER, (int) ARC_NUMBER);
@@ -63,7 +63,7 @@ class IScrollBarUI extends BasicScrollBarUI {
         Paint foregroundRectPaint = null;
         Paint backgroupRectPaint = null;
         Paint oldPaint = g2.getPaint();
-        //»æÖÆ¹ö¶¯±³¾°
+        //ç»˜åˆ¶æ»šåŠ¨èƒŒæ™¯
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         if (scrollbar.getOrientation() == JScrollBar.VERTICAL) {
@@ -86,7 +86,7 @@ class IScrollBarUI extends BasicScrollBarUI {
 
         g2.setPaint(oldPaint);
 
-        //Ê¼ÖÕÃ»ÓĞ½øÈëÕâÁ½¸öÅĞ¶Ï·½·¨£¬Í¨¹ıµ¥¶Àµ÷ÓÃËüÃÇÖĞµÄÈÎÒâÒ»¸ö¼´¿ÌÃ÷°×ÕâÁ½¸ö·½·¨µÄº¬Òå
+        //å§‹ç»ˆæ²¡æœ‰è¿›å…¥è¿™ä¸¤ä¸ªåˆ¤æ–­æ–¹æ³•ï¼Œé€šè¿‡å•ç‹¬è°ƒç”¨å®ƒä»¬ä¸­çš„ä»»æ„ä¸€ä¸ªå³åˆ»æ˜ç™½è¿™ä¸¤ä¸ªæ–¹æ³•çš„å«ä¹‰
         if (trackHighlight == DECREASE_HIGHLIGHT) {
             paintDecreaseHighlight(g);
         } else if (trackHighlight == INCREASE_HIGHLIGHT) {

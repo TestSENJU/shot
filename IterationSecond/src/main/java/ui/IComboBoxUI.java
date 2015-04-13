@@ -76,7 +76,7 @@ public class IComboBoxUI extends BasicComboBoxUI {
 
 	public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
 		Font oldFont = comboBox.getFont();
-		comboBox.setFont(new Font("Arial", Font.PLAIN, 13));//TODO XUtil.defaultComboBoxFont
+		comboBox.setFont(new Font("微软雅黑", Font.PLAIN, 13));//TODO XUtil.defaultComboBoxFont
 
 		super.paintCurrentValue(g, bounds, hasFocus);
 		comboBox.setFont(oldFont);

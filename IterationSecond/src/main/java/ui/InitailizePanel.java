@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import sound.PlayWave;
 import ui.hot.HotInfoPanel;
@@ -128,7 +129,7 @@ public class InitailizePanel {
 		infoPanel.setOpaque(false);
 		
 		land.add(infoPanel, 0);
-		Controller.f.add(land);
+		Controller.f.getContentPane().add(land);
 	} 
 	
 	class HotInfoListener implements MouseListener {
@@ -177,8 +178,7 @@ public class InitailizePanel {
 			//TODO
 			infoPanel.removeAll();
 			TeamPanel tp = new TeamPanel();
-			JPanel t = tp.init();
-			infoPanel.add(t, 0);
+			infoPanel.add(tp.init());
 			infoPanel.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {

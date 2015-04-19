@@ -1,6 +1,5 @@
 package ui.team;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 
@@ -16,7 +15,6 @@ import org.apache.batik.swing.svg.SVGDocumentLoaderAdapter;
 import org.apache.batik.swing.svg.SVGDocumentLoaderEvent;
 
 import ui.IScrollBarUI;
-import ui.InitailizePanel;
 
 public class TeamPanel {
 	/**
@@ -60,7 +58,7 @@ public class TeamPanel {
 
 	public JScrollPane init(){
 		teamPanel = new JPanel();
-		teamPanel.setBackground(Color.WHITE);
+		teamPanel.setOpaque(false);
 
 		//TODO
 		//---------------------------------
@@ -836,8 +834,7 @@ public class TeamPanel {
 	    scrollPane.getVerticalScrollBar().setUI(new IScrollBarUI());
         scrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
 		teamPanel.setVisible(true);
-		teamPanel.setLayout(null);
-		
+		teamPanel.setLayout(null);	
 		return scrollPane;
 	}
 }

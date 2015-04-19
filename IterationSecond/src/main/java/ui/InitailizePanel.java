@@ -6,12 +6,12 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 import sound.PlayWave;
 import ui.hot.HotInfoPanel;
 import ui.player.PlayerPanel;
-import ui.team.TeamPanel;
+import ui.statistic.StatisticPanel;
+import ui.team.TeamHomePanel;
 
 public class InitailizePanel {
 	/** 
@@ -177,8 +177,10 @@ public class InitailizePanel {
 			PlayWave.startClickSound();
 			//TODO
 			infoPanel.removeAll();
-			TeamPanel tp = new TeamPanel();
-			infoPanel.add(tp.init());
+			/*TeamPanel tp = new TeamPanel();
+			infoPanel.add(tp.init());*/
+			TeamHomePanel thp = new TeamHomePanel();
+			infoPanel.add(thp.init());
 			infoPanel.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
@@ -195,6 +197,11 @@ public class InitailizePanel {
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
 			//TODO
+			infoPanel.removeAll();
+			StatisticPanel sp = new StatisticPanel();
+			JPanel s = sp.init();
+			infoPanel.add(s, 0);
+			infoPanel.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();

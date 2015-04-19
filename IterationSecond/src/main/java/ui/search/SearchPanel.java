@@ -19,12 +19,12 @@ public class SearchPanel {
 	 * @author forIris
 	 * @version  June 12, 2015 11:41:31 AM
 	 * **/
-	private JPanel hotPanel;
+	private JPanel searchPanel;
 	public JPanel init(){
-		hotPanel = new JPanel();
-		hotPanel.setOpaque(false);
-		hotPanel.setBounds(0, 0, 1000-130, 700);
-		hotPanel.setLayout(null);
+		searchPanel = new JPanel();
+		searchPanel.setOpaque(false);
+		searchPanel.setBounds(0, 0, 1000-130, 700);
+		searchPanel.setLayout(null);
 		
 		JButton test = new JButton();
 		test.setBounds(0, 200, 120, 40);
@@ -34,8 +34,8 @@ public class SearchPanel {
 		test.setFont(new Font("Arial", Font.PLAIN, 20));
 		test.setForeground(Color.WHITE);
 		//Hello.setIcon(hello);
-		hotPanel.add(test, 0);
+		searchPanel.add(test, 0);
 		
-		return hotPanel;
+		return searchPanel;
 	}
 }

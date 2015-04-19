@@ -45,6 +45,14 @@ public class AllImages {
 	public static final ImageIcon IMG_SEASONHOTTEAM = new ImageIcon("img/hotseasonteam.png");
 	/**       *****************hotInfoPanel 进步最快球员button 100x40***************       **/
 	public static final ImageIcon IMG_BESTPLAYER = new ImageIcon("img/bestplayer.png");
+	/**       *****************statisticPanel 球员场均数据 button 100x30***************       **/
+	public static final ImageIcon IMG_PLAYER_AVERAGE_DATA = new ImageIcon("img/playerAverageData.png");
+	/**       *****************statisticPanel 球员总赛季数据 button 100x30***************       **/
+	public static final ImageIcon IMG_PLAYER_ALL_DATA = new ImageIcon("img/playerAllData.png");
+	/**       *****************statisticPanel 球队场均数据 button 100x30***************       **/
+	public static final ImageIcon IMG_TEAM_AVERAGE_DATA = new ImageIcon("img/teamAverageData.png");
+	/**       *****************statisticPanel 球队总赛季数据 button 100x30***************       **/
+	public static final ImageIcon IMG_TEAM_ALL_DATA = new ImageIcon("img/teamAllData.png");
 	/**       *****************系统初始化背景图片***************       **/
 	/**       *****************系统初始化背景图片***************       **/
 }

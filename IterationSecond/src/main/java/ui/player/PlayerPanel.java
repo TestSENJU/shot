@@ -16,7 +16,7 @@ import ui.MyTable;
 public class PlayerPanel {
 	/**
 	 * @param 展示所有球员基本信息的表格界面
-	 *         ->点击表格球员头像可以进入球员具体信息界面
+	 *         ->双击表格球员头像可以进入球员具体信息界面
 	 * @author forIris
 	 * @version  June 12, 2015 11:41:31 AM
 	 * **/
@@ -76,16 +76,24 @@ public class PlayerPanel {
 	// TODO 
 	class TableListener implements MouseListener {
 
-		public void mouseClicked(MouseEvent arg0) {
-			System.out.println(players.getValueAt(players.getSelectedRow(), players.getSelectedColumn()));
+		public void mouseClicked(MouseEvent e) {
+			if(e.getClickCount()==2){
+				System.out.println(players.getValueAt(players.getSelectedRow(), players.getSelectedColumn()));
+				if (players.getSelectedColumn()==0) {
+					playerPanel.removeAll();
+					PlayerHomePanel php = new PlayerHomePanel();
+					playerPanel.add(php.init("A"));
+					playerPanel.repaint();
+				}
+			}
 		}
-		public void mouseEntered(MouseEvent arg0) {
+		public void mouseEntered(MouseEvent e) {
 		}
-		public void mouseExited(MouseEvent arg0) {
+		public void mouseExited(MouseEvent e) {
 		}
-		public void mousePressed(MouseEvent arg0) {
+		public void mousePressed(MouseEvent e) {
 		}
-		public void mouseReleased(MouseEvent arg0) {			
+		public void mouseReleased(MouseEvent e) {			
 		}
 	}
 }

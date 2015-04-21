@@ -13,6 +13,12 @@ import po.MatchPO;
  * getMatchByPlayer 根据球员名称查找比赛
  * @category
  * getMatchByTeam 根据球队名称查找比赛，注意是缩写
+ * @category
+ * getMatchNamesByTime 根据时间返回所有比赛的名字
+ * @category
+ * getMatchNamesByPlayer 根据球员返回所有比赛的名字
+ * @category
+ * getMatchNamesByTeam 根据球队返回所有比赛的名字
  */
 public interface MatchDataService{
 
@@ -22,4 +28,9 @@ public interface MatchDataService{
 	
 	public ArrayList<MatchPO> getMatchByTeam(String teamName);
 	
+	public ArrayList<String> getMatchNamesByTime(String time);
+	
+	public ArrayList<String> getMatchNamesByPlayer(String name);
+	
+	public ArrayList<String> getMatchNamesByTeam(String name);
 }

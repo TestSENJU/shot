@@ -49,4 +49,6 @@ public ArrayList<TeamBasicPO> getTeamBasic();
 
 public TeamBasicPO getTeamBasicByName(String teamName);
 
+public ArrayList<String> getPlayerNamesOfTeam(String teamName);
+
 }

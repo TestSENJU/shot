@@ -16,8 +16,6 @@ import po.PlayerBasicPO;
 /**
  * 
  * @author wyt
- * @category
- * 模糊查找还没实现 还有计算的那堆公示还没抄，错误逻辑检测还有的丰富
  *
  */
 public class PlayerData_Impl implements PlayerDataService{
@@ -180,5 +178,24 @@ public class PlayerData_Impl implements PlayerDataService{
 			
 		}
     }
+
+	public ArrayList<String> getMatchNamesByPlayerName(String playerName) {
+		// TODO Auto-generated method stub
+		PlayerAllPO player=playerTable.get(playerName);
+		if(player!=null){
+			ArrayList<String> namelist=player.getMatchNames();
+			if(namelist!=null){
+				return namelist;
+			}else{
+				System.out.println("getMatchNamesByPlayerName1");
+				return null;
+			}
+			
+		}else{
+			System.out.println("getMatchNamesByPlayerName2");
+			return null;
+		}
+
+	}
    
 }

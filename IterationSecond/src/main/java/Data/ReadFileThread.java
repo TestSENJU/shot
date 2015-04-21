@@ -95,27 +95,33 @@ private void readFile(String filename){
 				}			
 		    }else{
 		    	if(haveTeam){
-						if(team2!=""){
+		    		//TODO
+		    		if(checkData(str)){
+		    			if(team2!=""){
 							list1.add(str);
 						}else{
 							list2.add(str);
-						}
-						
+						}				
+		    		}
 				}
 		    }		
 		}
         
 		ArrayList<String[]>strlist1=new ArrayList<String[]>();
 		ArrayList<String[]>strlist2=new ArrayList<String[]>();
+		ArrayList<String> playerList1=new ArrayList<String>();
+		ArrayList<String>playerList2=new ArrayList<String>();
 		for(int j=0;j<list1.size();j++){
 			String[] strs=list1.get(j).split(";");
 			strlist1.add(strs);
 			teamTime1=refreshTime(teamTime1,strs[2]);
+			playerList1.add(strs[0]);
 		}
 		for(int j=0;j<list2.size();j++){
 			String[] strs=list2.get(j).split(";");
 			strlist2.add(strs);
 			teamTime2=refreshTime(teamTime2,strs[2]);
+			playerList2.add(strs[0]);
 		}
 		nums1=getTeamDataByStr(strlist1);
 		nums2=getTeamDataByStr(strlist2);
@@ -125,8 +131,8 @@ private void readFile(String filename){
 		double opponentNum2[]=getOpponentDataByStrs(strlist2);
 		int i1=0;int i2=0;
 		if(TeamNum1[14]>TeamNum2[14]){i1=1;i2=0;}else{i1=0;i2=1;}
-		TeamData_Impl.addToTable(TeamNum1, opponentNum2, filename, team1, i1);
-		TeamData_Impl.addToTable(TeamNum2,opponentNum1,filename,team2,i2);
+		TeamData_Impl.addToTable(TeamNum1, opponentNum2, filename, team1, 1, playerList1,i1);
+		TeamData_Impl.addToTable(TeamNum2,opponentNum1,filename,team2,1, playerList2,i2);
 		PlayerData_Impl.addToTable(strlist1,filename,team1,nums1,teamTime1,nums2);
 		PlayerData_Impl.addToTable(strlist2,filename,team2,nums2,teamTime1,nums1);
 		MatchData_Impl.addToTable(filename, team1, teamTime1, strlist1, team2, strlist2, pointer, pointerpart);

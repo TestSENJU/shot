@@ -14,7 +14,7 @@ import po.TeamAveragePlusRatePO;
 import po.TeamBasicPO;
 
 public class TeamData_Impl implements TeamDataService{
-	private final String filename="teams";
+	private  final   String filename="teams";
     private static Hashtable<String,TeamAllPO>teamTable=new Hashtable<String,TeamAllPO>();
 	public ArrayList<TeamAllPlusRatePO> getTeamAll() {
 		// TODO Auto-generated method stub
@@ -149,7 +149,7 @@ public class TeamData_Impl implements TeamDataService{
 		return null;
 	}
     public static void addToTable(double [] teamData,double opponentData[],
-    		String filename,String teamName,int i){
+    		String filename,String teamName,int i,ArrayList<String>nameList,int win){
     	if(teamName.equals("NOH")&&teamName.equals("NOP")){
     		if(teamTable.containsKey("NOP")){
         		teamTable.get("NOP").addOpponentData(filename, opponentData);
@@ -167,6 +167,9 @@ public class TeamData_Impl implements TeamDataService{
         	}
 		}else{
 			if(teamTable.containsKey(teamName)){
+				if(win==1){
+					teamTable.get(teamName).addWinMatchNum(filename);
+				}
         		teamTable.get(teamName).addOpponentData(filename, opponentData);
         		teamTable.get(teamName).addTeamData(filename, teamData);
         		if(i==1)teamTable.get(teamName).addWinMatchNum(filename);
@@ -247,8 +250,12 @@ public class TeamData_Impl implements TeamDataService{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("teamDataImpl getTeamBasicByName ioexception");
-		}
-		
+		}		
+		return null;
+	}
+
+	public ArrayList<String> getPlayerNamesOfTeam(String teamName) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

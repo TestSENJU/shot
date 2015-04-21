@@ -22,8 +22,33 @@ import java.util.ArrayList;
  * @param offensiveNum
  * 先发场数
  * @param playerData
- * playervo里面那些double的属性
- *
+ *0篮板数
+ *1助攻数
+ *2投篮命中率
+ *3三分命中率
+ *4罚球命中率
+ *5进攻数
+ *6防守数
+ *7抢断数
+ *8盖帽数
+ *9失误数
+ *10犯规数
+ *11得分
+ *12效率
+ *13GmSc效率值
+ *14真实命中率
+ *15投篮效率
+ *16篮板率
+ *17进攻篮板率
+ *18防守篮板率
+ *19助攻率
+ *20抢断率
+ *21盖帽率
+ *22失误率
+ *23使用率
+ *24得分提升率
+ *25篮板提升率
+ *26助攻提升率
  */
 public class PlayerAllPlusRatePO {
 	private final String filename="teams";
@@ -33,7 +58,7 @@ private ArrayList<String> teamAreaList=new ArrayList<String>();
 private String playingTime;// 在场时间
 private int competeNum;// 参赛场数
 private int offensiveNum;// 先发场数
-private double [] playerData=new double[23];
+private double [] playerData=new double[27];
 
 public PlayerAllPlusRatePO(String playerName){
 	this.name=playerName;

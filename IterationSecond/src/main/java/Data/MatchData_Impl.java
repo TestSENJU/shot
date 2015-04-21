@@ -95,74 +95,39 @@ public class MatchData_Impl implements MatchDataService{
 			}
 		}
 	}
+
+	public ArrayList<String> getMatchNamesByTime(String time) {
+		// TODO Auto-generated method stub
+		ArrayList<String> nameList=timeTable.get(time);
+		if(nameList==null){
+			System.out.println("macthdataImpl getMatchNamesByTime");
+			return null;
+		}else{
+			return nameList;
+		}
 	
-//	public static void addMatchPO(MatchPO newMatch) throws FileNotFoundException{
-//			BufferedReader br=new BufferedReader(new FileReader(filename));
-//			
-//			try {		
-//				String allInfo=br.readLine();
-//				String strs1[]=allInfo.split(";");
-//				newMatch.setPointer(strs1[2]);
-//				String every=br.readLine();
-//				String strs2[]=every.split(";");
-//				for(int i=0;i<strs2.length;i++){
-//					newMatch.addPointerPart(strs2[i]);
-//				}
-//				String str="";
-//				int i=0;
-//				while((str=br.readLine())!=null){
-//					if(str.length()!=3){
-//						String strs[]=str.split(";");
-//						if(i==1){
-//							newMatch.addTeam1List(strs);
-//						}else if(i==2){
-//							newMatch.addTeam2List(strs);
-//						}
-//						
-//						if(playerTable.containsKey(strs[0])){
-//							playerTable.get(strs[0]).add(filename);
-//						}else{
-//							ArrayList<String> matchNames=new ArrayList<String>();
-//							matchNames.add(filename);
-//							playerTable.put(strs[0], matchNames);
-//						}
-//						
-//					}else{
-//						i++;
-//					}
-//				}
-//				matchTable.put(filename, newMatch);
-//				
-//				
-//				String ss[]=filename.split("_");
-//				if(timeTable.containsKey(ss[0]+"_"+ss[1])){
-//					timeTable.get(ss[0]+"_"+ss[1]).add(filename);
-//				}else{
-//					ArrayList<String> matchNames=new ArrayList<String>();
-//					matchNames.add(filename);
-//					timeTable.put(ss[0]+"_"+ss[1], matchNames);
-//				}
-//				
-//				
-//				String sss[]=ss[2].split("-");
-//				if(teamTable.containsKey(sss[0])){
-//					teamTable.get(sss[0]).add(filename);
-//				}else{
-//					ArrayList<String> matchNames=new ArrayList<String>();
-//					matchNames.add(filename);
-//					teamTable.put(sss[0], matchNames);
-//				}
-//				if(teamTable.containsKey(sss[1])){
-//					teamTable.get(sss[1]).add(filename);
-//				}else{
-//					ArrayList<String> matchNames=new ArrayList<String>();
-//					matchNames.add(filename);
-//					teamTable.put(sss[1], matchNames);
-//				}
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				System.out.print("matchData_Impl addMacthPO ioexception");
-//			}
-//		}
+	}
+
+	public ArrayList<String> getMatchNamesByPlayer(String name) {
+		// TODO Auto-generated method stub
+		ArrayList<String> nameList=playerTable.get(name);
+		if(nameList==null){
+			System.out.println(" matchdataImpl getMatchNamesByPlayer");
+			return null;
+		}else{
+			return nameList;
+		}		
+	}
+
+	public ArrayList<String> getMatchNamesByTeam(String name) {
+		// TODO Auto-generated method stub
+		ArrayList<String> nameList=teamTable.get(name);
+		if(nameList==null){
+			System.out.println(" matchdataImpl getMatchNamesByTeam");
+			return null;
+		}else{
+			return nameList;
+		}	
+	}
+	
 }

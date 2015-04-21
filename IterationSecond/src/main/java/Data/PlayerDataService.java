@@ -24,7 +24,8 @@ import po.PlayerBasicPO;
  * getAllPlayerNames返回所有球员的姓名
  * @category
  * getPlayerNameByStr根据字符串返回相近的球员姓名
- *
+ *@category
+ *getMatchNamesByPlayerName 根据球员姓名返回他参加过的比赛
  */
 public interface PlayerDataService {
 
@@ -43,5 +44,7 @@ public interface PlayerDataService {
 	public ArrayList<String> getAllPlayerNames();
 	
 	public ArrayList<String> getPlayerNameByStr(String str);
+	
+	public ArrayList<String> getMatchNamesByPlayerName(String playerName);
 	
 }

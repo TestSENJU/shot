@@ -14,8 +14,14 @@ package po;
  *
  */
 public class TeamBasicPO {
+public String getTeamName() {
+		return teamName;
+	}
 String teamName;
 private String usedName;
+private String longName;
+
+private String usedLongName;
 private String teamInfo[]=new String[6];
 public TeamBasicPO(String teamName){
 	this.teamName=teamName;
@@ -24,6 +30,21 @@ public TeamBasicPO(String teamName){
 	}
 	
 }
+public String getLongName() {
+	return longName;
+}
+
+public void setLongName(String longName) {
+	this.longName = longName;
+}
+public String getUsedLongName() {
+	return usedLongName;
+}
+
+public void setUsedLongName(String usedLongName) {
+	this.usedLongName = usedLongName;
+}
+
 public void setTeamName(String name){
 	this.teamName=name;
 }

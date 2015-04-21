@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *
  */
 public class TeamAveragePlusRatePO {
-String teamName;
+public String teamName;
 private String teamNameLong;
 private int matchNum;
 private double[] teamData=new double[25];

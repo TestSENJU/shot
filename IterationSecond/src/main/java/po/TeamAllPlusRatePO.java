@@ -72,6 +72,9 @@ public int getWinNum() {
 	return winNum;
 }
 
+public void setWinNum(int winNum) {
+	this.winNum = winNum;
+}
 private String getLongName(String shortName){
 	try {
 		@SuppressWarnings("resource")

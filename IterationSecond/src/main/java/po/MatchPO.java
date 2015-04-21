@@ -46,6 +46,18 @@ private void setBasicInfo(){
 	}
 }
 
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public void setTeam1(String team1) {
+	this.team1 = team1;
+}
+public void setTeam2(String team2) {
+	this.team2 = team2;
+}
 public void setTime(String time) {
 	this.time = time;
 }

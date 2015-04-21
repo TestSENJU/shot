@@ -59,6 +59,9 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 	String time="0:0";
 	String teamTime="0:0";
 	double data[]=new double[27];
+	ArrayList<String>filenamelist=getRecentFiveMatches();
+	double raiseNumUsed[]=new double[3];
+	double raiseNum[]=new double[3];
 	for(String key:keys){
 		String strs[]=playerDataList.get(key);
 		double dnums1[]=teamDataList.get(key);
@@ -76,6 +79,15 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 			time=refreshTime(time,strs[2]);
 			allData.addPlayingTime(strs[2]);
 			teamTime=refreshTime(teamTime,teamTimeList.get(key));
+			if(filenamelist.contains(key)){
+				raiseNum[0]+=Double.parseDouble(strs[14]);
+				raiseNum[1]+=Double.parseDouble(strs[8]);
+				raiseNum[2]+=Double.parseDouble(strs[9]);
+			}else{
+				raiseNumUsed[0]+=Double.parseDouble(strs[14]);
+				raiseNumUsed[1]+=Double.parseDouble(strs[8]);
+				raiseNumUsed[2]+=Double.parseDouble(strs[9]);
+			}
 	}
 	String times1[]=time.split(":");
 	String times2[]=teamTime.split(":");
@@ -114,9 +126,11 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 	data[21]=nums[11]*timeRate/(opponentNums[0]-opponentNums[2]);
 	data[22]=nums[12]/(nums[1]-nums[3]+0.44*nums[5]+nums[12]);
 	data[23]=(nums[1]+0.44*nums[5]+nums[12])*timeRate/(teamNums[0]+0.44*teamNums[3]+teamNums[7]);
-	data[24]=
-	data[25]=
-	data[26]=7;
+	
+
+	data[24]=(raiseNum[0]/5-raiseNumUsed[0]/(playerDataList.size()-5))/(raiseNumUsed[0]/(playerDataList.size()-5));
+	data[25]=(raiseNum[1]/5-raiseNumUsed[1]/(playerDataList.size()-5))/(raiseNumUsed[1]/(playerDataList.size()-5));
+	data[26]=(raiseNum[2]/5-raiseNumUsed[2]/(playerDataList.size()-5))/(raiseNumUsed[2]/(playerDataList.size()-5));
 	
 	allData.setPlayerData(data);
 	return allData;

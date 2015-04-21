@@ -92,6 +92,16 @@ public void addTeam(String team){
 	this.teamList.add(team);
 	this.teamAreaList.add(getTeamArea(team,filename));
 }
+
+public void setTeamList(ArrayList<String> teamList) {
+	this.teamList = teamList;
+}
+public void setTeamAreaList(ArrayList<String> teamAreaList) {
+	this.teamAreaList = teamAreaList;
+}
+public void setPlayingTime(String playingTime) {
+	this.playingTime = playingTime;
+}
 @SuppressWarnings("resource")
 private static String getTeamArea(String teamName,String path){
 	if(teamName!=null){

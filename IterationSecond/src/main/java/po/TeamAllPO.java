@@ -59,10 +59,11 @@ public TeamAllPlusRatePO makeDetailedAllPO(){
 	data[18]=winMatchNum.size()/teamDataList.size();
 	data[19]=data[1]+0.4*data[5]-1.07*(data[6]/(data[6]+data[7])*data[12])+1.07*data[12];
 	data[20]=data[14]/data[19]*100;
-			data[21]=oppData[2]/data[19]*100;
-			data[22]=(data[6]+data[7])/(data[6]+oppData[1]+data[7]+oppData[0]);
-					data[24]=data[9]/data[19];
-					allData.setTeamData(data);
+	data[21]=oppData[2]/data[19]*100;
+	data[22]=(data[6]+data[7])/(data[6]+oppData[1]+data[7]+oppData[0]);
+	data[24]=data[9]/data[19];
+	
+	allData.setTeamData(data);
 	return allData;
 }
 public TeamAveragePlusRatePO makeAveragePO(){

@@ -6,12 +6,10 @@ import vo.MatchVO;
 
 public interface MatchBL {
 
-	public ArrayList<String> getMatchByPlayer(String player);
+	public ArrayList<MatchVO> getMatchByPlayer(String player);
 	
-	public ArrayList<String> getMatchByTeam(String team);
+	public ArrayList<MatchVO> getMatchByTeam(String team);
 	
-	public ArrayList<String> getMatchByTime(String time);
-//	
-//	public MatchVO getMatchByName(String name);
+	public ArrayList<MatchVO> getMatchByTime(String time);
 	
 }

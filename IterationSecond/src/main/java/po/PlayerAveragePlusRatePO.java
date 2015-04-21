@@ -3,7 +3,6 @@ package po;
 import java.util.ArrayList;
 
 public class PlayerAveragePlusRatePO {
-	private final String filename="teams";
 	String name;
 	private ArrayList<String> teamList=new ArrayList<String>();
 	private ArrayList<String> teamAreaList=new ArrayList<String>();
@@ -49,9 +48,7 @@ public PlayerAveragePlusRatePO(PlayerAllPlusRatePO allpo){
 	}	
 	this.playerData=averageData;
 }
-public String getFilename() {
-	return filename;
-}
+
 public String getName() {
 	return name;
 }

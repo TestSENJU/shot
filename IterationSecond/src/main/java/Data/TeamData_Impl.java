@@ -206,7 +206,11 @@ public class TeamData_Impl implements TeamDataService{
 	    		teamInfo[4]=strs[5].trim();
 	    		teamInfo[5]=strs[6].trim();
 	    		teamBasic.setTeamInfo(teamInfo);
-	    		if(strs[1].equals("NOP")){teamBasic.setUsedName("NOH");teamBasic.setTeamName("NOP");}
+	    		if(strs[1].equals("NOH")){teamBasic.setUsedName("NOH");
+	    		teamBasic.setUsedLongName("Hornets");
+	    		teamBasic.setTeamName("NOP");
+	    		teamBasic.setLongName("Pelicans");
+	    		}
 	    		basicList.add(teamBasic);
 			}
 			return basicList;
@@ -240,7 +244,10 @@ public class TeamData_Impl implements TeamDataService{
 		    		teamInfo[5]=strs[6].trim();
 		    		teamBasic.setTeamInfo(teamInfo);
 		    		//TODO
-		    		if(teamName.equals("NOH")){teamBasic.setUsedName("NOH");teamBasic.setTeamName("NOP");}
+		    		if(teamName.equals("NOH")){teamBasic.setUsedName("NOH");
+		    		teamBasic.setUsedLongName("Hornets");
+		    		teamBasic.setTeamName("NOP");
+		    		teamBasic.setLongName("Pelicans");}
 		    		return teamBasic;
 		    	}
 		    }

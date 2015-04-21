@@ -11,7 +11,7 @@ public interface MatchBL {
 	public ArrayList<String> getMatchByTeam(String team);
 	
 	public ArrayList<String> getMatchByTime(String time);
-	
-	public MatchVO getMatchByName(String name);
+//	
+//	public MatchVO getMatchByName(String name);
 	
 }

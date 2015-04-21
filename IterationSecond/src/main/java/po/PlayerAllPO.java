@@ -123,7 +123,6 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 }
 //获取最近五场比赛的名字
 private ArrayList<String> getRecentFiveMatches(){
-	ArrayList<String>list=new ArrayList<String>();
 	Set<String>keys=playerDataList.keySet();
 	String matchnames[]=new String[keys.size()];
 	int i=0;
@@ -131,7 +130,11 @@ private ArrayList<String> getRecentFiveMatches(){
 		matchnames[i]=key;
 	}
 	Arrays.sort(matchnames);
-	ArrayList<String>names=new ArrayList<String>()
+	ArrayList<String>names=new ArrayList<String>();
+	for(int j=keys.size()-1;j>keys.size()-6;j--){
+		names.add(matchnames[i]);
+	}
+	return names;
 }
 private String refreshTime(String teamTime1,String timeAdd){
 	String s[]=teamTime1.split(":");

@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
@@ -21,6 +22,7 @@ public class Controller {
 	 * @version  June 12, 2015 11:41:31 AM
 	 * **/
 	public static MyFrame f = new MyFrame(1000,700);
+	public static JLayeredPane bg;
 	public static LandingPanel land;
 	private JButton close;
 	private JButton min;
@@ -38,6 +40,10 @@ public class Controller {
 		land.setOpaque(false);
 		land.setBounds(0, 0, f.getWidth(), f.getHeight());
 		land.setLayout(null);
+		
+		bg = new JLayeredPane();
+		bg.setBounds(0, 0, Controller.f.getWidth(), Controller.f.getHeight());
+		bg.add(land, new Integer(0));
 		
 		JLabel Hello = new JLabel();
 		Hello.setBounds(380, 250, 260, 40);
@@ -74,9 +80,9 @@ public class Controller {
 		land.add(min, 0);
 		
 		f.getContentPane().setLayout(null);
-		f.getContentPane().add(land);
+		f.getContentPane().add(bg);
 		f.setVisible(true);
-		land.setVisible(true);
+		//land.setVisible(true);
 	}
 	
 	class HelloListener implements MouseListener {
@@ -87,7 +93,7 @@ public class Controller {
 			hip.init();
 			HotInfoPanel hp = new HotInfoPanel();
 			JPanel h = hp.init();
-			InitailizePanel.infoPanel.add(h, 0);
+			InitailizePanel.bg.add(h, new Integer(1));
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();

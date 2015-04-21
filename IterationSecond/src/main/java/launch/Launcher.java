@@ -9,5 +9,4 @@ public class Launcher {
 		Controller ui = new Controller();
 		ui.layout();
 	}
-
 }

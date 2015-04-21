@@ -1,5 +1,7 @@
 package ui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -8,8 +10,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 public class MyDialog extends JPanel implements Runnable, MouseListener, MouseMotionListener {
 
@@ -19,6 +24,11 @@ public class MyDialog extends JPanel implements Runnable, MouseListener, MouseMo
 	protected float hyalineValue = 0f;
 	protected DialogWindow dialog = null;
 	//protected DataAnalyse dataAnalyse = null;
+	protected JButton sure;
+	protected JButton cancel;
+	protected JLabel choose;
+	protected JRadioButton ascend;
+	protected JRadioButton descend;
 
 	public MyDialog (int width, int height) {
 		this.setLayout(null);
@@ -33,6 +43,38 @@ public class MyDialog extends JPanel implements Runnable, MouseListener, MouseMo
 		// 注册鼠标移动监听器
 		this.addMouseMotionListener(this);
 		new Thread(this).start();
+		
+		//TODO
+		choose = new JLabel();
+		choose.setOpaque(false);
+		choose.setText("请选择升序 or 降序：");
+		choose.setBounds(30, 50, 150, 30);
+		choose.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		choose.setForeground(Color.BLUE);
+		this.add(choose, 0);
+		
+		ascend = new JRadioButton("升序", true);
+		ascend.setBounds(40, 80, 100, 40);
+		this.add(ascend, 0);
+		
+		descend = new JRadioButton("降序", false);
+		descend.setBounds(140, 80, 100, 40);
+		this.add(descend, 0);
+		
+		sure = new JButton();
+		sure.setBounds(40, 150, 100, 30);
+		sure.setContentAreaFilled(false);
+		sure.setText("sure");
+		sure.setOpaque(false);
+		this.add(sure, 0);
+		
+		cancel = new JButton();
+		cancel.setBounds(160, 150, 100, 30);
+		cancel.setContentAreaFilled(false);
+		cancel.setText("cancel");
+		cancel.setOpaque(false);
+		this.add(cancel, 0);
+		
 		dialog = new DialogWindow();
 		dialog.add(this);
 	}
@@ -136,7 +178,7 @@ public class MyDialog extends JPanel implements Runnable, MouseListener, MouseMo
 		public DialogWindow () {
 			this.setUndecorated(true);
 			this.setLayout(null);
-			this.setLocationRelativeTo(null);
+			this.setLocationRelativeTo(Controller.f);
 			this.setAlwaysOnTop(true);
 			this.setVisible(true);
 			new ExtendFrame().start();

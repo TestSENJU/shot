@@ -69,7 +69,7 @@ public class HotInfoPanel {
 	public JPanel init(){
 		hotPanel = new JPanel();
 		hotPanel.setOpaque(false);
-		hotPanel.setBounds(0, 0, 1000-130, 700);
+		hotPanel.setBounds(130, 0, 1000-130, 700);
 		hotPanel.setLayout(null);
 		
 		tablePanel = new JPanel();

@@ -10,18 +10,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.JTableHeader;
 
 import sound.PlayWave;
 import ui.AllImages;
 import ui.IScrollBarUI;
+import ui.MyDialog;
 import ui.MyStringTable;
 import ui.MyTable;
 import ui.player.PlayerHomePanel;
 
 public class StatisticPanel {
 	/**
-	 * @param 展示热点信息的界面
+	 * @param 展示球员和球队的比赛数据的界面
 	 * @author forIris
 	 * @version  June 12, 2015 11:41:31 AM
 	 * **/
@@ -39,7 +39,7 @@ public class StatisticPanel {
 	public JPanel init(){
 		statisticPanel = new JPanel();
 		statisticPanel.setOpaque(false);
-		statisticPanel.setBounds(0, 0, 1000-130, 700);
+		statisticPanel.setBounds(130, 0, 1000-130, 700);
 		statisticPanel.setLayout(null);
 		
 		tablePanel = new JPanel();
@@ -332,7 +332,7 @@ public class StatisticPanel {
 			PlayWave.startClickSound();
 			if(e.getClickCount()==2){
 				System.out.println(pDataTable.getColumnName(pDataTable.getTableHeader().columnAtPoint(e.getPoint())));
-				
+				new MyDialog(300, 200);
 			}
 		}
 		public void mouseEntered(MouseEvent e) {

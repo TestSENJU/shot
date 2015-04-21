@@ -5,11 +5,13 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
+import ui.AllImages;
 import ui.IScrollBarUI;
 import ui.MyTable;
 
@@ -23,12 +25,21 @@ public class PlayerPanel {
 	private JPanel playerPanel;
 	private JScrollPane scrollPane;
 	private MyTable players;
+	private JButton panelTitle;
 
 	public JPanel init(){
 		playerPanel = new JPanel();
 		playerPanel.setOpaque(false);
-		playerPanel.setBounds(0, 0, 1000-130, 700);
+		playerPanel.setBounds(130, 0, 1000-130, 700);
 		playerPanel.setLayout(null);
+		
+		panelTitle = new JButton();
+		panelTitle.setBounds(40, 15, 300, 70);
+		panelTitle.setOpaque(false);
+		panelTitle.setContentAreaFilled(false);
+		panelTitle.setBorderPainted(false);
+		panelTitle.setIcon(AllImages.IMG_PLAYERPANEL_TITLE);
+		playerPanel.add(panelTitle, 0);
 		
 		String[] columnName = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 		Object[][] columnValues = new Object[30][columnName.length];

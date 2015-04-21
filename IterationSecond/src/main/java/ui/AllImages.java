@@ -53,6 +53,38 @@ public class AllImages {
 	public static final ImageIcon IMG_TEAM_AVERAGE_DATA = new ImageIcon("img/teamAverageData.png");
 	/**       *****************statisticPanel 球队总赛季数据 button 100x30***************       **/
 	public static final ImageIcon IMG_TEAM_ALL_DATA = new ImageIcon("img/teamAllData.png");
-	/**       *****************系统初始化背景图片***************       **/
-	/**       *****************系统初始化背景图片***************       **/
+	/**       *****************searchPanel 检索球员 button 100x30***************       **/
+	public static final ImageIcon IMG_SEARCHPLAYER = new ImageIcon("img/searchP.png");
+	/**       *****************searchPanel 检索球队 button 100x30***************       **/
+	public static final ImageIcon IMG_SEARCHTEAM = new ImageIcon("img/searchT.png");
+	/**       *****************searchPanel 检索比赛 button 100x30***************       **/
+	public static final ImageIcon IMG_SEARCHMATCH = new ImageIcon("img/searchM.png");
+	/**       *****************TeamHomePanel 球员信息 button 100x30***************       **/
+	public static final ImageIcon IMG_INIT_PLAYERDATA = new ImageIcon("img/initPlayerData.png");
+	/**       *****************TeamHomePanel 比赛数据 button 100x30***************       **/
+	public static final ImageIcon IMG_INIT_TEAMDATA = new ImageIcon("img/initTeamData.png");
+	/**       *****************TeamHomePanel 近期比赛 button 100x30***************       **/
+	public static final ImageIcon IMG_INIT_RECENTMATCH = new ImageIcon("img/initRM.png");
+	/**       *****************TeamHomePanel 过往比赛 button 100x30***************       **/
+	public static final ImageIcon IMG_INIT_ALLMATCH = new ImageIcon("img/initAM.png");
+	/**       *****************TeamPanel 东部联盟 button 200x50***************       **/
+	public static final ImageIcon IMG_EASTERNTITLE = new ImageIcon("img/easternTitle.png");
+	/**       *****************TeamPanel 西部联盟 button 200x50***************       **/
+	public static final ImageIcon IMG_WESTERNTITLE = new ImageIcon("img/westTitle.png");
+	/**       *****************TeamPanel 东南分区 button 150x40***************       **/
+	public static final ImageIcon IMG_ES_PART = new ImageIcon("img/esPart.png");
+	/**       *****************TeamPanel 中央分区 button 150x40***************       **/
+	public static final ImageIcon IMG_CENTER_PART = new ImageIcon("img/cPart.png");
+	/**       *****************TeamPanel 大西洋分区 button 150x40***************       **/
+	public static final ImageIcon IMG_ATLANTIC_PART = new ImageIcon("img/AtlanticOceanPart.png");
+	/**       *****************TeamPanel 太平洋分区 button 150x40***************       **/
+	public static final ImageIcon IMG_PACIFIC_PART = new ImageIcon("img/PacificOceanPart.png");
+	/**       *****************TeamPanel 西北分区 button 150x40***************       **/
+	public static final ImageIcon IMG_WN_PART = new ImageIcon("img/wnPart.png");
+	/**       *****************TeamPanel 西南分区 button 150x40***************       **/
+	public static final ImageIcon IMG_WS_PART = new ImageIcon("img/wsPart.png");
+	/**       *****************TeamPanel title button 295x70***************       **/
+	public static final ImageIcon IMG_TEAMPANEL_TITLE = new ImageIcon("img/teamPanelTitle.png");
+	/**       *****************PlayerPanel title button 295x70***************       **/
+	public static final ImageIcon IMG_PLAYERPANEL_TITLE = new ImageIcon("img/playerPanelTitle.png");
 }

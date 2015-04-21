@@ -5,13 +5,15 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import sound.PlayWave;
 import ui.hot.HotInfoPanel;
 import ui.player.PlayerPanel;
+import ui.search.SearchPanel;
 import ui.statistic.StatisticPanel;
-import ui.team.TeamHomePanel;
+import ui.team.TeamPanel;
 
 public class InitailizePanel {
 	/** 
@@ -19,6 +21,7 @@ public class InitailizePanel {
 	 * @author forIris
 	 * @version  June 12, 2015 11:41:31 AM
 	 * **/
+	public static JLayeredPane bg;
 	private LandingPanel land;
 	public static JPanel infoPanel;
 	private JButton logo;
@@ -42,6 +45,10 @@ public class InitailizePanel {
 		land.setBounds(0, 0, Controller.f.getWidth(), Controller.f.getHeight());
 		land.setLayout(null);
 		
+		bg = new JLayeredPane();
+		bg.setBounds(0, 0, Controller.f.getWidth(), Controller.f.getHeight());
+		bg.add(land, new Integer(0));
+	
 		logo = new JButton();
 		logo.setBounds(10, 10, 120, 120);
 		logo.setOpaque(false);
@@ -128,19 +135,19 @@ public class InitailizePanel {
 		infoPanel.setBounds(130, 0, 1000-130, 700);
 		infoPanel.setOpaque(false);
 		
-		land.add(infoPanel, 0);
-		Controller.f.getContentPane().add(land);
+		bg.add(infoPanel, new Integer(1));
+		Controller.f.getContentPane().add(bg);
 	} 
 	
 	class HotInfoListener implements MouseListener {
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
 			//TODO
-			infoPanel.removeAll();
+			bg.remove(new Integer(1));
 			HotInfoPanel hp = new HotInfoPanel();
 			JPanel h = hp.init();
-			infoPanel.add(h, 0);
-			infoPanel.repaint();
+			bg.add(h, new Integer(1));
+			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();
@@ -156,11 +163,12 @@ public class InitailizePanel {
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
 			//TODO
-			infoPanel.removeAll();
+			//infoPanel.removeAll();
+			bg.remove(new Integer(1));
 			PlayerPanel pp = new PlayerPanel();
 			JPanel p = pp.init();
-			infoPanel.add(p, 0);
-			infoPanel.repaint();
+			bg.add(p, new Integer(1));
+			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();
@@ -176,12 +184,12 @@ public class InitailizePanel {
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
 			//TODO
-			infoPanel.removeAll();
-			/*TeamPanel tp = new TeamPanel();
-			infoPanel.add(tp.init());*/
-			TeamHomePanel thp = new TeamHomePanel();
-			infoPanel.add(thp.init());
-			infoPanel.repaint();
+			bg.remove(new Integer(1));
+			TeamPanel tp = new TeamPanel();
+			bg.add(tp.init(), new Integer(1));
+			/*TeamHomePanel thp = new TeamHomePanel();
+			infoPanel.add(thp.init());*/
+			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();
@@ -197,11 +205,11 @@ public class InitailizePanel {
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
 			//TODO
-			infoPanel.removeAll();
+			bg.remove(new Integer(1));
 			StatisticPanel sp = new StatisticPanel();
 			JPanel s = sp.init();
-			infoPanel.add(s, 0);
-			infoPanel.repaint();
+			bg.add(s, 0);
+			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();
@@ -217,6 +225,11 @@ public class InitailizePanel {
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
 			//TODO
+			bg.remove(new Integer(1));
+			SearchPanel sep = new SearchPanel();
+			JPanel s = sep.init();
+			bg.add(s, 0);
+			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();

@@ -1,6 +1,7 @@
 package ui.player;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JViewport;
 import javax.swing.ListSelectionModel;
 
 import ui.IScrollBarUI;
@@ -25,10 +27,8 @@ public class PlayerHomePanel {
 	 * **/
 	
 	private JPanel pHomePanel;
-	private JScrollPane scrollPaneAverage;
-	private MyStringTable playerAverage;
-	private JScrollPane scrollPaneAll;
-	private MyStringTable playerAll;
+	private JScrollPane scrollPaneP;
+	private MyStringTable playerTable;
 	private JButton playerPhoto;
 	private JButton playerName;
 	private JButton playerJerseyNum;
@@ -40,6 +40,7 @@ public class PlayerHomePanel {
 	private JButton playerExp;
 	private JButton playerSchool;
 	private JButton playerTeam;
+	//
 	
 	public JPanel init(String playerID){
 		pHomePanel = new JPanel();
@@ -209,13 +210,25 @@ public class PlayerHomePanel {
 		pHomePanel.add(playerTeam, 0);
 		
 		//TODO average match data table
-		JLabel pAverageTable = new JLabel();
-		pAverageTable.setBounds(30, 350, width, height);
-		pAverageTable.setOpaque(false);
-		pAverageTable.setText("场均数据");
-		pHomePanel.add(pAverageTable, 0);
+		JLabel pTable = new JLabel();
+		pTable.setBounds(30, 350, width, height);
+		pTable.setOpaque(false);
+		pTable.setText("比赛数据");
+		pHomePanel.add(pTable, 0);
 		
-		String[] columnName = new String[] { "参赛场数", "先发场数",
+		JLabel pAver = new JLabel();
+		pAver.setBounds(30, 410-5, 60, 30);
+		pAver.setOpaque(false);
+		pAver.setText("场均");
+		pHomePanel.add(pAver, 0);
+		
+		JLabel pAll = new JLabel();
+		pAll.setBounds(30, 440-5, 60, 30);
+		pAll.setOpaque(false);
+		pAll.setText("总赛季");
+		pHomePanel.add(pAll, 0);
+		
+		String[] columnName = new String[] {"Tag", "参赛场数", "先发场数",
 				"篮板数", "助攻数", "在场时间","投篮命中率",
 				"三分命中率","罚球命中率","进攻数","防守数" ,
 				"抢断数","盖帽数","失误数" ,"犯规数",
@@ -223,9 +236,13 @@ public class PlayerHomePanel {
 				"篮板率","进攻篮板率","防守篮板率","助攻率",
 				"抢断率","盖帽率" ,
 				"失误率","使用率"};
-		Object[][] columnValues = new Object[1][columnName.length];
-		for (int i = 0; i < 1; i++) {
-			columnValues[i][0] = i;
+		Object[][] columnValues = new Object[2][columnName.length];
+		for (int i = 0; i < 2; i++) {
+			if(i%2==0){
+				columnValues[i][0] = "总赛季";
+			} else {
+				columnValues[i][0] = "场均";
+			}
 			columnValues[i][1] = i;
 			columnValues[i][2] = i;
 			columnValues[i][3] = i;
@@ -252,96 +269,46 @@ public class PlayerHomePanel {
 			columnValues[i][24] = i;
 			columnValues[i][25] = i;
 			columnValues[i][26] = i;
+			columnValues[i][27] = i;
 		}
-		playerAverage = new MyStringTable(columnValues, columnName);
-		playerAverage.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		playerAverage.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		playerAverage.setForeground(Color.white);
-		playerAverage.setRowHeight(50);
-		playerAverage.setBounds(30, 380, 1000-130-100, 100);
-		playerAverage.setOpaque(false);
+		playerTable = new MyStringTable(columnValues, columnName);
+		playerTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		playerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		playerTable.setForeground(Color.white);
+		playerTable.setRowHeight(30);
+		playerTable.setBounds(90, 380, 1000-130-100-60, 105);
+		playerTable.setOpaque(false);
 		
 		//playerAverage.addMouseListener(new TableListener());
 
-		playerAverage.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		playerTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		
-	    scrollPaneAverage = new JScrollPane();
-	    scrollPaneAverage.setColumnHeaderView(playerAverage.getTableHeader());	//设置头部（HeaderView部分）  
-	    scrollPaneAverage.getColumnHeader().setOpaque(false);	//再取出头部，并设置为透明  
-	    
-	    scrollPaneAverage.setViewportView(playerAverage);	//装载表格  
-	    scrollPaneAverage.setOpaque(false);
-	    scrollPaneAverage.getViewport().setOpaque(false);
-	    scrollPaneAverage.getVerticalScrollBar().setUI(new IScrollBarUI());
-	    scrollPaneAverage.getHorizontalScrollBar().setUI(new IScrollBarUI());
-	    
-        pHomePanel.add(scrollPaneAverage);
-        scrollPaneAverage.setBounds(30, 380, 1000-130-100, 100);
-        scrollPaneAverage.setOpaque(false);
-        
-		//TODO all match data table
-        JLabel pAllTable = new JLabel();
-		pAllTable.setBounds(30, 480+20, width, height);
-		pAllTable.setOpaque(false);
-		pAllTable.setText("赛季总数据");
-		pHomePanel.add(pAllTable, 0);
-		Object[][] columnValuesA = new Object[1][columnName.length];
-		for (int i = 0; i < 1; i++) {
-			columnValuesA[i][0] = i;
-			columnValuesA[i][1] = i;
-			columnValuesA[i][2] = i;
-			columnValuesA[i][3] = i;
-			columnValuesA[i][4] = i;
-			columnValuesA[i][5] = i;
-			columnValuesA[i][6] = i;
-			columnValuesA[i][7] = i;
-			columnValuesA[i][8] = i;
-			columnValuesA[i][9] = i;
-			columnValuesA[i][10] = i;
-			columnValuesA[i][11] = i;
-			columnValuesA[i][12] = i;
-			columnValuesA[i][13] = i;
-			columnValuesA[i][14] = i;
-			columnValuesA[i][15] = i;
-			columnValuesA[i][16] = i;
-			columnValuesA[i][17] = i;
-			columnValuesA[i][18] = i;
-			columnValuesA[i][19] = i;
-			columnValuesA[i][20] = i;
-			columnValuesA[i][21] = i;
-			columnValuesA[i][22] = i;
-			columnValuesA[i][23] = i;
-			columnValuesA[i][24] = i;
-			columnValuesA[i][25] = i;
-			columnValuesA[i][26] = i;
-		}
+		String[] name = {"Test"};
+		Object[][] value = new Object[2][1];
+		value[0][0] = "ave";
+		value[1][0] = "all";
+		MyStringTable tt = new MyStringTable(value, name);
+		tt.setForeground(Color.WHITE);
+		tt.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		tt.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tt.setRowHeight(30);
+		tt.setOpaque(false);
+		tt.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		
-		playerAll = new MyStringTable(columnValuesA, columnName);
-		playerAll.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		playerAll.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		playerAll.setForeground(Color.white);
-		playerAll.setRowHeight(50);
-		playerAll.setBounds(30, 480+50, 1000-130-100, 100);
-		playerAll.setOpaque(false);
-		
-		//playerAverage.addMouseListener(new TableListener());
-
-		playerAll.setFont(new Font("微软雅黑", Font.PLAIN, 15));
-		
-	    scrollPaneAll = new JScrollPane();
-	    scrollPaneAll.setColumnHeaderView(playerAll.getTableHeader());	//设置头部（HeaderView部分）  
-	    scrollPaneAll.getColumnHeader().setOpaque(false);	//再取出头部，并设置为透明  
+	    scrollPaneP = new JScrollPane();
+	    scrollPaneP.setColumnHeaderView(playerTable.getTableHeader());	//设置头部（HeaderView部分）  
+	    scrollPaneP.getColumnHeader().setOpaque(false);	//再取出头部，并设置为透明  
 	    
-	    scrollPaneAll.setViewportView(playerAll);	//装载表格  
-	    scrollPaneAll.setOpaque(false);
-	    scrollPaneAll.getViewport().setOpaque(false);
-	    scrollPaneAll.getVerticalScrollBar().setUI(new IScrollBarUI());
-	    scrollPaneAll.getHorizontalScrollBar().setUI(new IScrollBarUI());
+	    scrollPaneP.setViewportView(playerTable);	//装载表格  
+	    scrollPaneP.setOpaque(false);
+	    scrollPaneP.getViewport().setOpaque(false);
+	    scrollPaneP.getVerticalScrollBar().setUI(new IScrollBarUI());
+	    scrollPaneP.getHorizontalScrollBar().setUI(new IScrollBarUI());
 	    
-        pHomePanel.add(scrollPaneAll);
-        scrollPaneAll.setBounds(30, 480+50, 1000-130-100, 100);
-        scrollPaneAll.setOpaque(false);
-        
+        pHomePanel.add(scrollPaneP);
+        scrollPaneP.setBounds(90, 380, 1000-130-100-60, 105);
+        scrollPaneP.setOpaque(false);
 		return pHomePanel;
 	}
+
 }

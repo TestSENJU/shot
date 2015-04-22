@@ -2,21 +2,27 @@ package ui.statistic;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
 import sound.PlayWave;
 import ui.AllImages;
+import ui.DialogPanel;
 import ui.IScrollBarUI;
 import ui.MyDialog;
 import ui.MyStringTable;
 import ui.MyTable;
+import ui.MyDialog.DialogWindow;
 import ui.player.PlayerHomePanel;
 
 public class StatisticPanel {
@@ -35,6 +41,16 @@ public class StatisticPanel {
 	private JScrollPane tScrollPane;
 	private MyTable pDataTable;
 	private MyStringTable tDataTable;
+	//
+	protected DialogPanel dPanel;
+	protected DialogWindow dialog = null;
+	protected JButton sure;
+	protected JButton cancel;
+	protected JLabel choose;
+	protected JRadioButton ascend;
+	protected JRadioButton descend;
+	private ButtonGroup group;
+	public static String AorD = "";
 	
 	public JPanel init(){
 		statisticPanel = new JPanel();
@@ -304,7 +320,7 @@ public class StatisticPanel {
 	class pTableListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
-			PlayWave.startClickSound();
+			//PlayWave.startClickSound();
 			if(e.getClickCount()==2){
 				System.out.println(pDataTable.getValueAt(pDataTable.getSelectedRow(), pDataTable.getSelectedColumn()));
 				if (pDataTable.getSelectedColumn()==0) {
@@ -332,7 +348,67 @@ public class StatisticPanel {
 			PlayWave.startClickSound();
 			if(e.getClickCount()==2){
 				System.out.println(pDataTable.getColumnName(pDataTable.getTableHeader().columnAtPoint(e.getPoint())));
-				new MyDialog(300, 200);
+				// TODO DIALOG------------------------------------------------
+				dPanel = new DialogPanel(AllImages.IMG_DIALOG_BG);
+				dPanel.setLayout(null);
+				dPanel.setSize(400, 300);
+				//dPanel.setDragable();
+				// 设置panel为透明
+				dPanel.setOpaque(false);
+				// 设置布局管理为绝对布局
+				dPanel.setLayout(null);
+				// 注册鼠标监听器
+				dPanel.addMouseListener(this);
+				// 注册鼠标移动监听器
+				//dPanel.addMouseMotionListener(this);
+				
+				choose = new JLabel();
+				choose.setOpaque(false);
+				choose.setText("请选择升序 or 降序：");
+				choose.setBounds(30, 50, 200, 30);
+				choose.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+				choose.setForeground(Color.WHITE);
+				dPanel.add(choose, 0);
+				
+				ascend = new JRadioButton("升序", AllImages.IMG_RIGHT_RADIO, true);
+				ascend.setBounds(60, 80, 80, 25);
+				ascend.setOpaque(false);
+				ascend.setForeground(Color.WHITE);
+				ascend.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+				ascend.addItemListener(new ItemListener());
+				dPanel.add(ascend, 0);
+				
+				descend = new JRadioButton("降序",AllImages.IMG_FALSE_RADIO, false);
+				descend.setBounds(180, 80, 80, 25);
+				descend.setForeground(Color.WHITE);
+				descend.setOpaque(false);
+				descend.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+				descend.addItemListener(new ItemListener());
+				dPanel.add(descend, 0);
+				
+				group = new ButtonGroup();
+				group.add(ascend);
+				group.add(descend);
+				
+				sure = new JButton();
+				sure.setBounds(80, 150, 80, 40);
+				sure.setContentAreaFilled(false);
+				sure.setBorderPainted(false);
+				sure.setOpaque(false);
+				sure.setIcon(AllImages.IMG_SURE);
+				sure.addMouseListener(new SureListener());
+				dPanel.add(sure, 0);
+				
+				cancel = new JButton();
+				cancel.setBounds(200, 150, 80, 30);
+				cancel.setContentAreaFilled(false);
+				cancel.setBorderPainted(false);
+				cancel.setIcon(AllImages.IMG_CANCEL);
+				cancel.setOpaque(false);
+				cancel.addMouseListener(new CancelListener());
+				dPanel.add(cancel, 0);
+				MyDialog pd = new MyDialog();
+				pd.init(400, 300, dPanel);
 			}
 		}
 		public void mouseEntered(MouseEvent e) {
@@ -342,6 +418,77 @@ public class StatisticPanel {
 		public void mousePressed(MouseEvent e) {
 		}
 		public void mouseReleased(MouseEvent arg0) {
+		}
+		class ItemListener implements java.awt.event.ItemListener{
+
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				 if (e.getSource() == ascend) {
+			            ascend.setIcon(AllImages.IMG_RIGHT_RADIO);
+			            descend.setIcon(AllImages.IMG_FALSE_RADIO);
+			        } else {
+			        	descend.setIcon(AllImages.IMG_RIGHT_RADIO);
+				        ascend.setIcon(AllImages.IMG_FALSE_RADIO);
+			        }
+			}
+			
+		}
+		class SureListener implements MouseListener {
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				PlayWave.startClickSound();
+				System.out.println(ascend.isSelected());
+				if (ascend.isSelected()) {
+					AorD = "ascend";
+					
+				} else if(descend.isSelected()){
+					AorD = "descend";
+				} else {
+					AorD = "0";
+				}
+				dialog.dispose();
+			}
+
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			public void mouseExited(MouseEvent e) {
+				
+			}
+
+			public void mousePressed(MouseEvent e) {
+		
+			}
+
+			public void mouseReleased(MouseEvent arg0) {
+			
+			}
+			
+		}
+
+		class CancelListener implements MouseListener {
+
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				PlayWave.startClickSound();
+				dialog.dispose();
+			}
+
+			public void mouseEntered(MouseEvent arg0) {
+			}
+
+			public void mouseExited(MouseEvent arg0) {
+				
+			}
+
+			public void mousePressed(MouseEvent arg0) {
+		
+			}
+
+			public void mouseReleased(MouseEvent arg0) {
+			
+			}
+			
 		}
 	}
 	//TODO

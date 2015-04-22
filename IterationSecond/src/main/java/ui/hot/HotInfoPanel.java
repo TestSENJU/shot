@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,6 +20,7 @@ import ui.IComboBox;
 import ui.IScrollBarUI;
 import ui.InitailizePanel;
 import ui.MyTable;
+import ui.player.PlayerHomePanel;
 import ui.player.PlayerPanel;
 
 public class HotInfoPanel {
@@ -134,7 +136,9 @@ public class HotInfoPanel {
 		});;
 		JButton sure = new JButton();
 		sure.setOpaque(false);
-		sure.setText("sure");
+		sure.setContentAreaFilled(false);
+		sure.setBorderPainted(false);
+		sure.setIcon(AllImages.IMG_SURE);
 		sure.setBounds(180, 0, 80, 30);
 		sure.addMouseListener(new HPTComboBoxListener());
 		tablePanel.add(c, 0);
@@ -148,7 +152,7 @@ public class HotInfoPanel {
 		columnName = new String[] { "球员头像", "球员名称", "所属球队", "球员位置", "数据" };
 		columnValues = new Object[30][columnName.length];
 		for (int i = 0; i < 30; i++) {
-			columnValues[i][0] = i;
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
 			columnValues[i][1] = i;
 			columnValues[i][2] = i;
 			columnValues[i][3] = i;
@@ -195,7 +199,9 @@ public class HotInfoPanel {
 		});;
 		JButton sure = new JButton();
 		sure.setOpaque(false);
-		sure.setText("sure");
+		sure.setContentAreaFilled(false);
+		sure.setBorderPainted(false);
+		sure.setIcon(AllImages.IMG_SURE);
 		sure.setBounds(180, 0, 80, 30);
 		sure.addMouseListener(new HPSComboBoxListener());
 		tablePanel.add(c, 0);
@@ -211,13 +217,13 @@ public class HotInfoPanel {
 		columnValues = new Object[30][columnName.length];
 		for (int i = 0; i < 30; i++) {
 
-			columnValues[i][0] = i+1;
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
 			columnValues[i][1] = i+1;
 			columnValues[i][2] = i+1;
 			columnValues[i][3] = i+1;
 			columnValues[i][4] = i+1;
 		}
-		JTable topFive = new MyTable(columnValues, columnName);
+		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		topFive.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		topFive.setForeground(Color.white);
@@ -257,7 +263,9 @@ public class HotInfoPanel {
 		});;
 		JButton sure = new JButton();
 		sure.setOpaque(false);
-		sure.setText("sure");
+		sure.setContentAreaFilled(false);
+		sure.setBorderPainted(false);
+		sure.setIcon(AllImages.IMG_SURE);
 		sure.setBounds(180, 0, 80, 30);
 		sure.addMouseListener(new HTSComboBoxListener());
 		tablePanel.add(c, 0);
@@ -278,7 +286,8 @@ public class HotInfoPanel {
 			columnValues[i][2] = i+2;
 			columnValues[i][3] = i+2;
 		}
-		JTable topFive = new MyTable(columnValues, columnName);
+		
+		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		topFive.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		topFive.setForeground(Color.white);
@@ -318,7 +327,9 @@ public class HotInfoPanel {
 		});;
 		JButton sure = new JButton();
 		sure.setOpaque(false);
-		sure.setText("sure");
+		sure.setContentAreaFilled(false);
+		sure.setBorderPainted(false);
+		sure.setIcon(AllImages.IMG_SURE);
 		sure.setBounds(180, 0, 80, 30);
 		sure.addMouseListener(new BPComboBoxListener());
 		tablePanel.add(c, 0);
@@ -334,13 +345,13 @@ public class HotInfoPanel {
 		columnValues = new Object[30][columnName.length];
 		for (int i = 0; i < 30; i++) {
 
-			columnValues[i][0] = i+3;
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
 			columnValues[i][1] = i+3;
 			columnValues[i][2] = i+3;
 			columnValues[i][3] = i+3;
 			columnValues[i][4] = i+3;
 		}
-		JTable topFive = new MyTable(columnValues, columnName);
+		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		topFive.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		topFive.setForeground(Color.white);
@@ -524,20 +535,24 @@ public class HotInfoPanel {
 	// TODO 
 	class TableListener implements MouseListener {
 
-		public void mouseClicked(MouseEvent arg0) {
-			System.out.println(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()));
-			hotPanel.setVisible(false);
-			PlayerPanel pp = new PlayerPanel();
-			JPanel p = pp.init();
-			InitailizePanel.infoPanel.add(p);
+		public void mouseClicked(MouseEvent e) {
+			if(e.getClickCount()==2){
+				System.out.println(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()));
+				if (topFive.getSelectedColumn()==0) {
+					hotPanel.removeAll();
+					PlayerHomePanel php = new PlayerHomePanel();
+					hotPanel.add(php.init(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()+1).toString()));
+					hotPanel.repaint();
+				}
+			}
 		}
-		public void mouseEntered(MouseEvent arg0) {
+		public void mouseEntered(MouseEvent e) {
 		}
-		public void mouseExited(MouseEvent arg0) {
+		public void mouseExited(MouseEvent e) {
 		}
-		public void mousePressed(MouseEvent arg0) {
+		public void mousePressed(MouseEvent e) {
 		}
-		public void mouseReleased(MouseEvent arg0) {			
+		public void mouseReleased(MouseEvent e) {			
 		}
 	}
 }

@@ -16,11 +16,11 @@ public class AllImages {
 	/**       *****************返回button图标 100x30***************       **/
 	public static final ImageIcon IMG_BACK = new ImageIcon("img/back.jpg");
 	/**       *****************关闭frame图标 30x30***************       **/
-	public static final ImageIcon IMG_CLOSE = new ImageIcon("img/close.png");
+	public static final ImageIcon IMG_CLOSE = new ImageIcon("img/CLOSE_WHITE.png");
 	/**       *****************关闭frame图标 30x30***************       **/
 	public static final ImageIcon IMG_CLOSE_RED = new ImageIcon("img/CLOSE_RED.png");
 	/**       *****************最小化frame图标 30x30***************       **/
-	public static final ImageIcon IMG_MIN = new ImageIcon("img/min.png");
+	public static final ImageIcon IMG_MIN = new ImageIcon("img/MIN_WHITE.png");
 	/**       *****************最小化frame图标 30x30***************       **/
 	public static final ImageIcon IMG_MIN_RED = new ImageIcon("img/MIN_RED.png");
 	/**       *****************initailizePanel logo图标 120x120***************       **/
@@ -87,4 +87,16 @@ public class AllImages {
 	public static final ImageIcon IMG_TEAMPANEL_TITLE = new ImageIcon("img/teamPanelTitle.png");
 	/**       *****************PlayerPanel title button 295x70***************       **/
 	public static final ImageIcon IMG_PLAYERPANEL_TITLE = new ImageIcon("img/playerPanelTitle.png");
+	/**       *****************sure frame图标 80x30***************       **/
+	public static final ImageIcon IMG_SURE = new ImageIcon("img/sure.png");
+	/**       *****************cancel frame图标 80x30***************       **/
+	public static final ImageIcon IMG_CANCEL = new ImageIcon("img/cancel.png");
+	/**       *****************comboBox down frame图标 30x30***************       **/
+	public static final ImageIcon IMG_COMBO = new ImageIcon("img/comboIcon.png");
+	/**       *****************dialogBG frame图标 400x300***************       **/
+	public static final ImageIcon IMG_DIALOG_BG = new ImageIcon("img/dialogBg.png");
+	/**       *****************dialog radioButton false图标 25x25***************       **/
+	public static final ImageIcon IMG_FALSE_RADIO = new ImageIcon("img/radioFalse.png");
+	/**       *****************dialog radioButton right图标 25x25***************       **/
+	public static final ImageIcon IMG_RIGHT_RADIO = new ImageIcon("img/radioRight.png");
 }

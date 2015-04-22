@@ -279,7 +279,7 @@ public class TeamHomePanel {
 		
 		//pTable.addMouseListener(new TableListener());
 
-		pTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		pTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    pScrollPane = new JScrollPane();
 	    pScrollPane.setColumnHeaderView(pTable.getTableHeader());	//设置头部（HeaderView部分）  
@@ -292,6 +292,7 @@ public class TeamHomePanel {
 	    pScrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
 	    
         pScrollPane.setBounds(30, 0, 1000-130-100, 450);
+        pScrollPane.setBorder(null);
         pScrollPane.setOpaque(false);
 		return pScrollPane;
 	}
@@ -348,7 +349,7 @@ public class TeamHomePanel {
 			
 			//pTable.addMouseListener(new TableListener());
 
-			tTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+			tTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 			
 		    tScrollPane = new JScrollPane();
 		    tScrollPane.setColumnHeaderView(tTable.getTableHeader());	//设置头部（HeaderView部分）  
@@ -385,7 +386,7 @@ public class TeamHomePanel {
 		
 		//pTable.addMouseListener(new TableListener());
 
-		rMTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		rMTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    rMScrollPane = new JScrollPane();
 	    rMScrollPane.setColumnHeaderView(rMTable.getTableHeader());	//设置头部（HeaderView部分）  
@@ -421,7 +422,7 @@ public class TeamHomePanel {
 		
 		//pTable.addMouseListener(new TableListener());
 
-		aMTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		aMTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 		aMScrollPane = new JScrollPane();
 		aMScrollPane.setColumnHeaderView(aMTable.getTableHeader());	//设置头部（HeaderView部分）  

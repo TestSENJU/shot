@@ -150,7 +150,7 @@ public class InitailizePanel {
 			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
-			PlayWave.startMoveButtonSound();
+			//PlayWave.startMoveButtonSound();
 		}
 		public void mouseExited(MouseEvent e) {	
 		}
@@ -171,7 +171,7 @@ public class InitailizePanel {
 			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
-			PlayWave.startMoveButtonSound();
+			//PlayWave.startMoveButtonSound();
 		}
 		public void mouseExited(MouseEvent e) {	
 		}
@@ -192,7 +192,7 @@ public class InitailizePanel {
 			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
-			PlayWave.startMoveButtonSound();
+			//PlayWave.startMoveButtonSound();
 		}
 		public void mouseExited(MouseEvent e) {	
 		}
@@ -212,7 +212,7 @@ public class InitailizePanel {
 			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
-			PlayWave.startMoveButtonSound();
+			//PlayWave.startMoveButtonSound();
 		}
 		public void mouseExited(MouseEvent e) {	
 		}
@@ -232,7 +232,7 @@ public class InitailizePanel {
 			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
-			PlayWave.startMoveButtonSound();
+			//PlayWave.startMoveButtonSound();
 		}
 		public void mouseExited(MouseEvent e) {	
 		}
@@ -247,7 +247,7 @@ public class InitailizePanel {
 			//TODO
 		}
 		public void mouseEntered(MouseEvent e) {
-			PlayWave.startMoveButtonSound();
+			//PlayWave.startMoveButtonSound();
 		}
 		public void mouseExited(MouseEvent e) {	
 		}
@@ -263,7 +263,7 @@ public class InitailizePanel {
 			System.exit(0);
 		}
 		public void mouseEntered(MouseEvent e) {
-			PlayWave.startMoveButtonSound();
+			//PlayWave.startMoveButtonSound();
 			close.setIcon(AllImages.IMG_CLOSE_RED);
 		}
 		public void mouseExited(MouseEvent e) {	
@@ -280,7 +280,7 @@ public class InitailizePanel {
 			Controller.f.setExtendedState(JFrame.ICONIFIED);
 		}
 		public void mouseEntered(MouseEvent e) {
-			PlayWave.startMoveButtonSound();
+			//PlayWave.startMoveButtonSound();
 			min.setIcon(AllImages.IMG_MIN_RED);
 		}
 		public void mouseExited(MouseEvent e) {	
@@ -296,7 +296,7 @@ public class InitailizePanel {
 			//TODO
 		}
 		public void mouseEntered(MouseEvent e) {
-			PlayWave.startMoveButtonSound();
+			//PlayWave.startMoveButtonSound();
 		}
 		public void mouseExited(MouseEvent e) {	
 		}

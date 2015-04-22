@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -42,9 +43,9 @@ public class PlayerPanel {
 		playerPanel.add(panelTitle, 0);
 		
 		String[] columnName = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
-		Object[][] columnValues = new Object[30][columnName.length];
-		for (int i = 0; i < 30; i++) {
-			columnValues[i][0] = i;
+		Object[][] columnValues = new Object[448][columnName.length];
+		for (int i = 0; i < 448; i++) {
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
 			columnValues[i][1] = i;
 			columnValues[i][2] = i;
 			columnValues[i][3] = i;
@@ -60,7 +61,7 @@ public class PlayerPanel {
 		players.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		players.setForeground(Color.white);
 		players.setRowHeight(50);
-		players.setBounds(40, 100, 1000-130-100, 480);
+		players.setBounds(40, 100, 1000-130-100, 520);
 		players.setOpaque(false);
 		
 		players.addMouseListener(new TableListener());
@@ -78,7 +79,7 @@ public class PlayerPanel {
         scrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
 	    
         playerPanel.add(scrollPane);
-		scrollPane.setBounds(40, 100, 1000-130-100, 480);
+		scrollPane.setBounds(40, 100, 1000-130-100, 520);
 		scrollPane.setOpaque(false);
 		
 		return playerPanel;

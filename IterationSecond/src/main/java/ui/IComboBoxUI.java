@@ -8,7 +8,6 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
@@ -32,9 +31,9 @@ public class IComboBoxUI extends BasicComboBoxUI {
 
 	protected JButton createArrowButton() {
 		arrow = new JButton();
-		arrow.setIcon(new ImageIcon("img/down.jpg"));//XUtil.defaultComboBoxArrowIcon
+		arrow.setIcon(AllImages.IMG_COMBO);//XUtil.defaultComboBoxArrowIcon
 		arrow.setRolloverEnabled(true);
-		arrow.setRolloverIcon(new ImageIcon("img/down.jpg"));//XUtil.defaultComboBoxArrowIcon_Into
+		arrow.setRolloverIcon(AllImages.IMG_COMBO);//XUtil.defaultComboBoxArrowIcon_Into
 		arrow.setBorder(null);
 		arrow.setBackground(Color.BLUE);//XUtil.defaultComboBoxColor
 		arrow.setOpaque(false);
@@ -60,11 +59,11 @@ public class IComboBoxUI extends BasicComboBoxUI {
 		if (comboBox.isPopupVisible()) {
 			heightOffset = 5;
 			height = (int) this.getPreferredSize(c).getHeight();
-			arrow.setIcon(new ImageIcon("img/down.jpg"));//XUtil.defaultComboBoxArrowIcon_Into
+			arrow.setIcon(AllImages.IMG_COMBO);//XUtil.defaultComboBoxArrowIcon_Into
 		} else {
 			heightOffset = 0;
 			height = (int) this.getPreferredSize(c).getHeight() - 1;
-			arrow.setIcon(new ImageIcon("img/down.jpg"));//XUtil.defaultComboBoxArrowIcon
+			arrow.setIcon(AllImages.IMG_COMBO);//XUtil.defaultComboBoxArrowIcon
 		}
 		if (comboBox.isFocusable()) {
 			//g2.setColor(Color.WHITE);

@@ -3,6 +3,7 @@ package ui.player;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +14,14 @@ import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.ListSelectionModel;
 
+import org.apache.batik.swing.JSVGCanvas;
+import org.apache.batik.swing.gvt.GVTTreeRendererAdapter;
+import org.apache.batik.swing.gvt.GVTTreeRendererEvent;
+import org.apache.batik.swing.svg.GVTTreeBuilderAdapter;
+import org.apache.batik.swing.svg.GVTTreeBuilderEvent;
+import org.apache.batik.swing.svg.SVGDocumentLoaderAdapter;
+import org.apache.batik.swing.svg.SVGDocumentLoaderEvent;
+
 import ui.IScrollBarUI;
 import ui.MyStringTable;
 
@@ -22,13 +31,17 @@ public class PlayerHomePanel {
 	 *         -> 球员头像+动态图片
 	 *         -> 球员的个人基本信息
 	 *         -> 球员的比赛数据[场均和总赛季]
+	 *         -> 球员的近期比赛
+	 *         -> 球员的所有比赛
 	 * @author forIris
 	 * @version  June 13, 2015 15:54:31 PM
 	 * **/
 	
 	private JPanel pHomePanel;
+	private JPanel morePanel;
 	private JScrollPane scrollPaneP;
 	private MyStringTable playerTable;
+	//
 	private JButton playerPhoto;
 	private JButton playerName;
 	private JButton playerJerseyNum;
@@ -41,6 +54,9 @@ public class PlayerHomePanel {
 	private JButton playerSchool;
 	private JButton playerTeam;
 	//
+	private JButton data;
+	private JButton recentM;
+	private JButton allM;
 	
 	public JPanel init(String playerID){
 		pHomePanel = new JPanel();
@@ -70,6 +86,8 @@ public class PlayerHomePanel {
 		playerName.setContentAreaFilled(false);
 		playerName.setBorderPainted(false);
 		playerName.setText("姓名");
+		playerName.setForeground(Color.GRAY);
+		playerName.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(playerName, 0);
 		
 		//TODO
@@ -77,6 +95,8 @@ public class PlayerHomePanel {
 		pName.setBounds(toLeftFirst+100, 80, width, height);
 		pName.setOpaque(false);
 		pName.setText("aron");
+		pName.setForeground(Color.WHITE);
+		pName.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pName, 0);
 		
 		playerJerseyNum = new JButton();
@@ -85,6 +105,8 @@ public class PlayerHomePanel {
 		playerJerseyNum.setContentAreaFilled(false);
 		playerJerseyNum.setBorderPainted(false);
 		playerJerseyNum.setText("球衣号码");
+		playerJerseyNum.setForeground(Color.GRAY);
+		playerJerseyNum.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(playerJerseyNum, 0);
 		
 		//TODO
@@ -92,6 +114,8 @@ public class PlayerHomePanel {
 		pJerseyNum.setBounds(toLeftFirst+100, 130, width, height);
 		pJerseyNum.setOpaque(false);
 		pJerseyNum.setText("19");
+		pJerseyNum.setForeground(Color.WHITE);
+		pJerseyNum.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pJerseyNum, 0);
 		
 		
@@ -101,6 +125,8 @@ public class PlayerHomePanel {
 		playerPosition.setContentAreaFilled(false);
 		playerPosition.setBorderPainted(false);
 		playerPosition.setText("位置");
+		playerPosition.setForeground(Color.GRAY);
+		playerPosition.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(playerPosition, 0);
 		
 		//TODO
@@ -108,6 +134,8 @@ public class PlayerHomePanel {
 		pPosition.setBounds(toLeftFirst+100, 180, width, height);
 		pPosition.setOpaque(false);
 		pPosition.setText("F");
+		pPosition.setForeground(Color.WHITE);
+		pPosition.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pPosition, 0);
 		
 		playerHeight = new JButton();
@@ -116,6 +144,8 @@ public class PlayerHomePanel {
 		playerHeight.setContentAreaFilled(false);
 		playerHeight.setBorderPainted(false);
 		playerHeight.setText("身高");
+		playerHeight.setForeground(Color.GRAY);
+		playerHeight.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(playerHeight, 0);
 		
 		//TODO
@@ -123,6 +153,8 @@ public class PlayerHomePanel {
 		pHeight.setBounds(toLeftFirst+100, 230, width, height);
 		pHeight.setOpaque(false);
 		pHeight.setText("174");
+		pHeight.setForeground(Color.WHITE);
+		pHeight.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pHeight, 0);
 		
 		playerWeight = new JButton();
@@ -131,6 +163,8 @@ public class PlayerHomePanel {
 		playerWeight.setContentAreaFilled(false);
 		playerWeight.setBorderPainted(false);
 		playerWeight.setText("体重");
+		playerWeight.setForeground(Color.GRAY);
+		playerWeight.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(playerWeight, 0);
 		
 		//TODO
@@ -138,6 +172,8 @@ public class PlayerHomePanel {
 		pWeight.setBounds(toLeftFirst+100, 280, width, height);
 		pWeight.setOpaque(false);
 		pWeight.setText("60kg");
+		pWeight.setForeground(Color.WHITE);
+		pWeight.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pWeight, 0);
 		
 		//
@@ -147,6 +183,8 @@ public class PlayerHomePanel {
 		playerBirth.setContentAreaFilled(false);
 		playerBirth.setBorderPainted(false);
 		playerBirth.setText("生日");
+		playerBirth.setForeground(Color.GRAY);
+		playerBirth.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(playerBirth, 0);
 		
 		//TODO
@@ -154,6 +192,8 @@ public class PlayerHomePanel {
 		pBirth.setBounds(toLeftSecond+100, 80, width, height);
 		pBirth.setOpaque(false);
 		pBirth.setText("96-01-19");
+		pBirth.setForeground(Color.WHITE);
+		pBirth.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pBirth, 0);
 		
 		playerAge = new JButton();
@@ -162,6 +202,8 @@ public class PlayerHomePanel {
 		playerAge.setContentAreaFilled(false);
 		playerAge.setBorderPainted(false);
 		playerAge.setText("年龄");
+		playerAge.setForeground(Color.GRAY);
+		playerAge.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(playerAge, 0);
 		
 		//TODO
@@ -169,6 +211,8 @@ public class PlayerHomePanel {
 		pAge.setBounds(toLeftSecond+100, 130, width, height);
 		pAge.setOpaque(false);
 		pAge.setText("19");
+		pAge.setForeground(Color.WHITE);
+		pAge.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pAge, 0);
 		
 		playerExp = new JButton();
@@ -177,6 +221,8 @@ public class PlayerHomePanel {
 		playerExp.setContentAreaFilled(false);
 		playerExp.setBorderPainted(false);
 		playerExp.setText("球龄");
+		playerExp.setForeground(Color.GRAY);
+		playerExp.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(playerExp, 0);
 		
 		//TODO
@@ -184,6 +230,8 @@ public class PlayerHomePanel {
 		pExp.setBounds(toLeftSecond+100, 180, width, height);
 		pExp.setOpaque(false);
 		pExp.setText("1.5 years");
+		pExp.setForeground(Color.WHITE);
+		pExp.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pExp, 0);
 		
 		playerSchool = new JButton();
@@ -192,6 +240,8 @@ public class PlayerHomePanel {
 		playerSchool.setContentAreaFilled(false);
 		playerSchool.setBorderPainted(false);
 		playerSchool.setText("毕业学校");
+		playerSchool.setForeground(Color.GRAY);
+		playerSchool.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(playerSchool, 0);
 		
 		//TODO
@@ -199,36 +249,88 @@ public class PlayerHomePanel {
 		pSchool.setBounds(toLeftSecond+100, 230, width, height);
 		pSchool.setOpaque(false);
 		pSchool.setText("CPU");
+		pSchool.setForeground(Color.WHITE);
+		pSchool.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pSchool, 0);
 		
 		playerTeam = new JButton();
-		playerTeam.setBounds(550, 100, 100, 100);
+		playerTeam.setBounds(550, 80, 100, 30);
 		playerTeam.setOpaque(false);
 		playerTeam.setContentAreaFilled(false);
 		playerTeam.setBorderPainted(false);
 		playerTeam.setText("所属球队");
+		playerTeam.setForeground(Color.GRAY);
+		playerTeam.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(playerTeam, 0);
+		
+		//TODO logoIcon
+		JSVGCanvas svgCanvas = new JSVGCanvas();
+		File f1 = new File("teamImg/ATL.svg");
+		svgCanvas.setBounds(600, 130, 140, 140);
+		svgCanvas.setURI(f1.toURI().toString());
+		svgCanvas.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter(){
+			public void documentLoadingStarted(SVGDocumentLoaderEvent e){
+			}
+			public void documentLoadingCompleted(SVGDocumentLoaderEvent e){
+			}
+		});
+		svgCanvas.addGVTTreeBuilderListener(new GVTTreeBuilderAdapter(){
+			public void gvtBuildStarted(GVTTreeBuilderEvent e){
+			}
+			public void gvtBuildCompleted(GVTTreeBuilderEvent e){
+				//frame.pack();
+			}
+		});
+		svgCanvas.addGVTTreeRendererListener(new GVTTreeRendererAdapter(){
+			 public void gvtRenderingPrepare(GVTTreeRendererEvent e) {  
+				 }   
+			 public void gvtRenderingCompleted(GVTTreeRendererEvent e) {
+				 System.out.println(1);
+			 }
+		});
+		pHomePanel.add(svgCanvas, 0);
 		
 		//TODO average match data table
 		JLabel pTable = new JLabel();
 		pTable.setBounds(30, 350, width, height);
 		pTable.setOpaque(false);
 		pTable.setText("比赛数据");
+		pTable.setForeground(Color.GRAY);
+		pTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pTable, 0);
 		
 		JLabel pAver = new JLabel();
 		pAver.setBounds(30, 410-5, 60, 30);
 		pAver.setOpaque(false);
 		pAver.setText("场均");
+		pAver.setForeground(Color.GRAY);
+		pAver.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pAver, 0);
 		
 		JLabel pAll = new JLabel();
 		pAll.setBounds(30, 440-5, 60, 30);
 		pAll.setOpaque(false);
 		pAll.setText("总赛季");
+		pAll.setForeground(Color.GRAY);
+		pAll.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pAll, 0);
 		
-		String[] columnName = new String[] {"Tag", "参赛场数", "先发场数",
+		morePanel = new JPanel();
+		morePanel.setOpaque(false);
+		morePanel.setBounds(0, 360, 1000-130, 700-360);
+		morePanel.setLayout(null);
+		pHomePanel.add(morePanel, 0);
+		
+		//TODO button data recentM allM
+		data = new JButton();
+		data.setOpaque(false);
+		
+		return pHomePanel;
+	}
+	
+	// TODO for button data
+	public void initDataTable(){
+		String[] columnName = new String[] {"参赛场数", "先发场数",
 				"篮板数", "助攻数", "在场时间","投篮命中率",
 				"三分命中率","罚球命中率","进攻数","防守数" ,
 				"抢断数","盖帽数","失误数" ,"犯规数",
@@ -269,7 +371,6 @@ public class PlayerHomePanel {
 			columnValues[i][24] = i;
 			columnValues[i][25] = i;
 			columnValues[i][26] = i;
-			columnValues[i][27] = i;
 		}
 		playerTable = new MyStringTable(columnValues, columnName);
 		playerTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -283,18 +384,6 @@ public class PlayerHomePanel {
 
 		playerTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		
-		String[] name = {"Test"};
-		Object[][] value = new Object[2][1];
-		value[0][0] = "ave";
-		value[1][0] = "all";
-		MyStringTable tt = new MyStringTable(value, name);
-		tt.setForeground(Color.WHITE);
-		tt.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		tt.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tt.setRowHeight(30);
-		tt.setOpaque(false);
-		tt.setFont(new Font("微软雅黑", Font.PLAIN, 15));
-		
 	    scrollPaneP = new JScrollPane();
 	    scrollPaneP.setColumnHeaderView(playerTable.getTableHeader());	//设置头部（HeaderView部分）  
 	    scrollPaneP.getColumnHeader().setOpaque(false);	//再取出头部，并设置为透明  
@@ -305,10 +394,18 @@ public class PlayerHomePanel {
 	    scrollPaneP.getVerticalScrollBar().setUI(new IScrollBarUI());
 	    scrollPaneP.getHorizontalScrollBar().setUI(new IScrollBarUI());
 	    
-        pHomePanel.add(scrollPaneP);
-        scrollPaneP.setBounds(90, 380, 1000-130-100-60, 105);
+        morePanel.add(scrollPaneP, 0);
+        scrollPaneP.setBounds(90, 10, 1000-130-100-60, 105);
         scrollPaneP.setOpaque(false);
-		return pHomePanel;
+	}
+	
+	// TODO for button recentM
+	public void initRMTable(){
+		
 	}
 
+	// TODO for button allM
+	public void initAMTable(){
+		
+	}
 }

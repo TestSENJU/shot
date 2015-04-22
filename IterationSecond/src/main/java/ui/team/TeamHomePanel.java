@@ -62,7 +62,7 @@ public class TeamHomePanel {
 	private MyStringTable aMTable;
 	private JScrollPane aMScrollPane;
 	
-	public JPanel init(){
+	public JPanel init(String teamID){
 		teamHomePanel = new JPanel();
 		teamHomePanel.setOpaque(false);
 		teamHomePanel.setBounds(0, 0, 1000-130, 700);
@@ -108,6 +108,8 @@ public class TeamHomePanel {
 		fullName.setContentAreaFilled(false);
 		fullName.setBorderPainted(false);
 		fullName.setText("队名");
+		fullName.setForeground(Color.GRAY);
+		fullName.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(fullName, 0);
 		
 		//TODO
@@ -115,6 +117,8 @@ public class TeamHomePanel {
 		tfullName.setBounds(toLeftFirst+100, 50, width, height);
 		tfullName.setOpaque(false);
 		tfullName.setText("黄蜂");
+		tfullName.setForeground(Color.WHITE);
+		tfullName.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(tfullName, 0);
 		
 		shortName = new JButton();
@@ -123,6 +127,8 @@ public class TeamHomePanel {
 		shortName.setContentAreaFilled(false);
 		shortName.setBorderPainted(false);
 		shortName.setText("队名缩写");
+		shortName.setForeground(Color.GRAY);
+		shortName.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(shortName, 0);
 		
 		//TODO
@@ -130,6 +136,8 @@ public class TeamHomePanel {
 		tShortName.setBounds(toLeftFirst+100, 100, width, height);
 		tShortName.setOpaque(false);
 		tShortName.setText("HF");
+		tShortName.setForeground(Color.WHITE);
+		tShortName.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(tShortName, 0);
 		
 		location = new JButton();
@@ -138,6 +146,8 @@ public class TeamHomePanel {
 		location.setContentAreaFilled(false);
 		location.setBorderPainted(false);
 		location.setText("所在地");
+		location.setForeground(Color.GRAY);
+		location.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(location, 0);
 		
 		//TODO
@@ -145,6 +155,8 @@ public class TeamHomePanel {
 		tLocation.setBounds(toLeftFirst+100, 150, width, height);
 		tLocation.setOpaque(false);
 		tLocation.setText("NJU");
+		tLocation.setForeground(Color.WHITE);
+		tLocation.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(tLocation, 0);
 		
 		zone = new JButton();
@@ -153,6 +165,8 @@ public class TeamHomePanel {
 		zone.setContentAreaFilled(false);
 		zone.setBorderPainted(false);
 		zone.setText("赛区");
+		zone.setForeground(Color.GRAY);
+		zone.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(zone, 0);
 		
 		//TODO
@@ -160,6 +174,8 @@ public class TeamHomePanel {
 		tZone.setBounds(toLeftSecond+100, 50, width, height);
 		tZone.setOpaque(false);
 		tZone.setText("NJU");
+		tZone.setForeground(Color.WHITE);
+		tZone.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(tZone, 0);
 		
 		partition = new JButton();
@@ -168,6 +184,8 @@ public class TeamHomePanel {
 		partition.setContentAreaFilled(false);
 		partition.setBorderPainted(false);
 		partition.setText("分区");
+		partition.setForeground(Color.GRAY);
+		partition.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(partition, 0);
 		
 		//TODO
@@ -175,6 +193,8 @@ public class TeamHomePanel {
 		tPartition.setBounds(toLeftSecond+100, 100, width, height);
 		tPartition.setOpaque(false);
 		tPartition.setText("NJU");
+		tPartition.setForeground(Color.WHITE);
+		tPartition.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(tPartition, 0);
 		
 		homeCourt = new JButton();
@@ -183,6 +203,8 @@ public class TeamHomePanel {
 		homeCourt.setContentAreaFilled(false);
 		homeCourt.setBorderPainted(false);
 		homeCourt.setText("主场");
+		homeCourt.setForeground(Color.GRAY);
+		homeCourt.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(homeCourt, 0);
 		
 		//TODO
@@ -190,6 +212,8 @@ public class TeamHomePanel {
 		tHomeCourt.setBounds(toLeftThird+100, 50, width, height);
 		tHomeCourt.setOpaque(false);
 		tHomeCourt.setText("NJU");
+		tHomeCourt.setForeground(Color.WHITE);
+		tHomeCourt.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(tHomeCourt, 0);
 		
 		settingTime = new JButton();
@@ -198,6 +222,8 @@ public class TeamHomePanel {
 		settingTime.setContentAreaFilled(false);
 		settingTime.setBorderPainted(false);
 		settingTime.setText("建立时间");
+		settingTime.setForeground(Color.GRAY);
+		settingTime.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(settingTime, 0);
 		
 		//TODO
@@ -205,6 +231,8 @@ public class TeamHomePanel {
 		tSettingTime.setBounds(toLeftThird+100, 100, width, height);
 		tSettingTime.setOpaque(false);
 		tSettingTime.setText("96-01-19");
+		tSettingTime.setForeground(Color.WHITE);
+		tSettingTime.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		teamHomePanel.add(tSettingTime, 0);
 		
 		//TODO initButton
@@ -279,7 +307,7 @@ public class TeamHomePanel {
 		
 		//pTable.addMouseListener(new TableListener());
 
-		pTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		pTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    pScrollPane = new JScrollPane();
 	    pScrollPane.setColumnHeaderView(pTable.getTableHeader());	//设置头部（HeaderView部分）  
@@ -292,6 +320,7 @@ public class TeamHomePanel {
 	    pScrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
 	    
         pScrollPane.setBounds(30, 0, 1000-130-100, 450);
+        pScrollPane.setBorder(null);
         pScrollPane.setOpaque(false);
 		return pScrollPane;
 	}
@@ -348,7 +377,7 @@ public class TeamHomePanel {
 			
 			//pTable.addMouseListener(new TableListener());
 
-			tTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+			tTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 			
 		    tScrollPane = new JScrollPane();
 		    tScrollPane.setColumnHeaderView(tTable.getTableHeader());	//设置头部（HeaderView部分）  
@@ -385,7 +414,7 @@ public class TeamHomePanel {
 		
 		//pTable.addMouseListener(new TableListener());
 
-		rMTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		rMTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    rMScrollPane = new JScrollPane();
 	    rMScrollPane.setColumnHeaderView(rMTable.getTableHeader());	//设置头部（HeaderView部分）  
@@ -421,7 +450,7 @@ public class TeamHomePanel {
 		
 		//pTable.addMouseListener(new TableListener());
 
-		aMTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		aMTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 		aMScrollPane = new JScrollPane();
 		aMScrollPane.setColumnHeaderView(aMTable.getTableHeader());	//设置头部（HeaderView部分）  

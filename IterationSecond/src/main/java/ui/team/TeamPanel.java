@@ -1224,7 +1224,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("ATL"));
 				basic.repaint();
 			}		
 		}
@@ -1243,7 +1243,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("CHA"));
 				basic.repaint();
 			}		
 		}
@@ -1262,7 +1262,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("MIA"));
 				basic.repaint();
 			}		
 		}
@@ -1281,7 +1281,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("ORL"));
 				basic.repaint();
 			}		
 		}
@@ -1300,7 +1300,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("WAS"));
 				basic.repaint();
 			}		
 		}
@@ -1319,7 +1319,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("CHI"));
 				basic.repaint();
 			}		
 		}
@@ -1338,7 +1338,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("CLE"));
 				basic.repaint();
 			}		
 		}
@@ -1357,7 +1357,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("DET"));
 				basic.repaint();
 			}		
 		}
@@ -1376,7 +1376,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("IND"));
 				basic.repaint();
 			}		
 		}
@@ -1395,7 +1395,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("MIL"));
 				basic.repaint();
 			}		
 		}
@@ -1414,7 +1414,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("BOS"));
 				basic.repaint();
 			}		
 		}
@@ -1433,7 +1433,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("BKN"));
 				basic.repaint();
 			}		
 		}
@@ -1452,7 +1452,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("NYK"));
 				basic.repaint();
 			}		
 		}
@@ -1471,7 +1471,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("PHI"));
 				basic.repaint();
 			}		
 		}
@@ -1490,7 +1490,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("TOR"));
 				basic.repaint();
 			}		
 		}
@@ -1509,7 +1509,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("GSW"));
 				basic.repaint();
 			}		
 		}
@@ -1528,7 +1528,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("LAC"));
 				basic.repaint();
 			}		
 		}
@@ -1547,7 +1547,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("LAL"));
 				basic.repaint();
 			}		
 		}
@@ -1566,7 +1566,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("PHX"));
 				basic.repaint();
 			}		
 		}
@@ -1585,7 +1585,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("SAC"));
 				basic.repaint();
 			}		
 		}
@@ -1604,7 +1604,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("DEN"));
 				basic.repaint();
 			}		
 		}
@@ -1623,7 +1623,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("MIN"));
 				basic.repaint();
 			}		
 		}
@@ -1642,7 +1642,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("OKC"));
 				basic.repaint();
 			}		
 		}
@@ -1661,7 +1661,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("POR"));
 				basic.repaint();
 			}		
 		}
@@ -1680,7 +1680,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("UTA"));
 				basic.repaint();
 			}		
 		}
@@ -1699,7 +1699,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("DAL"));
 				basic.repaint();
 			}		
 		}
@@ -1718,7 +1718,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("HOU"));
 				basic.repaint();
 			}		
 		}
@@ -1737,7 +1737,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("MEM"));
 				basic.repaint();
 			}		
 		}
@@ -1756,7 +1756,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("NOP"));
 				basic.repaint();
 			}		
 		}
@@ -1775,7 +1775,7 @@ public class TeamPanel {
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
-				basic.add(thp.init());
+				basic.add(thp.init("SAS"));
 				basic.repaint();
 			}		
 		}

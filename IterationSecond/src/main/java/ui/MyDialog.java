@@ -1,11 +1,5 @@
 package ui;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -13,13 +7,13 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-public class MyDialog extends JPanel implements Runnable, MouseListener, MouseMotionListener {
+public class MyDialog implements Runnable, MouseListener, MouseMotionListener {
 
 	/** serialVersionUID */
 	public static final long serialVersionUID = 1L;
+	//protected DialogPanel dPanel;
 	/** 窗体透明值 */
 	protected float hyalineValue = 0f;
 	protected DialogWindow dialog = null;
@@ -30,112 +24,77 @@ public class MyDialog extends JPanel implements Runnable, MouseListener, MouseMo
 	protected JRadioButton ascend;
 	protected JRadioButton descend;
 
-	public MyDialog (int width, int height) {
-		this.setLayout(null);
-		this.setSize(width, height);
-		this.setDragable();
+	public MyDialog () {
+	}
+	
+	
+	public DialogWindow init (int width, int height, DialogPanel dPanel) {
+		/*dPanel = new DialogPanel(AllImages.IMG_DIALOG_BG);
+		dPanel.setLayout(null);
+		dPanel.setSize(width, height);
+		dPanel.setDragable();
 		// 设置panel为透明
-		this.setOpaque(false);
+		dPanel.setOpaque(false);
 		// 设置布局管理为绝对布局
-		this.setLayout(null);
+		dPanel.setLayout(null);
 		// 注册鼠标监听器
-		this.addMouseListener(this);
+		dPanel.addMouseListener(this);
 		// 注册鼠标移动监听器
-		this.addMouseMotionListener(this);
-		new Thread(this).start();
+		dPanel.addMouseMotionListener(this);*/
+		//new Thread(dPanel).start();
 		
-		//TODO
+/*		//TODO
 		choose = new JLabel();
 		choose.setOpaque(false);
 		choose.setText("请选择升序 or 降序：");
-		choose.setBounds(30, 50, 150, 30);
-		choose.setFont(new Font("微软雅黑", Font.PLAIN, 15));
-		choose.setForeground(Color.BLUE);
-		this.add(choose, 0);
+		choose.setBounds(30, 50, 200, 30);
+		choose.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+		choose.setForeground(Color.WHITE);
+		dPanel.add(choose, 0);
 		
-		ascend = new JRadioButton("升序", true);
-		ascend.setBounds(40, 80, 100, 40);
-		this.add(ascend, 0);
+		ascend = new JRadioButton("升序", AllImages.IMG_RIGHT_RADIO, true);
+		ascend.setBounds(60, 80, 80, 25);
+		ascend.setOpaque(false);
+		ascend.setForeground(Color.WHITE);
+		ascend.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		ascend.addItemListener(new ItemListener());
+		dPanel.add(ascend, 0);
 		
-		descend = new JRadioButton("降序", false);
-		descend.setBounds(140, 80, 100, 40);
-		this.add(descend, 0);
+		descend = new JRadioButton("降序",AllImages.IMG_FALSE_RADIO, false);
+		descend.setBounds(180, 80, 80, 25);
+		descend.setForeground(Color.WHITE);
+		descend.setOpaque(false);
+		descend.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		descend.addItemListener(new ItemListener());
+		dPanel.add(descend, 0);
+		
+		group = new ButtonGroup();
+		group.add(ascend);
+		group.add(descend);
 		
 		sure = new JButton();
-		sure.setBounds(40, 150, 100, 30);
+		sure.setBounds(80, 150, 80, 40);
 		sure.setContentAreaFilled(false);
-		sure.setText("sure");
+		sure.setBorderPainted(false);
 		sure.setOpaque(false);
-		this.add(sure, 0);
+		sure.setIcon(AllImages.IMG_SURE);
+		sure.addMouseListener(new SureListener());
+		dPanel.add(sure, 0);
 		
 		cancel = new JButton();
-		cancel.setBounds(160, 150, 100, 30);
+		cancel.setBounds(200, 150, 80, 30);
 		cancel.setContentAreaFilled(false);
-		cancel.setText("cancel");
+		cancel.setBorderPainted(false);
+		cancel.setIcon(AllImages.IMG_CANCEL);
 		cancel.setOpaque(false);
-		this.add(cancel, 0);
+		cancel.addMouseListener(new CancelListener());
+		dPanel.add(cancel, 0);*/
 		
 		dialog = new DialogWindow();
-		dialog.add(this);
+		dialog.add(dPanel, 0);
+		return dialog;
 	}
-
-	protected Point loc = null;
-	protected Point tmp = null;
-	protected boolean isDragged = false;
-
-	/**
-	 * 设置可以拖动窗体
-	 */
-	protected void setDragable () {
-		this.addMouseListener(new MouseAdapter() {
-
-			public void mouseReleased (java.awt.event.MouseEvent e) {
-				isDragged = false;
-			}
-
-			public void mousePressed (java.awt.event.MouseEvent e) {
-				tmp = new Point(e.getX(), e.getY());
-				isDragged = true;
-			}
-
-		});
-
-		this.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-
-			public void mouseDragged (java.awt.event.MouseEvent e) {
-				if (isDragged) {
-					loc = new Point(dialog.getLocation().x + e.getX() - tmp.x, dialog.getLocation().y + e.getY() - tmp.y);
-					dialog.setLocation(loc);
-				}
-			}
-		});
-	}
-
-	/**
-	 * 画出数字方法，实际位数不足则用0代替
-	 * 
-	 * @param x
-	 *            左上角x坐标
-	 * @param y
-	 *            左上角y坐标
-	 * @param num
-	 *            需要显示的数字
-	 * @param maxBit
-	 *            最大位数
-	 * @param g
-	 *            画笔
-	 */
-	public void drawNumber (int x, int y, int num, int maxBit, Image number, int w, int h, Graphics g) {
-		String strNum = Integer.toString(num);
-		for (int i = strNum.length(); i < maxBit; i++) {
-			strNum = "0" + strNum;
-		}
-		for (int i = 0; i < strNum.length(); i++) {
-			int index = strNum.length() - (maxBit - i);
-			int bit = strNum.charAt(index) - '0';
-			g.drawImage(number, x + w * i, y, x + w * (i + 1), y + h, bit * w, 0, (bit + 1) * w, h, null);
-		}
-	}
+	
 
 	/**
 	 * @author cylong
@@ -144,7 +103,7 @@ public class MyDialog extends JPanel implements Runnable, MouseListener, MouseMo
 	public void run () {
 		while (true) {
 			Sleep.sleep(20);
-			this.repaint();
+			//dPanel.repaint();
 		}
 	}
 
@@ -172,8 +131,8 @@ public class MyDialog extends JPanel implements Runnable, MouseListener, MouseMo
 		/** serialVersionUID */
 		public static final long serialVersionUID = 1L;
 		public int width = 0;
-		public int maxWidth = MyDialog.this.getWidth();
-		public int height = MyDialog.this.getHeight();
+		public int maxWidth = 400;
+		public int height = 300;
 
 		public DialogWindow () {
 			this.setUndecorated(true);

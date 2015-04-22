@@ -19,7 +19,7 @@ public class ComboTextField extends JTextField {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JComboBox<String> jcb;
+	public static JComboBox<String> jcb;
 	private ArrayList<String> items;
 	private String result = "";
 

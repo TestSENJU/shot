@@ -131,9 +131,9 @@ public class MyTable extends JTable {
 	        for (int i = 0; i < tcm.getColumnCount(); i++) 
 	        {
 	            TableColumn tc = tcm.getColumn(i);
-	            tc.setPreferredWidth(100);
+	            tc.setPreferredWidth(70);
 	            // tc.setMinWidth(100);
-	            tc.setMaxWidth(100);
+	            tc.setMaxWidth(70);
 	        }
 	        return tcm;
 	    }

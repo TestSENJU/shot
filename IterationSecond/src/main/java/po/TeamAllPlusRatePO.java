@@ -58,7 +58,7 @@ private double[] teamData=new double[25];
 private ArrayList<String> playerList=new ArrayList<String>();
 public TeamAllPlusRatePO(String name){
 	this.teamName=name;
-	this.teamNameLong=getLongName(name);
+	this.teamNameLong=getLongName(this.teamName);
 	this.matchNum=0;
 	this.winNum=0;
 	for(int i=0;i<teamData.length;i++){
@@ -81,9 +81,12 @@ private String getLongName(String shortName){
 		BufferedReader br=new BufferedReader(new FileReader("teams"));
 	    String str="";
 	    while((str=br.readLine())!=null){
-	    	String strs[]=str.split("|");
-	    	if(strs[1].equals(shortName)){
-	    		return strs[0];
+	    	if(str.startsWith("║")){
+				String mass[]=str.split("║");
+				String contents[]=mass[1].split("│");
+				if(contents[1].equals(shortName)){
+		    		return contents[0];
+		    	}
 	    	}
 	    }
 	    if(shortName.equals("NOH")){return "Pelicans";}

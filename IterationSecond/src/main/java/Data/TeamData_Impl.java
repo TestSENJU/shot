@@ -1,9 +1,11 @@
 package Data;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Set;
@@ -102,12 +104,17 @@ public class TeamData_Impl implements TeamDataService{
     private ArrayList<String> getTeamNamesByBasic(){
     	try {
 			@SuppressWarnings("resource")
-			BufferedReader br=new BufferedReader(new FileReader(filename));
+			BufferedReader br=new BufferedReader(
+					new InputStreamReader(new FileInputStream(filename),"UTF-8"));
 			String str="";
 			ArrayList<String>list=new ArrayList<String>();
 			while((str=br.readLine())!=null){
-				String strs[]=str.split("|");
-				list.add(strs[1]);
+				if(str.startsWith("║")){
+					String mass[]=str.split("║");
+					String contents[]=mass[1].split("│");
+					list.add(contents[1]);
+				}
+			
 			}
 			return list;
 		} catch (FileNotFoundException e) {
@@ -139,10 +146,13 @@ public class TeamData_Impl implements TeamDataService{
 			BufferedReader br=new BufferedReader(new FileReader(filename));
 		    String str="";
 		    while((str=br.readLine())!=null){
-		    	String strs[]=str.split("|");
-		    	if(strs[1].equals(shortName)){
-		    		return strs[0];
-		    	}
+		    	if(str.startsWith("║")){
+					String mass[]=str.split("║");
+					String contents[]=mass[1].split("│");
+					if(contents[1].equals(shortName)){
+			    		return contents[0];
+			    	}
+				}
 		    }
 		    if(shortName.equals("NOH")){return "Pelicans";}
 		} catch (FileNotFoundException e) {
@@ -270,6 +280,7 @@ public class TeamData_Impl implements TeamDataService{
 
 	public ArrayList<String> getPlayerNamesOfTeam(String teamName) {
 		// TODO Auto-generated method stub
-		return null;
+		TeamAllPlusRatePO po=getTeamAllByName(teamName);
+		return po.getPlayerList();
 	}
 }

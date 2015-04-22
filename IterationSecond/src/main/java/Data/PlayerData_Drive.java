@@ -7,6 +7,7 @@ import po.MatchPO;
 import po.PlayerAllPlusRatePO;
 import po.PlayerAveragePlusRatePO;
 import po.PlayerBasicPO;
+import po.TeamAllPlusRatePO;
 import vo.MatchVO;
 
 public class PlayerData_Drive {
@@ -106,30 +107,44 @@ public static void main(String args[]){
 //		System.out.println();
 //	}
 	
-	ArrayList<MatchPO> list=matchData.getMatchByTeam("ATL");
-	for(int i=0;i<list.size();i++){
-		MatchPO match=list.get(i);
-		System.out.println(match.getName());
-		System.out.println(match.getTeam1());
-		System.out.println(match.getTeam2());
-		System.out.println(match.getPointer());
-		ArrayList<String>list2=match.getPointerPart();
-		for(int j=0;j<list2.size();j++){
-			System.out.println(list2.get(j));
-		}
-		ArrayList<String[]>list1=match.getList2();
-		for(int j=0;j<list1.size();j++){
-			String strs[]=list1.get(j);
-			for(int k=0;k<strs.length;k++){
-				System.out.print(strs[k]);
-				System.out.print(";");
-			}
-			System.out.println();
-	}
-	}
+	//根据球队查找有空指针
+//	ArrayList<MatchPO> list=matchData.getMatchByTeam("ATL");
+//	for(int i=0;i<list.size();i++){
+//		MatchPO match=list.get(i);
+//		System.out.println(match.getName());
+//		System.out.println(match.getTeam1());
+//		System.out.println(match.getTeam2());
+//		System.out.println(match.getPointer());
+//		ArrayList<String>list2=match.getPointerPart();
+//		for(int j=0;j<list2.size();j++){
+//			System.out.println(list2.get(j));
+//		}
+//		ArrayList<String[]>list1=match.getList2();
+//		for(int j=0;j<list1.size();j++){
+//			String strs[]=list1.get(j);
+//			for(int k=0;k<strs.length;k++){
+//				System.out.print(strs[k]);
+//				System.out.print(";");
+//			}
+//			System.out.println();
+//	}
+//	}
 	
-//	TeamDataService team=new TeamData_Impl();
-	
+	TeamDataService team=new TeamData_Impl();
+//	ArrayList<String>list=team.getAllTeamNames();
+//	for(int i=0;i<list.size();i++){
+//		System.out.println(list.get(i));
+//	}
+//	String name=team.getTeamName("CHA");
+//	System.out.print(name);
+	TeamAllPlusRatePO po=team.getTeamAllByName("CHA");
+	System.out.println(po.getTeamName());
+	System.out.println(po.getMatchNum());
+	System.out.println(po.getTeamNameLong());
+	System.out.println(po.getWinNum());
+//	System.out.println(po.getTeamName());
+
+
 }
 }
 //

@@ -61,6 +61,15 @@ public class MatchData_Impl implements MatchDataService{
 		newMatch.setPointer(pointer);
 		newMatch.setPointerPart(pointerpart);
 		matchTable.put(filename, newMatch);
+		String ss[]=filename.split("_");
+		String timeMatch=ss[0]+"_"+ss[1];
+		if(timeTable.contains(timeMatch)){
+			timeTable.get(timeMatch).add(filename);
+		}else{
+			ArrayList<String> list=new ArrayList<String>();
+			list.add(filename);
+			timeTable.put(timeMatch,list );
+		}
 		if(teamTable.containsKey(team1)){
 			teamTable.get(team1).add(filename);
 		}else{

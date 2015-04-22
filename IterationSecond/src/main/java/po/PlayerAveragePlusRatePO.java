@@ -27,7 +27,6 @@ public PlayerAveragePlusRatePO(PlayerAllPlusRatePO allpo){
 	this.competeNum=allpo.getCompeteNum();
 	this.offensiveNum=allpo.getOffensiveNum();
 	String allTime=allpo.getPlayingTime();
-	System.out.println(allTime);
 	String strs[]=allTime.split(":");
 	int hour=Integer.parseInt(strs[0])/competeNum;
 	

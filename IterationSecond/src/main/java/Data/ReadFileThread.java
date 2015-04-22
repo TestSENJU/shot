@@ -28,6 +28,7 @@ public void run(){
 			System.out.println("readFileThread sleep");
 		}
 		String[] fileNames=new File(path).list();
+		
 		if(filenames!=null){
 			if(fileNames!=null){
 				
@@ -36,15 +37,19 @@ public void run(){
 				ArrayList<String> list=new ArrayList<String>();
 				Arrays.sort(filenames);
 				Arrays.sort(fileNames);
-				int len = filenames.length;
-				for (int i = 0; i < len; i++){
-				    if (Arrays.binarySearch(fileNames, filenames[i]) != -1)
-				         list.add(filenames[i]) ;
+//				int len = fileNames.length;
+//				for (int i = 0; i < len; i++){
+//				    if (Arrays.binarySearch(filenames, fileNames[i]) == -1)
+//				         list.add(fileNames[i]) ;
+//				}
+				for(int i=filenames.length;i<fileNames.length;i++){
+					list.add(fileNames[i]);
 				}
 				    for(int i=0;i<list.size();i++){
 				    	System.out.println(list.get(i));
                         readFile(this.path+"//"+list.get(i));
 				     }	
+				    this.filenames=fileNames;
 				}			
 			}			
 		}else{

@@ -63,9 +63,9 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 	String time="0:0";
 	String teamTime="0:0";
 	double data[]=new double[27];
-	ArrayList<String>filenamelist=getRecentFiveMatches();
 	double raiseNumUsed[]=new double[3];
 	double raiseNum[]=new double[3];
+	ArrayList<String>filenamelist=getRecentFiveMatches();
 	for(String key:keys){
 		String strs[]=playerDataList.get(key);
 		double dnums1[]=teamDataList.get(key);
@@ -83,16 +83,28 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 			time=refreshTime(time,strs[2]);
 			allData.addPlayingTime(strs[2]);
 			teamTime=refreshTime(teamTime,teamTimeList.get(key));
-			if(filenamelist.contains(key)){
+			if(filenamelist!=null){
+				if(filenamelist.contains(key)){
 				raiseNum[0]+=Double.parseDouble(strs[14]);
 				raiseNum[1]+=Double.parseDouble(strs[8]);
 				raiseNum[2]+=Double.parseDouble(strs[9]);
-			}else{
 				raiseNumUsed[0]+=Double.parseDouble(strs[14]);
 				raiseNumUsed[1]+=Double.parseDouble(strs[8]);
 				raiseNumUsed[2]+=Double.parseDouble(strs[9]);
+				}	
 			}
 	}
+	if(filenamelist!=null){
+		data[24]=(raiseNum[0]/5-raiseNumUsed[0]/(playerDataList.size()-5))/(raiseNumUsed[0]/(playerDataList.size()-5));
+		data[25]=(raiseNum[1]/5-raiseNumUsed[1]/(playerDataList.size()-5))/(raiseNumUsed[1]/(playerDataList.size()-5));
+		data[26]=(raiseNum[2]/5-raiseNumUsed[2]/(playerDataList.size()-5))/(raiseNumUsed[2]/(playerDataList.size()-5));
+	
+	}else{
+		data[24]=0;
+		data[25]=0;
+		data[26]=0;
+	}
+	
 	String times1[]=time.split(":");
 	String times2[]=teamTime.split(":");
 	double playerTime=Integer.parseInt(times1[0])*60+Integer.parseInt(times1[1]);
@@ -130,30 +142,31 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 	data[21]=nums[11]*timeRate/(opponentNums[0]-opponentNums[2]);
 	data[22]=nums[12]/(nums[1]-nums[3]+0.44*nums[5]+nums[12]);
 	data[23]=(nums[1]+0.44*nums[5]+nums[12])*timeRate/(teamNums[0]+0.44*teamNums[3]+teamNums[6]);
-	
-
-	data[24]=(raiseNum[0]/5-raiseNumUsed[0]/(playerDataList.size()-5))/(raiseNumUsed[0]/(playerDataList.size()-5));
-	data[25]=(raiseNum[1]/5-raiseNumUsed[1]/(playerDataList.size()-5))/(raiseNumUsed[1]/(playerDataList.size()-5));
-	data[26]=(raiseNum[2]/5-raiseNumUsed[2]/(playerDataList.size()-5))/(raiseNumUsed[2]/(playerDataList.size()-5));
-	
+		
 	allData.setPlayerData(data);
 	return allData;
 }
 //获取最近五场比赛的名字
 private ArrayList<String> getRecentFiveMatches(){
 	Set<String>keys=playerDataList.keySet();
-	String matchnames[]=new String[keys.size()];
-	int i=0;
-	for(String key:keys){
-		matchnames[i]=key;
-		i++;
+	if(keys.size()<=5){
+		return null;
+	}else{
+		String matchnames[]=new String[keys.size()];
+		int i=0;
+		for(String key:keys){
+			matchnames[i]=key;
+			i++;
+		}
+		Arrays.sort(matchnames);
+		ArrayList<String>names=new ArrayList<String>();
+		System.out.println(matchnames.length);
+		for(int j=matchnames.length;j>matchnames.length-5;j--){
+			names.add(matchnames[j-1]);
+		}
+		return names;
 	}
-	Arrays.sort(matchnames);
-	ArrayList<String>names=new ArrayList<String>();
-	for(int j=matchnames.length-1;j>matchnames.length-6;j--){
-		names.add(matchnames[j]);
-	}
-	return names;
+	
 }
 private String refreshTime(String teamTime1,String timeAdd){
 	String s[]=teamTime1.split(":");

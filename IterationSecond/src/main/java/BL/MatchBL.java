@@ -12,4 +12,9 @@ public interface MatchBL {
 	
 	public ArrayList<MatchVO> getMatchByTime(String time);
 	
+	public ArrayList<MatchVO> getRecentMatchByPlayer(String playerName);
+	
+	public ArrayList<MatchVO> getRecentMatchByTeam(String teamName);
+	
+	
 }

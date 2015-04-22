@@ -11,7 +11,7 @@ private ArrayList<String> teamAreaList=new ArrayList<String>();
 private String playingTime;// 在场时间
 private int competeNum;// 参赛场数
 private int offensiveNum;// 先发场数
-private double [] playerData=new double[24];
+private double [] playerData=new double[27];
 public PlayerAllVO(String name){
 	this.playerName=name;
 }
@@ -22,10 +22,7 @@ public PlayerAllVO(PlayerAllPlusRatePO po){
 	this.playingTime=po.getPlayingTime();
 	this.competeNum=po.getCompeteNum();
 	this.offensiveNum=po.getOffensiveNum();
-	double[]nums=po.getPlayerData();
-	for(int i=0;i<this.playerData.length;i++){
-		this.playerData[i]=nums[i];
-	}
+	this.playerData=po.getPlayerData();
 
 }
 public ArrayList<String> getTeamList() {

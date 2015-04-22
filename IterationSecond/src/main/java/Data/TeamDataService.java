@@ -19,7 +19,7 @@ import po.TeamBasicPO;
  * @category
  * getTeamAverage获得所有球队的场均PO
  * @category
- * getAllTeamNames 获得所有球队的名称 以”缩写-全称“的格式
+ * getAllTeamNames 获得所有球队的名称 以”缩写“的格式
  * @category
  * getTeamNameByStr 根据字符串返回接近的球队缩写
  *@category

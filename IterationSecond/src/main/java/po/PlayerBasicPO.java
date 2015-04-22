@@ -5,8 +5,6 @@ package po;
  * 
  *@param playerName
  *   球员姓名
- *@param team
- *   当前球员所属队伍
  * @param basicInfo
  * 0 Number
  * 1 Position

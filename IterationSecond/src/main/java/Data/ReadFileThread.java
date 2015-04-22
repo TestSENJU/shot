@@ -17,6 +17,7 @@ public ReadFileThread(String pathname){
 	this.path=pathname;
 	this.filenames=new File(path).list();
 }
+@Override
 public void run(){
 	while(true){
 		try {
@@ -29,39 +30,41 @@ public void run(){
 		String[] fileNames=new File(path).list();
 		if(filenames!=null){
 			if(fileNames!=null){
+				
 				if(fileNames.length>filenames.length){
+					System.out.println("run");
 				ArrayList<String> list=new ArrayList<String>();
 				Arrays.sort(filenames);
 				Arrays.sort(fileNames);
 				int len = filenames.length;
-				for (int i = 0; i < len; i++)
-				{
+				for (int i = 0; i < len; i++){
 				    if (Arrays.binarySearch(fileNames, filenames[i]) != -1)
 				         list.add(filenames[i]) ;
 				}
-				for(int i=0;i<list.size();i++){
-                readFile(list.get(i));
-				}		
+				    for(int i=0;i<list.size();i++){
+				    	System.out.println(list.get(i));
+                        readFile(this.path+"//"+list.get(i));
+				     }	
+				}			
 			}			
-		}
 		}else{
 			this.filenames=fileNames;
 		}
 		
-	}	
+	}
+	
 }
+
 public void start(){
-	String fnames[]=new File(path).list();
-	if(fnames.length!=0){
-		this.filenames=fnames;
-		for(int i=0;i<fnames.length;i++){
-			readFile(filenames[i]);		
-		}		
-	}	
+		for(int i=0;i<filenames.length;i++){
+//		   	System.out.println(filenames[i]);
+			readFile(this.path+"//"+filenames[i]);
+		}	
 }
 
 private void readFile(String filename){
 	try {
+//		System.out.println("efa");
 		@SuppressWarnings("resource")
 		BufferedReader br=new BufferedReader(new FileReader(filename));
 		String str="";
@@ -131,14 +134,16 @@ private void readFile(String filename){
 		double opponentNum2[]=getOpponentDataByStrs(strlist2);
 		int i1=0;int i2=0;
 		if(TeamNum1[14]>TeamNum2[14]){i1=1;i2=0;}else{i1=0;i2=1;}
-		TeamData_Impl.addToTable(TeamNum1, opponentNum2, filename, team1, 1, playerList1,i1);
-		TeamData_Impl.addToTable(TeamNum2,opponentNum1,filename,team2,1, playerList2,i2);
-		PlayerData_Impl.addToTable(strlist1,filename,team1,nums1,teamTime1,nums2);
-		PlayerData_Impl.addToTable(strlist2,filename,team2,nums2,teamTime1,nums1);
-		MatchData_Impl.addToTable(filename, team1, teamTime1, strlist1, team2, strlist2, pointer, pointerpart);
+		String filestrs[]=filename.split("//");
+		
+		TeamData_Impl.addToTable(TeamNum1, opponentNum2, filestrs[2], team1, 1, playerList1,i1);
+		TeamData_Impl.addToTable(TeamNum2,opponentNum1,filestrs[2],team2,1, playerList2,i2);
+		PlayerData_Impl.addToTable(strlist1,filestrs[2],team1,nums1,teamTime1,nums2);
+		PlayerData_Impl.addToTable(strlist2,filestrs[2],team2,nums2,teamTime1,nums1);
+		MatchData_Impl.addToTable(filestrs[2], team1, teamTime1, strlist1, team2, strlist2, pointer, pointerpart);
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
-        System.out.println("read file file notfount");
+        System.out.println("read file file notfound");
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		 System.out.println("read file io");
@@ -163,21 +168,21 @@ private static double[] getTeamAllDataByStrs(ArrayList<String[]>list){
 	for(int i=0;i<nums.length;i++)nums[i]=0;
 	for(int j=0;j<list.size();j++){
 		String strs[]=list.get(j);
-		nums[0]+=Double.parseDouble(strs[0]);
-		nums[1]+=Double.parseDouble(strs[1]);
-		nums[2]+=Double.parseDouble(strs[2]);
-		nums[3]+=Double.parseDouble(strs[3]);
-		nums[4]+=Double.parseDouble(strs[3]);
-		nums[5]+=Double.parseDouble(strs[5]);
-		nums[6]+=Double.parseDouble(strs[6]);
-		nums[7]+=Double.parseDouble(strs[7]);
-		nums[8]+=Double.parseDouble(strs[8]);
-		nums[9]+=Double.parseDouble(strs[9]);
-		nums[10]+=Double.parseDouble(strs[10]);
-		nums[11]+=Double.parseDouble(strs[11]);
-		nums[12]+=Double.parseDouble(strs[12]);
-		nums[13]+=Double.parseDouble(strs[13]);
-		nums[14]+=Double.parseDouble(strs[14]);
+		nums[0]+=Double.parseDouble(strs[3]);
+		nums[1]+=Double.parseDouble(strs[4]);
+		nums[2]+=Double.parseDouble(strs[5]);
+		nums[3]+=Double.parseDouble(strs[6]);
+		nums[4]+=Double.parseDouble(strs[7]);
+		nums[5]+=Double.parseDouble(strs[8]);
+		nums[6]+=Double.parseDouble(strs[9]);
+		nums[7]+=Double.parseDouble(strs[10]);
+		nums[8]+=Double.parseDouble(strs[11]);
+		nums[9]+=Double.parseDouble(strs[12]);
+		nums[10]+=Double.parseDouble(strs[13]);
+		nums[11]+=Double.parseDouble(strs[14]);
+		nums[12]+=Double.parseDouble(strs[15]);
+		nums[13]+=Double.parseDouble(strs[16]);
+		nums[14]+=Double.parseDouble(strs[17]);
 	}
 	return nums;
 }

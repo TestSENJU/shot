@@ -16,7 +16,7 @@ import po.PlayerBasicPO;
 /**
  * 
  * @author wyt
- *
+ * 先发场数 队伍信息
  */
 public class PlayerData_Impl implements PlayerDataService{
     private static Hashtable<String,PlayerAllPO> playerTable=new Hashtable<String,PlayerAllPO>();
@@ -63,6 +63,8 @@ public class PlayerData_Impl implements PlayerDataService{
 				ss[j]=s[j+1];
 			}
 			PlayerBasicPO basic=new PlayerBasicPO(playerName);
+			basic.setBasicInfo(ss);
+			
 			return basic;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -163,6 +165,7 @@ public class PlayerData_Impl implements PlayerDataService{
 				playerTable.get(strs[0]).addCompeteData(filename, nums2);
 				playerTable.get(strs[0]).addTeamData(filename, nums1);
 				playerTable.get(strs[0]).addTeamTime(filename, teamTime);
+				
 				playerTable.get(strs[0]).addTeam(team);
 			}else{
 				PlayerAllPO playerAll=new PlayerAllPO(strs[0]);

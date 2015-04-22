@@ -60,6 +60,7 @@ public class MatchData_Impl implements MatchDataService{
 		newMatch.setTime(time);
 		newMatch.setPointer(pointer);
 		newMatch.setPointerPart(pointerpart);
+		matchTable.put(filename, newMatch);
 		if(teamTable.containsKey(team1)){
 			teamTable.get(team1).add(filename);
 		}else{
@@ -85,7 +86,7 @@ public class MatchData_Impl implements MatchDataService{
 			}
 		}
 		for(int i=0;i<list2.size();i++){
-			String strs[]=list1.get(i);
+			String strs[]=list2.get(i);
 			if(playerTable.containsKey(strs[0])){
 				playerTable.get(strs[0]).add(filename);
 			}else{
@@ -128,6 +129,18 @@ public class MatchData_Impl implements MatchDataService{
 		}else{
 			return nameList;
 		}	
+	}
+
+	public MatchPO getMatchByName(String matchName) {
+		// TODO Auto-generated method stub
+		MatchPO po=matchTable.get(matchName);
+		if(po!=null){
+			return po;
+		}else{
+			System.out.println("getmatchbyname");
+			return null;
+		}
+
 	}
 	
 }

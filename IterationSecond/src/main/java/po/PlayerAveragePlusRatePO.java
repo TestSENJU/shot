@@ -21,15 +21,17 @@ public PlayerAveragePlusRatePO(String playerName){
 	}
 }
 public PlayerAveragePlusRatePO(PlayerAllPlusRatePO allpo){
+	this.name=allpo.name;
 	this.teamList=allpo.getTeamAreaList();
 	this.teamList=allpo.getTeamList();
 	this.competeNum=allpo.getCompeteNum();
 	this.offensiveNum=allpo.getOffensiveNum();
 	String allTime=allpo.getPlayingTime();
+	System.out.println(allTime);
 	String strs[]=allTime.split(":");
 	int hour=Integer.parseInt(strs[0])/competeNum;
 	
-	strs[1]=Integer.parseInt(strs[1])+Integer.parseInt(strs[0])%competeNum*60+"";
+	strs[1]=Integer.parseInt(strs[1])+60*Integer.parseInt(strs[0])%competeNum+"";
 	strs[0]=hour+"";
 	this.playingTime=strs[0]+":"+strs[1];
 	double allData[]=allpo.getPlayerData();

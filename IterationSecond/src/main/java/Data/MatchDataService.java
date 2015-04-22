@@ -19,6 +19,7 @@ import po.MatchPO;
  * getMatchNamesByPlayer 根据球员返回所有比赛的名字
  * @category
  * getMatchNamesByTeam 根据球队返回所有比赛的名字
+ * @category
  */
 public interface MatchDataService{
 
@@ -33,4 +34,7 @@ public interface MatchDataService{
 	public ArrayList<String> getMatchNamesByPlayer(String name);
 	
 	public ArrayList<String> getMatchNamesByTeam(String name);
+	
+	public MatchPO getMatchByName(String matchName);
+	
 }

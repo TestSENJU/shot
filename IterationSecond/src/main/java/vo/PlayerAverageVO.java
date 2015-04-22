@@ -11,7 +11,7 @@ public class PlayerAverageVO {
 	private String playingTime;
 	private int competeNum;
 	private int offensiveNum;
-	private double[] playerData=new double[24];
+	private double[] playerData=new double[27];
 	public PlayerAverageVO(String playerName){
 		this.name=playerName;
 	}
@@ -22,10 +22,7 @@ public class PlayerAverageVO {
 		this.playingTime=po.getPlayingTime();
 		this.competeNum=po.getCompeteNum();
 		this.offensiveNum=po.getOffensiveNum();
-		double []nums=po.getPlayerData();
-		for(int i=0;i<this.playerData.length;i++){
-			this.playerData[i]=nums[i];
-		}
+		this.playerData=po.getPlayerData();
 		
 	}
 	public ArrayList<String> getTeamList() {

@@ -48,5 +48,29 @@ public ArrayList<MatchVO> getMatchByTime(String time) {
 	}
 }
 
+public ArrayList<MatchVO> getRecentMatchByPlayer(String playerName) {
+	// TODO Auto-generated method stub
+	ArrayList<String> nameList=new ArrayList<String>();
+	nameList=match.getMatchNamesByPlayer(playerName);
+	nameList.sort(null);
+	ArrayList<MatchVO> list=new ArrayList<MatchVO>();
+	for(int i=nameList.size()-1;i>nameList.size()-6;i--){
+		list.add(new MatchVO(match.getMatchByName(nameList.get(i))));
+	}
+	return list;
+}
+
+public ArrayList<MatchVO> getRecentMatchByTeam(String teamName) {
+	// TODO Auto-generated method stub
+	ArrayList<String> nameList=new ArrayList<String>();
+	nameList=match.getMatchNamesByTeam(teamName);
+	nameList.sort(null);
+	ArrayList<MatchVO> list=new ArrayList<MatchVO>();
+	for(int i=nameList.size()-1;i>nameList.size()-6;i--){
+		list.add(new MatchVO(match.getMatchByName(nameList.get(i))));
+	}
+	return list;
+}
+
 
 }

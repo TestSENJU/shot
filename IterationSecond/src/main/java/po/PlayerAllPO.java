@@ -22,10 +22,14 @@ public class PlayerAllPO{
 public PlayerAllPO(String playerName){
 	this.name=playerName;
 }
-@SuppressWarnings("unchecked")
 public ArrayList<String> getMatchNames(){
 	Set<String> keys=playerDataList.keySet();
-	return (ArrayList<String>)keys;
+	ArrayList<String>list=new ArrayList<String>();
+	
+	for(String key:keys){
+		list.add(key);
+	}
+	return list;
 }
 public void addPlayerData(String matchName,String[] playerData){
 	this.playerDataList.put(matchName, playerData);
@@ -66,8 +70,8 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 		String strs[]=playerDataList.get(key);
 		double dnums1[]=teamDataList.get(key);
 		double dnums2[]=competeDataList.get(key);
-		char c[]=strs[1].toCharArray();
-		if(c[0]<='Z'&&c[0]>='A') allData.addOffensiveNum(1);
+		
+		if(strs[1]!="") allData.addOffensiveNum(1);
 		
 			for(int i=0;i<nums.length;i++){
 				nums[i]+=Double.parseDouble(strs[i+3]);
@@ -121,11 +125,11 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 	//            -1.07*(对手进攻篮板/(对手进攻篮板+我方防守篮板)*对手投失球数)
 	//             +1.07*对手失误数
 	double offensiveTime=opponentNums[0]+opponentNums[3]*0.4-
-			1.07*(opponentNums[4]/(opponentNums[4]+teamNums[5])*opponentNums[7]);
+			1.07*(opponentNums[3]/(opponentNums[4]+teamNums[5])*opponentNums[6]);
 	data[20]=nums[10]*timeRate/offensiveTime;
 	data[21]=nums[11]*timeRate/(opponentNums[0]-opponentNums[2]);
 	data[22]=nums[12]/(nums[1]-nums[3]+0.44*nums[5]+nums[12]);
-	data[23]=(nums[1]+0.44*nums[5]+nums[12])*timeRate/(teamNums[0]+0.44*teamNums[3]+teamNums[7]);
+	data[23]=(nums[1]+0.44*nums[5]+nums[12])*timeRate/(teamNums[0]+0.44*teamNums[3]+teamNums[6]);
 	
 
 	data[24]=(raiseNum[0]/5-raiseNumUsed[0]/(playerDataList.size()-5))/(raiseNumUsed[0]/(playerDataList.size()-5));
@@ -142,11 +146,12 @@ private ArrayList<String> getRecentFiveMatches(){
 	int i=0;
 	for(String key:keys){
 		matchnames[i]=key;
+		i++;
 	}
 	Arrays.sort(matchnames);
 	ArrayList<String>names=new ArrayList<String>();
-	for(int j=keys.size()-1;j>keys.size()-6;j--){
-		names.add(matchnames[i]);
+	for(int j=matchnames.length-1;j>matchnames.length-6;j--){
+		names.add(matchnames[j]);
 	}
 	return names;
 }

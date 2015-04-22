@@ -122,6 +122,13 @@ public class TeamData_Impl implements TeamDataService{
     }
 	public ArrayList<String> getTeamNameByStr(String str) {
 		// TODO Auto-generated method stub
+		Set<String>keys=teamTable.keySet();
+//		ArrayList<String> list=new ArrayList<String>();
+		for(String key:keys){
+			if(key.contains(str)){
+				
+			}
+		}
 		return null;
 	}
 

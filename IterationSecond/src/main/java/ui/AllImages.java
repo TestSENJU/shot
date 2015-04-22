@@ -99,4 +99,10 @@ public class AllImages {
 	public static final ImageIcon IMG_FALSE_RADIO = new ImageIcon("img/radioFalse.png");
 	/**       *****************dialog radioButton right图标 25x25***************       **/
 	public static final ImageIcon IMG_RIGHT_RADIO = new ImageIcon("img/radioRight.png");
+	/**       *****************PlayerHomePanel 比赛数据 button 100x30***************       **/
+	public static final ImageIcon IMG_INIT_PDATA = new ImageIcon("img/initTeamData.png");
+	/**       *****************PlayerHomePanel 近期比赛 button 100x30***************       **/
+	public static final ImageIcon IMG_INIT_PRECENTMATCH = new ImageIcon("img/initRM.png");
+	/**       *****************PlayerHomePanel 过往比赛 button 100x30***************       **/
+	public static final ImageIcon IMG_INIT_PALLMATCH = new ImageIcon("img/initAM.png");
 }

@@ -2,12 +2,15 @@ package ui.statistic;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -18,11 +21,12 @@ import javax.swing.ListSelectionModel;
 import sound.PlayWave;
 import ui.AllImages;
 import ui.DialogPanel;
+import ui.IComboBox;
 import ui.IScrollBarUI;
 import ui.MyDialog;
+import ui.MyDialog.DialogWindow;
 import ui.MyStringTable;
 import ui.MyTable;
-import ui.MyDialog.DialogWindow;
 import ui.player.PlayerHomePanel;
 
 public class StatisticPanel {
@@ -51,6 +55,12 @@ public class StatisticPanel {
 	protected JRadioButton descend;
 	private ButtonGroup group;
 	public static String AorD = "";
+	//tool panel
+	private JPanel toolPanel;
+	private JComboBox<Object> position;
+	private JComboBox<Object> league;
+	private JComboBox<Object> sortBy;
+	private JButton sureTool;
 	
 	public JPanel init(){
 		statisticPanel = new JPanel();
@@ -58,9 +68,15 @@ public class StatisticPanel {
 		statisticPanel.setBounds(130, 0, 1000-130, 700);
 		statisticPanel.setLayout(null);
 		
+		toolPanel = new JPanel();
+		toolPanel.setOpaque(false);
+		toolPanel.setBounds(0, 70, 1000-130, 80);
+		toolPanel.setLayout(null);
+		statisticPanel.add(toolPanel, 0);
+		
 		tablePanel = new JPanel();
 		tablePanel.setOpaque(false);
-		tablePanel.setBounds(0, 100, 1000-130, 600);
+		tablePanel.setBounds(0, 150, 1000-130, 530);
 		tablePanel.setLayout(null);
 		statisticPanel.add(tablePanel, 0);
 		
@@ -105,19 +121,90 @@ public class StatisticPanel {
 		return statisticPanel;
 	}
 	
+	public void initToolPanel(){
+		//0,70,1000-130,100
+		//combo
+		JLabel po = new JLabel();
+		po.setOpaque(false);
+		po.setText("筛选-> 球员位置");
+		po.setBounds(30, 20, 100, 30);
+		po.setFont(new Font("微软雅黑",Font.PLAIN,13));
+		po.setForeground(Color.WHITE);
+		toolPanel.add(po, 0);
+		
+		Object[] poInfo = {"前锋","中锋","后卫"};
+		position = new IComboBox(poInfo);
+		position.setBounds(140, 20, 100, 30);
+		position.addActionListener(new ActionListener() {		
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(position.getSelectedItem());
+			}
+		});
+		toolPanel.add(position, 0);
+		
+		JLabel le = new JLabel();
+		le.setOpaque(false);
+		le.setText("球员联盟");
+		le.setBounds(250, 20, 70, 30);
+		le.setFont(new Font("微软雅黑",Font.PLAIN,13));
+		le.setForeground(Color.WHITE);
+		toolPanel.add(le, 0);
+		
+		Object[] leInfo = {"东部东南分区","东部中央分区","东部大西洋分区",
+				"西部太平洋分区","西部西北分区","西部西南分区"};
+		league = new JComboBox<Object>(leInfo);
+		league.setBounds(330, 20, 120, 30);
+		league.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.out.println(league.getSelectedItem());
+			}
+		});
+		toolPanel.add(league, 0);
+		
+		JLabel sb = new JLabel();
+		sb.setOpaque(false);
+		sb.setText("筛选条件");
+		sb.setBounds(460, 20, 70, 30);
+		sb.setFont(new Font("微软雅黑",Font.PLAIN,13));
+		sb.setForeground(Color.WHITE);
+		toolPanel.add(sb, 0);
+		
+		Object[] sbInfo = {"得分","篮板","助攻","得分/篮板/助攻",
+				"盖帽","抢断","犯规","失误","分钟","效率","投篮",
+				"三分","罚球","两双"};
+		 
+		sortBy = new JComboBox<Object>(sbInfo);
+		sortBy.setBounds(540, 20, 120, 30);
+		sortBy.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.out.println(sortBy.getSelectedItem());
+			}
+		});
+		toolPanel.add(sortBy, 0);
+		
+		sureTool = new JButton();
+		sureTool.setOpaque(false);
+		sureTool.setContentAreaFilled(false);
+		sureTool.setBorderPainted(false);
+		sureTool.setIcon(AllImages.IMG_SURE);
+		sureTool.setBounds(680, 20, 80, 30);
+		sureTool.addMouseListener(new SureToolListener());
+		toolPanel.add(sureTool, 0);
+	}
+	
 	public JScrollPane playerDataTable(Object[][] columnValues, String[] columnName){
 		pDataTable = new MyTable(columnValues, columnName);
 		pDataTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		pDataTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		pDataTable.setForeground(Color.white);
-		pDataTable.setRowHeight(35);
+		pDataTable.setRowHeight(30);
 		pDataTable.setBounds(40, 0, 1000-130-100, 500);
 		pDataTable.setOpaque(false);
 		
 		pDataTable.addMouseListener(new pTableListener());
 		pDataTable.getTableHeader().addMouseListener(new pTableHeaderListener());
 
-		pDataTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		pDataTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    pScrollPane = new JScrollPane();
 	    pScrollPane.setColumnHeaderView(pDataTable.getTableHeader());	//设置头部（HeaderView部分）  
@@ -144,8 +231,9 @@ public class StatisticPanel {
 		tDataTable.setOpaque(false);
 		
 		tDataTable.addMouseListener(new pTableListener());
+		tDataTable.getTableHeader().addMouseListener(new tTableHeaderListener());
 
-		tDataTable.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		tDataTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    tScrollPane = new JScrollPane();
 	    tScrollPane.setColumnHeaderView(tDataTable.getTableHeader());	//设置头部（HeaderView部分）  
@@ -191,6 +279,8 @@ public class StatisticPanel {
 			}
 			tablePanel.add(playerDataTable(columnValues, columnName));
 			tablePanel.repaint();
+			initToolPanel();
+			toolPanel.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
 		}
@@ -245,8 +335,10 @@ public class StatisticPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
+			toolPanel.removeAll();
+			toolPanel.repaint();
 			tablePanel.removeAll();
-			String[] columnName = new String[] {"Tag", "比赛场数", "投篮命中数", 
+			String[] columnName = new String[] {"球队名称", "比赛场数", "投篮命中数", 
     		"投篮出手次数", "三分命中数", "三分出手数","罚球命中数","罚球出手数",
     		"进攻篮板数","防守篮板数","篮板数",
     		"助攻数","抢断数","盖帽数","失误数",
@@ -283,6 +375,8 @@ public class StatisticPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
+			toolPanel.removeAll();
+			toolPanel.repaint();
 			tablePanel.removeAll();
 			String[] columnName = new String[] {"球队名称", "比赛场数", "投篮命中数", 
     		"投篮出手次数", "三分命中数", "三分出手数","罚球命中数","罚球出手数",
@@ -495,5 +589,161 @@ public class StatisticPanel {
 		}
 		public void mouseReleased(MouseEvent arg0) {
 		}
+	}
+	//TODO 
+		class tTableHeaderListener implements MouseListener{
+
+			public void mouseClicked(MouseEvent e) {
+				PlayWave.startClickSound();
+				if(e.getClickCount()==2){
+					System.out.println(tDataTable.getColumnName(tDataTable.getTableHeader().columnAtPoint(e.getPoint())));
+					// TODO DIALOG------------------------------------------------
+					dPanel = new DialogPanel(AllImages.IMG_DIALOG_BG);
+					dPanel.setLayout(null);
+					dPanel.setSize(400, 300);
+					//dPanel.setDragable();
+					// 设置panel为透明
+					dPanel.setOpaque(false);
+					// 设置布局管理为绝对布局
+					dPanel.setLayout(null);
+					// 注册鼠标监听器
+					dPanel.addMouseListener(this);
+					// 注册鼠标移动监听器
+					//dPanel.addMouseMotionListener(this);
+					MyDialog pd = new MyDialog();
+					dw = pd.init(400, 300, dPanel);
+					
+					choose = new JLabel();
+					choose.setOpaque(false);
+					choose.setText("请选择升序 or 降序：");
+					choose.setBounds(30, 50, 200, 30);
+					choose.setFont(new Font("微软雅黑", Font.PLAIN, 18));
+					choose.setForeground(Color.WHITE);
+					dPanel.add(choose, 0);
+					
+					ascend = new JRadioButton("升序", AllImages.IMG_RIGHT_RADIO, true);
+					ascend.setBounds(90, 140, 100, 25);
+					ascend.setOpaque(false);
+					ascend.setForeground(Color.WHITE);
+					ascend.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+					ascend.addItemListener(new ItemListener());
+					dPanel.add(ascend, 0);
+					
+					descend = new JRadioButton("降序",AllImages.IMG_FALSE_RADIO, false);
+					descend.setBounds(240, 140, 100, 25);
+					descend.setForeground(Color.WHITE);
+					descend.setOpaque(false);
+					descend.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+					descend.addItemListener(new ItemListener());
+					dPanel.add(descend, 0);
+					
+					group = new ButtonGroup();
+					group.add(ascend);
+					group.add(descend);
+					
+					sure = new JButton();
+					sure.setBounds(100, 220, 80, 30);
+					sure.setContentAreaFilled(false);
+					sure.setBorderPainted(false);
+					sure.setOpaque(false);
+					sure.setIcon(AllImages.IMG_SURE);
+					sure.addMouseListener(new MouseListener(){
+						public void mouseClicked(MouseEvent e) {
+							// TODO 
+							PlayWave.startClickSound();
+							System.out.println(ascend.isSelected());
+							if (ascend.isSelected()) {
+								AorD = "ascend";
+								
+								
+							} else if(descend.isSelected()){
+								AorD = "descend";
+							} else {
+								AorD = "0";
+							}
+							dw.dispose();
+						}
+						public void mouseEntered(MouseEvent e) {
+						}
+						public void mouseExited(MouseEvent e) {						
+						}
+						public void mousePressed(MouseEvent e) {				
+						}
+						public void mouseReleased(MouseEvent arg0) {					
+						}
+					});
+					dPanel.add(sure, 0);
+					
+					cancel = new JButton();
+					cancel.setBounds(220, 220, 80, 30);
+					cancel.setContentAreaFilled(false);
+					cancel.setBorderPainted(false);
+					cancel.setIcon(AllImages.IMG_CANCEL);
+					cancel.setOpaque(false);
+					cancel.addMouseListener(new MouseListener(){
+
+						public void mouseClicked(MouseEvent arg0) {
+							// TODO Auto-generated method stub
+							PlayWave.startClickSound();
+							dw.dispose();
+						}
+
+						public void mouseEntered(MouseEvent arg0) {
+						}
+
+						public void mouseExited(MouseEvent arg0) {
+							
+						}
+
+						public void mousePressed(MouseEvent arg0) {
+					
+						}
+
+						public void mouseReleased(MouseEvent arg0) {
+						
+						}
+						
+					});
+					dPanel.add(cancel, 0);
+		
+				}
+			}
+			public void mouseEntered(MouseEvent e) {
+			}
+			public void mouseExited(MouseEvent e) {
+			}
+			public void mousePressed(MouseEvent e) {
+			}
+			public void mouseReleased(MouseEvent arg0) {
+			}
+			class ItemListener implements java.awt.event.ItemListener{
+
+				public void itemStateChanged(ItemEvent e) {
+					// TODO Auto-generated method stub
+					 if (e.getSource() == ascend) {
+				            ascend.setIcon(AllImages.IMG_RIGHT_RADIO);
+				            descend.setIcon(AllImages.IMG_FALSE_RADIO);
+				        } else {
+				        	descend.setIcon(AllImages.IMG_RIGHT_RADIO);
+					        ascend.setIcon(AllImages.IMG_FALSE_RADIO);
+				        }
+				}
+				
+			}
+		}
+
+	class SureToolListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			System.out.println(position.getSelectedItem().toString()+league.getSelectedItem().toString()+sortBy.getSelectedItem().toString());
+		}
+		public void mouseEntered(MouseEvent arg0) {
+		}
+		public void mouseExited(MouseEvent arg0) {
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}	
 	}
 }

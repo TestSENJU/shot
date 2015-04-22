@@ -15,6 +15,7 @@ import javax.swing.JScrollPane;
 
 import ui.AllImages;
 import ui.ComboTextField;
+import ui.MyStringTable;
 
 public class SearchPanel {
 	/**
@@ -32,6 +33,7 @@ public class SearchPanel {
 	private JPanel searchPanel;
 	private JPanel searchToolPanel;
 	private JPanel tablePanel;
+	private MyStringTable dataTable;
 	private JScrollPane dataScrollPane;
 	private JButton searchP;
 	private JButton searchT;
@@ -344,6 +346,7 @@ public class SearchPanel {
 	//TODO
 	public JScrollPane initTable(Object[][] columnValue, String[] columnName){
 		dataScrollPane = new JScrollPane();
+		
 		return dataScrollPane;
 	}
 	

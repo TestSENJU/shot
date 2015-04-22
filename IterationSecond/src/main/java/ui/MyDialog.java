@@ -1,20 +1,13 @@
 package ui;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
-
-import sound.PlayWave;
-import ui.statistic.StatisticPanel;
 
 public class MyDialog implements Runnable, MouseListener, MouseMotionListener {
 
@@ -30,7 +23,6 @@ public class MyDialog implements Runnable, MouseListener, MouseMotionListener {
 	protected JLabel choose;
 	protected JRadioButton ascend;
 	protected JRadioButton descend;
-	private ButtonGroup group;
 
 	public MyDialog () {
 	}

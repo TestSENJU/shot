@@ -18,10 +18,9 @@ import sound.PlayWave;
 import ui.AllImages;
 import ui.IComboBox;
 import ui.IScrollBarUI;
-import ui.InitailizePanel;
 import ui.MyTable;
 import ui.player.PlayerHomePanel;
-import ui.player.PlayerPanel;
+import ui.team.TeamHomePanel;
 
 public class HotInfoPanel {
 	/**
@@ -148,10 +147,10 @@ public class HotInfoPanel {
 	 * for hotPlayerToday button
 	 * show five player info
 	 * */
-	public void hotPlayerTodayTable(){
+	public void hotPlayerTodayTable(String id){
 		columnName = new String[] { "球员头像", "球员名称", "所属球队", "球员位置", "数据" };
-		columnValues = new Object[30][columnName.length];
-		for (int i = 0; i < 30; i++) {
+		columnValues = new Object[5][columnName.length];
+		for (int i = 0; i < 5; i++) {
 			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
 			columnValues[i][1] = i;
 			columnValues[i][2] = i;
@@ -166,7 +165,7 @@ public class HotInfoPanel {
 		topFive.setBounds(40, 50, 1000-130-100, 480);
 		topFive.setOpaque(false);
 		
-		topFive.addMouseListener(new TableListener());
+		topFive.addMouseListener(new TablePListener());
 
 		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		
@@ -212,10 +211,10 @@ public class HotInfoPanel {
 	 * for hotPlayerSeason button
 	 * show five player info
 	 * */
-	public void hotPlayerSeasonTable(){
+	public void hotPlayerSeasonTable(String id){
 		columnName = new String[] { "球员头像", "球员名称", "所属球队", "位置", "数据" };
-		columnValues = new Object[30][columnName.length];
-		for (int i = 0; i < 30; i++) {
+		columnValues = new Object[5][columnName.length];
+		for (int i = 0; i < 5; i++) {
 
 			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
 			columnValues[i][1] = i+1;
@@ -230,6 +229,8 @@ public class HotInfoPanel {
 		topFive.setRowHeight(50);
 		topFive.setBounds(40, 50, 1000-130-100, 480);
 		topFive.setOpaque(false);
+		
+		topFive.addMouseListener(new TablePListener());
 
 		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		
@@ -253,7 +254,7 @@ public class HotInfoPanel {
 	 * show comboBox and sure button
 	 * */
 	public void hotTeamSeasonPanel(){
-		Object[] conditionInfo = {"场均得分","场均篮板","场均助攻","场均盖帽","场均抢断","三分命中率","投篮命中率","罚球命中率"};
+		Object[] conditionInfo = { "场均得分","场均篮板","场均助攻","场均盖帽","场均抢断","三分命中率","投篮命中率","罚球命中率"};
 		c = new IComboBox(conditionInfo);
 		c.setBounds(50, 0, 100, 30);
 		c.addActionListener(new ActionListener() {		
@@ -276,15 +277,13 @@ public class HotInfoPanel {
 	 * for hotTeamSeason button
 	 * show five team info
 	 * */
-	public void hotTeamSeasonTable(){
-		columnName = new String[] { "球队头像", "球队名称", "联盟", "数据" };
-		columnValues = new Object[30][columnName.length];
-		for (int i = 0; i < 30; i++) {
-
+	public void hotTeamSeasonTable(String id){
+		columnName = new String[] { "球队名称", "联盟", "数据" };
+		columnValues = new Object[5][columnName.length];
+		for (int i = 0; i < 5; i++) {
 			columnValues[i][0] = i+2;
 			columnValues[i][1] = i+2;
 			columnValues[i][2] = i+2;
-			columnValues[i][3] = i+2;
 		}
 		
 		topFive = new MyTable(columnValues, columnName);
@@ -294,6 +293,8 @@ public class HotInfoPanel {
 		topFive.setRowHeight(50);
 		topFive.setBounds(40, 50, 1000-130-100, 480);
 		topFive.setOpaque(false);
+		
+		topFive.addMouseListener(new TableTListener());
 
 		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		
@@ -340,10 +341,10 @@ public class HotInfoPanel {
 	 * for bestPlayer button
 	 * show five player info
 	 * */
-	public void bestPlayerTable(){
+	public void bestPlayerTable(String id){
 		columnName = new String[] { "球员头像", "球员名称", "所属球队", "最近五场比赛提升率","数据" };
-		columnValues = new Object[30][columnName.length];
-		for (int i = 0; i < 30; i++) {
+		columnValues = new Object[5][columnName.length];
+		for (int i = 0; i < 5; i++) {
 
 			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
 			columnValues[i][1] = i+3;
@@ -358,6 +359,8 @@ public class HotInfoPanel {
 		topFive.setRowHeight(50);
 		topFive.setBounds(40, 50, 1000-130-100, 480);
 		topFive.setOpaque(false);
+		
+		topFive.addMouseListener(new TablePListener());
 
 		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		
@@ -401,7 +404,7 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
-			hotPlayerTodayTable();
+			hotPlayerTodayTable(c.getSelectedItem().toString());
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -440,7 +443,7 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
-			hotPlayerSeasonTable();
+			hotPlayerSeasonTable(c.getSelectedItem().toString());
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -479,7 +482,7 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
-			hotTeamSeasonTable();
+			hotTeamSeasonTable(c.getSelectedItem().toString());
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -518,7 +521,7 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
-			bestPlayerTable();
+			bestPlayerTable(c.getSelectedItem().toString());
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -533,7 +536,7 @@ public class HotInfoPanel {
 	}
 	
 	// TODO 
-	class TableListener implements MouseListener {
+	class TablePListener implements MouseListener {
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getClickCount()==2){
@@ -542,6 +545,29 @@ public class HotInfoPanel {
 					hotPanel.removeAll();
 					PlayerHomePanel php = new PlayerHomePanel();
 					hotPanel.add(php.init(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()+1).toString()));
+					hotPanel.repaint();
+				}
+			}
+		}
+		public void mouseEntered(MouseEvent e) {
+		}
+		public void mouseExited(MouseEvent e) {
+		}
+		public void mousePressed(MouseEvent e) {
+		}
+		public void mouseReleased(MouseEvent e) {			
+		}
+	}
+	// TODO 
+	class TableTListener implements MouseListener {
+
+		public void mouseClicked(MouseEvent e) {
+			if(e.getClickCount()==2){
+				System.out.println(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()));
+				if (topFive.getSelectedColumn()==0) {
+					hotPanel.removeAll();
+					TeamHomePanel thp = new TeamHomePanel();
+					hotPanel.add(thp.init(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()+1).toString()));
 					hotPanel.repaint();
 				}
 			}

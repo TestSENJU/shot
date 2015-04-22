@@ -43,7 +43,7 @@ public class StatisticPanel {
 	private MyStringTable tDataTable;
 	//
 	protected DialogPanel dPanel;
-	protected DialogWindow dialog = null;
+	private DialogWindow dw;
 	protected JButton sure;
 	protected JButton cancel;
 	protected JLabel choose;
@@ -361,6 +361,8 @@ public class StatisticPanel {
 				dPanel.addMouseListener(this);
 				// 注册鼠标移动监听器
 				//dPanel.addMouseMotionListener(this);
+				MyDialog pd = new MyDialog();
+				dw = pd.init(400, 300, dPanel);
 				
 				choose = new JLabel();
 				choose.setOpaque(false);
@@ -371,7 +373,7 @@ public class StatisticPanel {
 				dPanel.add(choose, 0);
 				
 				ascend = new JRadioButton("升序", AllImages.IMG_RIGHT_RADIO, true);
-				ascend.setBounds(60, 80, 80, 25);
+				ascend.setBounds(90, 140, 100, 25);
 				ascend.setOpaque(false);
 				ascend.setForeground(Color.WHITE);
 				ascend.setFont(new Font("微软雅黑", Font.PLAIN, 15));
@@ -379,7 +381,7 @@ public class StatisticPanel {
 				dPanel.add(ascend, 0);
 				
 				descend = new JRadioButton("降序",AllImages.IMG_FALSE_RADIO, false);
-				descend.setBounds(180, 80, 80, 25);
+				descend.setBounds(240, 140, 100, 25);
 				descend.setForeground(Color.WHITE);
 				descend.setOpaque(false);
 				descend.setFont(new Font("微软雅黑", Font.PLAIN, 15));
@@ -391,24 +393,69 @@ public class StatisticPanel {
 				group.add(descend);
 				
 				sure = new JButton();
-				sure.setBounds(80, 150, 80, 40);
+				sure.setBounds(100, 220, 80, 30);
 				sure.setContentAreaFilled(false);
 				sure.setBorderPainted(false);
 				sure.setOpaque(false);
 				sure.setIcon(AllImages.IMG_SURE);
-				sure.addMouseListener(new SureListener());
+				sure.addMouseListener(new MouseListener(){
+					public void mouseClicked(MouseEvent e) {
+						// TODO 
+						PlayWave.startClickSound();
+						System.out.println(ascend.isSelected());
+						if (ascend.isSelected()) {
+							AorD = "ascend";
+							
+						} else if(descend.isSelected()){
+							AorD = "descend";
+						} else {
+							AorD = "0";
+						}
+						dw.dispose();
+					}
+					public void mouseEntered(MouseEvent e) {
+					}
+					public void mouseExited(MouseEvent e) {						
+					}
+					public void mousePressed(MouseEvent e) {				
+					}
+					public void mouseReleased(MouseEvent arg0) {					
+					}
+				});
 				dPanel.add(sure, 0);
 				
 				cancel = new JButton();
-				cancel.setBounds(200, 150, 80, 30);
+				cancel.setBounds(220, 220, 80, 30);
 				cancel.setContentAreaFilled(false);
 				cancel.setBorderPainted(false);
 				cancel.setIcon(AllImages.IMG_CANCEL);
 				cancel.setOpaque(false);
-				cancel.addMouseListener(new CancelListener());
+				cancel.addMouseListener(new MouseListener(){
+
+					public void mouseClicked(MouseEvent arg0) {
+						// TODO Auto-generated method stub
+						PlayWave.startClickSound();
+						dw.dispose();
+					}
+
+					public void mouseEntered(MouseEvent arg0) {
+					}
+
+					public void mouseExited(MouseEvent arg0) {
+						
+					}
+
+					public void mousePressed(MouseEvent arg0) {
+				
+					}
+
+					public void mouseReleased(MouseEvent arg0) {
+					
+					}
+					
+				});
 				dPanel.add(cancel, 0);
-				MyDialog pd = new MyDialog();
-				pd.init(400, 300, dPanel);
+	
 			}
 		}
 		public void mouseEntered(MouseEvent e) {
@@ -430,63 +477,6 @@ public class StatisticPanel {
 			        	descend.setIcon(AllImages.IMG_RIGHT_RADIO);
 				        ascend.setIcon(AllImages.IMG_FALSE_RADIO);
 			        }
-			}
-			
-		}
-		class SureListener implements MouseListener {
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				PlayWave.startClickSound();
-				System.out.println(ascend.isSelected());
-				if (ascend.isSelected()) {
-					AorD = "ascend";
-					
-				} else if(descend.isSelected()){
-					AorD = "descend";
-				} else {
-					AorD = "0";
-				}
-				dialog.dispose();
-			}
-
-			public void mouseEntered(MouseEvent e) {
-			}
-
-			public void mouseExited(MouseEvent e) {
-				
-			}
-
-			public void mousePressed(MouseEvent e) {
-		
-			}
-
-			public void mouseReleased(MouseEvent arg0) {
-			
-			}
-			
-		}
-
-		class CancelListener implements MouseListener {
-
-			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				PlayWave.startClickSound();
-				dialog.dispose();
-			}
-
-			public void mouseEntered(MouseEvent arg0) {
-			}
-
-			public void mouseExited(MouseEvent arg0) {
-				
-			}
-
-			public void mousePressed(MouseEvent arg0) {
-		
-			}
-
-			public void mouseReleased(MouseEvent arg0) {
-			
 			}
 			
 		}

@@ -18,6 +18,7 @@ import javax.swing.ListSelectionModel;
 import sound.PlayWave;
 import ui.AllImages;
 import ui.ComboTextField;
+import ui.DateChooserJButton;
 import ui.IScrollBarUI;
 import ui.MyStringTable;
 import vo.PlayerBasicVO;
@@ -51,6 +52,8 @@ public class SearchPanel {
 	private ComboTextField comboField;
 	//
 	JLabel A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z;
+	public DateChooserJButton beginTime;
+	public DateChooserJButton endTime;
 	//
 	PlayerBL pbl = new PlayerBL_Impl();
 	TeamBL tbl = new TeamBL_Impl();
@@ -133,6 +136,7 @@ public class SearchPanel {
 		sure.setContentAreaFilled(false);
 		sure.setOpaque(false);
 		sure.setIcon(AllImages.IMG_SURE);
+		sure.addMouseListener(new SurePListener());
 		searchToolPanel.add(sure, 0);
 		
 		//TODO 索引
@@ -373,6 +377,7 @@ public class SearchPanel {
 		sure.setContentAreaFilled(false);
 		sure.setOpaque(false);
 		sure.setIcon(AllImages.IMG_SURE);
+		sure.addMouseListener(new SureTListener());
 		searchToolPanel.add(sure, 0);
 		
 		//TODO 索引
@@ -589,30 +594,30 @@ public class SearchPanel {
 	}
 	
 	public void initMTool(){
-		String[] name = {"ab","bc","bcd","bcc","bdd","befg","ff","gt","hy","ibc","jkb","kib","lac","mb","nac","opu","pab","qsc","rst","uwv"};
-		ArrayList<String> list = new ArrayList<String>();
-		for (int i=0;i < name.length;i++) {
-			list.add(name[i]);
-		}
-		comboField = new ComboTextField(list);
-		comboField.setFont(new Font("微软雅黑", Font.PLAIN, 13));
-		comboField.setOpaque(false);
-		comboField.setBounds(40, 20, 150, 30);
-		comboField.setForeground(Color.WHITE);
-		comboField.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println(ComboTextField.jcb.getSelectedItem().toString());
-			}		
-		});
-		searchToolPanel.add(comboField, 0);
+		
+		beginTime = new DateChooserJButton();
+		beginTime.setBounds(100, 20, 120, 40);
+		beginTime.setOpaque(false);
+		beginTime.setContentAreaFilled(false);
+		beginTime.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		beginTime.setForeground(Color.WHITE);
+		searchToolPanel.add(beginTime, 0);
+		
+		endTime = new DateChooserJButton();
+		endTime.setBounds(300, 20, 120, 40);
+		endTime.setOpaque(false);
+		endTime.setContentAreaFilled(false);
+		endTime.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		endTime.setForeground(Color.WHITE);
+		searchToolPanel.add(endTime, 0);
 		
 		JButton sure = new JButton();
-		sure.setBounds(210, 20, 80, 30);
+		sure.setBounds(480, 20, 80, 30);
 		sure.setBorderPainted(true);
 		sure.setContentAreaFilled(false);
 		sure.setOpaque(false);
 		sure.setIcon(AllImages.IMG_SURE);
+		sure.addMouseListener(new SureMListener());
 		searchToolPanel.add(sure, 0);
 	}
 	
@@ -2365,5 +2370,78 @@ public class SearchPanel {
 		}
 		public void mouseReleased(MouseEvent arg0) {
 		}
+	}
+	
+	class SurePListener implements MouseListener{
+
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseEntered(MouseEvent arg0) {
+			
+		}
+
+		public void mouseExited(MouseEvent arg0) {
+			
+		}
+
+		public void mousePressed(MouseEvent arg0) {
+			
+		}
+
+		public void mouseReleased(MouseEvent arg0) {
+			
+		}
+		
+	}
+	class SureTListener implements MouseListener{
+
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void mouseEntered(MouseEvent arg0) {
+			
+		}
+
+		public void mouseExited(MouseEvent arg0) {
+			
+		}
+
+		public void mousePressed(MouseEvent arg0) {
+			
+		}
+
+		public void mouseReleased(MouseEvent arg0) {
+			
+		}
+		
+	}
+	class SureMListener implements MouseListener{
+
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			System.out.println(beginTime.getDate()+"---"+endTime.getDate());
+		}
+
+		public void mouseEntered(MouseEvent arg0) {
+			
+		}
+
+		public void mouseExited(MouseEvent arg0) {
+			
+		}
+
+		public void mousePressed(MouseEvent arg0) {
+			
+		}
+
+		public void mouseReleased(MouseEvent arg0) {
+			
+		}
+		
 	}
 }

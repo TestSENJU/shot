@@ -73,7 +73,7 @@ public class PlayerPanel {
 		
 		players.addMouseListener(new TableListener());
 
-		players.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		players.setFont(new Font("微软雅黑", Font.PLAIN, 12));
 		
 	    scrollPane = new JScrollPane();
 	    scrollPane.setColumnHeaderView(players.getTableHeader());	//设置头部（HeaderView部分）  

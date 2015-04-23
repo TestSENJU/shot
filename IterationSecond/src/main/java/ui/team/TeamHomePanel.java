@@ -545,7 +545,7 @@ public class TeamHomePanel {
 			MatchBL mbl = new MatchBL_Impl();
 			ArrayList<MatchVO> teamMatch = new ArrayList<MatchVO>();
 			teamMatch = mbl.getRecentMatchByTeam(teamTempID);
-			String[] columnName_RM = new String[] { "比赛名称","时间", "比分", "对手" };
+			String[] columnName_RM = new String[] { "比赛名称","时间", "对手", "比分" };
 			Object[][] columnRMValues = new Object[teamMatch.size()][columnName_RM.length];
 			for (int i = 0; i < teamMatch.size(); i++) {
 				columnRMValues[i][0] = teamMatch.get(i).getName();

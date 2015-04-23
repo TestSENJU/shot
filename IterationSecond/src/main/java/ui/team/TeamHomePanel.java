@@ -126,7 +126,7 @@ public class TeamHomePanel {
 		fullName.setBorderPainted(false);
 		fullName.setText("队名");
 		fullName.setForeground(Color.GRAY);
-		fullName.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		fullName.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(fullName, 0);
 		
 		//TODO
@@ -135,7 +135,7 @@ public class TeamHomePanel {
 		tfullName.setOpaque(false);
 		tfullName.setText(teamInfo.getLongName());
 		tfullName.setForeground(Color.WHITE);
-		tfullName.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		tfullName.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(tfullName, 0);
 		
 		shortName = new JButton();
@@ -145,7 +145,7 @@ public class TeamHomePanel {
 		shortName.setBorderPainted(false);
 		shortName.setText("队名缩写");
 		shortName.setForeground(Color.GRAY);
-		shortName.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		shortName.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(shortName, 0);
 		
 		//TODO
@@ -154,7 +154,7 @@ public class TeamHomePanel {
 		tShortName.setOpaque(false);
 		tShortName.setText(teamTempID);
 		tShortName.setForeground(Color.WHITE);
-		tShortName.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		tShortName.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(tShortName, 0);
 		
 		location = new JButton();
@@ -164,7 +164,7 @@ public class TeamHomePanel {
 		location.setBorderPainted(false);
 		location.setText("所在地");
 		location.setForeground(Color.GRAY);
-		location.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		location.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(location, 0);
 		
 		//TODO
@@ -173,7 +173,7 @@ public class TeamHomePanel {
 		tLocation.setOpaque(false);
 		tLocation.setText(teamInfo.getTeamInfo()[1]);
 		tLocation.setForeground(Color.WHITE);
-		tLocation.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		tLocation.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(tLocation, 0);
 		
 		zone = new JButton();
@@ -183,7 +183,7 @@ public class TeamHomePanel {
 		zone.setBorderPainted(false);
 		zone.setText("赛区");
 		zone.setForeground(Color.GRAY);
-		zone.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		zone.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(zone, 0);
 		
 		//TODO
@@ -192,7 +192,7 @@ public class TeamHomePanel {
 		tZone.setOpaque(false);
 		tZone.setText(teamInfo.getTeamInfo()[2]);
 		tZone.setForeground(Color.WHITE);
-		tZone.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		tZone.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(tZone, 0);
 		
 		partition = new JButton();
@@ -202,7 +202,7 @@ public class TeamHomePanel {
 		partition.setBorderPainted(false);
 		partition.setText("分区");
 		partition.setForeground(Color.GRAY);
-		partition.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		partition.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(partition, 0);
 		
 		//TODO
@@ -211,7 +211,7 @@ public class TeamHomePanel {
 		tPartition.setOpaque(false);
 		tPartition.setText(teamInfo.getTeamInfo()[3]);
 		tPartition.setForeground(Color.WHITE);
-		tPartition.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		tPartition.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(tPartition, 0);
 		
 		homeCourt = new JButton();
@@ -221,7 +221,7 @@ public class TeamHomePanel {
 		homeCourt.setBorderPainted(false);
 		homeCourt.setText("主场");
 		homeCourt.setForeground(Color.GRAY);
-		homeCourt.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		homeCourt.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(homeCourt, 0);
 		
 		//TODO
@@ -230,7 +230,7 @@ public class TeamHomePanel {
 		tHomeCourt.setOpaque(false);
 		tHomeCourt.setText(teamInfo.getTeamInfo()[4]);
 		tHomeCourt.setForeground(Color.WHITE);
-		tHomeCourt.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		tHomeCourt.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(tHomeCourt, 0);
 		
 		settingTime = new JButton();
@@ -240,7 +240,7 @@ public class TeamHomePanel {
 		settingTime.setBorderPainted(false);
 		settingTime.setText("建立时间");
 		settingTime.setForeground(Color.GRAY);
-		settingTime.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		settingTime.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(settingTime, 0);
 		
 		//TODO
@@ -249,7 +249,7 @@ public class TeamHomePanel {
 		tSettingTime.setOpaque(false);
 		tSettingTime.setText(teamInfo.getTeamInfo()[5]);
 		tSettingTime.setForeground(Color.WHITE);
-		tSettingTime.setFont(new Font("微软雅黑",Font.PLAIN, 15));
+		tSettingTime.setFont(new Font("微软雅黑",Font.PLAIN, 13));
 		teamHomePanel.add(tSettingTime, 0);
 		
 		//TODO initButton

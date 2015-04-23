@@ -8,6 +8,8 @@ import po.PlayerAllPlusRatePO;
 import po.PlayerAveragePlusRatePO;
 import po.PlayerBasicPO;
 import po.TeamAllPlusRatePO;
+import po.TeamAveragePlusRatePO;
+import po.TeamBasicPO;
 import vo.MatchVO;
 
 public class PlayerData_Drive {
@@ -42,18 +44,18 @@ public static void main(String args[]){
 //		System.out.println(list1.get(i));
 //	}
 	//球员所属球队，提升率,average
-//	ArrayList<PlayerAveragePlusRatePO> list=playerData.getPlayerAverage();
-//	for(int i=0;i<list.size();i++){
-//		PlayerAveragePlusRatePO player=list.get(i);
-//		System.out.println(player.getName());
-//		System.out.println(player.getCompeteNum());
-//		System.out.println(player.getOffensiveNum());
-//		System.out.println(player.getPlayingTime());
-//		double[] data=player.getPlayerData();
-//		for(int j=0;j<data.length;j++){
-//			System.out.println(data[j]);
-//	}
-//	}
+	ArrayList<PlayerAveragePlusRatePO> list=playerData.getPlayerAverage();
+	for(int i=0;i<list.size();i++){
+		PlayerAveragePlusRatePO player=list.get(i);
+		System.out.println(player.getName());
+		System.out.println(player.getCompeteNum());
+		System.out.println(player.getOffensiveNum());
+		System.out.println(player.getPlayingTime());
+		double[] data=player.getPlayerData();
+		for(int j=0;j<data.length;j++){
+			System.out.println(data[j]);
+	}
+	}
 	
 //	PlayerAveragePlusRatePO po=playerData.getPlayerAverageByName("Aaron Brooks");
 //	System.out.println(po.getPlayingTime());
@@ -87,7 +89,7 @@ public static void main(String args[]){
 	
 	
 	
-	MatchDataService matchData=new MatchData_Impl();
+//	MatchDataService matchData=new MatchData_Impl();
 //	MatchPO match=matchData.getMatchByName("13-14_01-01_CHA-LAC");
 //	System.out.println(match.getName());
 //	System.out.println(match.getTeam1());
@@ -107,7 +109,6 @@ public static void main(String args[]){
 //		System.out.println();
 //	}
 	
-	//根据球队查找有空指针
 //	ArrayList<MatchPO> list=matchData.getMatchByTeam("ATL");
 //	for(int i=0;i<list.size();i++){
 //		MatchPO match=list.get(i);
@@ -130,6 +131,7 @@ public static void main(String args[]){
 //	}
 //	}
 	
+	// 赢得比赛的数量
 	TeamDataService team=new TeamData_Impl();
 //	ArrayList<String>list=team.getAllTeamNames();
 //	for(int i=0;i<list.size();i++){
@@ -137,14 +139,73 @@ public static void main(String args[]){
 //	}
 //	String name=team.getTeamName("CHA");
 //	System.out.print(name);
-	TeamAllPlusRatePO po=team.getTeamAllByName("CHA");
-	System.out.println(po.getTeamName());
-	System.out.println(po.getMatchNum());
-	System.out.println(po.getTeamNameLong());
-	System.out.println(po.getWinNum());
+	
+//	TeamAllPlusRatePO po=team.getTeamAllByName("CHA");
 //	System.out.println(po.getTeamName());
-
-
+//	System.out.println(po.getMatchNum());
+//	System.out.println(po.getTeamNameLong());
+//	System.out.println(po.getWinNum());
+//	ArrayList<String> list=po.getPlayerList();
+//	System.out.println(list.size());
+//	for(int i=0;i<list.size();i++){
+//		System.out.println(list.get(i));
+//	}
+//    double[] nums=po.getTeamData();
+//    for(int i=0;i<nums.length;i++){
+//    	System.out.println(nums[i]);
+//    }
+//
+//	TeamBasicPO po=team.getTeamBasicByName("CHA");
+//	String strs[]=po.getTeamInfo();
+//	for(int i=0;i<strs.length;i++){
+//		System.out.println(strs[i]);
+//	}
+	
+//	ArrayList<TeamBasicPO>list=team.getTeamBasic();
+//	for(int i=0;i<list.size();i++){
+//		TeamBasicPO po=list.get(i);
+//        System.out.println(po.getTeamName());
+//        System.out.println(po.getLongName());
+//		String strs[]=po.getTeamInfo();
+//		for(int j=0;j<strs.length;j++){
+//			System.out.println(strs[j]);
+//	}
+//	
+//}
+//	ArrayList<String> list=team.getPlayerNamesOfTeam("CHA");
+//	for(int i=0;i<list.size();i++){
+//		System.out.println(list.get(i));
+//	}
+//	System.out.println(team.getTeamName("CHA"));
+	
+//    ArrayList<TeamAveragePlusRatePO>list=team.getTeamAverage();
+//    for(int i=0;i<list.size();i++){
+//    	TeamAveragePlusRatePO po=list.get(i);
+//    	System.out.println(po.getTeamNameLong());
+//    	System.out.println(po.getMatchNum());
+//    	System.out.println(po.getWinNum());
+//    	double nums[]=po.getTeamData();
+//    	ArrayList<String> playernames=po.getPlayerList();
+//    	for(int j=0;j<nums.length;j++){
+//    		System.out.println(nums[j]);
+//    	}
+//    	for(int j=0;j<playernames.size();j++){
+//    		System.out.println(playernames.get(j));
+//    	}
+//    	
+//    }
+//	TeamAveragePlusRatePO  po=team.getTeamAverageByName("CHA");
+//	System.out.println(po.getTeamNameLong());
+//	System.out.println(po.getMatchNum());
+//	System.out.println(po.getWinNum());
+//	double nums[]=po.getTeamData();
+//	ArrayList<String> playernames=po.getPlayerList();
+//	for(int j=0;j<nums.length;j++){
+//		System.out.println(nums[j]);
+//	}
+//	for(int j=0;j<playernames.size();j++){
+//		System.out.println(playernames.get(j));
+//	}
 }
 }
 //

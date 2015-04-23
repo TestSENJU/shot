@@ -47,4 +47,6 @@ public interface PlayerDataService {
 	
 	public ArrayList<String> getMatchNamesByPlayerName(String playerName);
 	
+	public ArrayList<String> getPlayerNamesByBasic(String path);
+	
 }

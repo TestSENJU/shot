@@ -41,7 +41,7 @@ public class MatchData_Impl implements MatchDataService{
 
 	public ArrayList<MatchPO> getMatchByTeam(String teamName) {
 		// TODO Auto-generated method stub
-		ArrayList<String>teamList=playerTable.get(teamName);
+		ArrayList<String>teamList=teamTable.get(teamName);
 		if(teamList==null){
 			return null;
 		}else{

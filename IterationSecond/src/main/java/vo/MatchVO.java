@@ -5,17 +5,30 @@ import java.util.ArrayList;
 import po.MatchPO;
 
 public class MatchVO {
+	//比赛名称
 String name;
+//比赛时间
 private String time;
+//前一支球队的名字
 private String team1;
+///后一支球队的
 private String team2;
+//前一个队伍的数据，就是比赛文件里面那一行一行的
 private ArrayList<String[]> list1=new ArrayList<String[]>();
+//后一个队伍的数据，就是比赛文件里面那一行一行的
 private ArrayList<String[]>list2=new ArrayList<String[]>();
+//总得分 比如85-112
 private String pointer;
+//每一个分场的得分
 private ArrayList<String> pointerpart=new ArrayList<String>();
 public MatchVO(String filename){
 	this.name=filename;	
 }
+
+public String getName() {
+	return name;
+}
+
 public MatchVO(MatchPO po){
 	this.name=po.getName();
 	this.time=po.getTime();

@@ -33,7 +33,7 @@ public void run(){
 			if(fileNames!=null){
 				
 				if(fileNames.length>filenames.length){
-					System.out.println("run");
+			
 				ArrayList<String> list=new ArrayList<String>();
 				Arrays.sort(filenames);
 				Arrays.sort(fileNames);
@@ -141,11 +141,11 @@ private void readFile(String filename){
 		if(TeamNum1[14]>TeamNum2[14]){i1=1;i2=0;}else{i1=0;i2=1;}
 		String filestrs[]=filename.split("//");
 		
-		TeamData_Impl.addToTable(TeamNum1, opponentNum2, filestrs[2], team1, 1, playerList1,i1);
-		TeamData_Impl.addToTable(TeamNum2,opponentNum1,filestrs[2],team2,1, playerList2,i2);
-		PlayerData_Impl.addToTable(strlist1,filestrs[2],team1,nums1,teamTime1,nums2);
-		PlayerData_Impl.addToTable(strlist2,filestrs[2],team2,nums2,teamTime1,nums1);
-		MatchData_Impl.addToTable(filestrs[2], team1, teamTime1, strlist1, team2, strlist2, pointer, pointerpart);
+		TeamData_Impl.addToTable(TeamNum1, opponentNum2, filestrs[1], team1, playerList1,i1);
+		TeamData_Impl.addToTable(TeamNum2,opponentNum1,filestrs[1],team2, playerList2,i2);
+		PlayerData_Impl.addToTable(strlist1,filestrs[1],team1,nums1,teamTime1,nums2);
+		PlayerData_Impl.addToTable(strlist2,filestrs[1],team2,nums2,teamTime1,nums1);
+		MatchData_Impl.addToTable(filestrs[1], team1, teamTime1, strlist1, team2, strlist2, pointer, pointerpart);
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
         System.out.println("read file file notfound");

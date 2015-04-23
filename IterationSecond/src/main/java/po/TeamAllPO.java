@@ -15,7 +15,7 @@ String teamName;
 private ArrayList<String> playerList=new ArrayList<String>();
 private HashMap<String,double[]>teamDataList=new HashMap<String,double[]>();
 private HashMap<String,double[]>opponentDataList=new HashMap<String,double[]>();
-private ArrayList<String> winMatchNum=new ArrayList<String>();
+private ArrayList<String> winMatchList=new ArrayList<String>();
 
 public TeamAllPO(String name){
 	this.teamName=name;
@@ -30,7 +30,7 @@ public void addOpponentData(String matchName,double[]opponentData){
 	this.opponentDataList.put(matchName, opponentData);
 }
 public void addWinMatchNum(String matchName){
-	this.winMatchNum.add(matchName);
+	this.winMatchList.add(matchName);
 }
 public TeamAllPlusRatePO makeDetailedAllPO(){
 	TeamAllPlusRatePO allData=new TeamAllPlusRatePO(this.teamName);
@@ -39,7 +39,7 @@ public TeamAllPlusRatePO makeDetailedAllPO(){
 	if(this.teamName=="NOP"){
 		allData.setUsedName("NOH");
 	}
-	allData.addWinNum(winMatchNum.size());
+	allData.addWinNum(winMatchList.size());
     double[] data=new double[25];
     double [] oppData=new double[3];
     Set<String>keys=teamDataList.keySet();
@@ -56,7 +56,7 @@ public TeamAllPlusRatePO makeDetailedAllPO(){
 	data[15]=data[0]/data[1];
 	data[16]=data[2]/data[3];
 	data[17]=data[4]/data[5];
-	data[18]=winMatchNum.size()/teamDataList.size();
+	data[18]=winMatchList.size()/teamDataList.size();
 	data[19]=data[1]+0.4*data[5]-1.07*(data[6]/(data[6]+data[7])*data[12])+1.07*data[12];
 	data[20]=data[14]/data[19]*100;
 	data[21]=oppData[2]/data[19]*100;

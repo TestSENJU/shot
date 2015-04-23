@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,6 +27,13 @@ import sound.PlayWave;
 import ui.AllImages;
 import ui.IScrollBarUI;
 import ui.MyStringTable;
+import vo.MatchVO;
+import vo.PlayerAllVO;
+import vo.PlayerBasicVO;
+import BL.MatchBL;
+import BL.MatchBL_Impl;
+import BL.PlayerBL;
+import BL.PlayerBL_Impl;
 
 public class PlayerHomePanel {
 	/**
@@ -61,8 +69,19 @@ public class PlayerHomePanel {
 	private JScrollPane rMScrollPane;
 	private MyStringTable aMTable;
 	private JScrollPane aMScrollPane;
+	
+	//
+	MatchBL mbl = new MatchBL_Impl();
+	String playerTempID;
 
 	public JPanel init(String playerID) {
+		playerTempID = playerID;
+		PlayerBL pbl = new PlayerBL_Impl();
+		PlayerBasicVO pbasicList = new PlayerBasicVO(playerID);
+		pbasicList = pbl.getPlayerBasicByName(playerID);
+		PlayerAllVO playerAllList = new PlayerAllVO(playerID);
+		playerAllList = pbl.getPlayerAllByName(playerID);
+		
 		pHomePanel = new JPanel();
 		pHomePanel.setOpaque(false);
 		pHomePanel.setBounds(0, 0, 1000 - 130, 700);
@@ -74,7 +93,7 @@ public class PlayerHomePanel {
 		playerPhoto.setOpaque(false);
 		playerPhoto.setContentAreaFilled(false);
 		playerPhoto.setBorderPainted(false);
-		playerPhoto.setIcon(new ImageIcon("playerImg/action/Aaron Brooks.png"));
+		playerPhoto.setIcon(new ImageIcon("playerImg/action/"+pbasicList.getPlayerName()+".png"));
 		pHomePanel.add(playerPhoto, 0);
 
 		// TODO basic info labels - name-jerseyNum-position-
@@ -99,7 +118,7 @@ public class PlayerHomePanel {
 		JLabel pName = new JLabel();
 		pName.setBounds(toLeftFirst + 100, 80, width, height);
 		pName.setOpaque(false);
-		pName.setText("aron");
+		pName.setText(pbasicList.getPlayerName());
 		pName.setForeground(Color.WHITE);
 		pName.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pName, 0);
@@ -118,7 +137,7 @@ public class PlayerHomePanel {
 		JLabel pJerseyNum = new JLabel();
 		pJerseyNum.setBounds(toLeftFirst + 100, 130, width, height);
 		pJerseyNum.setOpaque(false);
-		pJerseyNum.setText("19");
+		pJerseyNum.setText(pbasicList.getBasicInfo()[0]);
 		pJerseyNum.setForeground(Color.WHITE);
 		pJerseyNum.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pJerseyNum, 0);
@@ -137,7 +156,7 @@ public class PlayerHomePanel {
 		JLabel pPosition = new JLabel();
 		pPosition.setBounds(toLeftFirst + 100, 180, width, height);
 		pPosition.setOpaque(false);
-		pPosition.setText("F");
+		pPosition.setText(pbasicList.getBasicInfo()[1]);
 		pPosition.setForeground(Color.WHITE);
 		pPosition.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pPosition, 0);
@@ -156,7 +175,7 @@ public class PlayerHomePanel {
 		JLabel pHeight = new JLabel();
 		pHeight.setBounds(toLeftFirst + 100, 230, width, height);
 		pHeight.setOpaque(false);
-		pHeight.setText("174");
+		pHeight.setText(pbasicList.getBasicInfo()[2]);
 		pHeight.setForeground(Color.WHITE);
 		pHeight.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pHeight, 0);
@@ -175,7 +194,7 @@ public class PlayerHomePanel {
 		JLabel pWeight = new JLabel();
 		pWeight.setBounds(toLeftFirst + 100, 280, width, height);
 		pWeight.setOpaque(false);
-		pWeight.setText("60kg");
+		pWeight.setText(pbasicList.getBasicInfo()[3]);
 		pWeight.setForeground(Color.WHITE);
 		pWeight.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pWeight, 0);
@@ -195,7 +214,7 @@ public class PlayerHomePanel {
 		JLabel pBirth = new JLabel();
 		pBirth.setBounds(toLeftSecond + 100, 80, width, height);
 		pBirth.setOpaque(false);
-		pBirth.setText("96-01-19");
+		pBirth.setText(pbasicList.getBasicInfo()[4]);
 		pBirth.setForeground(Color.WHITE);
 		pBirth.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pBirth, 0);
@@ -214,7 +233,7 @@ public class PlayerHomePanel {
 		JLabel pAge = new JLabel();
 		pAge.setBounds(toLeftSecond + 100, 130, width, height);
 		pAge.setOpaque(false);
-		pAge.setText("19");
+		pAge.setText(pbasicList.getBasicInfo()[5]);
 		pAge.setForeground(Color.WHITE);
 		pAge.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pAge, 0);
@@ -233,7 +252,7 @@ public class PlayerHomePanel {
 		JLabel pExp = new JLabel();
 		pExp.setBounds(toLeftSecond + 100, 180, width, height);
 		pExp.setOpaque(false);
-		pExp.setText("1.5 years");
+		pExp.setText(pbasicList.getBasicInfo()[6]);
 		pExp.setForeground(Color.WHITE);
 		pExp.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pExp, 0);
@@ -252,7 +271,7 @@ public class PlayerHomePanel {
 		JLabel pSchool = new JLabel();
 		pSchool.setBounds(toLeftSecond + 100, 230, width, height);
 		pSchool.setOpaque(false);
-		pSchool.setText("CPU");
+		pSchool.setText(pbasicList.getBasicInfo()[7]);
 		pSchool.setForeground(Color.WHITE);
 		pSchool.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pSchool, 0);
@@ -270,7 +289,7 @@ public class PlayerHomePanel {
 
 		// logoIcon
 		JSVGCanvas svgCanvas = new JSVGCanvas();
-		File f1 = new File("teamImg/ATL.svg");
+		File f1 = new File("teamImg/"+playerAllList.getTeamList().get(playerAllList.getTeamList().size()-1)+".svg");
 		svgCanvas.setBounds(600, 130, 140, 140);
 		svgCanvas.setURI(f1.toURI().toString());
 		svgCanvas.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter() {
@@ -293,7 +312,7 @@ public class PlayerHomePanel {
 			}
 
 			public void gvtRenderingCompleted(GVTTreeRendererEvent e) {
-				System.out.println(1);
+				System.out.println("renderCompleted");
 			}
 		});
 		pHomePanel.add(svgCanvas, 0);
@@ -591,13 +610,14 @@ public class PlayerHomePanel {
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			PlayWave.startClickSound();
-			String[] columnName_RM = new String[] { "时间", "比赛名称", "比分", "对手" };
+			ArrayList<MatchVO> playerMatch = new ArrayList<MatchVO>();
+			playerMatch = mbl.getRecentMatchByPlayer(playerTempID);
+			String[] columnName_RM = new String[] { "比赛名称", "时间", "比分" };
 			Object[][] columnRMValues = new Object[5][columnName_RM.length];
 			for (int i = 0; i < 5; i++) {
-				columnRMValues[i][0] = i;
-				columnRMValues[i][1] = i;
-				columnRMValues[i][2] = i;
-				columnRMValues[i][3] = i;
+				columnRMValues[i][0] = playerMatch.get(i).getName();
+				columnRMValues[i][1] = playerMatch.get(i).getTime();
+				columnRMValues[i][2] = playerMatch.get(i).getPointer();
 			}
 			morePanel.removeAll();
 			morePanel.add(initRMTable(columnRMValues, columnName_RM), 0);
@@ -621,13 +641,14 @@ public class PlayerHomePanel {
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			PlayWave.startClickSound();
-			String[] columnName_AM = new String[] { "时间", "比赛名称", "比分", "对手" };
-			Object[][] columnAMValues = new Object[30][columnName_AM.length];
-			for (int i = 0; i < 30; i++) {
-				columnAMValues[i][0] = i;
-				columnAMValues[i][1] = i;
-				columnAMValues[i][2] = i;
-				columnAMValues[i][3] = i;
+			ArrayList<MatchVO> playerMatch = new ArrayList<MatchVO>();
+			playerMatch = mbl.getMatchByPlayer(playerTempID);
+			String[] columnName_AM = new String[] { "比赛名称", "时间", "比分" };
+			Object[][] columnAMValues = new Object[5][columnName_AM.length];
+			for (int i = 0; i < 5; i++) {
+				columnAMValues[i][0] = playerMatch.get(i).getName();
+				columnAMValues[i][1] = playerMatch.get(i).getTime();
+				columnAMValues[i][2] = playerMatch.get(i).getPointer();
 			}
 			morePanel.removeAll();
 			morePanel.add(initAMTable(columnAMValues, columnName_AM), 0);

@@ -51,7 +51,6 @@ public class PlayerData_Impl implements PlayerDataService{
 			String s[]=new String[9];
 			String ss[]=new String[8];
 		    while((str=br.readLine())!=null){
-				
 				if(str.contains("│")){
 					String strs[]=str.split("│");
 					s[n]=(strs[1].substring(0, strs[1].length()-1));
@@ -63,6 +62,7 @@ public class PlayerData_Impl implements PlayerDataService{
 				ss[j]=s[j+1];
 			}
 			PlayerBasicPO basic=new PlayerBasicPO(playerName);
+			
 			basic.setBasicInfo(ss);
 			
 			return basic;
@@ -147,7 +147,7 @@ public class PlayerData_Impl implements PlayerDataService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	private ArrayList<String> getPlayerNamesByBasic(String path){
+	public ArrayList<String> getPlayerNamesByBasic(String path){
 		ArrayList<String> playerNames=new ArrayList<String>();
 		String names[]=new File(path).list();
 		for(int i=0;i<names.length;i++){

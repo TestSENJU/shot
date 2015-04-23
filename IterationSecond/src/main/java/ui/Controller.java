@@ -94,6 +94,10 @@ public class Controller {
 			HotInfoPanel hp = new HotInfoPanel();
 			JPanel h = hp.init();
 			InitailizePanel.bg.add(h, new Integer(1));
+			HotInfoPanel.tablePanel.removeAll();
+			hp.hotPlayerTodayPanel();
+			HotInfoPanel.tablePanel.repaint();
+			HotInfoPanel.hotPanel.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();

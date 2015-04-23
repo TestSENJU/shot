@@ -59,6 +59,7 @@ public class PlayerBL_Impl implements PlayerBL{
 		// TODO Auto-generated method stub
 		PlayerBasicVO vo=new PlayerBasicVO(playerData.getPlayerBasicByName(name));
 		if(vo!=null){
+			System.out.println(vo.getPlayerName());
 			return vo;
 		}else{
 			System.out.println("getplayerbasicbyname vo");
@@ -122,24 +123,57 @@ public class PlayerBL_Impl implements PlayerBL{
 		return result;
 	}
 
-	public ArrayList<PlayerAllVO> getPlayerAllRankingByNum(int num) {
+	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumRaising(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAllVO> list=getPlayerAll();
 		Collections.sort(list, new SortAllByNum(num));
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNum(int num) {
+	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumRaising(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO> list=getPlayerAverage();
 		Collections.sort(list, new SortAverageByNum(num));
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getTodayHotPlayerRankingByNum(int num,
-			String time) {
+	public ArrayList<PlayerAverageVO> getTodayHotPlayerRankingByNum(int num) {
+		// TODO Auto-generated method stub
+		return getHotPlayerRankingByNum(num);
+	}
+
+	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumDeclining(int num) {
+		// TODO Auto-generated method stub
+		ArrayList<PlayerAllVO> list=getPlayerAllRankingByNumRaising(num);
+		Collections.reverse(list);
+		return list;
+	}
+
+	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumDeclining(
+			int num) {
+		// TODO Auto-generated method stub
+		ArrayList<PlayerAverageVO> list=getPlayerAvergaeRankingByNumDeclining(num);
+		Collections.reverse(list);
+		return list;
+	}
+
+	public ArrayList<PlayerAllVO> getPlayerAllByLeague(String str) {
+		// TODO Auto-generated method stub
+//		ArrayList<PlayerAllVO>list=getPlayerAll();
+//		for(int i=0;i<list.size();i++){
+//			PlayerAllVO 
+//		}
+		return null;
+	}
+
+	public ArrayList<PlayerAverageVO> getPlayerAverageByLeague(String str) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public ArrayList<String> getPlayerNamesByBasic() {
+		// TODO Auto-generated method stub
+		return playerData.getPlayerNamesByBasic("players/info");
 	}
 
 }

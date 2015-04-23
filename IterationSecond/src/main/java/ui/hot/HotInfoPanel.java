@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +22,14 @@ import ui.IScrollBarUI;
 import ui.MyTable;
 import ui.player.PlayerHomePanel;
 import ui.team.TeamHomePanel;
+import vo.PlayerAverageVO;
+import vo.PlayerBasicVO;
+import vo.TeamAverageVO;
+import vo.TeamBasicVO;
+import BL.PlayerBL;
+import BL.PlayerBL_Impl;
+import BL.TeamBL;
+import BL.TeamBL_Impl;
 
 public class HotInfoPanel {
 	/**
@@ -59,8 +68,8 @@ public class HotInfoPanel {
 	 * @author forIris
 	 * @version  June 12, 2015 11:41:31 AM
 	 * **/
-	private JPanel hotPanel;
-	private JPanel tablePanel;
+	public static JPanel hotPanel;
+	public static JPanel tablePanel;
 	public IComboBox c;
 	private String[] columnName = null;
 	private Object[][] columnValues = null;
@@ -130,7 +139,7 @@ public class HotInfoPanel {
 		c.setBounds(50, 0, 100, 30);
 		c.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println(c.getSelectedItem());
+				//System.out.println(c.getSelectedItem());
 			}
 		});;
 		JButton sure = new JButton();
@@ -148,14 +157,30 @@ public class HotInfoPanel {
 	 * show five player info
 	 * */
 	public void hotPlayerTodayTable(String id){
+		PlayerBL pbl = new PlayerBL_Impl();
+		ArrayList<PlayerAverageVO> hptList = new ArrayList<PlayerAverageVO>();
+		if (id.equals("篮板")) {
+			hptList = pbl.getTodayHotPlayerRankingByNum(0);
+		} else if (id.equals("得分")) {
+			hptList = pbl.getTodayHotPlayerRankingByNum(11);
+		} else if (id.equals("助攻")) {
+			hptList = pbl.getTodayHotPlayerRankingByNum(1);
+		} else if (id.equals("抢断")) {
+			hptList = pbl.getTodayHotPlayerRankingByNum(7);
+		} else if (id.equals("盖帽")) {
+			hptList = pbl.getTodayHotPlayerRankingByNum(8);
+		} else {
+			System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
+		}
 		columnName = new String[] { "球员头像", "球员名称", "所属球队", "球员位置", "数据" };
 		columnValues = new Object[5][columnName.length];
 		for (int i = 0; i < 5; i++) {
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
-			columnValues[i][1] = i;
-			columnValues[i][2] = i;
-			columnValues[i][3] = i;
-			columnValues[i][4] = i;
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hptList.get(i).getName()+".png");
+			columnValues[i][1] = hptList.get(i).getName();
+			columnValues[i][2] = hptList.get(i).getTeamList().get(hptList.get(i).getTeamList().size()-1);
+			PlayerBasicVO forPosition = new PlayerBasicVO(hptList.get(i).getName());
+			columnValues[i][3] = forPosition.getBasicInfo()[1];
+			columnValues[i][4] = hptList.get(i).getPlayerData()[1];//
 		}
 		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -167,7 +192,7 @@ public class HotInfoPanel {
 		
 		topFive.addMouseListener(new TablePListener());
 
-		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    scrollPane = new JScrollPane();
 	    scrollPane.setColumnHeaderView(topFive.getTableHeader());	//设置头部（HeaderView部分）  
@@ -212,15 +237,32 @@ public class HotInfoPanel {
 	 * show five player info
 	 * */
 	public void hotPlayerSeasonTable(String id){
-		columnName = new String[] { "球员头像", "球员名称", "所属球队", "位置", "数据" };
+		PlayerBL pbl = new PlayerBL_Impl();
+		ArrayList<PlayerAverageVO> hpsList = new ArrayList<PlayerAverageVO>();
+		if (id.equals("篮板")) {
+			hpsList = pbl.getHotPlayerRankingByNum(0);
+		} else if (id.equals("得分")) {
+			hpsList = pbl.getHotPlayerRankingByNum(11);
+		} else if (id.equals("助攻")) {
+			hpsList = pbl.getHotPlayerRankingByNum(1);
+		} else if (id.equals("抢断")) {
+			hpsList = pbl.getHotPlayerRankingByNum(7);
+		} else if (id.equals("盖帽")) {
+			hpsList = pbl.getHotPlayerRankingByNum(8);
+		} else {
+			System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
+		}
+		columnName = new String[] { "球员头像", "球员名称", "所属球队", "位置", "数据","排名" };
 		columnValues = new Object[5][columnName.length];
 		for (int i = 0; i < 5; i++) {
 
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
-			columnValues[i][1] = i+1;
-			columnValues[i][2] = i+1;
-			columnValues[i][3] = i+1;
-			columnValues[i][4] = i+1;
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hpsList.get(i).getName()+".png");
+			columnValues[i][1] = hpsList.get(i).getName();
+			columnValues[i][2] = hpsList.get(i).getTeamList().get(hpsList.get(i).getTeamList().size()-1);
+			PlayerBasicVO forPosition = new PlayerBasicVO(hpsList.get(i).getName());
+			columnValues[i][3] = forPosition.getBasicInfo()[1];
+			columnValues[i][4] = hpsList.get(i).getPlayerData()[1];
+			columnValues[i][5] = i+1;
 		}
 		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -232,7 +274,7 @@ public class HotInfoPanel {
 		
 		topFive.addMouseListener(new TablePListener());
 
-		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    scrollPane = new JScrollPane();
 	    scrollPane.setColumnHeaderView(topFive.getTableHeader());	//设置头部（HeaderView部分）  
@@ -278,12 +320,37 @@ public class HotInfoPanel {
 	 * show five team info
 	 * */
 	public void hotTeamSeasonTable(String id){
+		//"场均得分","场均篮板","场均助攻","场均盖帽",
+		//"场均抢断","三分命中率","投篮命中率","罚球命中率"
+		TeamBL tbl = new TeamBL_Impl();
+		ArrayList<TeamAverageVO> htsList = new ArrayList<TeamAverageVO>();
+		if (id.equals("场均得分")) {
+			htsList = tbl.getHotTeamByNum(14);
+		} else if (id.equals("场均篮板")) {
+			htsList = tbl.getHotTeamByNum(8);
+		} else if (id.equals("场均助攻")) {
+			htsList = tbl.getHotTeamByNum(9);
+		} else if (id.equals("场均盖帽")) {
+			htsList = tbl.getHotTeamByNum(11);
+		} else if (id.equals("场均抢断")) {
+			htsList = tbl.getHotTeamByNum(10);
+		} else if (id.equals("三分命中率")) {
+			htsList = tbl.getHotTeamByNum(16);
+		} else if (id.equals("投篮命中率")) {
+			htsList = tbl.getHotTeamByNum(15);
+		} else if (id.equals("罚球命中率")) {
+			htsList = tbl.getHotTeamByNum(17);
+		} else {
+			System.out.println("HotInfoPanel-hotTeamSeasonTable-InvalidInput.");
+		}
+		
 		columnName = new String[] { "球队名称", "联盟", "数据" };
 		columnValues = new Object[5][columnName.length];
 		for (int i = 0; i < 5; i++) {
-			columnValues[i][0] = i+2;
-			columnValues[i][1] = i+2;
-			columnValues[i][2] = i+2;
+			columnValues[i][0] = htsList.get(i).getTeamName();
+			TeamBasicVO forLeague = new TeamBasicVO(htsList.get(i).getTeamName());
+			columnValues[i][1] = forLeague.getTeamInfo()[3]+"-"+forLeague.getTeamInfo()[4];
+			columnValues[i][2] = htsList.get(i).getTeamData()[1];
 		}
 		
 		topFive = new MyTable(columnValues, columnName);
@@ -296,7 +363,7 @@ public class HotInfoPanel {
 		
 		topFive.addMouseListener(new TableTListener());
 
-		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    scrollPane = new JScrollPane();
 	    scrollPane.setColumnHeaderView(topFive.getTableHeader());	//设置头部（HeaderView部分）  
@@ -342,15 +409,27 @@ public class HotInfoPanel {
 	 * show five player info
 	 * */
 	public void bestPlayerTable(String id){
+		PlayerBL pbl = new PlayerBL_Impl();
+		ArrayList<PlayerAverageVO> bpList = new ArrayList<PlayerAverageVO>();
+		//"场均得分","场均篮板","场均助攻"
+		if (id.equals(id.equals("场均得分"))) {
+			bpList = pbl.getMostImprovedPlayerByNum(11);
+		} else if (id.equals("场均篮板")) {
+			bpList = pbl.getMostImprovedPlayerByNum(0);
+		} else if (id.equals("场均助攻")) {
+			bpList = pbl.getMostImprovedPlayerByNum(1);
+		} else {
+			System.out.println("HotInfoPanel-BestPlayerTable-InvalidInput");
+		}
 		columnName = new String[] { "球员头像", "球员名称", "所属球队", "最近五场比赛提升率","数据" };
 		columnValues = new Object[5][columnName.length];
 		for (int i = 0; i < 5; i++) {
 
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
-			columnValues[i][1] = i+3;
-			columnValues[i][2] = i+3;
-			columnValues[i][3] = i+3;
-			columnValues[i][4] = i+3;
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+bpList.get(i).getName()+".png");
+			columnValues[i][1] = bpList.get(i).getName();
+			columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
+			columnValues[i][3] = bpList.get(i).getPlayerData()[1];
+			columnValues[i][4] = bpList.get(i).getPlayerData()[2];
 		}
 		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -362,7 +441,7 @@ public class HotInfoPanel {
 		
 		topFive.addMouseListener(new TablePListener());
 
-		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    scrollPane = new JScrollPane();
 	    scrollPane.setColumnHeaderView(topFive.getTableHeader());	//设置头部（HeaderView部分）  

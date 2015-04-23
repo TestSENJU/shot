@@ -3,17 +3,31 @@ package vo;
 import po.TeamBasicPO;
 
 public class TeamBasicVO {
+	//球队缩写名
 	String teamName;
+	//球队曾用缩写名
 	private String usedName;
+	//球队全名
 	private String longName;
-
+    //球队曾用全名
 	private String usedLongName;
+	/*
+	 *  * 0球队全名
+ * 1所在地
+ * 2 赛区
+ * 3分区
+ * 4主场
+ * 5建立时间
+	 */
 	private String teamInfo[]=new String[6];
 	
 	public TeamBasicVO(String name){
 		this.teamName=name;
 	}
-    public TeamBasicVO(TeamBasicPO po){
+    public String getTeamName() {
+		return teamName;
+	}
+	public TeamBasicVO(TeamBasicPO po){
     	this.teamName=po.getTeamName();
     	this.usedName=po.getUsedName();
     	this.usedLongName=po.getUsedLongName();

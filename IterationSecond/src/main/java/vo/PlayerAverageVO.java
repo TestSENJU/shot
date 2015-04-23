@@ -5,15 +5,51 @@ import java.util.ArrayList;
 import po.PlayerAveragePlusRatePO;
 
 public class PlayerAverageVO {
-	String name;
+	String name;	//球员名
+	//球员所在过的球队名
 	private ArrayList<String> teamList=new ArrayList<String>();
+	//球员所在的球队所属的联盟
 	private ArrayList<String> teamAreaList=new ArrayList<String>();
+	// 在场时间
 	private String playingTime;
+	// 参赛场数
 	private int competeNum;
+	// 先发场数
 	private int offensiveNum;
+	/*0篮板数
+	*1助攻数
+	*2投篮命中率
+	*3三分命中率
+	*4罚球命中率
+	*5进攻数
+	*6防守数
+	*7抢断数
+	*8盖帽数
+	*9失误数
+	*10犯规数
+	*11得分
+	*12效率
+	*13GmSc效率值
+	*14真实命中率
+	*15投篮效率
+	*16篮板率
+	*17进攻篮板率
+	*18防守篮板率
+	*19助攻率
+	*20抢断率
+	*21盖帽率
+	*22失误率
+	*23使用率
+	*24得分提升率
+	*25篮板提升率
+	*26助攻提升率
+	*/
 	private double[] playerData=new double[27];
 	public PlayerAverageVO(String playerName){
 		this.name=playerName;
+	}
+	public String getName() {
+		return name;
 	}
 	public PlayerAverageVO(PlayerAveragePlusRatePO po){
 		this.name=po.getName();

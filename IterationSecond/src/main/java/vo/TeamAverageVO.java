@@ -5,13 +5,41 @@ import java.util.ArrayList;
 import po.TeamAveragePlusRatePO;
 
 public class TeamAverageVO {
-	String teamName;
-	private String teamNameLong;
-	private int matchNum;
+	String teamName;//球队缩写名
+	private String teamNameLong;//球队的全名
+	private int matchNum;//球队参加比赛的数量
+	/*
+	 *  *  0投篮命中数
+ *  1投篮出手数
+ *  2三分命中数
+ *  3三分出手数
+ *  4罚球命中数
+ *  5罚球出手数
+ *  6进攻前场篮板数
+ *  7进攻后场篮板数
+ *  8总篮板数
+ *  9助攻数
+ *  10抢断数
+ *  11盖帽数
+ *  12失误数
+ *  13犯规数
+ *  14个人得分
+ *  15投篮命中率
+ *  16三分命中率
+ *  17罚球命中率
+ *  18胜率
+ *  19进攻回合
+ *  20进攻效率
+ *  21防守效率
+ *  22篮板效率
+ *  23抢断效率
+ *  24助攻率
+	 */
 	private double[] teamData=new double[25];
-	private String usedName;
-	private String usedLongName;
-	private int winNum;
+	private String usedName;//球队曾经用过的缩写名
+	private String usedLongName;//球队的曾经使用过的全名
+	private int winNum;//球队比赛胜利的数量
+	//球队的球员名字
 	private ArrayList<String> playerList=new ArrayList<String>();
 	public TeamAverageVO(String name){
 		this.teamName=name;
@@ -34,6 +62,9 @@ public class TeamAverageVO {
 	}
 	public int getMatchNum() {
 		return matchNum;
+	}
+	public String getTeamName() {
+		return teamName;
 	}
 	public void setMatchNum(int matchNum) {
 		this.matchNum = matchNum;

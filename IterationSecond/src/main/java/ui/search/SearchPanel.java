@@ -12,10 +12,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
+import sound.PlayWave;
 import ui.AllImages;
 import ui.ComboTextField;
+import ui.IScrollBarUI;
 import ui.MyStringTable;
+import vo.PlayerBasicVO;
+import vo.TeamBasicVO;
+import BL.PlayerBL;
+import BL.PlayerBL_Impl;
+import BL.TeamBL;
+import BL.TeamBL_Impl;
 
 public class SearchPanel {
 	/**
@@ -41,6 +51,9 @@ public class SearchPanel {
 	private ComboTextField comboField;
 	//
 	JLabel A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z;
+	//
+	PlayerBL pbl = new PlayerBL_Impl();
+	TeamBL tbl = new TeamBL_Impl();
 	
 	public JPanel init(){
 		searchPanel = new JPanel();
@@ -65,7 +78,7 @@ public class SearchPanel {
 		searchT.setContentAreaFilled(false);
 		searchT.setBorderPainted(false);
 		searchT.setIcon(AllImages.IMG_SEARCHTEAM);
-		searchT.addMouseListener(new STListener());
+		searchT.addMouseListener(new STEAMListener());
 		searchPanel.add(searchT, 0);
 		
 		searchM = new JButton();
@@ -336,23 +349,334 @@ public class SearchPanel {
 	}
 	
 	public void initTTool(){
+		String[] name = {"ab","bc","bcd","bcc","bdd","befg","ff","gt","hy","ibc","jkb","kib","lac","mb","nac","opu","pab","qsc","rst","uwv"};
+		ArrayList<String> list = new ArrayList<String>();
+		for (int i=0;i < name.length;i++) {
+			list.add(name[i]);
+		}
+		comboField = new ComboTextField(list);
+		comboField.setFont(new Font("微软雅黑", Font.PLAIN, 13));
+		comboField.setOpaque(false);
+		comboField.setBounds(40, 20, 150, 30);
+		comboField.setForeground(Color.WHITE);
+		comboField.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println(ComboTextField.jcb.getSelectedItem().toString());
+			}		
+		});
+		searchToolPanel.add(comboField, 0);
 		
+		JButton sure = new JButton();
+		sure.setBounds(210, 20, 80, 30);
+		sure.setBorderPainted(true);
+		sure.setContentAreaFilled(false);
+		sure.setOpaque(false);
+		sure.setIcon(AllImages.IMG_SURE);
+		searchToolPanel.add(sure, 0);
+		
+		//TODO 索引
+		int width = 15;
+		int height = 30;
+		A = new JLabel();
+		A.setText("<html><u>A</u></html>");
+		A.setOpaque(false);
+		A.setForeground(Color.WHITE);
+		A.setBounds(40, 60, width, height);
+		A.setFont(new Font("Arial", Font.PLAIN, 15));
+		A.addMouseListener(new ATListener());
+		searchToolPanel.add(A, 0);
+		B = new JLabel();
+		B.setText("<html><u>B</u></html>");
+		B.setOpaque(false);
+		B.setForeground(Color.WHITE);
+		B.setBounds(70, 60, width, height);
+		B.setFont(new Font("Arial", Font.PLAIN, 15));
+		B.addMouseListener(new BTListener());
+		searchToolPanel.add(B, 0);
+		C = new JLabel();
+		C.setText("<html><u>C</u></html>");
+		C.setOpaque(false);
+		C.setForeground(Color.WHITE);
+		C.setBounds(100, 60, width, height);
+		C.setFont(new Font("Arial", Font.PLAIN, 15));
+		C.addMouseListener(new CTListener());
+		searchToolPanel.add(C, 0);
+		D = new JLabel();
+		D.setText("<html><u>D</u></html>");
+		D.setOpaque(false);
+		D.setForeground(Color.WHITE);
+		D.setBounds(130, 60, width, height);
+		D.setFont(new Font("Arial", Font.PLAIN, 15));
+		D.addMouseListener(new DTListener());
+		searchToolPanel.add(D, 0);
+		E = new JLabel();
+		E.setText("<html><u>E</u></html>");
+		E.setOpaque(false);
+		E.setForeground(Color.WHITE);
+		E.setBounds(160, 60, width, height);
+		E.setFont(new Font("Arial", Font.PLAIN, 15));
+		E.addMouseListener(new ETListener());
+		searchToolPanel.add(E, 0);
+		F = new JLabel();
+		F.setText("<html><u>F</u></html>");
+		F.setOpaque(false);
+		F.setForeground(Color.WHITE);
+		F.setBounds(190, 60, width, height);
+		F.setFont(new Font("Arial", Font.PLAIN, 15));
+		F.addMouseListener(new FTListener());
+		searchToolPanel.add(F, 0);
+		G = new JLabel();
+		G.setText("<html><u>G</u></html>");
+		G.setOpaque(false);
+		G.setForeground(Color.WHITE);
+		G.setBounds(220, 60, width, height);
+		G.setFont(new Font("Arial", Font.PLAIN, 15));
+		G.addMouseListener(new GTListener());
+		searchToolPanel.add(G, 0);
+		H = new JLabel();
+		H.setText("<html><u>H</u></html>");
+		H.setOpaque(false);
+		H.setForeground(Color.WHITE);
+		H.setBounds(250, 60, width, height);
+		H.setFont(new Font("Arial", Font.PLAIN, 15));
+		H.addMouseListener(new HTListener());
+		searchToolPanel.add(H, 0);
+		I = new JLabel();
+		I.setText("<html><u>I</u></html>");
+		I.setOpaque(false);
+		I.setForeground(Color.WHITE);
+		I.setBounds(280, 60, width, height);
+		I.setFont(new Font("Arial", Font.PLAIN, 15));
+		I.addMouseListener(new ITListener());
+		searchToolPanel.add(I, 0);
+		J = new JLabel();
+		J.setText("<html><u>J</u></html>");
+		J.setOpaque(false);
+		J.setForeground(Color.WHITE);
+		J.setBounds(310, 60, width, height);
+		J.setFont(new Font("Arial", Font.PLAIN, 15));
+		J.addMouseListener(new JTListener());
+		searchToolPanel.add(J, 0);
+		K = new JLabel();
+		K.setText("<html><u>K</u></html>");
+		K.setOpaque(false);
+		K.setForeground(Color.WHITE);
+		K.setBounds(340, 60, width, height);
+		K.setFont(new Font("Arial", Font.PLAIN, 15));
+		K.addMouseListener(new KTListener());
+		searchToolPanel.add(K, 0);
+		L = new JLabel();
+		L.setText("<html><u>L</u></html>");
+		L.setOpaque(false);
+		L.setForeground(Color.WHITE);
+		L.setBounds(370, 60, width, height);
+		L.setFont(new Font("Arial", Font.PLAIN, 15));
+		L.addMouseListener(new LTListener());
+		searchToolPanel.add(L, 0);
+		M = new JLabel();
+		M.setText("<html><u>M</u></html>");
+		M.setOpaque(false);
+		M.setForeground(Color.WHITE);
+		M.setBounds(400, 60, width, height);
+		M.setFont(new Font("Arial", Font.PLAIN, 15));
+		M.addMouseListener(new MTListener());
+		searchToolPanel.add(M, 0);
+		N = new JLabel();
+		N.setText("<html><u>N</u></html>");
+		N.setOpaque(false);
+		N.setForeground(Color.WHITE);
+		N.setBounds(430, 60, width, height);
+		N.setFont(new Font("Arial", Font.PLAIN, 15));
+		N.addMouseListener(new NTListener());
+		searchToolPanel.add(N, 0);
+		O = new JLabel();
+		O.setText("<html><u>O</u></html>");
+		O.setOpaque(false);
+		O.setForeground(Color.WHITE);
+		O.setBounds(460, 60, width, height);
+		O.setFont(new Font("Arial", Font.PLAIN, 15));
+		O.addMouseListener(new OTListener());
+		searchToolPanel.add(O, 0);
+		P = new JLabel();
+		P.setText("<html><u>P</u></html>");
+		P.setOpaque(false);
+		P.setForeground(Color.WHITE);
+		P.setBounds(490, 60, width, height);
+		P.setFont(new Font("Arial", Font.PLAIN, 15));
+		P.addMouseListener(new PTListener());
+		searchToolPanel.add(P, 0);
+		Q = new JLabel();
+		Q.setText("<html><u>Q</u></html>");
+		Q.setOpaque(false);
+		Q.setForeground(Color.WHITE);
+		Q.setBounds(520, 60, width, height);
+		Q.setFont(new Font("Arial", Font.PLAIN, 15));
+		Q.addMouseListener(new QTListener());
+		searchToolPanel.add(Q, 0);
+		R = new JLabel();
+		R.setText("<html><u>R</u></html>");
+		R.setOpaque(false);
+		R.setForeground(Color.WHITE);
+		R.setBounds(550, 60, width, height);
+		R.setFont(new Font("Arial", Font.PLAIN, 15));
+		R.addMouseListener(new RTListener());
+		searchToolPanel.add(R, 0);
+		S = new JLabel();
+		S.setText("<html><u>S</u></html>");
+		S.setOpaque(false);
+		S.setForeground(Color.WHITE);
+		S.setBounds(580, 60, width, height);
+		S.setFont(new Font("Arial", Font.PLAIN, 15));
+		S.addMouseListener(new STListener());
+		searchToolPanel.add(S, 0);
+		T = new JLabel();
+		T.setText("<html><u>T</u></html>");
+		T.setOpaque(false);
+		T.setForeground(Color.WHITE);
+		T.setBounds(610, 60, width, height);
+		T.setFont(new Font("Arial", Font.PLAIN, 15));
+		T.addMouseListener(new TTListener());
+		searchToolPanel.add(T, 0);
+		U = new JLabel();
+		U.setText("<html><u>U</u></html>");
+		U.setOpaque(false);
+		U.setForeground(Color.WHITE);
+		U.setBounds(640, 60, width, height);
+		U.setFont(new Font("Arial", Font.PLAIN, 15));
+		U.addMouseListener(new UTListener());
+		searchToolPanel.add(U, 0);
+		V = new JLabel();
+		V.setText("<html><u>V</u></html>");
+		V.setOpaque(false);
+		V.setForeground(Color.WHITE);
+		V.setBounds(670, 60, width, height);
+		V.setFont(new Font("Arial", Font.PLAIN, 15));
+		V.addMouseListener(new VTListener());
+		searchToolPanel.add(V, 0);
+		W = new JLabel();
+		W.setText("<html><u>W</u></html>");
+		W.setOpaque(false);
+		W.setForeground(Color.WHITE);
+		W.setBounds(700, 60, width, height);
+		W.setFont(new Font("Arial", Font.PLAIN, 15));
+		W.addMouseListener(new WTListener());
+		searchToolPanel.add(W, 0);
+		X = new JLabel();
+		X.setText("<html><u>X</u></html>");
+		X.setOpaque(false);
+		X.setForeground(Color.WHITE);
+		X.setBounds(730, 60, width, height);
+		X.setFont(new Font("Arial", Font.PLAIN, 15));
+		X.addMouseListener(new XTListener());
+		searchToolPanel.add(X, 0);
+		Y = new JLabel();
+		Y.setText("<html><u>Y</u></html>");
+		Y.setOpaque(false);
+		Y.setForeground(Color.WHITE);
+		Y.setBounds(760, 60, width, height);
+		Y.setFont(new Font("Arial", Font.PLAIN, 15));
+		Y.addMouseListener(new YTListener());
+		searchToolPanel.add(Y, 0);
+		Z = new JLabel();
+		Z.setText("<html><u>Z</u></html>");
+		Z.setOpaque(false);
+		Z.setForeground(Color.WHITE);
+		Z.setBounds(790, 60, width, height);
+		Z.setFont(new Font("Arial", Font.PLAIN, 15));
+		Z.addMouseListener(new ZTListener());
+		searchToolPanel.add(Z, 0);
 	}
 	
 	public void initMTool(){
+		String[] name = {"ab","bc","bcd","bcc","bdd","befg","ff","gt","hy","ibc","jkb","kib","lac","mb","nac","opu","pab","qsc","rst","uwv"};
+		ArrayList<String> list = new ArrayList<String>();
+		for (int i=0;i < name.length;i++) {
+			list.add(name[i]);
+		}
+		comboField = new ComboTextField(list);
+		comboField.setFont(new Font("微软雅黑", Font.PLAIN, 13));
+		comboField.setOpaque(false);
+		comboField.setBounds(40, 20, 150, 30);
+		comboField.setForeground(Color.WHITE);
+		comboField.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println(ComboTextField.jcb.getSelectedItem().toString());
+			}		
+		});
+		searchToolPanel.add(comboField, 0);
 		
+		JButton sure = new JButton();
+		sure.setBounds(210, 20, 80, 30);
+		sure.setBorderPainted(true);
+		sure.setContentAreaFilled(false);
+		sure.setOpaque(false);
+		sure.setIcon(AllImages.IMG_SURE);
+		searchToolPanel.add(sure, 0);
 	}
 	
 	//TODO
 	public JScrollPane initTable(Object[][] columnValue, String[] columnName){
+		dataTable = new MyStringTable(columnValue, columnName);
+		dataTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		dataTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		dataTable.setForeground(Color.white);
+		dataTable.setRowHeight(35);
+		dataTable.setBounds(30, 20, 1000-130-100, 480);
+		dataTable.setOpaque(false);
+		
+		//pTable.addMouseListener(new TableListener());
+
+		dataTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
+		
 		dataScrollPane = new JScrollPane();
+	    dataScrollPane.setColumnHeaderView(dataTable.getTableHeader());	//设置头部（HeaderView部分）  
+	    dataScrollPane.getColumnHeader().setOpaque(false);	//再取出头部，并设置为透明  
+	    
+	    dataScrollPane.setViewportView(dataTable);	//装载表格  
+	    dataScrollPane.setOpaque(false);
+	    dataScrollPane.getViewport().setOpaque(false);
+	    dataScrollPane.getVerticalScrollBar().setUI(new IScrollBarUI());
+	    dataScrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
+	    
+	    dataScrollPane.setBounds(30, 20, 1000-130-100, 480);
+        dataScrollPane.setBorder(null);
+        dataScrollPane.setOpaque(false);
 		
 		return dataScrollPane;
+	}
+	public ArrayList<PlayerBasicVO> getPlayerDataList(String id){
+		ArrayList<PlayerBasicVO> dataList = new ArrayList<PlayerBasicVO>();
+		
+		ArrayList<String> playerName = new ArrayList<String>();
+		playerName = pbl.getPlayerNamesByBasic();
+		for (int i=0;i < playerName.size();i++) {
+			if(playerName.get(i).startsWith(id)){
+				if(pbl.getPlayerBasicByName(playerName.get(i))!=null)
+				dataList.add(pbl.getPlayerBasicByName(playerName.get(i)));
+			}
+		}
+		return dataList;
+	}
+	public ArrayList<TeamBasicVO> getTeamDataList(String id){
+		ArrayList<TeamBasicVO> dataList = new ArrayList<TeamBasicVO>();
+		ArrayList<String> teamName = new ArrayList<String>();
+		teamName = tbl.getTeamNames();
+		for (int i=0;i < teamName.size();i++) {
+			if (teamName.get(i).startsWith(id)) {
+				dataList.add(tbl.getTeamBasicByName(teamName.get(i)));
+			}
+		}
+		return dataList;
 	}
 	
 	class SPListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			PlayWave.startClickSound();
+			tablePanel.removeAll();
+			tablePanel.repaint();
 			searchToolPanel.removeAll();
 			initPTool();
 			searchToolPanel.repaint();
@@ -366,10 +690,15 @@ public class SearchPanel {
 		public void mouseReleased(MouseEvent arg0) {
 		}
 	}
-	class STListener implements MouseListener{
+	class STEAMListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			PlayWave.startClickSound();
+			tablePanel.removeAll();
+			tablePanel.repaint();
+			searchToolPanel.removeAll();
+			initTTool();
+			searchToolPanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 		}
@@ -383,7 +712,12 @@ public class SearchPanel {
 	class SMListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			PlayWave.startClickSound();
+			tablePanel.removeAll();
+			tablePanel.repaint();
+			searchToolPanel.removeAll();
+			initMTool();
+			searchToolPanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 		}
@@ -397,7 +731,23 @@ public class SearchPanel {
 	class AListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("A");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			A.setForeground(Color.RED);
@@ -413,7 +763,23 @@ public class SearchPanel {
 	class BListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("B");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			B.setForeground(Color.RED);
@@ -429,7 +795,23 @@ public class SearchPanel {
 	class CListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("C");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			C.setForeground(Color.RED);
@@ -445,7 +827,23 @@ public class SearchPanel {
 	class DListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("D");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			D.setForeground(Color.RED);
@@ -461,7 +859,23 @@ public class SearchPanel {
 	class EListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("E");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			E.setForeground(Color.RED);
@@ -477,7 +891,23 @@ public class SearchPanel {
 	class FListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("F");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			F.setForeground(Color.RED);
@@ -493,7 +923,23 @@ public class SearchPanel {
 	class GListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("G");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			G.setForeground(Color.RED);
@@ -509,7 +955,23 @@ public class SearchPanel {
 	class HListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("H");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			H.setForeground(Color.RED);
@@ -525,7 +987,23 @@ public class SearchPanel {
 	class IListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("I");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			I.setForeground(Color.RED);
@@ -541,7 +1019,23 @@ public class SearchPanel {
 	class JListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("J");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			J.setForeground(Color.RED);
@@ -557,7 +1051,23 @@ public class SearchPanel {
 	class KListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("K");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			K.setForeground(Color.RED);
@@ -573,7 +1083,23 @@ public class SearchPanel {
 	class LListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("L");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			L.setForeground(Color.RED);
@@ -589,7 +1115,23 @@ public class SearchPanel {
 	class MListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("M");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			M.setForeground(Color.RED);
@@ -605,7 +1147,23 @@ public class SearchPanel {
 	class NListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("N");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			N.setForeground(Color.RED);
@@ -621,7 +1179,23 @@ public class SearchPanel {
 	class OListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("O");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			O.setForeground(Color.RED);
@@ -637,7 +1211,23 @@ public class SearchPanel {
 	class PListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("P");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			P.setForeground(Color.RED);
@@ -653,7 +1243,23 @@ public class SearchPanel {
 	class QListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("Q");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			Q.setForeground(Color.RED);
@@ -669,7 +1275,23 @@ public class SearchPanel {
 	class RListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("R");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			R.setForeground(Color.RED);
@@ -685,7 +1307,23 @@ public class SearchPanel {
 	class SListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("S");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			S.setForeground(Color.RED);
@@ -701,7 +1339,23 @@ public class SearchPanel {
 	class TListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("T");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			T.setForeground(Color.RED);
@@ -717,7 +1371,23 @@ public class SearchPanel {
 	class UListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("U");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			U.setForeground(Color.RED);
@@ -733,7 +1403,23 @@ public class SearchPanel {
 	class VListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("V");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			V.setForeground(Color.RED);
@@ -749,7 +1435,23 @@ public class SearchPanel {
 	class WListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("W");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			W.setForeground(Color.RED);
@@ -765,7 +1467,23 @@ public class SearchPanel {
 	class XListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("X");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			X.setForeground(Color.RED);
@@ -781,7 +1499,23 @@ public class SearchPanel {
 	class YListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("Y");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			Y.setForeground(Color.RED);
@@ -797,7 +1531,829 @@ public class SearchPanel {
 	class ZListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			ArrayList<PlayerBasicVO> data = getPlayerDataList("Z");
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getPlayerName();
+				columnValues[i][1] = data.get(i).getBasicInfo()[0];
+				columnValues[i][2] = data.get(i).getBasicInfo()[1];
+				columnValues[i][3] = data.get(i).getBasicInfo()[2];
+				columnValues[i][4] = data.get(i).getBasicInfo()[3];
+				columnValues[i][5] = data.get(i).getBasicInfo()[4];
+				columnValues[i][6] = data.get(i).getBasicInfo()[5];
+				columnValues[i][7] = data.get(i).getBasicInfo()[6];
+				columnValues[i][8] = data.get(i).getBasicInfo()[7];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			Z.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			Z.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class ATListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("A");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			A.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			A.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class BTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("B");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			B.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			B.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class CTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("C");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			C.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			C.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class DTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("D");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			D.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			D.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class ETListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("E");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			E.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			E.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class FTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("F");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			F.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			F.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class GTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("G");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			G.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			G.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class HTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("H");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			H.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			H.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class ITListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("I");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			I.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			I.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class JTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("J");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			J.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			J.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class KTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("K");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			K.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			K.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class LTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("L");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			L.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			L.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class MTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("M");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			M.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			M.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class NTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("N");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			N.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			N.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class OTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("O");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			O.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			O.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class PTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("P");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			P.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			P.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class QTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("Q");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			Q.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			Q.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class RTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("R");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			R.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			R.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class STListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("S");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			S.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			S.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class TTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("T");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			T.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			T.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class UTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("U");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			U.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			U.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class VTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("V");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			V.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			V.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class WTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("W");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			W.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			W.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class XTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("X");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			X.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			X.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class YTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("Y");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+			Y.setForeground(Color.RED);
+		}
+		public void mouseExited(MouseEvent arg0) {
+			Y.setForeground(Color.WHITE);
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class ZTListener implements MouseListener{
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			ArrayList<TeamBasicVO> data = getTeamDataList("Z");
+			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[data.size()][columnName.length];
+			for (int i = 0; i < data.size(); i++) {
+				columnValues[i][0] = data.get(i).getTeamName();
+				columnValues[i][1] = data.get(i).getLongName();
+				columnValues[i][2] = data.get(i).getTeamInfo()[1];
+				columnValues[i][3] = data.get(i).getTeamInfo()[2];
+				columnValues[i][4] = data.get(i).getTeamInfo()[3];
+				columnValues[i][5] = data.get(i).getTeamInfo()[4];
+				columnValues[i][6] = data.get(i).getTeamInfo()[5];
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 			Z.setForeground(Color.RED);

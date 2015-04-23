@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +16,9 @@ import javax.swing.ListSelectionModel;
 import ui.AllImages;
 import ui.IScrollBarUI;
 import ui.MyTable;
+import vo.PlayerBasicVO;
+import BL.PlayerBL;
+import BL.PlayerBL_Impl;
 
 public class PlayerPanel {
 	/**
@@ -42,19 +46,22 @@ public class PlayerPanel {
 		panelTitle.setIcon(AllImages.IMG_PLAYERPANEL_TITLE);
 		playerPanel.add(panelTitle, 0);
 		
+		PlayerBL pbl = new PlayerBL_Impl();
+		ArrayList<PlayerBasicVO> pbList = new ArrayList<PlayerBasicVO>();
+		pbList = pbl.getPlayerBasic();
 		String[] columnName = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
-		Object[][] columnValues = new Object[448][columnName.length];
-		for (int i = 0; i < 448; i++) {
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/Aaron Brooks.png");
-			columnValues[i][1] = i;
-			columnValues[i][2] = i;
-			columnValues[i][3] = i;
-			columnValues[i][4] = i;
-			columnValues[i][5] = i;
-			columnValues[i][6] = i;
-			columnValues[i][7] = i;
-			columnValues[i][8] = i;
-			columnValues[i][9] = i;
+		Object[][] columnValues = new Object[pbList.size()][columnName.length];
+		for (int i = 0; i < pbList.size(); i++) {
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+pbList.get(i).getPlayerName()+".png");
+			columnValues[i][1] = pbList.get(i).getPlayerName();
+			columnValues[i][2] = pbList.get(i).getBasicInfo()[0];
+			columnValues[i][3] = pbList.get(i).getBasicInfo()[1];
+			columnValues[i][4] = pbList.get(i).getBasicInfo()[2];
+			columnValues[i][5] = pbList.get(i).getBasicInfo()[3];
+			columnValues[i][6] = pbList.get(i).getBasicInfo()[4];
+			columnValues[i][7] = pbList.get(i).getBasicInfo()[5];
+			columnValues[i][8] = pbList.get(i).getBasicInfo()[6];
+			columnValues[i][9] = pbList.get(i).getBasicInfo()[7];
 		}
 		players = new MyTable(columnValues, columnName);
 		players.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -94,7 +101,7 @@ public class PlayerPanel {
 				if (players.getSelectedColumn()==0) {
 					playerPanel.removeAll();
 					PlayerHomePanel php = new PlayerHomePanel();
-					playerPanel.add(php.init("A"));
+					playerPanel.add(php.init(players.getValueAt(players.getSelectedRow(), players.getSelectedColumn()+1).toString()));
 					playerPanel.repaint();
 				}
 			}

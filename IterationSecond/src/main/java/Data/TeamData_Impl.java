@@ -166,19 +166,25 @@ public class TeamData_Impl implements TeamDataService{
 		return null;
 	}
     public static void addToTable(double [] teamData,double opponentData[],
-    		String filename,String teamName,int i,ArrayList<String>nameList,int win){
+    		String filename,String teamName,ArrayList<String>nameList,int win){
     	if(teamName.equals("NOH")&&teamName.equals("NOP")){
     		if(teamTable.containsKey("NOP")){
         		teamTable.get("NOP").addOpponentData(filename, opponentData);
         		teamTable.get("NOP").addTeamData(filename, teamData);
-        		if(i==1)teamTable.get("NOP").addWinMatchNum(filename);
+        		for(int j=0;j<nameList.size();j++){
+            		teamTable.get("NOP").addPlayer(nameList.get(j));
+        		}
+
+        		if(win==1)teamTable.get("NOP").addWinMatchNum(filename);
         	}else{
         		
         		TeamAllPO teamAll=new TeamAllPO("NOP");
-        		
+        		for(int j=0;j<nameList.size();j++){
+        			teamAll.addPlayer(nameList.get(j));
+        		}
         		teamAll.addOpponentData(filename, opponentData);
         		teamAll.addTeamData(filename, teamData);
-        		if(i==1)teamAll.addWinMatchNum(filename);
+        		if(win==1)teamAll.addWinMatchNum(filename);
         		
         		teamTable.put("NOP", teamAll);
         	}
@@ -187,16 +193,21 @@ public class TeamData_Impl implements TeamDataService{
 				if(win==1){
 					teamTable.get(teamName).addWinMatchNum(filename);
 				}
+				for(int j=0;j<nameList.size();j++){
+            		teamTable.get(teamName).addPlayer(nameList.get(j));
+        		}
         		teamTable.get(teamName).addOpponentData(filename, opponentData);
         		teamTable.get(teamName).addTeamData(filename, teamData);
-        		if(i==1)teamTable.get(teamName).addWinMatchNum(filename);
+        		if(win==1)teamTable.get(teamName).addWinMatchNum(filename);
         	}else{
         		
         		TeamAllPO teamAll=new TeamAllPO(teamName);
-        		
+        		for(int j=0;j<nameList.size();j++){
+        			teamAll.addPlayer(nameList.get(j));
+        		}
         		teamAll.addOpponentData(filename, opponentData);
         		teamAll.addTeamData(filename, teamData);
-        		if(i==1)teamAll.addWinMatchNum(filename);
+        		if(win==1)teamAll.addWinMatchNum(filename);
         		
         		teamTable.put(teamName, teamAll);
         	}
@@ -212,8 +223,9 @@ public class TeamData_Impl implements TeamDataService{
 			BufferedReader br=new BufferedReader(new FileReader(filename));
 			String str="";
 			while((str=br.readLine())!=null){
-
-	    		String strs[]=str.split("|");
+				if(str.startsWith("║")){
+					String mass[]=str.split("║");
+					String strs[]=mass[1].split("│");
 	    		String teamInfo[]=new String[6];
 	    		teamInfo[0]=strs[0].trim();
 				TeamBasicPO teamBasic=new TeamBasicPO(strs[1]);
@@ -222,6 +234,7 @@ public class TeamData_Impl implements TeamDataService{
 	    		teamInfo[3]=strs[4].trim();
 	    		teamInfo[4]=strs[5].trim();
 	    		teamInfo[5]=strs[6].trim();
+	    		teamBasic.setLongName(teamInfo[0]);
 	    		teamBasic.setTeamInfo(teamInfo);
 	    		if(strs[1].equals("NOH")){teamBasic.setUsedName("NOH");
 	    		teamBasic.setUsedLongName("Hornets");
@@ -229,7 +242,8 @@ public class TeamData_Impl implements TeamDataService{
 	    		teamBasic.setLongName("Pelicans");
 	    		}
 	    		basicList.add(teamBasic);
-			}
+				}
+				}
 			return basicList;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -250,22 +264,26 @@ public class TeamData_Impl implements TeamDataService{
 		    String str="";
 		    while((str=br.readLine())!=null){
 		    	if(str.contains(teamName)){
-		    		TeamBasicPO teamBasic=new TeamBasicPO(teamName);
-		    		String strs[]=str.split("|");
+		    		if(str.startsWith("║")){
+						String mass[]=str.split("║");
+						String strs[]=mass[1].split("│");
 		    		String teamInfo[]=new String[6];
 		    		teamInfo[0]=strs[0].trim();
+					TeamBasicPO teamBasic=new TeamBasicPO(strs[1]);
 		    		teamInfo[1]=strs[2].trim();
 		    		teamInfo[2]=strs[3].trim();
 		    		teamInfo[3]=strs[4].trim();
 		    		teamInfo[4]=strs[5].trim();
 		    		teamInfo[5]=strs[6].trim();
 		    		teamBasic.setTeamInfo(teamInfo);
+		    		teamBasic.setLongName(teamInfo[0]);
 		    		//TODO
 		    		if(teamName.equals("NOH")){teamBasic.setUsedName("NOH");
 		    		teamBasic.setUsedLongName("Hornets");
 		    		teamBasic.setTeamName("NOP");
 		    		teamBasic.setLongName("Pelicans");}
 		    		return teamBasic;
+		    	}
 		    	}
 		    }
 		} catch (FileNotFoundException e) {

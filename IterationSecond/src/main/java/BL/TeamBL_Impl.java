@@ -37,7 +37,7 @@ public class TeamBL_Impl implements TeamBL{
 		return volist;
 	}
 
-	public ArrayList<TeamBasicVO> getTeamBasic() {
+	public ArrayList<TeamBasicVO>getTeamBasic() {
 		// TODO Auto-generated method stub
 		ArrayList<TeamBasicPO> list=new ArrayList<TeamBasicPO>();
 		list=teamData.getTeamBasic();
@@ -73,7 +73,7 @@ public class TeamBL_Impl implements TeamBL{
 	}
 
 	@SuppressWarnings("unused")
-	public TeamAllVO getTeamAllByName(String name) {
+	public TeamAllVO getTeamAllByNameRaising(String name){
 		// TODO Auto-generated method stub
 		TeamAllVO vo=new TeamAllVO(teamData.getTeamAllByName(name));
 		if(vo!=null){
@@ -84,7 +84,7 @@ public class TeamBL_Impl implements TeamBL{
 		}
 	}
 
-	public ArrayList<TeamAllVO> getTeamAllRankingByNum(int num) {
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAllVO> list=getTeamAll();
 		Collections.sort(list, new TeamSortAllByNum(num));
@@ -138,6 +138,20 @@ public class TeamBL_Impl implements TeamBL{
 	public ArrayList<String> getPlayerNamesOfTeam(String teamName) {
 		// TODO Auto-generated method stub
 		return teamData.getPlayerNamesOfTeam(teamName);
+	}
+
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num) {
+		// TODO Auto-generated method stub
+		ArrayList<TeamAverageVO>list=getTeamAverageRankingByNum(num);
+		Collections.reverse(list);
+		return list;
+	}
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(int num) {
+		// TODO Auto-generated method stub
+		ArrayList<TeamAllVO> list=getTeamAllRankingByNumRaising(num);
+		Collections.reverse(list);
+		
+		return list;
 	}
 
 }

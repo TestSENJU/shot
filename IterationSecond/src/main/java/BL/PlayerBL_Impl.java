@@ -106,7 +106,7 @@ public class PlayerBL_Impl implements PlayerBL{
 		ArrayList<PlayerAverageVO> list=getPlayerAverage();
 		Collections.sort(list, new SortAverageByNum(num));
 		ArrayList<PlayerAverageVO> result=new ArrayList<PlayerAverageVO>();
-		for(int i=list.size()-1;i>list.size()-6;i++){
+		for(int i=list.size()-1;i>list.size()-6;i--){
 			result.add(list.get(i));
 		}
 		return list;
@@ -117,7 +117,7 @@ public class PlayerBL_Impl implements PlayerBL{
 		ArrayList<PlayerAverageVO> list=getPlayerAverage();
 		Collections.sort(list, new SortAverageByNum(num));
 		ArrayList<PlayerAverageVO> result=new ArrayList<PlayerAverageVO>();
-		for(int i=list.size()-1;i>list.size()-6;i++){
+		for(int i=list.size()-1;i>list.size()-6;i--){
 			result.add(list.get(i));
 		}
 		return result;

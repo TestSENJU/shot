@@ -2,6 +2,7 @@ package BL;
 
 import java.util.ArrayList;
 
+import vo.MatchShortVO;
 import vo.MatchVO;
 
 public interface MatchBL {
@@ -15,6 +16,15 @@ public interface MatchBL {
 	public ArrayList<MatchVO> getRecentMatchByPlayer(String playerName);
 	//根据球队名返回球队最近的五场比赛
 	public ArrayList<MatchVO> getRecentMatchByTeam(String teamName);
-	
+	//根据球队名返回简略信息的最近五场比赛
+	public ArrayList<MatchShortVO> getRecentShortMatchByTeam(String teamName);
+	//根据球员名返回简略信息的最近五场比赛
+	public ArrayList<MatchShortVO> getRecentShortMatchByPlayer(String playerName);
+    //根据时间段返回简略信息的比赛
+	public ArrayList<MatchShortVO> getShortMatchByPeriod(String beginTime,String endTime);
+	//返回所有比赛的简略信息
+	public ArrayList<MatchShortVO> getAllMatch();
+	//根据比赛名返回比赛的详细VO
+	public MatchVO getMatchByName(String name);
 	
 }

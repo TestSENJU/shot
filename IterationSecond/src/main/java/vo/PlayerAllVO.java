@@ -38,11 +38,8 @@ private int offensiveNum;// 先发场数
 *21盖帽率
 *22失误率
 *23使用率
-*24得分提升率
-*25篮板提升率
-*26助攻提升率
 */
-private double [] playerData=new double[27];
+private double [] playerData=new double[24];
 public PlayerAllVO(String name){
 	this.playerName=name;
 }
@@ -53,7 +50,9 @@ public PlayerAllVO(PlayerAllPlusRatePO po){
 	this.playingTime=po.getPlayingTime();
 	this.competeNum=po.getCompeteNum();
 	this.offensiveNum=po.getOffensiveNum();
-	this.playerData=po.getPlayerData();
+	for(int i=0;i<this.playerData.length;i++){
+		this.playerData[i]=po.getPlayerData()[i];
+	}
 
 }
 

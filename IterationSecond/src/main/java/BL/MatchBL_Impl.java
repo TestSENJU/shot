@@ -2,8 +2,10 @@ package BL;
 
 import java.util.ArrayList;
 
+import po.MatchShortPO;
 import Data.MatchDataService;
 import Data.MatchData_Impl;
+import vo.MatchShortVO;
 import vo.MatchVO;
 
 public class MatchBL_Impl implements MatchBL{
@@ -72,5 +74,70 @@ public ArrayList<MatchVO> getRecentMatchByTeam(String teamName) {
 	return list;
 }
 
+public ArrayList<MatchShortVO> getRecentShortMatchByTeam(String teamName) {
+	// TODO Auto-generated method stub
+	ArrayList<MatchShortPO> polist=match.getRecentShortMatchByTeam(teamName);
+	
+	if(polist!=null){
+		ArrayList<MatchShortVO> list=new ArrayList<MatchShortVO>();
+		for(int i=0;i<polist.size();i++){
+			list.add(new MatchShortVO(polist.get(i)));		
+		}
+		return list;
+	}else{
+		return null;
+	}
+}
+
+public ArrayList<MatchShortVO> getRecentShortMatchByPlayer(String playerName) {
+	// TODO Auto-generated method stub
+ArrayList<MatchShortPO> polist=match.getRecentShortMatchByPlayer(playerName);
+	
+	if(polist!=null){
+		ArrayList<MatchShortVO> list=new ArrayList<MatchShortVO>();
+		for(int i=0;i<polist.size();i++){
+			list.add(new MatchShortVO(polist.get(i)));		
+		}
+		return list;
+	}else{
+		return null;
+	}
+}
+
+public ArrayList<MatchShortVO> getShortMatchByPeriod(String beginTime,
+		String endTime) {
+	// TODO Auto-generated method stub
+ArrayList<MatchShortPO> polist=match.getShortMatchByPeriod(beginTime, endTime);
+	
+	if(polist!=null){
+		ArrayList<MatchShortVO> list=new ArrayList<MatchShortVO>();
+		for(int i=0;i<polist.size();i++){
+			list.add(new MatchShortVO(polist.get(i)));		
+		}
+		return list;
+	}else{
+		return null;
+	}
+}
+
+public ArrayList<MatchShortVO> getAllMatch() {
+	// TODO Auto-generated method stub
+ArrayList<MatchShortPO> polist=match.getAllMatch();
+	
+	if(polist!=null){
+		ArrayList<MatchShortVO> list=new ArrayList<MatchShortVO>();
+		for(int i=0;i<polist.size();i++){
+			list.add(new MatchShortVO(polist.get(i)));		
+		}
+		return list;
+	}else{
+		return null;
+	}
+}
+
+public MatchVO getMatchByName(String name) {
+	// TODO Auto-generated method stub
+	return new MatchVO(match.getMatchByName(name));
+}
 
 }

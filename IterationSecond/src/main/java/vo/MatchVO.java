@@ -10,34 +10,57 @@ String name;
 //比赛时间
 private String time;
 //前一支球队的名字
-private String team1;
+private String winTeam;
 ///后一支球队的
-private String team2;
+private String lostTeam;
 //前一个队伍的数据，就是比赛文件里面那一行一行的
-private ArrayList<String[]> list1=new ArrayList<String[]>();
+private ArrayList<String[]> winList=new ArrayList<String[]>();
 //后一个队伍的数据，就是比赛文件里面那一行一行的
-private ArrayList<String[]>list2=new ArrayList<String[]>();
+private ArrayList<String[]>lostList=new ArrayList<String[]>();
 //总得分 比如85-112
-private String pointer;
+private String winPointer;
+private String lostPointer;
 //每一个分场的得分
-private ArrayList<String> pointerpart=new ArrayList<String>();
+private ArrayList<String> pointerpart1=new ArrayList<String>();
+private ArrayList<String>pointerpart2=new ArrayList<String>();
+
 public MatchVO(String filename){
 	this.name=filename;	
 }
-
-public String getName() {
-	return name;
-}
-
 public MatchVO(MatchPO po){
 	this.name=po.getName();
 	this.time=po.getTime();
-	this.team1=po.getTeam1();
-	this.team2=po.getTeam2();
-	this.list1=po.getList1();
-	this.list2=po.getList2();
-	this.pointer=po.getPointer();
-	this.pointerpart=po.getPointerPart();
+	String strs[]=po.getPointer().split("-");
+	ArrayList<String>list=po.getPointerPart();
+
+	if(Integer.parseInt(strs[0])<Integer.parseInt(strs[1])){
+		this.winTeam=po.getTeam2();
+		this.lostTeam=po.getTeam1();
+		this.winList=po.getList2();
+		this.lostList=po.getList1();
+		this.winPointer=strs[1];
+		this.lostPointer=strs[0];
+		for(int i=0;i<list.size();i++){
+			String ss[]=list.get(i).split("-");
+			this.pointerpart1.add(ss[1]);
+			this.pointerpart2.add(ss[0]);
+		}
+	}else{
+		this.winTeam=po.getTeam1();
+		this.lostTeam=po.getTeam2();
+		this.winList=po.getList1();
+		this.lostList=po.getList2();
+		this.winPointer=strs[0];
+		this.lostPointer=strs[1];
+		for(int i=0;i<list.size();i++){
+			String ss[]=list.get(i).split("-");
+			this.pointerpart1.add(ss[0]);
+			this.pointerpart2.add(ss[1]);
+		}
+	}
+}
+public String getName() {
+	return name;
 }
 public String getTime() {
 	return time;
@@ -45,41 +68,53 @@ public String getTime() {
 public void setTime(String time) {
 	this.time = time;
 }
-public String getTeam1() {
-	return team1;
+public String getWinTeam() {
+	return winTeam;
 }
-public void setTeam1(String team1) {
-	this.team1 = team1;
+public void setWinTeam(String winTeam) {
+	this.winTeam = winTeam;
 }
-public String getTeam2() {
-	return team2;
+public String getLostTeam() {
+	return lostTeam;
 }
-public void setTeam2(String team2) {
-	this.team2 = team2;
+public void setLostTeam(String lostTeam) {
+	this.lostTeam = lostTeam;
 }
-public ArrayList<String[]> getList1() {
-	return list1;
+public ArrayList<String[]> getWinList() {
+	return winList;
 }
-public void setList1(ArrayList<String[]> list1) {
-	this.list1 = list1;
+public void setWinList(ArrayList<String[]> winList) {
+	this.winList = winList;
 }
-public ArrayList<String[]> getList2() {
-	return list2;
+public ArrayList<String[]> getLostList() {
+	return lostList;
 }
-public void setList2(ArrayList<String[]> list2) {
-	this.list2 = list2;
+public void setLostList(ArrayList<String[]> lostList) {
+	this.lostList = lostList;
 }
-public String getPointer() {
-	return pointer;
+public String getWinPointer() {
+	return winPointer;
 }
-public void setPointer(String pointer) {
-	this.pointer = pointer;
+public void setWinPointer(String winPointer) {
+	this.winPointer = winPointer;
 }
-public ArrayList<String> getPointerpart() {
-	return pointerpart;
+public String getLostPointer() {
+	return lostPointer;
 }
-public void setPointerpart(ArrayList<String> pointerpart) {
-	this.pointerpart = pointerpart;
+public void setLostPointer(String lostPointer) {
+	this.lostPointer = lostPointer;
+}
+public ArrayList<String> getPointerpart1() {
+	return pointerpart1;
+}
+public void setPointerpart1(ArrayList<String> pointerpart1) {
+	this.pointerpart1 = pointerpart1;
+}
+public ArrayList<String> getPointerpart2() {
+	return pointerpart2;
+}
+public void setPointerpart2(ArrayList<String> pointerpart2) {
+	this.pointerpart2 = pointerpart2;
 }
 
 }

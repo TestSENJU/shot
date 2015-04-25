@@ -12,6 +12,7 @@ import po.PlayerBasicPO;
 import vo.PlayerAllVO;
 import vo.PlayerAverageVO;
 import vo.PlayerBasicVO;
+import vo.PlayerShortVO;
 
 public class PlayerBL_Impl implements PlayerBL{
     PlayerDataService playerData=new PlayerData_Impl();
@@ -157,23 +158,48 @@ public class PlayerBL_Impl implements PlayerBL{
 		return list;
 	}
 
-	public ArrayList<PlayerAllVO> getPlayerAllByLeague(String str) {
-		// TODO Auto-generated method stub
-//		ArrayList<PlayerAllVO>list=getPlayerAll();
-//		for(int i=0;i<list.size();i++){
-//			PlayerAllVO 
-//		}
-		return null;
-	}
-
-	public ArrayList<PlayerAverageVO> getPlayerAverageByLeague(String str) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public ArrayList<String> getPlayerNamesByBasic() {
 		// TODO Auto-generated method stub
 		return playerData.getPlayerNamesByBasic("players/info");
+	}
+
+	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(
+			String location, String league, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConRaising(
+			String location, String league, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConDeclining(
+			String location, String league, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConDeclining(
+			String location, String league, int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerShortVO> getImprovedPlayerByNum(int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerShortVO> getTodayHotPlayerByNum(int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerShortVO> getHotPlayerByNum(int num) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

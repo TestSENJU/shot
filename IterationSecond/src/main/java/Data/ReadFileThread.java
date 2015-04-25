@@ -37,11 +37,6 @@ public void run(){
 				ArrayList<String> list=new ArrayList<String>();
 				Arrays.sort(filenames);
 				Arrays.sort(fileNames);
-//				int len = fileNames.length;
-//				for (int i = 0; i < len; i++){
-//				    if (Arrays.binarySearch(filenames, fileNames[i]) == -1)
-//				         list.add(fileNames[i]) ;
-//				}
 				for(int i=filenames.length;i<fileNames.length;i++){
 					list.add(fileNames[i]);
 				}
@@ -69,7 +64,6 @@ public void start(){
 
 private void readFile(String filename){
 	try {
-//		System.out.println("efa");
 		@SuppressWarnings("resource")
 		BufferedReader br=new BufferedReader(new FileReader(filename));
 		String str="";

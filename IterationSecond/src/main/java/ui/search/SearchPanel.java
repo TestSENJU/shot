@@ -21,8 +21,11 @@ import ui.ComboTextField;
 import ui.DateChooserJButton;
 import ui.IScrollBarUI;
 import ui.MyStringTable;
+import vo.MatchVO;
 import vo.PlayerBasicVO;
 import vo.TeamBasicVO;
+import BL.MatchBL;
+import BL.MatchBL_Impl;
 import BL.PlayerBL;
 import BL.PlayerBL_Impl;
 import BL.TeamBL;
@@ -57,6 +60,7 @@ public class SearchPanel {
 	//
 	PlayerBL pbl = new PlayerBL_Impl();
 	TeamBL tbl = new TeamBL_Impl();
+	MatchBL mbl = new MatchBL_Impl();
 	
 	public JPanel init(){
 		searchPanel = new JPanel();
@@ -93,14 +97,12 @@ public class SearchPanel {
 		searchM.addMouseListener(new SMListener());
 		searchPanel.add(searchM, 0);
 		
-		//TODO
 		searchToolPanel = new JPanel();
 		searchToolPanel.setOpaque(false);
 		searchToolPanel.setBounds(0, 70, 1000-130, 100);
 		searchToolPanel.setLayout(null);
 		searchPanel.add(searchToolPanel, 0);
 		
-		//TODO
 		tablePanel = new JPanel();
 		tablePanel.setOpaque(false);
 		tablePanel.setBounds(0, 170, 1000-130, 700-170);
@@ -110,13 +112,9 @@ public class SearchPanel {
 		return searchPanel;
 	}
 	
-	//TODO
 	public void initPTool(){
-		String[] name = {"ab","bc","bcd","bcc","bdd","befg","ff","gt","hy","ibc","jkb","kib","lac","mb","nac","opu","pab","qsc","rst","uwv"};
-		ArrayList<String> list = new ArrayList<String>();
-		for (int i=0;i < name.length;i++) {
-			list.add(name[i]);
-		}
+		ArrayList<String> list = pbl.getPlayerNames();
+		
 		comboField = new ComboTextField(list);
 		comboField.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		comboField.setOpaque(false);
@@ -124,7 +122,6 @@ public class SearchPanel {
 		comboField.setForeground(Color.WHITE);
 		comboField.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println(ComboTextField.jcb.getSelectedItem().toString());
 			}		
 		});
@@ -132,7 +129,7 @@ public class SearchPanel {
 		
 		JButton sure = new JButton();
 		sure.setBounds(210, 20, 80, 30);
-		sure.setBorderPainted(true);
+		sure.setBorderPainted(false);
 		sure.setContentAreaFilled(false);
 		sure.setOpaque(false);
 		sure.setIcon(AllImages.IMG_SURE);
@@ -349,15 +346,13 @@ public class SearchPanel {
 		Z.setBounds(790, 60, width, height);
 		Z.setFont(new Font("Arial", Font.PLAIN, 15));
 		Z.addMouseListener(new ZListener());
+		//TODO
 		searchToolPanel.add(Z, 0);
 	}
 	
 	public void initTTool(){
-		String[] name = {"ab","bc","bcd","bcc","bdd","befg","ff","gt","hy","ibc","jkb","kib","lac","mb","nac","opu","pab","qsc","rst","uwv"};
-		ArrayList<String> list = new ArrayList<String>();
-		for (int i=0;i < name.length;i++) {
-			list.add(name[i]);
-		}
+		ArrayList<String> list = tbl.getTeamNames();
+		
 		comboField = new ComboTextField(list);
 		comboField.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		comboField.setOpaque(false);
@@ -365,7 +360,6 @@ public class SearchPanel {
 		comboField.setForeground(Color.WHITE);
 		comboField.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println(ComboTextField.jcb.getSelectedItem().toString());
 			}		
 		});
@@ -373,7 +367,7 @@ public class SearchPanel {
 		
 		JButton sure = new JButton();
 		sure.setBounds(210, 20, 80, 30);
-		sure.setBorderPainted(true);
+		sure.setBorderPainted(false);
 		sure.setContentAreaFilled(false);
 		sure.setOpaque(false);
 		sure.setIcon(AllImages.IMG_SURE);
@@ -591,29 +585,44 @@ public class SearchPanel {
 		Z.setFont(new Font("Arial", Font.PLAIN, 15));
 		Z.addMouseListener(new ZTListener());
 		searchToolPanel.add(Z, 0);
+		//TODO
 	}
 	
 	public void initMTool(){
 		
+		JLabel chooseBegin = new JLabel();
+		chooseBegin.setText("起始时间");
+		chooseBegin.setOpaque(false);
+		chooseBegin.setForeground(Color.WHITE);
+		chooseBegin.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		chooseBegin.setBounds(30, 20, 80, 35);
+		searchToolPanel.add(chooseBegin, 0);
+		
 		beginTime = new DateChooserJButton();
-		beginTime.setBounds(100, 20, 120, 40);
-		beginTime.setOpaque(false);
-		beginTime.setContentAreaFilled(false);
+		beginTime.setBounds(110, 20, 110, 35);
+		beginTime.setBackground(Color.DARK_GRAY);
 		beginTime.setFont(new Font("微软雅黑",Font.PLAIN,15));
 		beginTime.setForeground(Color.WHITE);
 		searchToolPanel.add(beginTime, 0);
 		
+		JLabel chooseEnd = new JLabel();
+		chooseEnd.setText("结束时间");
+		chooseEnd.setOpaque(false);
+		chooseEnd.setForeground(Color.WHITE);
+		chooseEnd.setFont(new Font("微软雅黑", Font.PLAIN, 15));
+		chooseEnd.setBounds(260, 20, 80, 35);
+		searchToolPanel.add(chooseEnd, 0);
+		
 		endTime = new DateChooserJButton();
-		endTime.setBounds(300, 20, 120, 40);
-		endTime.setOpaque(false);
-		endTime.setContentAreaFilled(false);
+		endTime.setBounds(340, 20, 110, 35);
+		endTime.setBackground(Color.DARK_GRAY);
 		endTime.setFont(new Font("微软雅黑",Font.PLAIN,15));
 		endTime.setForeground(Color.WHITE);
 		searchToolPanel.add(endTime, 0);
 		
 		JButton sure = new JButton();
-		sure.setBounds(480, 20, 80, 30);
-		sure.setBorderPainted(true);
+		sure.setBounds(510, 22, 80, 30);
+		sure.setBorderPainted(false);
 		sure.setContentAreaFilled(false);
 		sure.setOpaque(false);
 		sure.setIcon(AllImages.IMG_SURE);
@@ -678,7 +687,6 @@ public class SearchPanel {
 	
 	class SPListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			PlayWave.startClickSound();
 			tablePanel.removeAll();
 			tablePanel.repaint();
@@ -697,7 +705,6 @@ public class SearchPanel {
 	}
 	class STEAMListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			PlayWave.startClickSound();
 			tablePanel.removeAll();
 			tablePanel.repaint();
@@ -716,7 +723,6 @@ public class SearchPanel {
 	}
 	class SMListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			PlayWave.startClickSound();
 			tablePanel.removeAll();
 			tablePanel.repaint();
@@ -767,7 +773,6 @@ public class SearchPanel {
 	}
 	class BListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("B");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -799,7 +804,6 @@ public class SearchPanel {
 	}
 	class CListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("C");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -831,7 +835,6 @@ public class SearchPanel {
 	}
 	class DListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("D");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -863,7 +866,6 @@ public class SearchPanel {
 	}
 	class EListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("E");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -895,7 +897,6 @@ public class SearchPanel {
 	}
 	class FListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("F");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -927,7 +928,6 @@ public class SearchPanel {
 	}
 	class GListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("G");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -991,7 +991,6 @@ public class SearchPanel {
 	}
 	class IListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("I");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1023,7 +1022,6 @@ public class SearchPanel {
 	}
 	class JListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("J");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1055,7 +1053,6 @@ public class SearchPanel {
 	}
 	class KListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("K");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1087,7 +1084,6 @@ public class SearchPanel {
 	}
 	class LListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("L");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1119,7 +1115,6 @@ public class SearchPanel {
 	}
 	class MListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("M");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1151,7 +1146,6 @@ public class SearchPanel {
 	}
 	class NListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("N");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1215,7 +1209,6 @@ public class SearchPanel {
 	}
 	class PListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("P");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1247,7 +1240,6 @@ public class SearchPanel {
 	}
 	class QListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("Q");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1279,7 +1271,6 @@ public class SearchPanel {
 	}
 	class RListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("R");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1311,7 +1302,6 @@ public class SearchPanel {
 	}
 	class SListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("S");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1343,7 +1333,6 @@ public class SearchPanel {
 	}
 	class TListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("T");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1407,7 +1396,6 @@ public class SearchPanel {
 	}
 	class VListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("V");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1439,7 +1427,6 @@ public class SearchPanel {
 	}
 	class WListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("W");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1471,7 +1458,6 @@ public class SearchPanel {
 	}
 	class XListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("X");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1503,7 +1489,6 @@ public class SearchPanel {
 	}
 	class YListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("Y");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1535,7 +1520,6 @@ public class SearchPanel {
 	}
 	class ZListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<PlayerBasicVO> data = getPlayerDataList("Z");
 			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 			Object[][] columnValues = new Object[data.size()][columnName.length];
@@ -1598,7 +1582,6 @@ public class SearchPanel {
 	}
 	class BTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("B");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1629,7 +1612,6 @@ public class SearchPanel {
 	}
 	class CTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("C");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1660,7 +1642,6 @@ public class SearchPanel {
 	}
 	class DTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("D");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1691,7 +1672,6 @@ public class SearchPanel {
 	}
 	class ETListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("E");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1722,7 +1702,6 @@ public class SearchPanel {
 	}
 	class FTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("F");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1753,7 +1732,6 @@ public class SearchPanel {
 	}
 	class GTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("G");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1815,7 +1793,6 @@ public class SearchPanel {
 	}
 	class ITListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("I");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1846,7 +1823,6 @@ public class SearchPanel {
 	}
 	class JTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("J");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1877,7 +1853,6 @@ public class SearchPanel {
 	}
 	class KTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("K");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1908,7 +1883,6 @@ public class SearchPanel {
 	}
 	class LTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("L");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1939,7 +1913,6 @@ public class SearchPanel {
 	}
 	class MTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("M");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -1970,7 +1943,6 @@ public class SearchPanel {
 	}
 	class NTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("N");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2032,7 +2004,6 @@ public class SearchPanel {
 	}
 	class PTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("P");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2063,7 +2034,6 @@ public class SearchPanel {
 	}
 	class QTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("Q");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2094,7 +2064,6 @@ public class SearchPanel {
 	}
 	class RTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("R");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2125,7 +2094,6 @@ public class SearchPanel {
 	}
 	class STListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("S");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2156,7 +2124,6 @@ public class SearchPanel {
 	}
 	class TTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("T");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2218,7 +2185,6 @@ public class SearchPanel {
 	}
 	class VTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("V");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2249,7 +2215,6 @@ public class SearchPanel {
 	}
 	class WTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("W");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2280,7 +2245,6 @@ public class SearchPanel {
 	}
 	class XTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("X");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2311,7 +2275,6 @@ public class SearchPanel {
 	}
 	class YTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("Y");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2342,7 +2305,6 @@ public class SearchPanel {
 	}
 	class ZTListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
 			ArrayList<TeamBasicVO> data = getTeamDataList("Z");
 			//球队全名-球队名缩写-所在地-赛区-分区-主场-建立时间
 			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
@@ -2376,7 +2338,24 @@ public class SearchPanel {
 
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			System.out.println(comboField.getText());
+			PlayerBasicVO playerBasicInfo= pbl.getPlayerBasicByName(comboField.getText());
+			String[] columnName = new String[] { "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+			Object[][] columnValues = new Object[1][columnName.length];
 			
+			columnValues[0][0] = playerBasicInfo.getPlayerName();
+			columnValues[0][1] = playerBasicInfo.getBasicInfo()[0];
+			columnValues[0][2] = playerBasicInfo.getBasicInfo()[1];
+			columnValues[0][3] = playerBasicInfo.getBasicInfo()[2];
+			columnValues[0][4] = playerBasicInfo.getBasicInfo()[3];
+			columnValues[0][5] = playerBasicInfo.getBasicInfo()[4];
+			columnValues[0][6] = playerBasicInfo.getBasicInfo()[5];
+			columnValues[0][7] = playerBasicInfo.getBasicInfo()[6];
+			columnValues[0][8] = playerBasicInfo.getBasicInfo()[7];
+			
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
@@ -2400,7 +2379,20 @@ public class SearchPanel {
 
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			System.out.println(comboField.getText());
+			TeamBasicVO teamBasicInfo = tbl.getTeamBasicByName(comboField.getText());
+			String[] columnName = new String[] { "缩写","全名", "所在地", "赛区","分区","主场","建立时间" };
+			Object[][] columnValues = new Object[1][columnName.length];
+			columnValues[0][0] = teamBasicInfo.getTeamName();
+			columnValues[0][1] = teamBasicInfo.getLongName();
+			columnValues[0][2] = teamBasicInfo.getTeamInfo()[1];
+			columnValues[0][3] = teamBasicInfo.getTeamInfo()[2];
+			columnValues[0][4] = teamBasicInfo.getTeamInfo()[3];
+			columnValues[0][5] = teamBasicInfo.getTeamInfo()[4];
+			columnValues[0][6] = teamBasicInfo.getTeamInfo()[5];
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnValues, columnName), 0);
+			tablePanel.repaint();
 		}
 
 		public void mouseEntered(MouseEvent arg0) {
@@ -2425,6 +2417,20 @@ public class SearchPanel {
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			System.out.println(beginTime.getDate()+"---"+endTime.getDate());
+			String[] beginT = beginTime.getDate().split("-");
+			String[] endT = endTime.getDate().split("-");
+			String forMatchT = beginT[0].substring(2, 4) + "-" + endT[0].substring(2, 4) + "_" + beginT[1] + "-" + endT[1];
+			ArrayList<MatchVO> matchData = mbl.getMatchByTime(forMatchT);
+			String[] columnName_M = new String[] { "比赛名称", "时间", "比分" };
+			Object[][] columnMValues = new Object[matchData.size()][columnName_M.length];
+			for (int i = 0; i < matchData.size(); i++) {
+				columnMValues[i][0] = matchData.get(i).getName();
+				columnMValues[i][1] = matchData.get(i).getTime();
+				columnMValues[i][2] = matchData.get(i).getPointer();
+			}
+			tablePanel.removeAll();
+			tablePanel.add(initTable(columnMValues, columnName_M), 0);
+			tablePanel.repaint();
 		}
 
 		public void mouseEntered(MouseEvent arg0) {

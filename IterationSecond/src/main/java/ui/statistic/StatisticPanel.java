@@ -166,7 +166,7 @@ public class StatisticPanel {
 		
 		Object[] leInfo = {"东部东南分区","东部中央分区","东部大西洋分区",
 				"西部太平洋分区","西部西北分区","西部西南分区"};
-		league = new JComboBox<Object>(leInfo);
+		league = new IComboBox(leInfo);
 		league.setBounds(330, 20, 120, 30);
 		league.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -187,7 +187,7 @@ public class StatisticPanel {
 				"盖帽","抢断","犯规","失误","分钟","效率","投篮",
 				"三分","罚球","两双"};
 		 
-		sortBy = new JComboBox<Object>(sbInfo);
+		sortBy = new IComboBox(sbInfo);
 		sortBy.setBounds(540, 20, 120, 30);
 		sortBy.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){

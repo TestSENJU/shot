@@ -12,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
@@ -101,7 +99,7 @@ public class IComboBoxUI extends BasicComboBoxUI {
 			private static final long serialVersionUID = 1L;
 
 			protected JScrollPane createScroller() {
-				String lookAndFeel = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
+				/*String lookAndFeel = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
 				try {
 					UIManager.setLookAndFeel(lookAndFeel);
 				} catch (ClassNotFoundException e) {
@@ -112,7 +110,7 @@ public class IComboBoxUI extends BasicComboBoxUI {
 					e.printStackTrace();
 				} catch (UnsupportedLookAndFeelException e) {
 					e.printStackTrace();
-				}
+				}*/
 				JScrollPane sp = new JScrollPane(list,
 						ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 						ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

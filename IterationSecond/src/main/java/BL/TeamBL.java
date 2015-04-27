@@ -24,6 +24,19 @@ public interface TeamBL {
 	//根据排序的依据返回升序的球队的所有的场均数据
 	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num);
 	///根据排序依据返回热点球队的五个球队的场均数据
+	/**
+	 * 
+	 * @param num
+	 * 0场均得分
+	 * 1场均篮板
+	 * 2场均助攻
+	 * 3场均盖帽
+	 * 4场均抢断
+	 * 5三分命中率
+	 * 6投篮命中率
+	 * 7罚球命中率
+	 * @return
+	 */
 	public ArrayList<TeamAverageVO> getHotTeamByNum(int num);
 	//根据缩写名返回全名
 	public String getLongNameByShortName(String shortName);
@@ -39,4 +52,5 @@ public interface TeamBL {
 	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(int num);
 	
 	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num);
+
 }

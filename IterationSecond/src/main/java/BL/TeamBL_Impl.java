@@ -101,6 +101,16 @@ public class TeamBL_Impl implements TeamBL{
 	public ArrayList<TeamAverageVO> getHotTeamByNum(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAverageVO> list=getTeamAverage();
+		switch(num){
+		case 0:Collections.sort(list, new TeamSortAverageByNum(14));
+		case 1:Collections.sort(list, new TeamSortAverageByNum(8));
+		case 2:Collections.sort(list, new TeamSortAverageByNum(9));
+		case 3:Collections.sort(list, new TeamSortAverageByNum(11));
+		case 4:Collections.sort(list, new TeamSortAverageByNum(10));
+		case 5:Collections.sort(list, new TeamSortAverageByNum(16));
+		case 6:Collections.sort(list, new TeamSortAverageByNum(15));
+		case 7:Collections.sort(list, new TeamSortAverageByNum(17));
+		}
 		Collections.sort(list, new TeamSortAverageByNum(num));
 		ArrayList<TeamAverageVO> result=new ArrayList<TeamAverageVO>();
 		for(int i=list.size()-1;i>list.size()-6;i++){

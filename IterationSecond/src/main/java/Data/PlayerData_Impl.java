@@ -20,6 +20,7 @@ import po.PlayerShortPO;
  * 先发场数 队伍信息
  */
 public class PlayerData_Impl implements PlayerDataService{
+	private static Hashtable<String,ArrayList<String>>todayData=new Hashtable<String,ArrayList<String>>();
     private static Hashtable<String,PlayerAllPO> playerTable=new Hashtable<String,PlayerAllPO>();
 	private String path="players/info";
     public PlayerAllPlusRatePO getPlayerAllByName(String playerName) {
@@ -201,7 +202,20 @@ public class PlayerData_Impl implements PlayerDataService{
 		}
 
 	}
-
+	public static String getToday(){
+		Set<String>keys=todayData.keySet();
+		String[] strs=new String[keys.size()];
+		int i=0;
+		for(String key:keys){
+			String ss[]=key.split("_");
+			strs[i]=ss[0]+"_"+ss[1];
+		}
+		return null;
+		
+	}
+    public static void addToToday(String matchName,String playerData){
+    	
+    }
 	public ArrayList<PlayerShortPO> getShortPlayerByNum(int num) {
 		// TODO Auto-generated method stub
 		return null;
@@ -219,7 +233,37 @@ public class PlayerData_Impl implements PlayerDataService{
 
 	public ArrayList<String> getPlayerByPosition(String position) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<String>list=new ArrayList<String>();
+		String filenames[]=new File("teams").list();
+		try {
+			for(int i=0;i<filenames.length;i++){
+				@SuppressWarnings("resource")
+				BufferedReader br=new BufferedReader(new FileReader(new File(filenames[i])));
+				String str=""; 
+				while((str=br.readLine())!=null){
+						if(str.contains("│")&&str.contains("Position")){
+							String strs[]=str.split("│");
+							if(strs[1].equals(position))
+							list.add(filenames[i]);
+						}
+					}
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(" playerdataimpl getplayerposition filenotfound");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println(" playerdataimpl getplayerposition io");
+			e.printStackTrace();
+		}
+		if(list.size()!=0)
+		return list;
+		else{
+			System.out.println(" playerdataimpl getplayerposition");
+			return null;
+		}
 	}
    
 }

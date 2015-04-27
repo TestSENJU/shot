@@ -63,7 +63,7 @@ public interface PlayerBL {
 	 * 2场均助攻
 	 * @return
 	 */
-	public ArrayList<PlayerShortVO> getImprovedPlayerByNum(int num);
+	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num);
 	
 	/**
 	 * 降序排列的当天热点球员前五名

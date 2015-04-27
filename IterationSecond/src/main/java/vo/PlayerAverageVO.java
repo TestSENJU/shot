@@ -40,8 +40,11 @@ public class PlayerAverageVO {
 	*21盖帽率
 	*22失误率
 	*23使用率
+	* *24得分提升率
+ *25篮板提升率
+ *26助攻提升率
 	*/
-	private double[] playerData=new double[24];
+	private double[] playerData=new double[27];
 	public PlayerAverageVO(String playerName){
 		this.name=playerName;
 	}
@@ -55,9 +58,8 @@ public class PlayerAverageVO {
 		this.playingTime=po.getPlayingTime();
 		this.competeNum=po.getCompeteNum();
 		this.offensiveNum=po.getOffensiveNum();
-		for(int i=0;i<this.playerData.length;i++){
-			this.playerData[i]=po.getPlayerData()[i];
-		}
+		this.playerData=po.getPlayerData();
+		
 		
 	}
 	public ArrayList<String> getTeamList() {

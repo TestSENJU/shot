@@ -12,7 +12,7 @@ public class TeamBasicVO {
     //球队曾用全名
 	private String usedLongName;
 	/*
-	 *  * 0球队全名
+ * 0球队全名
  * 1所在地
  * 2 赛区
  * 3分区

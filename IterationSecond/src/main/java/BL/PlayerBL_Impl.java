@@ -104,8 +104,16 @@ public class PlayerBL_Impl implements PlayerBL{
 		return list;
 	}
 
-	public ArrayList<PlayerShortVO> getImprovedPlayerByNum(int num) {
+	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num) {
 		// TODO Auto-generated method stub
+		ArrayList<PlayerAverageVO>list=getPlayerAverage();
+		switch(num){
+		case 0:Collections.sort(list, new SortAverageByNum(11,0));
+		case 1:Collections.sort(list, new SortAverageByNum(0,0));
+		case 2:Collections.sort(list, new SortAverageByNum(1,0));
+		}
+		
+		
 		return null;
 	}
 

@@ -30,6 +30,10 @@ public MatchShortVO(MatchShortPO po){
 		this.lostPointer=strs[1];
 	}
 }
+
+public String getName() {
+	return name;
+}
 public String getWinTeam() {
 	return winTeam;
 }

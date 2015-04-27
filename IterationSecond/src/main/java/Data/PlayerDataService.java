@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import po.PlayerAllPlusRatePO;
 import po.PlayerAveragePlusRatePO;
 import po.PlayerBasicPO;
+import po.PlayerShortPO;
 /**
  * 
  * @author wyt
@@ -30,5 +31,13 @@ public interface PlayerDataService {
 	public ArrayList<String> getMatchNamesByPlayerName(String playerName);
 	//根据基本信息的文件夹返回所有球员的名字
 	public ArrayList<String> getPlayerNamesByBasic(String path);
-	//
+	//根据筛选的项返回所有的球员
+	public ArrayList<PlayerShortPO> getShortPlayerByNum(int num);
+	//根据当天的比赛返回当天所有参加过比赛的球员的shortpo
+	public ArrayList<PlayerShortPO> getShortPlayerToday();
+	//根据联盟返回球员名
+	public ArrayList<String> getPlayerByLeague(String league);
+	//根据位置返回球员名
+	public ArrayList<String> getPlayerByPosition(String position);
+
 }

@@ -34,7 +34,7 @@ public interface PlayerDataService {
 	//根据筛选的项返回所有的球员
 	public ArrayList<PlayerShortPO> getShortPlayerByNum(int num);
 	//根据当天的比赛返回当天所有参加过比赛的球员的shortpo
-	public ArrayList<PlayerShortPO> getShortPlayerToday();
+	public ArrayList<PlayerShortPO> getShortPlayerToday(int num);
 	//根据联盟返回球员名
 	public ArrayList<String> getPlayerByLeague(String league);
 	//根据位置返回球员名

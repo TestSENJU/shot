@@ -13,6 +13,7 @@ import po.PlayerAllPO;
 import po.PlayerAllPlusRatePO;
 import po.PlayerAveragePlusRatePO;
 import po.PlayerBasicPO;
+import po.PlayerShortPO;
 /**
  * 
  * @author wyt
@@ -199,6 +200,26 @@ public class PlayerData_Impl implements PlayerDataService{
 			return null;
 		}
 
+	}
+
+	public ArrayList<PlayerShortPO> getShortPlayerByNum(int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerShortPO> getShortPlayerToday(int num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<String> getPlayerByLeague(String league) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<String> getPlayerByPosition(String position) {
+		// TODO Auto-generated method stub
+		return null;
 	}
    
 }

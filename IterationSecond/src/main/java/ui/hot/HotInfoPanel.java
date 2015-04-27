@@ -23,7 +23,6 @@ import ui.MyTable;
 import ui.player.PlayerHomePanel;
 import ui.team.TeamHomePanel;
 import vo.PlayerAverageVO;
-import vo.PlayerBasicVO;
 import vo.PlayerShortVO;
 import vo.TeamAverageVO;
 import vo.TeamBasicVO;
@@ -423,7 +422,7 @@ public class HotInfoPanel {
 	 * */
 	public void bestPlayerTable(String id){
 		PlayerBL pbl = new PlayerBL_Impl();
-		ArrayList<PlayerShortVO> bpList = new ArrayList<PlayerShortVO>();
+		ArrayList<PlayerAverageVO> bpList = new ArrayList<PlayerAverageVO>();
 		//"场均得分","场均篮板","场均助攻"
 		/** 0场均得分
 	 * 1场均篮板
@@ -441,11 +440,11 @@ public class HotInfoPanel {
 		columnValues = new Object[5][columnName.length];
 		for (int i = 0; i < 5; i++) {
 
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+bpList.get(i).getPlayerName()+".png");
-			columnValues[i][1] = bpList.get(i).getPlayerName();
-			columnValues[i][2] = bpList.get(i).getTeam();
-			columnValues[i][3] = bpList.get(i).getPlayerData()[1];
-			columnValues[i][4] = bpList.get(i).getNum();
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+bpList.get(i).getName()+".png");
+			columnValues[i][1] = bpList.get(i).getName();
+			columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
+			columnValues[i][3] = bpList.get(i).getPlayerData()[24];
+			columnValues[i][4] = bpList.get(i).getPlayerData()[18];//hehe
 		}
 		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

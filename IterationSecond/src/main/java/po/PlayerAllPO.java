@@ -48,7 +48,13 @@ public void addTeam(String str){
 		teamList.add(str);
 	}
 }
-
+public String getTeam(){
+	if(teamList.size()==0){
+		return null;
+	}else{
+		return teamList.get(teamList.size()-1);
+	}
+}
 public PlayerAllPlusRatePO makeDetailedAllPO(){
 	PlayerAllPlusRatePO allData=new PlayerAllPlusRatePO(this.name);
 	allData.addCompeteNum(playerDataList.size());

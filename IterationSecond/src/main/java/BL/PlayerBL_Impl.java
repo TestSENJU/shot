@@ -125,18 +125,31 @@ public class PlayerBL_Impl implements PlayerBL{
 			volist.add(new PlayerShortVO(polist.get(i)));
 		}
 		Collections.sort(volist, new SortShortByNum());
-		return null;
+		if(volist.size()<=5){
+			return volist;
+		}else{
+			ArrayList<PlayerShortVO> list=new ArrayList<PlayerShortVO>();
+			for(int i=volist.size()-1;i>volist.size()-6;i--){
+				list.add(volist.get(i));
+			}
+			return list;
+		}
 	}
 
 	public ArrayList<PlayerShortVO> getHotPlayerByNum(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerShortPO> polist=playerData.getShortPlayerByNum(num);
-		ArrayList<PlayerShortVO> volist=new ArrayList<PlayerShortVO>();
-		for(int i=0;i<polist.size();i++){
-			volist.add(new PlayerShortVO(polist.get(i)));
+		if(polist!=null){
+			ArrayList<PlayerShortVO> volist=new ArrayList<PlayerShortVO>();
+			for(int i=0;i<polist.size();i++){
+				volist.add(new PlayerShortVO(polist.get(i)));
+			}
+			Collections.sort(volist, new SortShortByNum());
+			return volist;
+		}else{
+			return null;
 		}
-		Collections.sort(volist, new SortShortByNum());
-		return null;
+	
 	}
 	public ArrayList<String> getPlayerNames() {
 		// TODO Auto-generated method stub

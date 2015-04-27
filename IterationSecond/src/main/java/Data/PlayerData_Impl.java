@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import po.PlayerShortPO;
  * 先发场数 队伍信息
  */
 public class PlayerData_Impl implements PlayerDataService{
+	private static String today="12-13_01-01";
 	private static Hashtable<String,ArrayList<String>>todayData=new Hashtable<String,ArrayList<String>>();
     private static Hashtable<String,PlayerAllPO> playerTable=new Hashtable<String,PlayerAllPO>();
 	private String path="players/info";
@@ -202,28 +204,88 @@ public class PlayerData_Impl implements PlayerDataService{
 		}
 
 	}
-	public static String getToday(){
-		Set<String>keys=todayData.keySet();
-		String[] strs=new String[keys.size()];
-		int i=0;
-		for(String key:keys){
-			String ss[]=key.split("_");
-			strs[i]=ss[0]+"_"+ss[1];
-		}
-		return null;
-		
-	}
+
     public static void addToToday(String matchName,String playerData){
+    	String strs[]=matchName.split("_");
+    	if((strs[0]+"_"+strs[1]).equals(today)){
+    		String player[]=playerData.split(";");
+    		if(todayData.contains(player[0])){
+    			todayData.get(player[0]).add(playerData);
+    		}else{
+    			ArrayList<String>list=new ArrayList<String>();
+    			list.add(playerData);
+    			todayData.put(player[0], list);
+    		}
+    	}else{
+    		String ss[]=new String[2];
+    		ss[0]=strs[0]+"_"+strs[1];
+    		ss[1]=today;
+    		Arrays.sort(ss);
+    		if(ss[0].equals(today)){
+    			today=ss[0];
+    			todayData.clear();
+    			ArrayList<String>list=new ArrayList<String>();
+    			String player[]=playerData.split(";");
+    			todayData.put(player[0], list);
+    		}
+    	}
     	
     }
 	public ArrayList<PlayerShortPO> getShortPlayerByNum(int num) {
 		// TODO Auto-generated method stub
-		return null;
+        return null;
 	}
-
+    private PlayerShortPO getShortPlayerByArrayList(String key,ArrayList<String>list,int num){
+    	PlayerShortPO po=new PlayerShortPO(key);
+    	String filename="player\\info\\"+key;
+    	po.setLocation(getPosition(filename));
+    	double result=0;
+    	for(int i=0;i<list.size();i++){
+    		String data[]=list.get(i).split(";");
+    		result+=Double.parseDouble(data[num+3]);
+    	}
+    	po.setNum(result);
+    	po.setTeam(playerTable.get(key).getTeam());
+    	
+    	return po;
+    }
 	public ArrayList<PlayerShortPO> getShortPlayerToday(int num) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<PlayerShortPO> list=new ArrayList<PlayerShortPO>();
+		Set<String>keys=todayData.keySet();
+		switch(num){
+		case 0:{
+			for(String key:keys){
+				list.add(getShortPlayerByArrayList(key,todayData.get(key),11));
+			}
+		}
+		case 1:{
+			for(String key:keys){
+				list.add(getShortPlayerByArrayList(key,todayData.get(key),0));
+			}
+		}
+		case 2:{
+			for(String key:keys){
+				list.add(getShortPlayerByArrayList(key,todayData.get(key),1));
+			}
+		}
+		case 3:{
+			for(String key:keys){
+				list.add(getShortPlayerByArrayList(key,todayData.get(key),8));
+			}
+		}
+		case 4:{
+			for(String key:keys){
+				list.add(getShortPlayerByArrayList(key,todayData.get(key),7));
+			}
+		}
+		}
+		if(list.size()==0){
+			System.out.println("playerdataimpl getShortPlayerByNum");
+			return null;
+		}else{
+			return list;
+		}
 	}
 
 	public ArrayList<String> getPlayerByLeague(String league) {
@@ -234,29 +296,13 @@ public class PlayerData_Impl implements PlayerDataService{
 	public ArrayList<String> getPlayerByPosition(String position) {
 		// TODO Auto-generated method stub
 		ArrayList<String>list=new ArrayList<String>();
-		String filenames[]=new File("teams").list();
-		try {
-			for(int i=0;i<filenames.length;i++){
-				@SuppressWarnings("resource")
-				BufferedReader br=new BufferedReader(new FileReader(new File(filenames[i])));
-				String str=""; 
-				while((str=br.readLine())!=null){
-						if(str.contains("│")&&str.contains("Position")){
-							String strs[]=str.split("│");
-							if(strs[1].equals(position))
-							list.add(filenames[i]);
-						}
-					}
+		String filenames[]=new File("players//info").list();
+		for(int i=0;i<filenames.length;i++){
+			String position1=getPosition(filenames[i]);
+			if(position1.equals(position)){
+				 list.add(filenames[i]);	
 			}
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println(" playerdataimpl getplayerposition filenotfound");
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println(" playerdataimpl getplayerposition io");
-			e.printStackTrace();
+
 		}
 		if(list.size()!=0)
 		return list;
@@ -265,5 +311,30 @@ public class PlayerData_Impl implements PlayerDataService{
 			return null;
 		}
 	}
-   
+   @SuppressWarnings("resource")
+private String getPosition(String filename){
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(new File(filename)));
+			String str=""; 
+			while((str=br.readLine())!=null){
+					if(str.contains("│")&&str.contains("Position")){
+						String strs[]=str.split("│");
+
+						return strs[1];
+					}
+				}
+		
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("getpostion1");
+			e1.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("getpostion2");
+			e.printStackTrace();
+		}
+	
+	   return null;
+   }
 }

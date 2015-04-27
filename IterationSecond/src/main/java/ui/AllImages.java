@@ -107,4 +107,8 @@ public class AllImages {
 	public static final ImageIcon IMG_INIT_PALLMATCH = new ImageIcon("img/initAM.png");
 	/**       *****************MatchHomePanel VS label ICON 120x120***************       **/
 	public static final ImageIcon IMG_SCOREVS = new ImageIcon("img/ScoreVS.png");
+	/**       *****************MatchHomePanel winnerTeam button ICON 100x30***************       **/
+	public static final ImageIcon IMG_MATCH_WINNERTEAM = new ImageIcon("img/winnerTeam.png");
+	/**       *****************MatchHomePanel loserTeam button ICON 100x30***************       **/
+	public static final ImageIcon IMG_MATCH_LOSERTEAM = new ImageIcon("img/loserTeam.png");
 }

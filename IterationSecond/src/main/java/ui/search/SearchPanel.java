@@ -22,7 +22,7 @@ import ui.DateChooserJButton;
 import ui.IScrollBarUI;
 import ui.MyStringTable;
 import ui.match.MatchHomePanel;
-import vo.MatchVO;
+import vo.MatchShortVO;
 import vo.PlayerBasicVO;
 import vo.TeamBasicVO;
 import BL.MatchBL;
@@ -641,7 +641,7 @@ public class SearchPanel {
 		dataTable.setBounds(30, 20, 1000-130-100, 480);
 		dataTable.setOpaque(false);
 		
-		//pTable.addMouseListener(new TableListener());
+		dataTable.addMouseListener(new TableListener());
 
 		dataTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
@@ -2420,12 +2420,13 @@ public class SearchPanel {
 			System.out.println(beginTime.getDate()+"---"+endTime.getDate());
 			String[] beginT = beginTime.getDate().split("-");
 			String[] endT = endTime.getDate().split("-");
-			String forMatchT = beginT[0].substring(2, 4) + "-" + endT[0].substring(2, 4) + "_" + beginT[1] + "-" + endT[1];
-			ArrayList<MatchVO> matchData = mbl.getMatchByTime(forMatchT);
+			String forMatchFT = beginT[0].substring(2, 4) + "-" + endT[0].substring(2, 4) + "_" + beginT[1] + "-" + beginT[2];
+			String forMatchET = beginT[0].substring(2, 4) + "-" + endT[0].substring(2, 4) + "_" + endT[1] + "-" + endT[2];
+			ArrayList<MatchShortVO> matchData = mbl.getShortMatchByPeriod(forMatchFT, forMatchET);
 			String[] columnName_M = new String[] { "比赛名称", "胜方", "负方", "比分", "时间" };
-			Object[][] columnMValues = new Object[matchData.size()][columnName_M.length];
-			for (int i = 0; i < matchData.size(); i++) {
-				columnMValues[i][0] = matchData.get(i).getName();
+			Object[][] columnMValues = new Object[2][columnName_M.length];
+			for (int i = 0; i < 2; i++) {
+				columnMValues[i][0] = "<html><u>"+"ATL"+"</u></html>";//matchData.get(i).getName()
 				columnMValues[i][1] = matchData.get(i).getWinTeam();
 				columnMValues[i][2] = matchData.get(i).getLostTeam();
 				columnMValues[i][3] = matchData.get(i).getWinPointer()+":"+matchData.get(i).getLostPointer();
@@ -2450,6 +2451,32 @@ public class SearchPanel {
 
 		public void mouseReleased(MouseEvent arg0) {
 			
+		}
+		
+	}
+	
+	class TableListener implements MouseListener {
+
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			if (e.getClickCount()==2) {
+				System.out.println(dataTable.getValueAt(dataTable.getSelectedRow(), dataTable.getSelectedColumn()));
+				searchPanel.removeAll();
+				MatchHomePanel mhp = new MatchHomePanel();
+				searchPanel.add(mhp.init("ATL"));
+				searchPanel.repaint();
+			}
+		}
+
+		public void mouseEntered(MouseEvent e) {
+		}
+		public void mouseExited(MouseEvent e) {
+		}
+
+		public void mousePressed(MouseEvent e) {
+		}
+
+		public void mouseReleased(MouseEvent arg0) {
 		}
 		
 	}

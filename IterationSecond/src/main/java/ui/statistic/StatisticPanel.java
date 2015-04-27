@@ -513,12 +513,12 @@ public class StatisticPanel {
 		public void mouseClicked(MouseEvent e) {
 			//PlayWave.startClickSound();
 			if(e.getClickCount()==2){
-				System.out.println(pDataTable.getValueAt(pDataTable.getSelectedRow(), pDataTable.getSelectedColumn()));
+				System.out.println(pDataTable.getValueAt(pDataTable.getSelectedRow(), pDataTable.getSelectedColumn()+1));
 				if (pDataTable.getSelectedColumn()==0) {
 					tablePanel.removeAll();
 					statisticPanel.removeAll();
 					PlayerHomePanel php = new PlayerHomePanel();
-					statisticPanel.add(php.init("A"));
+					statisticPanel.add(php.init(pDataTable.getValueAt(pDataTable.getSelectedRow(), pDataTable.getSelectedColumn()+1).toString()));
 					statisticPanel.repaint();
 				}
 			}

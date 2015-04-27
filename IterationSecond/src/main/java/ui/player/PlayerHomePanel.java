@@ -27,6 +27,7 @@ import sound.PlayWave;
 import ui.AllImages;
 import ui.IScrollBarUI;
 import ui.MyStringTable;
+import ui.team.TeamHomePanel;
 import vo.MatchVO;
 import vo.PlayerAllVO;
 import vo.PlayerAverageVO;
@@ -75,6 +76,7 @@ public class PlayerHomePanel {
 	MatchBL mbl = new MatchBL_Impl();
 	PlayerBL pbl = new PlayerBL_Impl();
 	String playerTempID;
+	String teamTempID;
 
 	public JPanel init(String playerID) {
 		playerTempID = playerID;
@@ -279,7 +281,7 @@ public class PlayerHomePanel {
 
 		// TODO
 		playerTeam = new JButton();
-		playerTeam.setBounds(550, 80, 100, 30);
+		playerTeam.setBounds(600, 80, 100, 30);
 		playerTeam.setOpaque(false);
 		playerTeam.setContentAreaFilled(false);
 		playerTeam.setBorderPainted(false);
@@ -291,7 +293,8 @@ public class PlayerHomePanel {
 		// logoIcon
 		JSVGCanvas svgCanvas = new JSVGCanvas();
 		File f1 = new File("teamImg/"+playerAllList.getTeamList().get(playerAllList.getTeamList().size()-1)+".svg");
-		svgCanvas.setBounds(600, 130, 140, 140);
+		teamTempID = playerAllList.getTeamList().get(playerAllList.getTeamList().size()-1);
+		svgCanvas.setBounds(620, 130, 140, 140);
 		svgCanvas.setURI(f1.toURI().toString());
 		svgCanvas.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter() {
 			public void documentLoadingStarted(SVGDocumentLoaderEvent e) {
@@ -316,6 +319,7 @@ public class PlayerHomePanel {
 				System.out.println("renderCompleted");
 			}
 		});
+		svgCanvas.addMouseListener(new TeamListener());
 		pHomePanel.add(svgCanvas, 0);
 
 		//TODO
@@ -689,6 +693,27 @@ public class PlayerHomePanel {
 			morePanel.removeAll();
 			morePanel.add(initAMTable(columnAMValues, columnName_AM), 0);
 			morePanel.repaint();
+		}
+
+		public void mouseEntered(MouseEvent arg0) {
+		}
+
+		public void mouseExited(MouseEvent arg0) {
+		}
+
+		public void mousePressed(MouseEvent arg0) {
+		}
+
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class TeamListener implements MouseListener {
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			pHomePanel.removeAll();
+			TeamHomePanel thp = new TeamHomePanel();
+			pHomePanel.add(thp.init(teamTempID), 0);
+			pHomePanel.repaint();
 		}
 
 		public void mouseEntered(MouseEvent arg0) {

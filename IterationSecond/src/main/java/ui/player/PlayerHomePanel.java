@@ -29,6 +29,7 @@ import ui.IScrollBarUI;
 import ui.MyStringTable;
 import vo.MatchVO;
 import vo.PlayerAllVO;
+import vo.PlayerAverageVO;
 import vo.PlayerBasicVO;
 import BL.MatchBL;
 import BL.MatchBL_Impl;
@@ -72,11 +73,11 @@ public class PlayerHomePanel {
 	
 	//
 	MatchBL mbl = new MatchBL_Impl();
+	PlayerBL pbl = new PlayerBL_Impl();
 	String playerTempID;
 
 	public JPanel init(String playerID) {
 		playerTempID = playerID;
-		PlayerBL pbl = new PlayerBL_Impl();
 		PlayerBasicVO pbasicList = new PlayerBasicVO(playerID);
 		pbasicList = pbl.getPlayerBasicByName(playerID);
 		PlayerAllVO playerAllList = new PlayerAllVO(playerID);
@@ -521,6 +522,8 @@ public class PlayerHomePanel {
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			PlayWave.startClickSound();
+			ArrayList<PlayerAllVO> pAllDataList = pbl.getPlayerAll();
+			ArrayList<PlayerAverageVO> pAverageDataList = pbl.getPlayerAverage();
 			String[] columnName = new String[] { "参赛场数", "先发场数", "篮板数", "助攻数",
 					"在场时间", "投篮命中率", "三分命中率", "罚球命中率", "进攻数",
 					"防守数", "抢断数",
@@ -531,35 +534,64 @@ public class PlayerHomePanel {
 			for (int i = 0; i < 2; i++) {
 				if (i % 2 == 0) {
 					columnValues[i][0] = "总赛季";
+					columnValues[i][1] = pAllDataList.get(i).getCompeteNum();
+					columnValues[i][2] = pAllDataList.get(i).getOffensiveNum();
+					columnValues[i][3] = pAllDataList.get(i).getPlayerData()[0];
+					columnValues[i][4] = pAllDataList.get(i).getPlayerData()[1];
+					columnValues[i][5] = pAllDataList.get(i).getPlayingTime();
+					columnValues[i][6] = pAllDataList.get(i).getPlayerData()[2];
+					columnValues[i][7] = pAllDataList.get(i).getPlayerData()[3];
+					columnValues[i][8] = pAllDataList.get(i).getPlayerData()[4];
+					columnValues[i][9] = pAllDataList.get(i).getPlayerData()[5];
+					columnValues[i][10] = pAllDataList.get(i).getPlayerData()[6];
+					columnValues[i][11] = pAllDataList.get(i).getPlayerData()[7];
+					columnValues[i][12] = pAllDataList.get(i).getPlayerData()[8];
+					columnValues[i][13] = pAllDataList.get(i).getPlayerData()[9];
+					columnValues[i][14] = pAllDataList.get(i).getPlayerData()[10];
+					columnValues[i][15] = pAllDataList.get(i).getPlayerData()[11];
+					columnValues[i][16] = pAllDataList.get(i).getPlayerData()[12];
+					columnValues[i][17] = pAllDataList.get(i).getPlayerData()[13];
+					columnValues[i][18] = pAllDataList.get(i).getPlayerData()[14];
+					columnValues[i][19] = pAllDataList.get(i).getPlayerData()[15];
+					columnValues[i][20] = pAllDataList.get(i).getPlayerData()[16];
+					columnValues[i][21] = pAllDataList.get(i).getPlayerData()[17];
+					columnValues[i][22] = pAllDataList.get(i).getPlayerData()[18];
+					columnValues[i][23] = pAllDataList.get(i).getPlayerData()[19];
+					columnValues[i][24] = pAllDataList.get(i).getPlayerData()[20];
+					columnValues[i][25] = pAllDataList.get(i).getPlayerData()[21];
+					columnValues[i][26] = pAllDataList.get(i).getPlayerData()[22];
+					columnValues[i][27] = pAllDataList.get(i).getPlayerData()[23];
 				} else {
 					columnValues[i][0] = "场均";
+					columnValues[i][1] = pAverageDataList.get(i).getCompeteNum();
+					columnValues[i][2] = pAverageDataList.get(i).getOffensiveNum();
+					columnValues[i][3] = pAverageDataList.get(i).getPlayerData()[0];
+					columnValues[i][4] = pAverageDataList.get(i).getPlayerData()[1];
+					columnValues[i][5] = pAverageDataList.get(i).getPlayingTime();
+					columnValues[i][6] = pAverageDataList.get(i).getPlayerData()[2];
+					columnValues[i][7] = pAverageDataList.get(i).getPlayerData()[3];
+					columnValues[i][8] = pAverageDataList.get(i).getPlayerData()[4];
+					columnValues[i][9] = pAverageDataList.get(i).getPlayerData()[5];
+					columnValues[i][10] = pAverageDataList.get(i).getPlayerData()[6];
+					columnValues[i][11] = pAverageDataList.get(i).getPlayerData()[7];
+					columnValues[i][12] = pAverageDataList.get(i).getPlayerData()[8];
+					columnValues[i][13] = pAverageDataList.get(i).getPlayerData()[9];
+					columnValues[i][14] = pAverageDataList.get(i).getPlayerData()[10];
+					columnValues[i][15] = pAverageDataList.get(i).getPlayerData()[11];
+					columnValues[i][16] = pAverageDataList.get(i).getPlayerData()[12];
+					columnValues[i][17] = pAverageDataList.get(i).getPlayerData()[13];
+					columnValues[i][18] = pAverageDataList.get(i).getPlayerData()[14];
+					columnValues[i][19] = pAverageDataList.get(i).getPlayerData()[15];
+					columnValues[i][20] = pAverageDataList.get(i).getPlayerData()[16];
+					columnValues[i][21] = pAverageDataList.get(i).getPlayerData()[17];
+					columnValues[i][22] = pAverageDataList.get(i).getPlayerData()[18];
+					columnValues[i][23] = pAverageDataList.get(i).getPlayerData()[19];
+					columnValues[i][24] = pAverageDataList.get(i).getPlayerData()[20];
+					columnValues[i][25] = pAverageDataList.get(i).getPlayerData()[21];
+					columnValues[i][26] = pAverageDataList.get(i).getPlayerData()[22];
+					columnValues[i][27] = pAverageDataList.get(i).getPlayerData()[23];
 				}
-				columnValues[i][1] = i;
-				columnValues[i][2] = i;
-				columnValues[i][3] = i;
-				columnValues[i][4] = i;
-				columnValues[i][5] = i;
-				columnValues[i][6] = i;
-				columnValues[i][7] = i;
-				columnValues[i][8] = i;
-				columnValues[i][9] = i;
-				columnValues[i][10] = i;
-				columnValues[i][11] = i;
-				columnValues[i][12] = i;
-				columnValues[i][13] = i;
-				columnValues[i][14] = i;
-				columnValues[i][15] = i;
-				columnValues[i][16] = i;
-				columnValues[i][17] = i;
-				columnValues[i][18] = i;
-				columnValues[i][19] = i;
-				columnValues[i][20] = i;
-				columnValues[i][21] = i;
-				columnValues[i][22] = i;
-				columnValues[i][23] = i;
-				columnValues[i][24] = i;
-				columnValues[i][25] = i;
-				columnValues[i][26] = i;
+				
 			}
 
 			morePanel.removeAll();
@@ -612,12 +644,14 @@ public class PlayerHomePanel {
 			PlayWave.startClickSound();
 			ArrayList<MatchVO> playerMatch = new ArrayList<MatchVO>();
 			playerMatch = mbl.getRecentMatchByPlayer(playerTempID);
-			String[] columnName_RM = new String[] { "比赛名称", "时间", "比分" };
+			String[] columnName_RM = new String[] { "比赛名称", "胜方", "负方", "比分", "时间" };
 			Object[][] columnRMValues = new Object[5][columnName_RM.length];
 			for (int i = 0; i < 5; i++) {
 				columnRMValues[i][0] = playerMatch.get(i).getName();
-				columnRMValues[i][1] = playerMatch.get(i).getTime();
-				columnRMValues[i][2] = playerMatch.get(i).getPointer();
+				columnRMValues[i][1] = playerMatch.get(i).getWinTeam();
+				columnRMValues[i][2] = playerMatch.get(i).getLostTeam();
+				columnRMValues[i][3] = playerMatch.get(i).getWinPointer()+":"+playerMatch.get(i).getLostPointer();
+				columnRMValues[i][4] = playerMatch.get(i).getTime();
 			}
 			morePanel.removeAll();
 			morePanel.add(initRMTable(columnRMValues, columnName_RM), 0);
@@ -643,12 +677,14 @@ public class PlayerHomePanel {
 			PlayWave.startClickSound();
 			ArrayList<MatchVO> playerMatch = new ArrayList<MatchVO>();
 			playerMatch = mbl.getMatchByPlayer(playerTempID);
-			String[] columnName_AM = new String[] { "比赛名称", "时间", "比分" };
+			String[] columnName_AM = new String[] { "比赛名称", "胜方", "负方", "比分", "时间" };
 			Object[][] columnAMValues = new Object[5][columnName_AM.length];
 			for (int i = 0; i < 5; i++) {
 				columnAMValues[i][0] = playerMatch.get(i).getName();
-				columnAMValues[i][1] = playerMatch.get(i).getTime();
-				columnAMValues[i][2] = playerMatch.get(i).getPointer();
+				columnAMValues[i][1] = playerMatch.get(i).getWinTeam();
+				columnAMValues[i][2] = playerMatch.get(i).getLostTeam();
+				columnAMValues[i][3] = playerMatch.get(i).getWinPointer()+":"+playerMatch.get(i).getLostPointer();
+				columnAMValues[i][4] = playerMatch.get(i).getTime();
 			}
 			morePanel.removeAll();
 			morePanel.add(initAMTable(columnAMValues, columnName_AM), 0);

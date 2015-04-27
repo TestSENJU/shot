@@ -353,7 +353,6 @@ public class TeamHomePanel {
 		    tScrollPane.getVerticalScrollBar().setUI(new IScrollBarUI());
 		    tScrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
 		    
-	        teamHomePanel.add(tScrollPane);
 	        tScrollPane.setBounds(30, 0, 1000-130-100, 450);
 	        tScrollPane.setOpaque(false);
 		return tScrollPane;
@@ -545,17 +544,14 @@ public class TeamHomePanel {
 			MatchBL mbl = new MatchBL_Impl();
 			ArrayList<MatchVO> teamMatch = new ArrayList<MatchVO>();
 			teamMatch = mbl.getRecentMatchByTeam(teamTempID);
-			String[] columnName_RM = new String[] { "比赛名称","时间", "对手", "比分" };
+			String[] columnName_RM = new String[] { "比赛名称","胜方","负方","比分","时间" };
 			Object[][] columnRMValues = new Object[teamMatch.size()][columnName_RM.length];
 			for (int i = 0; i < teamMatch.size(); i++) {
 				columnRMValues[i][0] = teamMatch.get(i).getName();
+				columnRMValues[i][1] = teamMatch.get(i).getWinTeam();
+				columnRMValues[i][1] = teamMatch.get(i).getLostTeam();
+				columnRMValues[i][3] = teamMatch.get(i).getWinPointer()+":"+teamMatch.get(i).getLostPointer();
 				columnRMValues[i][1] = teamMatch.get(i).getTime();
-				if (teamTempID.equals(teamMatch.get(i).getTeam1())) {
-					columnRMValues[i][2] = teamMatch.get(i).getTeam2();
-				} else {
-					columnRMValues[i][2] = teamMatch.get(i).getTeam1();
-				}		
-				columnRMValues[i][3] = teamMatch.get(i).getPointer();
 			}
 			PlayWave.startClickSound();
 			TablePanel.removeAll();		
@@ -577,17 +573,14 @@ public class TeamHomePanel {
 			MatchBL mbl = new MatchBL_Impl();
 			ArrayList<MatchVO> teamMatch = new ArrayList<MatchVO>();
 			teamMatch = mbl.getMatchByTeam(teamTempID);
-			String[] columnName_AM = new String[] { "比赛名称", "时间", "比分", "对手" };
+			String[] columnName_AM = new String[] { "比赛名称","胜方","负方","比分","时间" };
 			Object[][] columnAMValues = new Object[teamMatch.size()][columnName_AM.length];
 			for (int i = 0; i < teamMatch.size(); i++) {
 				columnAMValues[i][0] = teamMatch.get(i).getName();
-				columnAMValues[i][1] = teamMatch.get(i).getTime();
-				columnAMValues[i][2] = teamMatch.get(i).getPointer();
-				if (teamTempID.equals(teamMatch.get(i).getTeam1())) {
-					columnAMValues[i][3] = teamMatch.get(i).getTeam2();
-				} else {
-					columnAMValues[i][3] = teamMatch.get(i).getTeam1();
-				}		
+				columnAMValues[i][1] = teamMatch.get(i).getWinTeam();
+				columnAMValues[i][2] = teamMatch.get(i).getLostTeam();
+				columnAMValues[i][2] = teamMatch.get(i).getWinPointer()+":"+teamMatch.get(i).getLostPointer();
+				columnAMValues[i][2] = teamMatch.get(i).getTime();
 			}
 			PlayWave.startClickSound();
 			TablePanel.removeAll();		

@@ -21,6 +21,7 @@ import ui.ComboTextField;
 import ui.DateChooserJButton;
 import ui.IScrollBarUI;
 import ui.MyStringTable;
+import ui.match.MatchHomePanel;
 import vo.MatchVO;
 import vo.PlayerBasicVO;
 import vo.TeamBasicVO;
@@ -2421,12 +2422,14 @@ public class SearchPanel {
 			String[] endT = endTime.getDate().split("-");
 			String forMatchT = beginT[0].substring(2, 4) + "-" + endT[0].substring(2, 4) + "_" + beginT[1] + "-" + endT[1];
 			ArrayList<MatchVO> matchData = mbl.getMatchByTime(forMatchT);
-			String[] columnName_M = new String[] { "比赛名称", "时间", "比分" };
+			String[] columnName_M = new String[] { "比赛名称", "胜方", "负方", "比分", "时间" };
 			Object[][] columnMValues = new Object[matchData.size()][columnName_M.length];
 			for (int i = 0; i < matchData.size(); i++) {
 				columnMValues[i][0] = matchData.get(i).getName();
-				columnMValues[i][1] = matchData.get(i).getTime();
-				columnMValues[i][2] = matchData.get(i).getPointer();
+				columnMValues[i][1] = matchData.get(i).getWinTeam();
+				columnMValues[i][2] = matchData.get(i).getLostTeam();
+				columnMValues[i][3] = matchData.get(i).getWinPointer()+":"+matchData.get(i).getLostPointer();
+				columnMValues[i][4] = matchData.get(i).getTime();
 			}
 			tablePanel.removeAll();
 			tablePanel.add(initTable(columnMValues, columnName_M), 0);

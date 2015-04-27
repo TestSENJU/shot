@@ -24,6 +24,7 @@ import ui.player.PlayerHomePanel;
 import ui.team.TeamHomePanel;
 import vo.PlayerAverageVO;
 import vo.PlayerBasicVO;
+import vo.PlayerShortVO;
 import vo.TeamAverageVO;
 import vo.TeamBasicVO;
 import BL.PlayerBL;
@@ -158,29 +159,28 @@ public class HotInfoPanel {
 	 * */
 	public void hotPlayerTodayTable(String id){
 		PlayerBL pbl = new PlayerBL_Impl();
-		ArrayList<PlayerAverageVO> hptList = new ArrayList<PlayerAverageVO>();
+		ArrayList<PlayerShortVO> hptList = new ArrayList<PlayerShortVO>();
 		if (id.equals("篮板")) {
-			hptList = pbl.getTodayHotPlayerRankingByNum(0);
+			hptList = pbl.getTodayHotPlayerByNum(1);
 		} else if (id.equals("得分")) {
-			hptList = pbl.getTodayHotPlayerRankingByNum(11);
+			hptList = pbl.getTodayHotPlayerByNum(0);
 		} else if (id.equals("助攻")) {
-			hptList = pbl.getTodayHotPlayerRankingByNum(1);
+			hptList = pbl.getTodayHotPlayerByNum(2);
 		} else if (id.equals("抢断")) {
-			hptList = pbl.getTodayHotPlayerRankingByNum(7);
+			hptList = pbl.getTodayHotPlayerByNum(3);
 		} else if (id.equals("盖帽")) {
-			hptList = pbl.getTodayHotPlayerRankingByNum(8);
+			hptList = pbl.getTodayHotPlayerByNum(4);
 		} else {
 			System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
 		}
 		columnName = new String[] { "球员头像", "球员名称", "所属球队", "球员位置", "数据" };
 		columnValues = new Object[5][columnName.length];
 		for (int i = 0; i < 5; i++) {
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hptList.get(i).getName()+".png");
-			columnValues[i][1] = hptList.get(i).getName();
-			columnValues[i][2] = hptList.get(i).getTeamList().get(hptList.get(i).getTeamList().size()-1);
-			PlayerBasicVO forPosition = new PlayerBasicVO(hptList.get(i).getName());
-			columnValues[i][3] = forPosition.getBasicInfo()[1];
-			columnValues[i][4] = hptList.get(i).getPlayerData()[1];//
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hptList.get(i).getPlayerName()+".png");
+			columnValues[i][1] = hptList.get(i).getPlayerName();
+			columnValues[i][2] = hptList.get(i).getTeam();
+			columnValues[i][3] = hptList.get(i).getLocation();
+			columnValues[i][4] = hptList.get(i).getNum();//
 		}
 		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -238,17 +238,31 @@ public class HotInfoPanel {
 	 * */
 	public void hotPlayerSeasonTable(String id){
 		PlayerBL pbl = new PlayerBL_Impl();
-		ArrayList<PlayerAverageVO> hpsList = new ArrayList<PlayerAverageVO>();
-		if (id.equals("篮板")) {
-			hpsList = pbl.getHotPlayerRankingByNum(0);
-		} else if (id.equals("得分")) {
-			hpsList = pbl.getHotPlayerRankingByNum(11);
-		} else if (id.equals("助攻")) {
-			hpsList = pbl.getHotPlayerRankingByNum(1);
-		} else if (id.equals("抢断")) {
-			hpsList = pbl.getHotPlayerRankingByNum(7);
-		} else if (id.equals("盖帽")) {
-			hpsList = pbl.getHotPlayerRankingByNum(8);
+		ArrayList<PlayerShortVO> hpsList = new ArrayList<PlayerShortVO>();
+		/** 0场均得分
+	 * 1场均篮板
+	 * 2场均助攻
+	 * 3场均盖帽
+	 * 4场均抢断
+	 * 5三分命中率
+	 * 6投篮命中率
+	 * 7罚球命中率*/
+		if (id.equals("场均得分")) {
+			hpsList = pbl.getHotPlayerByNum(0);
+		} else if (id.equals("场均篮板")) {
+			hpsList = pbl.getHotPlayerByNum(1);
+		} else if (id.equals("场均助攻")) {
+			hpsList = pbl.getHotPlayerByNum(2);
+		} else if (id.equals("场均盖帽")) {
+			hpsList = pbl.getHotPlayerByNum(3);
+		} else if (id.equals("场均抢断")) {
+			hpsList = pbl.getHotPlayerByNum(4);
+		} else if (id.equals("三分命中率")) {
+			hpsList = pbl.getHotPlayerByNum(5);
+		} else if (id.equals("投篮命中率")) {
+			hpsList = pbl.getHotPlayerByNum(6);
+		} else if (id.equals("罚球命中率")) {
+			hpsList = pbl.getHotPlayerByNum(7);
 		} else {
 			System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
 		}
@@ -256,12 +270,11 @@ public class HotInfoPanel {
 		columnValues = new Object[5][columnName.length];
 		for (int i = 0; i < 5; i++) {
 
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hpsList.get(i).getName()+".png");
-			columnValues[i][1] = hpsList.get(i).getName();
-			columnValues[i][2] = hpsList.get(i).getTeamList().get(hpsList.get(i).getTeamList().size()-1);
-			PlayerBasicVO forPosition = new PlayerBasicVO(hpsList.get(i).getName());
-			columnValues[i][3] = forPosition.getBasicInfo()[1];
-			columnValues[i][4] = hpsList.get(i).getPlayerData()[1];
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hpsList.get(i).getPlayerName()+".png");
+			columnValues[i][1] = hpsList.get(i).getPlayerName();
+			columnValues[i][2] = hpsList.get(i).getTeam();
+			columnValues[i][3] =  hpsList.get(i).getLocation();
+			columnValues[i][4] = hpsList.get(i).getNum();
 			columnValues[i][5] = i+1;
 		}
 		topFive = new MyTable(columnValues, columnName);
@@ -410,14 +423,17 @@ public class HotInfoPanel {
 	 * */
 	public void bestPlayerTable(String id){
 		PlayerBL pbl = new PlayerBL_Impl();
-		ArrayList<PlayerAverageVO> bpList = new ArrayList<PlayerAverageVO>();
+		ArrayList<PlayerShortVO> bpList = new ArrayList<PlayerShortVO>();
 		//"场均得分","场均篮板","场均助攻"
+		/** 0场均得分
+	 * 1场均篮板
+	 * 2场均助攻*/
 		if (id.equals(id.equals("场均得分"))) {
-			bpList = pbl.getMostImprovedPlayerByNum(11);
+			bpList = pbl.getImprovedPlayerByNum(0);
 		} else if (id.equals("场均篮板")) {
-			bpList = pbl.getMostImprovedPlayerByNum(0);
+			bpList = pbl.getImprovedPlayerByNum(1);
 		} else if (id.equals("场均助攻")) {
-			bpList = pbl.getMostImprovedPlayerByNum(1);
+			bpList = pbl.getImprovedPlayerByNum(2);
 		} else {
 			System.out.println("HotInfoPanel-BestPlayerTable-InvalidInput");
 		}
@@ -425,11 +441,11 @@ public class HotInfoPanel {
 		columnValues = new Object[5][columnName.length];
 		for (int i = 0; i < 5; i++) {
 
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+bpList.get(i).getName()+".png");
-			columnValues[i][1] = bpList.get(i).getName();
-			columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
+			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+bpList.get(i).getPlayerName()+".png");
+			columnValues[i][1] = bpList.get(i).getPlayerName();
+			columnValues[i][2] = bpList.get(i).getTeam();
 			columnValues[i][3] = bpList.get(i).getPlayerData()[1];
-			columnValues[i][4] = bpList.get(i).getPlayerData()[2];
+			columnValues[i][4] = bpList.get(i).getNum();
 		}
 		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

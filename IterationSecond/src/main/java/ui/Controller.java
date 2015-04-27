@@ -14,6 +14,7 @@ import javax.swing.WindowConstants;
 
 import sound.PlayWave;
 import ui.hot.HotInfoPanel;
+import ui.match.MatchHomePanel;
 
 public class Controller {
 	/** 
@@ -51,6 +52,7 @@ public class Controller {
 		Hello.setFont(new Font("微软雅黑", Font.PLAIN, 30));
 		Hello.setForeground(Color.WHITE);
 		//Hello.setIcon(hello);
+		Hello.addMouseListener(new Hello());
 		land.add(Hello, 0);
 		
 		JButton welcome = new JButton();
@@ -58,7 +60,7 @@ public class Controller {
 		welcome.setBorderPainted(false);
 		welcome.setIcon(AllImages.IMG_WELCOME);
 		welcome.setOpaque(false);
-		welcome.addMouseListener(new HelloListener());
+		welcome.addMouseListener(new WelcomeListener());
 		land.add(welcome, 0);
 		
 		close = new JButton();
@@ -85,7 +87,7 @@ public class Controller {
 		//land.setVisible(true);
 	}
 	
-	class HelloListener implements MouseListener {
+	class WelcomeListener implements MouseListener {
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
 			land.setVisible(false);
@@ -141,5 +143,23 @@ public class Controller {
 		public void mousePressed(MouseEvent e) {}
 
 		public void mouseReleased(MouseEvent e) {}
+	}
+	class Hello implements MouseListener {
+
+		public void mouseClicked(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			land.setVisible(false);
+			MatchHomePanel mhp = new MatchHomePanel();
+			f.getContentPane().add(mhp.init("ATL"));
+			f.repaint();
+		}
+		public void mouseEntered(MouseEvent arg0) {
+		}
+		public void mouseExited(MouseEvent arg0) {
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}		
 	}
 }

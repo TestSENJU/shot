@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -52,7 +53,13 @@ public class PlayerPanel {
 		String[] columnName = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
 		Object[][] columnValues = new Object[pbList.size()][columnName.length];
 		for (int i = 0; i < pbList.size(); i++) {
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+pbList.get(i).getPlayerName()+".png");
+			File img = new File("playerImg/portrait/"+pbList.get(i).getPlayerName()+".png");
+			if (img.exists()) {
+				columnValues[i][0] = new ImageIcon("playerImg/portrait/"+pbList.get(i).getPlayerName()+".png");
+			} else {
+				columnValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
+			}
+			
 			columnValues[i][1] = pbList.get(i).getPlayerName();
 			columnValues[i][2] = pbList.get(i).getBasicInfo()[0];
 			columnValues[i][3] = pbList.get(i).getBasicInfo()[1];

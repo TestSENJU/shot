@@ -117,4 +117,6 @@ public class AllImages {
 	public static final ImageIcon IMG_MATCH_LOSERTEAM = new ImageIcon("img/loserTeam.png");
 	/**       *****************AboutUsPanel about us button ICON 870x650***************       **/
 	public static final ImageIcon IMG_ABOUTUSICON = new ImageIcon("img/aboutusIcon.png");
+	/**       *****************PlayerTable defaultIcon 50x50***************       **/
+	public static final ImageIcon IMG_DEFAULTPLAYER = new ImageIcon("img/defaultPlayer.png");
 }

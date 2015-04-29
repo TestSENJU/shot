@@ -35,6 +35,8 @@ import vo.TeamAverageVO;
 import vo.TeamBasicVO;
 import BL.MatchBL;
 import BL.MatchBL_Impl;
+import BL.PlayerBL;
+import BL.PlayerBL_Impl;
 import BL.TeamBL;
 import BL.TeamBL_Impl;
 
@@ -73,6 +75,7 @@ public class TeamHomePanel {
 	private MyStringTable aMTable;
 	private JScrollPane aMScrollPane;
 	TeamBL tbl = new TeamBL_Impl();
+	PlayerBL pbl = new PlayerBL_Impl();
 	String teamTempID;
 	
 	public JPanel init(String teamID){
@@ -425,6 +428,7 @@ public class TeamHomePanel {
 			Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
 			for (int i = 0; i < teamPlayerInfoList.size(); i++) {
 				PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+				pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
 				columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
 				columnPValues[i][1] = teamPlayerInfoList.get(i);
 				columnPValues[i][2] = pbvo.getBasicInfo()[0];

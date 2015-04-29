@@ -60,4 +60,5 @@ public interface TeamBL {
 	
 	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num);
 
+	public String getShortName(String longName);
 }

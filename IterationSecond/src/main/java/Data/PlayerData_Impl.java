@@ -160,10 +160,8 @@ public class PlayerData_Impl implements PlayerDataService{
 		return playerNames;
 	}
 
-    public static void addToTable(ArrayList<String[]>list,String filename,String team,
+    public static void addToTable(String[] strs,String filename,String team,
     	double[]nums1,String teamTime,double[]nums2){
-    	for(int j=0;j<list.size();j++){
-			String strs[]=list.get(j);
 			if(playerTable.containsKey(strs[0])){
 				playerTable.get(strs[0]).addPlayerData(filename, strs);
 				playerTable.get(strs[0]).addCompeteData(filename, nums2);
@@ -182,8 +180,6 @@ public class PlayerData_Impl implements PlayerDataService{
 				
 				playerTable.put(strs[0], playerAll);
 			}
-			
-		}
     }
 
 	public ArrayList<String> getMatchNamesByPlayerName(String playerName) {

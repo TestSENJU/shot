@@ -137,15 +137,17 @@ private void readFile(String filename){
 		
 		TeamData_Impl.addToTable(TeamNum1, opponentNum2, filestrs[2], team1, playerList1,i1);
 		TeamData_Impl.addToTable(TeamNum2,opponentNum1,filestrs[2],team2, playerList2,i2);
-		PlayerData_Impl.addToTable(strlist1,filestrs[2],team1,nums1,teamTime1,nums2);
-		PlayerData_Impl.addToTable(strlist2,filestrs[2],team2,nums2,teamTime1,nums1);
+		
+
 		MatchData_Impl.addToTable(filestrs[2], team1, teamTime1, strlist1, team2, strlist2, pointer, pointerpart);
 		for(int k=0;k<list1.size();k++){
 			PlayerData_Impl.addToToday(filestrs[2], list1.get(k));
-
+			PlayerData_Impl.addToTable(strlist1.get(k),filestrs[2],team1,nums1,teamTime1,nums2);
+			
 		}
 		for(int k=0;k<list2.size();k++){
 			PlayerData_Impl.addToToday(filestrs[2], list2.get(k));
+			PlayerData_Impl.addToTable(strlist2.get(k),filestrs[2],team2,nums2,teamTime2,nums1);
 		}
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block

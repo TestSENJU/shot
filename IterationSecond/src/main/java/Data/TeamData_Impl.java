@@ -138,7 +138,32 @@ public class TeamData_Impl implements TeamDataService{
 		}
 		return null;
 	}
-
+    public String getTeamShortName(String name){
+    	// TODO Auto-generated method stub
+    			try {
+    				@SuppressWarnings("resource")
+    				BufferedReader br=new BufferedReader(new FileReader(filename));
+    			    String str="";
+    			    while((str=br.readLine())!=null){
+    			    	if(str.startsWith("║")){
+    						String mass[]=str.split("║");
+    						String contents[]=mass[1].split("│");
+    						if(contents[0].equals(name)){
+    				    		return contents[1];
+    				    	}
+    					}
+    			    }
+    			    if(name.equals("Pelicans")){return "NOH";}
+    			} catch (FileNotFoundException e) {
+    				// TODO Auto-generated catch block
+    				System.out.println("teamDataImpl getTeamName filenotfound");
+    			} catch (IOException e) {
+    				// TODO Auto-generated catch block
+    				System.out.println("teamDataImpl getTeamName ioexception");
+    			}
+    			
+    			return null;
+    }
 	public String getTeamName(String shortName) {
 		// TODO Auto-generated method stub
 		try {

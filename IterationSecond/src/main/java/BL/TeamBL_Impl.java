@@ -172,6 +172,11 @@ public class TeamBL_Impl implements TeamBL{
 		return list;
 	}
 
+	public String getShortName(String longName) {
+		// TODO Auto-generated method stub
+		return teamData.getTeamShortName(longName);
+	}
+
 }
 class TeamSortAllByNum implements Comparator<Object>{
 	int comNum;

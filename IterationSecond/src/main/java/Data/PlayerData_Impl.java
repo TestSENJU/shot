@@ -322,8 +322,8 @@ public class PlayerData_Impl implements PlayerDataService{
 					if(str.startsWith("║")){
 						String mass[]=str.split("║");
 						String contents[]=mass[1].split("│");
-						if((contents[2]+"-"+contents[3]).equals(league))
-						list.add(contents[2]+"-"+contents[3]);
+						if((contents[3]+"-"+contents[4]).equals(league+"\t"))
+						list.add(contents[1]);
 					}
 				
 				}
@@ -348,7 +348,7 @@ public class PlayerData_Impl implements PlayerDataService{
 		ArrayList<String>list=new ArrayList<String>();
 		String filenames[]=new File("players/info").list();
 		for(int i=0;i<filenames.length;i++){
-			String position1=getPosition(filenames[i]);
+			String position1=getPosition("players/info/"+filenames[i]);
 			if(position1.equals(position)){
 				 list.add(filenames[i]);	
 			}
@@ -371,7 +371,7 @@ private String getPosition(String filename){
 					if(str.contains("│")&&str.contains("Position")){
 						String strs[]=str.split("│");
 
-						return strs[1];
+						return strs[1].substring(0, 1);
 					}
 				}
 		

@@ -484,20 +484,44 @@ public class HotInfoPanel {
 		 * 7罚球命中率*/
 			if (id.equals("场均得分")) {
 				hpsList = pbl.getHotPlayerByNum(0);
+				for (int i=0;i < hpsList.size();i++) {
+					System.out.println("score+"+hpsList.get(i).getPlayerName());
+				}
 			} else if (id.equals("场均篮板")) {
 				hpsList = pbl.getHotPlayerByNum(1);
+				for (int i=0;i < hpsList.size();i++) {
+					System.out.println("rebound+"+hpsList.get(i).getPlayerName());
+				}
 			} else if (id.equals("场均助攻")) {
 				hpsList = pbl.getHotPlayerByNum(2);
+				for (int i=0;i < hpsList.size();i++) {
+					System.out.println("assist+"+hpsList.get(i).getPlayerName());
+				}
 			} else if (id.equals("场均盖帽")) {
 				hpsList = pbl.getHotPlayerByNum(3);
+				for (int i=0;i < hpsList.size();i++) {
+					System.out.println("blockShot+"+hpsList.get(i).getPlayerName());
+				}
 			} else if (id.equals("场均抢断")) {
 				hpsList = pbl.getHotPlayerByNum(4);
+				for (int i=0;i < hpsList.size();i++) {
+					System.out.println("steal+"+hpsList.get(i).getPlayerName());
+				}
 			} else if (id.equals("三分命中率")) {
 				hpsList = pbl.getHotPlayerByNum(5);
+				for (int i=0;i < hpsList.size();i++) {
+					System.out.println("three+"+hpsList.get(i).getPlayerName());
+				}
 			} else if (id.equals("投篮命中率")) {
 				hpsList = pbl.getHotPlayerByNum(6);
+				for (int i=0;i < hpsList.size();i++) {
+					System.out.println("shoot+"+hpsList.get(i).getPlayerName());
+				}
 			} else if (id.equals("罚球命中率")) {
 				hpsList = pbl.getHotPlayerByNum(7);
+				for (int i=0;i < hpsList.size();i++) {
+					System.out.println("freeThrow+"+hpsList.get(i).getPlayerName());
+				}
 			} else {
 				System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
 			}

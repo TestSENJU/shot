@@ -331,7 +331,7 @@ public class PlayerHomePanel {
 
 		PlayerAllVO pAllDataList = pbl.getPlayerAllByName(playerTempID);
 		PlayerAverageVO pAverageDataList = pbl.getPlayerAverageByName(playerTempID);
-		String[] columnName = new String[] { "参赛场数", "先发场数", "篮板数", "助攻数",
+		String[] columnName = new String[] { "TAG", "参赛场数", "先发场数", "篮板数", "助攻数",
 				"在场时间", "投篮命中率", "三分命中率", "罚球命中率", "进攻数",
 				"防守数", "抢断数",
 				"盖帽数", "失误数", "犯规数", "得分", "效率", "GmSc效率值",

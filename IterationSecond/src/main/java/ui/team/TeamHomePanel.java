@@ -308,7 +308,7 @@ public class TeamHomePanel {
 		pTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		pTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		pTable.setForeground(Color.white);
-		pTable.setRowHeight(35);
+		pTable.setRowHeight(50);
 		pTable.setBounds(30, 0, 1000-130-100, 450);
 		pTable.setOpaque(false);
 		
@@ -431,15 +431,25 @@ public class TeamHomePanel {
 				pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
 				columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
 				columnPValues[i][1] = teamPlayerInfoList.get(i);
-				columnPValues[i][2] = pbvo.getBasicInfo()[0];
-				System.out.println(pbvo.getBasicInfo()[0]);
-				columnPValues[i][3] = pbvo.getBasicInfo()[1];
-				columnPValues[i][4] = pbvo.getBasicInfo()[2];
-				columnPValues[i][5] = pbvo.getBasicInfo()[3];
-				columnPValues[i][6] = pbvo.getBasicInfo()[4];
-				columnPValues[i][7] = pbvo.getBasicInfo()[5];
-				columnPValues[i][8] = pbvo.getBasicInfo()[6];
-				columnPValues[i][9] = pbvo.getBasicInfo()[7];
+				if (pbvo==null) {
+					columnPValues[i][2] = "null";
+					columnPValues[i][3] = "null";
+					columnPValues[i][4] = "null";
+					columnPValues[i][5] = "null";
+					columnPValues[i][6] = "null";
+					columnPValues[i][7] = "null";
+					columnPValues[i][8] = "null";
+					columnPValues[i][9] = "null";
+				} else {
+					columnPValues[i][2] = pbvo.getBasicInfo()[0];
+					columnPValues[i][3] = pbvo.getBasicInfo()[1];
+					columnPValues[i][4] = pbvo.getBasicInfo()[2];
+					columnPValues[i][5] = pbvo.getBasicInfo()[3];
+					columnPValues[i][6] = pbvo.getBasicInfo()[4];
+					columnPValues[i][7] = pbvo.getBasicInfo()[5];
+					columnPValues[i][8] = pbvo.getBasicInfo()[6];
+					columnPValues[i][9] = pbvo.getBasicInfo()[7];
+				}	
 			}
 			PlayWave.startClickSound();
 			TablePanel.removeAll();		

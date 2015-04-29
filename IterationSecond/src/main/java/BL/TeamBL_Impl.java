@@ -111,14 +111,14 @@ public class TeamBL_Impl implements TeamBL{
 		// TODO Auto-generated method stub
 		ArrayList<TeamAverageVO> list=getTeamAverage();
 		switch(num){
-		case 0:Collections.sort(list, new TeamSortAverageByNum(14,0));
-		case 1:Collections.sort(list, new TeamSortAverageByNum(8,0));
-		case 2:Collections.sort(list, new TeamSortAverageByNum(9,0));
-		case 3:Collections.sort(list, new TeamSortAverageByNum(11,0));
-		case 4:Collections.sort(list, new TeamSortAverageByNum(10,0));
-		case 5:Collections.sort(list, new TeamSortAverageByNum(16,0));
-		case 6:Collections.sort(list, new TeamSortAverageByNum(15,0));
-		case 7:Collections.sort(list, new TeamSortAverageByNum(17,0));
+		case 0:Collections.sort(list, new TeamSortAverageByNum(14,0));break;
+		case 1:Collections.sort(list, new TeamSortAverageByNum(8,0));break;
+		case 2:Collections.sort(list, new TeamSortAverageByNum(9,0));break;
+		case 3:Collections.sort(list, new TeamSortAverageByNum(11,0));break;
+		case 4:Collections.sort(list, new TeamSortAverageByNum(10,0));break;
+		case 5:Collections.sort(list, new TeamSortAverageByNum(16,0));break;
+		case 6:Collections.sort(list, new TeamSortAverageByNum(15,0));break;
+		case 7:Collections.sort(list, new TeamSortAverageByNum(17,0));break;
 		}
 		ArrayList<TeamAverageVO> result=new ArrayList<TeamAverageVO>();
 		for(int i=list.size()-1;i>=list.size()-6;i--){
@@ -194,14 +194,19 @@ class TeamSortAllByNum implements Comparator<Object>{
 		double[] nums2=po2.getTeamData();
 		if(nums1[comNum]>nums2[comNum]){
 			return 1;
-		}
+		}else if(nums1[comNum]==nums2[comNum])
 		return 0;
+		else return -1;
 		}else{
 			int num1=po1.getMatchNum();
 			int num2=po2.getMatchNum();
 			if(num1>num2){
 				return 1;
-			}else return 0;
+			}else if(num1==num2){
+				return 0;
+			}else {
+				return -1;
+			}
 		}
 	
 	}
@@ -222,16 +227,20 @@ class TeamSortAverageByNum implements Comparator<Object>{
 		if(option==0){
 			if(nums1[comNum]>nums2[comNum]){
 				return 1;
-			}
-			return 0;
+			}else if(nums1[comNum]>nums2[comNum]){
+				return 0;
+			}else 
+			return -1;
 		}else{
 
 			int num1=po1.getMatchNum();
 			int num2=po2.getMatchNum();
 			if(num1>num2){
 				return 1;
-			}else return 0;
-		
+			}else if(num1==num2){
+				return 0;
+			}else 
+	          return -1;	
 		}
 	
 	}

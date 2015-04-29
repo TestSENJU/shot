@@ -33,20 +33,20 @@ public class PlayerBL_Impl implements PlayerBL{
 				result.add(new PlayerAllVO(playerData.getPlayerAllByName(list.get(i))));
 			}
 			switch(num){
-			case 0:Collections.sort(result, new SortAllByNum(11, 0));
-			case 1:Collections.sort(result, new SortAllByNum(0,0));
-			case 2:Collections.sort(result, new SortAllByNum(1,0));
-			case 3:Collections.sort(result, new SortAllByNum(0,2));
-			case 4:Collections.sort(result, new SortAllByNum(8,0));
-			case 5:Collections.sort(result, new SortAllByNum(7,0));
-			case 6:Collections.sort(result, new SortAllByNum(10,0));
-			case 7:Collections.sort(result, new SortAllByNum(9,0));
-			case 8:Collections.sort(result, new SortAllByNum(0,1));
-			case 9:Collections.sort(result, new SortAllByNum(15,0));
-			case 10:Collections.sort(result, new SortAllByNum(2,0));
-			case 11:Collections.sort(result, new SortAllByNum(3,0));
-			case 12:Collections.sort(result, new SortAllByNum(4,0));
-			case 13:Collections.sort(result, new SortAllByNum(0,3));
+			case 0:Collections.sort(result, new SortAllByNum(11, 0));break;
+			case 1:Collections.sort(result, new SortAllByNum(0,0));break;
+			case 2:Collections.sort(result, new SortAllByNum(1,0));break;
+			case 3:Collections.sort(result, new SortAllByNum(0,2));break;
+			case 4:Collections.sort(result, new SortAllByNum(8,0));break;
+			case 5:Collections.sort(result, new SortAllByNum(7,0));break;
+			case 6:Collections.sort(result, new SortAllByNum(10,0));break;
+			case 7:Collections.sort(result, new SortAllByNum(9,0));break;
+			case 8:Collections.sort(result, new SortAllByNum(0,1));break;
+			case 9:Collections.sort(result, new SortAllByNum(15,0));break;
+			case 10:Collections.sort(result, new SortAllByNum(2,0));break;
+			case 11:Collections.sort(result, new SortAllByNum(3,0));break;
+			case 12:Collections.sort(result, new SortAllByNum(4,0));break;
+			case 13:Collections.sort(result, new SortAllByNum(0,3));break;
 			}
 			return result;
 		}else{
@@ -68,20 +68,20 @@ public class PlayerBL_Impl implements PlayerBL{
 				result.add(new PlayerAverageVO(playerData.getPlayerAverageByName(list.get(i))));
 			}
 			switch(num){
-			case 0:Collections.sort(result, new SortAverageByNum(11,0));
-			case 1:Collections.sort(result, new SortAverageByNum(0,0));
-			case 2:Collections.sort(result, new SortAverageByNum(1,0));
-			case 3:Collections.sort(result, new SortAverageByNum(0,2));
-			case 4:Collections.sort(result, new SortAverageByNum(8,0));
-			case 5:Collections.sort(result, new SortAverageByNum(7,0));
-			case 6:Collections.sort(result, new SortAverageByNum(10,0));
-			case 7:Collections.sort(result, new SortAverageByNum(9,0));
-			case 8:Collections.sort(result, new SortAverageByNum(0,1));
-			case 9:Collections.sort(result, new SortAverageByNum(15,0));
-			case 10:Collections.sort(result, new SortAverageByNum(2,0));
-			case 11:Collections.sort(result, new SortAverageByNum(3,0));
-			case 12:Collections.sort(result, new SortAverageByNum(4,0));
-			case 13:Collections.sort(result, new SortAverageByNum(0,3));
+			case 0:Collections.sort(result, new SortAverageByNum(11,0));break;
+			case 1:Collections.sort(result, new SortAverageByNum(0,0));break;
+			case 2:Collections.sort(result, new SortAverageByNum(1,0));break;
+			case 3:Collections.sort(result, new SortAverageByNum(0,2));break;
+			case 4:Collections.sort(result, new SortAverageByNum(8,0));break;
+			case 5:Collections.sort(result, new SortAverageByNum(7,0));break;
+			case 6:Collections.sort(result, new SortAverageByNum(10,0));break;
+			case 7:Collections.sort(result, new SortAverageByNum(9,0));break;
+			case 8:Collections.sort(result, new SortAverageByNum(0,1));break;
+			case 9:Collections.sort(result, new SortAverageByNum(15,0));break;
+			case 10:Collections.sort(result, new SortAverageByNum(2,0));break;
+			case 11:Collections.sort(result, new SortAverageByNum(3,0));break;
+			case 12:Collections.sort(result, new SortAverageByNum(4,0));break;
+			case 13:Collections.sort(result, new SortAverageByNum(0,3));break;
 			}
 			return result;
 		} else
@@ -109,9 +109,9 @@ public class PlayerBL_Impl implements PlayerBL{
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO>list=getPlayerAverage();
 		switch(num){
-		case 0:Collections.sort(list, new SortAverageByNum(24,0));
-		case 1:Collections.sort(list, new SortAverageByNum(25,0));
-		case 2:Collections.sort(list, new SortAverageByNum(26,0));
+		case 0:Collections.sort(list, new SortAverageByNum(24,0));break;
+		case 1:Collections.sort(list, new SortAverageByNum(25,0));break;
+		case 2:Collections.sort(list, new SortAverageByNum(26,0));break;
 		}
 		ArrayList<PlayerAverageVO> result=new ArrayList<PlayerAverageVO>();
 		for(int i=list.size()-1;i>list.size()-6;i--){
@@ -144,23 +144,28 @@ public class PlayerBL_Impl implements PlayerBL{
 		// TODO Auto-generated method stub
 		ArrayList<PlayerShortPO> polist=new ArrayList<PlayerShortPO>();
 		switch(num){
-		case 0:polist=playerData.getShortPlayerByNum(11);
-		case 1:polist=playerData.getShortPlayerByNum(0);
-		case 2:polist=playerData.getShortPlayerByNum(1);
-		case 3:polist=playerData.getShortPlayerByNum(8);
-		case 4:polist=playerData.getShortPlayerByNum(7);
-		case 5:polist=playerData.getShortPlayerByNum(3);
-		case 6:polist=playerData.getShortPlayerByNum(2);
-		case 7:polist=playerData.getShortPlayerByNum(4);
+		case 0:polist=playerData.getShortPlayerByNum(11);break;
+		case 1:polist=playerData.getShortPlayerByNum(0);break;
+		case 2:polist=playerData.getShortPlayerByNum(1);break;
+		case 3:polist=playerData.getShortPlayerByNum(8);break;
+		case 4:polist=playerData.getShortPlayerByNum(7);break;
+		case 5:polist=playerData.getShortPlayerByNum(3);break;
+		case 6:polist=playerData.getShortPlayerByNum(2);break;
+		case 7:polist=playerData.getShortPlayerByNum(4);break;
 		}
 
 		if(polist!=null){
+		
 			ArrayList<PlayerShortVO> volist=new ArrayList<PlayerShortVO>();
 			for(int i=0;i<polist.size();i++){
 				volist.add(new PlayerShortVO(polist.get(i)));
 			}
 			Collections.sort(volist, new SortShortByNum());
-			return volist;
+			ArrayList<PlayerShortVO> list=new ArrayList<PlayerShortVO>();
+			for(int i=volist.size()-1;i>=volist.size()-6;i--){
+				list.add(volist.get(i));
+			}
+			return list;
 		}else{
 			return null;
 		}
@@ -345,6 +350,8 @@ class SortAllByNum implements Comparator<Object>{
 				return 1;
 			}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])>Integer.parseInt(strs2[1])){
 				return 1;
+			}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])==Integer.parseInt(strs2[1])){
+				return 0;
 			}else{
 				return -1;
 			}
@@ -353,7 +360,9 @@ class SortAllByNum implements Comparator<Object>{
 			double[] nums2=po2.getPlayerData();
 			if(nums1[comNum]>nums2[comNum]){
 				return 1;
-			}
+			}else if(nums1[comNum]==nums2[comNum]){
+				return 0;
+			}else 
 			return -1;
 		}else if(this.option==2){
 			double[] nums1=po1.getPlayerData();
@@ -362,9 +371,9 @@ class SortAllByNum implements Comparator<Object>{
 			double num2=nums2[11]+nums2[0]+nums2[1];
 			if(num1>num2){
 				return 1;
-			}else{
-				return -1;
-			}
+			}else if(num1==num2){
+				return 0;
+			}else return -1;
 		}else if(this.option==3){
 			double[] nums1=po1.getPlayerData();
 			double[] nums2=po2.getPlayerData();
@@ -382,20 +391,25 @@ class SortAllByNum implements Comparator<Object>{
 			if(nums2[7]>10)i2++;
 			if(nums2[8]>10)i2++;
 			if(i1>i2) return 1;
+			else if(i1==i2) return 0;
 			else return -1;
 		}else if(this.option==4){
 			int num1=po1.getCompeteNum();
 			int num2=po2.getCompeteNum();
 			if(num1>num2){
 				return 1;
-			}
+			}else if(num1==num2){
+				return 0;
+			}else 
 			return -1;
 		}else if(this.option==5){
 			int num1=po1.getOffensiveNum();
 			int num2=po2.getOffensiveNum();
 			if(num1>num2){
 				return 1;
-			}
+			}else if(num1==num2){
+				return 0;
+			}else
 			return -1;
 		}else if(this.option==6){
 			String names[]=new String[2];
@@ -404,10 +418,12 @@ class SortAllByNum implements Comparator<Object>{
 			Arrays.sort(names);
 			if(names[1].equals(po1.getPlayerName())){
 				return 1;
-			}
+			}else if(names[0].equals(names[1])){
+				return 0;
+			}else
 			return -1;
 		}
-		return -1;
+		return 0;
 	}
 }
 class SortShortByNum implements Comparator<Object>{
@@ -417,6 +433,8 @@ class SortShortByNum implements Comparator<Object>{
 		PlayerShortVO player2=(PlayerShortVO)o2;
  		if(player1.getNum()>player2.getNum()){
  			return 1;
+ 		}else if(player1.getNum()==player2.getNum()){
+ 			return 0;
  		}else{
  			return -1;
  		}
@@ -443,6 +461,8 @@ class SortAverageByNum implements Comparator<Object>{
 				return 1;
 			}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])>Integer.parseInt(strs2[1])){
 				return 1;
+			}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])==Integer.parseInt(strs2[1])){
+			    return 0;
 			}else{
 				return -1;
 			}
@@ -451,6 +471,8 @@ class SortAverageByNum implements Comparator<Object>{
 			double[] nums2=po2.getPlayerData();
 			if(nums1[comNum]>nums2[comNum]){
 				return 1;
+			}else if(nums1[comNum]==nums2[comNum]){
+				return 0;
 			}
 			return -1;
 		}else if(this.option==2){
@@ -460,7 +482,9 @@ class SortAverageByNum implements Comparator<Object>{
 			double num2=nums2[11]+nums2[0]+nums2[1];
 			if(num1>num2){
 				return 1;
-			}else{
+			}else if(num1==num2){
+				return 0;
+			}else {
 				return -1;
 			}
 		}else if(this.option==3){
@@ -486,14 +510,18 @@ class SortAverageByNum implements Comparator<Object>{
 			int num2=po2.getCompeteNum();
 			if(num1>num2){
 				return 1;
-			}
+			}else if(num1==num2){
+				return 0;
+			}else
 			return -1;
 		}else if(this.option==5){
 			int num1=po1.getOffensiveNum();
 			int num2=po2.getOffensiveNum();
 			if(num1>num2){
 				return 1;
-			}
+			}else if(num1==num2){
+				return 0;
+			}else
 			return -1;
 		}else if(this.option==6){
 			String names[]=new String[2];
@@ -502,7 +530,9 @@ class SortAverageByNum implements Comparator<Object>{
 			Arrays.sort(names);
 			if(names[1].equals(po1.getName())){
 				return 1;
-			}
+			}else if(names[0].equals(names[1])){
+				return 0;
+			}else
 			return -1;
 		}
 		return -1;

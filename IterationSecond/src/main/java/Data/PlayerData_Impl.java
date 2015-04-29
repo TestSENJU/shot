@@ -234,6 +234,7 @@ public class PlayerData_Impl implements PlayerDataService{
 		ArrayList<PlayerShortPO>list=new ArrayList<PlayerShortPO>();
 		Set<String>keys=todayData.keySet();
 		for(String key:keys){
+		
 			PlayerAllPO po=playerTable.get(key);
 			PlayerAllPlusRatePO allpo=po.makeDetailedAllPO();
 			PlayerShortPO shortpo=new PlayerShortPO(key);
@@ -243,7 +244,11 @@ public class PlayerData_Impl implements PlayerDataService{
 			shortpo.setLocation(getPosition("players/info/"+key));
 			list.add(shortpo);
 		}
-		return list;
+		if(list.size()==0){
+			return null;
+		}else {
+			return list;
+		}
 	}
     private PlayerShortPO getShortPlayerByArrayList(String key,ArrayList<String>list,int num){
     	PlayerShortPO po=new PlayerShortPO(key);

@@ -41,7 +41,6 @@ public void run(){
 					list.add(fileNames[i]);
 				}
 				    for(int i=0;i<list.size();i++){
-				    	System.out.println(list.get(i));
                         readFile(this.path+"//"+list.get(i));
 				     }	
 				    this.filenames=fileNames;
@@ -143,10 +142,10 @@ private void readFile(String filename){
 		for(int k=0;k<list1.size();k++){
 			PlayerData_Impl.addToToday(filestrs[2], list1.get(k));
 			PlayerData_Impl.addToTable(strlist1.get(k),filestrs[2],team1,nums1,teamTime1,nums2);
-			
 		}
 		for(int k=0;k<list2.size();k++){
 			PlayerData_Impl.addToToday(filestrs[2], list2.get(k));
+			
 			PlayerData_Impl.addToTable(strlist2.get(k),filestrs[2],team2,nums2,teamTime2,nums1);
 		}
 	} catch (FileNotFoundException e) {

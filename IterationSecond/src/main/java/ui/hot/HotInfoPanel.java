@@ -75,6 +75,8 @@ public class HotInfoPanel {
 	private Object[][] columnValues = null;
 	private JScrollPane scrollPane;
 	private MyTable topFive;
+	PlayerBL pbl = new PlayerBL_Impl();
+	TeamBL tbl = new TeamBL_Impl();
 	
 	public JPanel init(){
 		hotPanel = new JPanel();
@@ -157,7 +159,7 @@ public class HotInfoPanel {
 	 * show five player info
 	 * */
 	public void hotPlayerTodayTable(String id){
-		PlayerBL pbl = new PlayerBL_Impl();
+
 		ArrayList<PlayerShortVO> hptList = new ArrayList<PlayerShortVO>();
 		if (id.equals("篮板")) {
 			hptList = pbl.getTodayHotPlayerByNum(1);
@@ -237,7 +239,6 @@ public class HotInfoPanel {
 	 * show five player info
 	 * */
 	public void hotPlayerSeasonTable(String id){
-		PlayerBL pbl = new PlayerBL_Impl();
 		ArrayList<PlayerShortVO> hpsList = new ArrayList<PlayerShortVO>();
 		/** 0场均得分
 	 * 1场均篮板
@@ -335,7 +336,7 @@ public class HotInfoPanel {
 	public void hotTeamSeasonTable(String id){
 		//"场均得分","场均篮板","场均助攻","场均盖帽",
 		//"场均抢断","三分命中率","投篮命中率","罚球命中率"
-		TeamBL tbl = new TeamBL_Impl();
+
 		ArrayList<TeamAverageVO> htsList = new ArrayList<TeamAverageVO>();
 		if (id.equals("场均得分")) {
 			htsList = tbl.getHotTeamByNum(14);
@@ -422,7 +423,6 @@ public class HotInfoPanel {
 	 * show five player info
 	 * */
 	public void bestPlayerTable(String id){
-		PlayerBL pbl = new PlayerBL_Impl();
 		ArrayList<PlayerAverageVO> bpList = new ArrayList<PlayerAverageVO>();
 		//"场均得分","场均篮板","场均助攻"
 		/** 0场均得分

@@ -22,6 +22,8 @@ import ui.DateChooserJButton;
 import ui.IScrollBarUI;
 import ui.MyStringTable;
 import ui.match.MatchHomePanel;
+import ui.player.PlayerHomePanel;
+import ui.team.TeamHomePanel;
 import vo.MatchShortVO;
 import vo.PlayerBasicVO;
 import vo.TeamBasicVO;
@@ -62,6 +64,8 @@ public class SearchPanel {
 	PlayerBL pbl = new PlayerBL_Impl();
 	TeamBL tbl = new TeamBL_Impl();
 	MatchBL mbl = new MatchBL_Impl();
+	//
+	public static String tempButton;
 	
 	public JPanel init(){
 		searchPanel = new JPanel();
@@ -688,6 +692,7 @@ public class SearchPanel {
 	
 	class SPListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
+			tempButton = "searchPlayer";
 			PlayWave.startClickSound();
 			tablePanel.removeAll();
 			tablePanel.repaint();
@@ -706,6 +711,7 @@ public class SearchPanel {
 	}
 	class STEAMListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
+			tempButton = "searchTeam";
 			PlayWave.startClickSound();
 			tablePanel.removeAll();
 			tablePanel.repaint();
@@ -724,6 +730,7 @@ public class SearchPanel {
 	}
 	class SMListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
+			tempButton = "searchMatch";
 			PlayWave.startClickSound();
 			tablePanel.removeAll();
 			tablePanel.repaint();
@@ -2460,13 +2467,31 @@ public class SearchPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			if (e.getClickCount()==2) {
+			if (tempButton.equals("searchPlayer")){
+				if (e.getClickCount()==2) {
+					System.out.println(dataTable.getValueAt(dataTable.getSelectedRow(), dataTable.getSelectedColumn()));
+					searchPanel.removeAll();
+					PlayerHomePanel php = new PlayerHomePanel();
+					searchPanel.add(php.init(dataTable.getValueAt(dataTable.getSelectedRow(), dataTable.getSelectedColumn()).toString()));
+					searchPanel.repaint();
+				}
+			} else if (tempButton.equals("searchTeam")) {
+				if (e.getClickCount()==2) {
 				System.out.println(dataTable.getValueAt(dataTable.getSelectedRow(), dataTable.getSelectedColumn()));
 				searchPanel.removeAll();
-				MatchHomePanel mhp = new MatchHomePanel();
-				searchPanel.add(mhp.init("ATL"));
+				TeamHomePanel thp = new TeamHomePanel();
+				searchPanel.add(thp.init(dataTable.getValueAt(dataTable.getSelectedRow(), dataTable.getSelectedColumn()).toString()));
 				searchPanel.repaint();
-			}
+				}
+			} else if (tempButton.equals("searchMatch")) {
+				if (e.getClickCount()==2) {
+					System.out.println(dataTable.getValueAt(dataTable.getSelectedRow(), dataTable.getSelectedColumn()));
+					searchPanel.removeAll();
+					MatchHomePanel mhp = new MatchHomePanel();
+					searchPanel.add(mhp.init(dataTable.getValueAt(dataTable.getSelectedRow(), dataTable.getSelectedColumn()).toString()));
+					searchPanel.repaint();
+				}
+			}	
 		}
 
 		public void mouseEntered(MouseEvent e) {

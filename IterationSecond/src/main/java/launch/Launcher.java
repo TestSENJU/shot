@@ -11,6 +11,6 @@ public class Launcher {
 		Controller ui = new Controller();
 		
 		ui.layout();
-		InitBL init=new InitBL_Impl("E:\\newdata");
+		InitBL init=new InitBL_Impl("E://matches");
 	}
 }

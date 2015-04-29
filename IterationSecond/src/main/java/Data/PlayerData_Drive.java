@@ -91,9 +91,14 @@ public static void main(String args[]){
 	
 	
 	MatchDataService matchData=new MatchData_Impl();
-	ArrayList<MatchShortPO> list=matchData.getShortMatchByPeriod("13-14_01-01","13-14_02-01");
-	for(int i=0;i<list.size();i++){
-		System.out.println(list.get(i).getName());
+//	ArrayList<MatchShortPO> list=matchData.getShortMatchByPeriod("13-14_01-01","13-14_02-01");
+//	for(int i=0;i<list.size();i++){
+//		System.out.println(list.get(i).getName());
+//	}
+	ArrayList<MatchShortPO> match=matchData.getAllMatch();
+	for(int i=0;i<match.size();i++){
+		System.out.println(match.get(i).getName());
+		System.out.println(match.get(i).getTeam1());
 	}
 //	MatchPO match=matchData.getMatchByName("13-14_01-01_CHA-LAC");
 //	System.out.println(match.getName());

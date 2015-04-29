@@ -249,7 +249,7 @@ public class PlayerData_Impl implements PlayerDataService{
 	}
     private PlayerShortPO getShortPlayerByArrayList(String key,ArrayList<String>list,int num){
     	PlayerShortPO po=new PlayerShortPO(key);
-    	String filename="player\\info\\"+key;
+    	String filename="players/info/"+key;
     	po.setLocation(getPosition(filename));
     	double result=0;
     	for(int i=0;i<list.size();i++){
@@ -349,7 +349,7 @@ public class PlayerData_Impl implements PlayerDataService{
 	public ArrayList<String> getPlayerByPosition(String position) {
 		// TODO Auto-generated method stub
 		ArrayList<String>list=new ArrayList<String>();
-		String filenames[]=new File("players//info").list();
+		String filenames[]=new File("players/info").list();
 		for(int i=0;i<filenames.length;i++){
 			String position1=getPosition(filenames[i]);
 			if(position1.equals(position)){

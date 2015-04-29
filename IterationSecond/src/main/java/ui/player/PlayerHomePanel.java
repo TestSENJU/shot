@@ -329,6 +329,8 @@ public class PlayerHomePanel {
 		morePanel.setLayout(null);
 		pHomePanel.add(morePanel, 0);
 
+		PlayerAllVO pAllDataList = pbl.getPlayerAllByName(playerTempID);
+		PlayerAverageVO pAverageDataList = pbl.getPlayerAverageByName(playerTempID);
 		String[] columnName = new String[] { "参赛场数", "先发场数", "篮板数", "助攻数",
 				"在场时间", "投篮命中率", "三分命中率", "罚球命中率", "进攻数",
 				"防守数", "抢断数",
@@ -339,35 +341,63 @@ public class PlayerHomePanel {
 		for (int i = 0; i < 2; i++) {
 			if (i % 2 == 0) {
 				columnValues[i][0] = "总赛季";
+				columnValues[i][1] = pAllDataList.getCompeteNum();
+				columnValues[i][2] = pAllDataList.getOffensiveNum();
+				columnValues[i][3] = pAllDataList.getPlayerData()[0];
+				columnValues[i][4] = pAllDataList.getPlayerData()[1];
+				columnValues[i][5] = pAllDataList.getPlayingTime();
+				columnValues[i][6] = pAllDataList.getPlayerData()[2];
+				columnValues[i][7] = pAllDataList.getPlayerData()[3];
+				columnValues[i][8] = pAllDataList.getPlayerData()[4];
+				columnValues[i][9] = pAllDataList.getPlayerData()[5];
+				columnValues[i][10] = pAllDataList.getPlayerData()[6];
+				columnValues[i][11] = pAllDataList.getPlayerData()[7];
+				columnValues[i][12] = pAllDataList.getPlayerData()[8];
+				columnValues[i][13] = pAllDataList.getPlayerData()[9];
+				columnValues[i][14] = pAllDataList.getPlayerData()[10];
+				columnValues[i][15] = pAllDataList.getPlayerData()[11];
+				columnValues[i][16] = pAllDataList.getPlayerData()[12];
+				columnValues[i][17] = pAllDataList.getPlayerData()[13];
+				columnValues[i][18] = pAllDataList.getPlayerData()[14];
+				columnValues[i][19] = pAllDataList.getPlayerData()[15];
+				columnValues[i][20] = pAllDataList.getPlayerData()[16];
+				columnValues[i][21] = pAllDataList.getPlayerData()[17];
+				columnValues[i][22] = pAllDataList.getPlayerData()[18];
+				columnValues[i][23] = pAllDataList.getPlayerData()[19];
+				columnValues[i][24] = pAllDataList.getPlayerData()[20];
+				columnValues[i][25] = pAllDataList.getPlayerData()[21];
+				columnValues[i][26] = pAllDataList.getPlayerData()[22];
+				columnValues[i][27] = pAllDataList.getPlayerData()[23];
 			} else {
 				columnValues[i][0] = "场均";
+				columnValues[i][1] = pAverageDataList.getCompeteNum();
+				columnValues[i][2] = pAverageDataList.getOffensiveNum();
+				columnValues[i][3] = pAverageDataList.getPlayerData()[0];
+				columnValues[i][4] = pAverageDataList.getPlayerData()[1];
+				columnValues[i][5] = pAverageDataList.getPlayingTime();
+				columnValues[i][6] = pAverageDataList.getPlayerData()[2];
+				columnValues[i][7] = pAverageDataList.getPlayerData()[3];
+				columnValues[i][8] = pAverageDataList.getPlayerData()[4];
+				columnValues[i][9] = pAverageDataList.getPlayerData()[5];
+				columnValues[i][10] = pAverageDataList.getPlayerData()[6];
+				columnValues[i][11] = pAverageDataList.getPlayerData()[7];
+				columnValues[i][12] = pAverageDataList.getPlayerData()[8];
+				columnValues[i][13] = pAverageDataList.getPlayerData()[9];
+				columnValues[i][14] = pAverageDataList.getPlayerData()[10];
+				columnValues[i][15] = pAverageDataList.getPlayerData()[11];
+				columnValues[i][16] = pAverageDataList.getPlayerData()[12];
+				columnValues[i][17] = pAverageDataList.getPlayerData()[13];
+				columnValues[i][18] = pAverageDataList.getPlayerData()[14];
+				columnValues[i][19] = pAverageDataList.getPlayerData()[15];
+				columnValues[i][20] = pAverageDataList.getPlayerData()[16];
+				columnValues[i][21] = pAverageDataList.getPlayerData()[17];
+				columnValues[i][22] = pAverageDataList.getPlayerData()[18];
+				columnValues[i][23] = pAverageDataList.getPlayerData()[19];
+				columnValues[i][24] = pAverageDataList.getPlayerData()[20];
+				columnValues[i][25] = pAverageDataList.getPlayerData()[21];
+				columnValues[i][26] = pAverageDataList.getPlayerData()[22];
+				columnValues[i][27] = pAverageDataList.getPlayerData()[23];
 			}
-			columnValues[i][1] = i;
-			columnValues[i][2] = i;
-			columnValues[i][3] = i;
-			columnValues[i][4] = i;
-			columnValues[i][5] = i;
-			columnValues[i][6] = i;
-			columnValues[i][7] = i;
-			columnValues[i][8] = i;
-			columnValues[i][9] = i;
-			columnValues[i][10] = i;
-			columnValues[i][11] = i;
-			columnValues[i][12] = i;
-			columnValues[i][13] = i;
-			columnValues[i][14] = i;
-			columnValues[i][15] = i;
-			columnValues[i][16] = i;
-			columnValues[i][17] = i;
-			columnValues[i][18] = i;
-			columnValues[i][19] = i;
-			columnValues[i][20] = i;
-			columnValues[i][21] = i;
-			columnValues[i][22] = i;
-			columnValues[i][23] = i;
-			columnValues[i][24] = i;
-			columnValues[i][25] = i;
-			columnValues[i][26] = i;
 		}
 
 		morePanel.removeAll();

@@ -128,15 +128,48 @@ public class MyStringTable extends JTable {
 	       
 	        //The following code can be used to fix table column width
 	        TableColumnModel tcm = table.getTableHeader().getColumnModel();
+	        
 	        for (int i = 0; i < tcm.getColumnCount(); i++) 
 	        {
 	            TableColumn tc = tcm.getColumn(i);
-	            tc.setPreferredWidth(80);
-	            // tc.setMinWidth(100);
-	            tc.setMaxWidth(80);
+	            //tc.setPreferredWidth(80);
+	            tc.setPreferredWidth(getPreferredWidthForColumn(tc));
+	            tc.setMinWidth(80);
+	            tc.setMaxWidth(120);
 	        }
 	        return tcm;
 	    }
+	    //TODO 适应内容的列宽----------------------------------
+	    private int getPreferredWidthForColumn(TableColumn col) {
+	        int hw = columnHeaderWidth(col);  // hw = header width
+	        int cw = widestCellInColumn(col);  // cw = column width
+
+	        return hw > cw ? hw : cw;
+	    }
+	    private int columnHeaderWidth(TableColumn col) {
+	        TableCellRenderer renderer = this.getTableHeader().getDefaultRenderer();
+	        Component comp = renderer.getTableCellRendererComponent(
+	                             this, col.getHeaderValue(),
+	                             false, false, 0, 0);
+
+	        return comp.getPreferredSize().width;
+	    }
+
+	    private int widestCellInColumn(TableColumn col) {
+	        int c = col.getModelIndex();
+	        int width = 0, maxw = 0;
+
+	        for (int r =0; r < this.getRowCount(); r++) {
+	            TableCellRenderer renderer = this.getCellRenderer(r, c);
+	            Component comp = renderer.getTableCellRendererComponent(
+	                                 this, this.getValueAt(r, c),
+	                                 false, false, r, c);
+	            width = comp.getPreferredSize().width;
+	            maxw = width > maxw ? width : maxw;
+	        }
+	        return maxw;
+	    }
+	    //----------------------------------------------------
 	    
 	    //TODO
 	    public void paintRow(){

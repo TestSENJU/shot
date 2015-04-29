@@ -233,7 +233,19 @@ public class PlayerData_Impl implements PlayerDataService{
     }
 	public ArrayList<PlayerShortPO> getShortPlayerByNum(int num) {
 		// TODO Auto-generated method stub
-        return null;
+		ArrayList<PlayerShortPO>list=new ArrayList<PlayerShortPO>();
+		Set<String>keys=todayData.keySet();
+		for(String key:keys){
+			PlayerAllPO po=playerTable.get(key);
+			PlayerAllPlusRatePO allpo=po.makeDetailedAllPO();
+			PlayerShortPO shortpo=new PlayerShortPO(key);
+			double data[]=allpo.getPlayerData();
+			shortpo.setNum(data[num]);
+			shortpo.setTeam(po.getTeam());
+			shortpo.setLocation("player\\info\\"+key);
+			list.add(shortpo);
+		}
+		return list;
 	}
     private PlayerShortPO getShortPlayerByArrayList(String key,ArrayList<String>list,int num){
     	PlayerShortPO po=new PlayerShortPO(key);
@@ -290,9 +302,50 @@ public class PlayerData_Impl implements PlayerDataService{
 
 	public ArrayList<String> getPlayerByLeague(String league) {
 		// TODO Auto-generated method stub
+		ArrayList<String>list=new ArrayList<String>();
+		Set<String>keys=playerTable.keySet();
+		ArrayList<String> teamNames=getTeamNamesByLeague(league);
+		for(String key:keys){
+			if(teamNames.contains(playerTable.get(key).getTeam())){
+				list.add(key);
+			}
+		}
+		if(list.size()!=0){
+			return list;
+		}
 		return null;
 	}
-
+    private ArrayList<String> getTeamNamesByLeague(String league){
+    		ArrayList<String>list=new ArrayList<String>();
+    		try {
+				@SuppressWarnings("resource")
+				BufferedReader br=new BufferedReader(new FileReader(new File("teams")));
+				String str="";
+				while((str=br.readLine())!=null){
+					if(str.startsWith("║")){
+						String mass[]=str.split("║");
+						String contents[]=mass[1].split("│");
+						if((contents[3]+"-"+contents[4]).equals(league))
+						list.add(contents[3]+"-"+contents[4]);
+					}
+				
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				System.out.println("getTeamNamesByLeague");
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("getTeamNamesByLeague2");
+				e.printStackTrace();
+			}
+    		if(list.size()!=0){
+    			return list;
+    		}else{
+    			System.out.println("getTeamNamesByLeague3");
+    			return null;
+    		}
+    }
 	public ArrayList<String> getPlayerByPosition(String position) {
 		// TODO Auto-generated method stub
 		ArrayList<String>list=new ArrayList<String>();

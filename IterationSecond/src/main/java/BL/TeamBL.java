@@ -18,8 +18,15 @@ public interface TeamBL {
 	//根据球队的缩写名返回球队的场均数据
 	public TeamAverageVO getTeamAverageByName(String name);
 	//根据球队的缩写名返回球队的总数居
-	public TeamAllVO getTeamAllByNameRaising(String name);
+	public TeamAllVO getTeamAllByName(String name);
 	//根据排序依据的数字返回升序的所有的赛季总数据
+	/**
+	 * 
+	 * @param num
+	 * 0-24数组里的那堆
+	 * 25比赛场数
+	 * @return
+	 */
 	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num);
 	//根据排序的依据返回升序的球队的所有的场均数据
 	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num);

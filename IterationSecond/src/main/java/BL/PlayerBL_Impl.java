@@ -1,6 +1,7 @@
 package BL;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -138,7 +139,18 @@ public class PlayerBL_Impl implements PlayerBL{
 
 	public ArrayList<PlayerShortVO> getHotPlayerByNum(int num) {
 		// TODO Auto-generated method stub
-		ArrayList<PlayerShortPO> polist=playerData.getShortPlayerByNum(num);
+		ArrayList<PlayerShortPO> polist=new ArrayList<PlayerShortPO>();
+		switch(num){
+		case 0:polist=playerData.getShortPlayerByNum(11);
+		case 1:polist=playerData.getShortPlayerByNum(0);
+		case 2:polist=playerData.getShortPlayerByNum(1);
+		case 3:polist=playerData.getShortPlayerByNum(8);
+		case 4:polist=playerData.getShortPlayerByNum(7);
+		case 5:polist=playerData.getShortPlayerByNum(3);
+		case 6:polist=playerData.getShortPlayerByNum(2);
+		case 7:polist=playerData.getShortPlayerByNum(4);
+		}
+
 		if(polist!=null){
 			ArrayList<PlayerShortVO> volist=new ArrayList<PlayerShortVO>();
 			for(int i=0;i<polist.size();i++){
@@ -240,14 +252,36 @@ public class PlayerBL_Impl implements PlayerBL{
 	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumRaising(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAllVO> list=getPlayerAll();
-		Collections.sort(list, new SortAllByNum(num,0));
+		if(num>=0&&num<=23){
+			Collections.sort(list, new SortAllByNum(num,0));
+		}else if(num==24){
+			Collections.sort(list, new SortAllByNum(0,1));
+		}else if(num==25){
+			Collections.sort(list, new SortAllByNum(0,4));
+		}else if(num==26){
+			Collections.sort(list, new SortAllByNum(0,5));
+		}else if(num==27){
+			Collections.sort(list, new SortAllByNum(0,6));
+
+		}
+		
 		return list;
 	}
 
 	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumRaising(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO> list=getPlayerAverage();
-		Collections.sort(list, new SortAverageByNum(num,0));
+		if(num>=0&&num<=23){
+			Collections.sort(list, new SortAverageByNum(num,0));
+		}else if(num==24){
+			Collections.sort(list, new SortAverageByNum(0,1));
+		}else if(num==25){
+			Collections.sort(list, new SortAverageByNum(0,4));
+		}else if(num==26){
+			Collections.sort(list, new SortAverageByNum(0,5));
+		}else if(num==27){
+			Collections.sort(list, new SortAverageByNum(0,6));
+		}
 		return list;
 	}
 
@@ -258,8 +292,7 @@ public class PlayerBL_Impl implements PlayerBL{
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumDeclining(
-			int num) {
+	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumDeclining(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO> list=getPlayerAvergaeRankingByNumDeclining(num);
 		Collections.reverse(list);
@@ -280,6 +313,9 @@ public class PlayerBL_Impl implements PlayerBL{
  *  1时间
  *  2得分篮板助攻
  *  3两双
+ *  4比赛场数
+ *  5先发场数
+ *  6字典序
  */
 class SortAllByNum implements Comparator<Object>{
 	int comNum;
@@ -339,6 +375,29 @@ class SortAllByNum implements Comparator<Object>{
 			if(nums2[8]>10)i2++;
 			if(i1>i2) return 1;
 			else return 0;
+		}else if(this.option==4){
+			int num1=po1.getCompeteNum();
+			int num2=po2.getCompeteNum();
+			if(num1>num2){
+				return 1;
+			}
+			return 0;
+		}else if(this.option==5){
+			int num1=po1.getOffensiveNum();
+			int num2=po2.getOffensiveNum();
+			if(num1>num2){
+				return 1;
+			}
+			return 0;
+		}else if(this.option==6){
+			String names[]=new String[2];
+			names[0]=po1.getPlayerName();
+			names[1]=po2.getPlayerName();
+			Arrays.sort(names);
+			if(names[1].equals(po1.getPlayerName())){
+				return 1;
+			}
+			return 0;
 		}
 		return 0;
 	}
@@ -413,6 +472,29 @@ class SortAverageByNum implements Comparator<Object>{
 			if(nums2[8]>10)i2++;
 			if(i1>i2) return 1;
 			else return 0;
+		}else if(this.option==4){
+			int num1=po1.getCompeteNum();
+			int num2=po2.getCompeteNum();
+			if(num1>num2){
+				return 1;
+			}
+			return 0;
+		}else if(this.option==5){
+			int num1=po1.getOffensiveNum();
+			int num2=po2.getOffensiveNum();
+			if(num1>num2){
+				return 1;
+			}
+			return 0;
+		}else if(this.option==6){
+			String names[]=new String[2];
+			names[0]=po1.getName();
+			names[1]=po2.getName();
+			Arrays.sort(names);
+			if(names[1].equals(po1.getName())){
+				return 1;
+			}
+			return 0;
 		}
 		return 0;
 	}

@@ -117,6 +117,16 @@ public interface PlayerBL {
 	public PlayerAverageVO getPlayerAverageByName(String name);
 	
 	//根据排序依据的数字返回所有球员的总数据升序
+	/**
+	 * 
+	 * @param num
+	 * 0-23数组数字
+	 * 24时间
+	 * 25参赛场数
+	 * 26先发场数
+	 * 27字典序
+	 * @return
+	 */
 	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumRaising(int num);
 	
 	//根据排序依据的数字返回所有球员的平均数据升序

@@ -73,7 +73,7 @@ public class TeamBL_Impl implements TeamBL{
 	}
 
 	@SuppressWarnings("unused")
-	public TeamAllVO getTeamAllByNameRaising(String name){
+	public TeamAllVO getTeamAllByName(String name){
 		// TODO Auto-generated method stub
 		TeamAllVO vo=new TeamAllVO(teamData.getTeamAllByName(name));
 		if(vo!=null){
@@ -87,14 +87,23 @@ public class TeamBL_Impl implements TeamBL{
 	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAllVO> list=getTeamAll();
-		Collections.sort(list, new TeamSortAllByNum(num));
+		if(num==25){
+			Collections.sort(list, new TeamSortAllByNum(0,1));
+		}else{
+			Collections.sort(list, new TeamSortAllByNum(num,0));
+		}	
 		return list;
 	}
 
 	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAverageVO> list=getTeamAverage();
-		Collections.sort(list, new TeamSortAverageByNum(num));
+		if(num==25){
+			Collections.sort(list, new TeamSortAverageByNum(0,1));
+		}else{
+			Collections.sort(list, new TeamSortAverageByNum(num,0));
+		}
+
 		return list;
 	}
 
@@ -102,16 +111,15 @@ public class TeamBL_Impl implements TeamBL{
 		// TODO Auto-generated method stub
 		ArrayList<TeamAverageVO> list=getTeamAverage();
 		switch(num){
-		case 0:Collections.sort(list, new TeamSortAverageByNum(14));
-		case 1:Collections.sort(list, new TeamSortAverageByNum(8));
-		case 2:Collections.sort(list, new TeamSortAverageByNum(9));
-		case 3:Collections.sort(list, new TeamSortAverageByNum(11));
-		case 4:Collections.sort(list, new TeamSortAverageByNum(10));
-		case 5:Collections.sort(list, new TeamSortAverageByNum(16));
-		case 6:Collections.sort(list, new TeamSortAverageByNum(15));
-		case 7:Collections.sort(list, new TeamSortAverageByNum(17));
+		case 0:Collections.sort(list, new TeamSortAverageByNum(14,0));
+		case 1:Collections.sort(list, new TeamSortAverageByNum(8,0));
+		case 2:Collections.sort(list, new TeamSortAverageByNum(9,0));
+		case 3:Collections.sort(list, new TeamSortAverageByNum(11,0));
+		case 4:Collections.sort(list, new TeamSortAverageByNum(10,0));
+		case 5:Collections.sort(list, new TeamSortAverageByNum(16,0));
+		case 6:Collections.sort(list, new TeamSortAverageByNum(15,0));
+		case 7:Collections.sort(list, new TeamSortAverageByNum(17,0));
 		}
-		Collections.sort(list, new TeamSortAverageByNum(num));
 		ArrayList<TeamAverageVO> result=new ArrayList<TeamAverageVO>();
 		for(int i=list.size()-1;i>list.size()-6;i++){
 			result.add(list.get(i));
@@ -167,25 +175,38 @@ public class TeamBL_Impl implements TeamBL{
 }
 class TeamSortAllByNum implements Comparator<Object>{
 	int comNum;
-    public TeamSortAllByNum(int num){
+	int option;
+    public TeamSortAllByNum(int num,int op){
     	this.comNum=num;
+    	this.option=op;
     }
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
 		TeamAllVO po1=(TeamAllVO) o1;
 		TeamAllVO po2=(TeamAllVO)o2;
+		if(option==0){
 		double[] nums1=po1.getTeamData();
 		double[] nums2=po2.getTeamData();
 		if(nums1[comNum]>nums2[comNum]){
 			return 1;
 		}
 		return 0;
+		}else{
+			int num1=po1.getMatchNum();
+			int num2=po2.getMatchNum();
+			if(num1>num2){
+				return 1;
+			}else return 0;
+		}
+	
 	}
 }
 class TeamSortAverageByNum implements Comparator<Object>{
 	int comNum;
-    public TeamSortAverageByNum(int num){
+	int option;
+    public TeamSortAverageByNum(int num,int op){
     	this.comNum=num;
+    	this.option=op;
     }
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
@@ -193,10 +214,20 @@ class TeamSortAverageByNum implements Comparator<Object>{
 		TeamAverageVO po2=(TeamAverageVO)o2;
 		double[] nums1=po1.getTeamData();
 		double[] nums2=po2.getTeamData();
-		if(nums1[comNum]>nums2[comNum]){
-			return 1;
+		if(option==0){
+			if(nums1[comNum]>nums2[comNum]){
+				return 1;
+			}
+			return 0;
+		}else{
+
+			int num1=po1.getMatchNum();
+			int num2=po2.getMatchNum();
+			if(num1>num2){
+				return 1;
+			}else return 0;
+		
 		}
-		return 0;
-	}
 	
+	}
 }

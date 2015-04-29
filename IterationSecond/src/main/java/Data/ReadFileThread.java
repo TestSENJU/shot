@@ -100,9 +100,9 @@ private void readFile(String filename){
 		    		//TODO
 		    		if(checkData(str)){
 		    			if(team2!=""){
-							list1.add(str);
-						}else{
 							list2.add(str);
+						}else{
+							list1.add(str);
 						}				
 		    		}
 				}

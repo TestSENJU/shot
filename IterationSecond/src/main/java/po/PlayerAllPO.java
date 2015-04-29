@@ -77,7 +77,7 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 		double dnums1[]=teamDataList.get(key);
 		double dnums2[]=competeDataList.get(key);
 		
-		if(strs[1]!="") allData.addOffensiveNum(1);
+		if(strs[1].equals("F")||strs[1].equals("C")||strs[2].equals("G")) allData.addOffensiveNum(1);
 		
 			for(int i=0;i<nums.length;i++){
 				nums[i]+=Double.parseDouble(strs[i+3]);

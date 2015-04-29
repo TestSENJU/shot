@@ -220,6 +220,7 @@ public class PlayerData_Impl implements PlayerDataService{
     		if(ss[0].equals(today)){
     			today=ss[1];
     			todayData.clear();
+    			
     			ArrayList<String>list=new ArrayList<String>();
     			list.add(playerData);
     			String player[]=playerData.split(";");
@@ -239,7 +240,7 @@ public class PlayerData_Impl implements PlayerDataService{
 			double data[]=allpo.getPlayerData();
 			shortpo.setNum(data[num]);
 			shortpo.setTeam(po.getTeam());
-			shortpo.setLocation("players/info/"+key);
+			shortpo.setLocation(getPosition("players/info/"+key));
 			list.add(shortpo);
 		}
 		return list;
@@ -252,6 +253,7 @@ public class PlayerData_Impl implements PlayerDataService{
     	for(int i=0;i<list.size();i++){
     		String data[]=list.get(i).split(";");
     		result+=Double.parseDouble(data[num+3]);
+    		
     	}
     	po.setNum(result);
     	po.setTeam(playerTable.get(key).getTeam());

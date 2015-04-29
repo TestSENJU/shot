@@ -346,7 +346,7 @@ class SortAllByNum implements Comparator<Object>{
 			}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])>Integer.parseInt(strs2[1])){
 				return 1;
 			}else{
-				return 0;
+				return -1;
 			}
 		}else if(this.option==0){
 			double[] nums1=po1.getPlayerData();
@@ -354,7 +354,7 @@ class SortAllByNum implements Comparator<Object>{
 			if(nums1[comNum]>nums2[comNum]){
 				return 1;
 			}
-			return 0;
+			return -1;
 		}else if(this.option==2){
 			double[] nums1=po1.getPlayerData();
 			double[] nums2=po2.getPlayerData();
@@ -363,7 +363,7 @@ class SortAllByNum implements Comparator<Object>{
 			if(num1>num2){
 				return 1;
 			}else{
-				return 0;
+				return -1;
 			}
 		}else if(this.option==3){
 			double[] nums1=po1.getPlayerData();
@@ -382,21 +382,21 @@ class SortAllByNum implements Comparator<Object>{
 			if(nums2[7]>10)i2++;
 			if(nums2[8]>10)i2++;
 			if(i1>i2) return 1;
-			else return 0;
+			else return -1;
 		}else if(this.option==4){
 			int num1=po1.getCompeteNum();
 			int num2=po2.getCompeteNum();
 			if(num1>num2){
 				return 1;
 			}
-			return 0;
+			return -1;
 		}else if(this.option==5){
 			int num1=po1.getOffensiveNum();
 			int num2=po2.getOffensiveNum();
 			if(num1>num2){
 				return 1;
 			}
-			return 0;
+			return -1;
 		}else if(this.option==6){
 			String names[]=new String[2];
 			names[0]=po1.getPlayerName();
@@ -405,9 +405,9 @@ class SortAllByNum implements Comparator<Object>{
 			if(names[1].equals(po1.getPlayerName())){
 				return 1;
 			}
-			return 0;
+			return -1;
 		}
-		return 0;
+		return -1;
 	}
 }
 class SortShortByNum implements Comparator<Object>{
@@ -417,8 +417,9 @@ class SortShortByNum implements Comparator<Object>{
 		PlayerShortVO player2=(PlayerShortVO)o2;
  		if(player1.getNum()>player2.getNum()){
  			return 1;
+ 		}else{
+ 			return -1;
  		}
-		return 0;
 	}
 	
 }
@@ -443,7 +444,7 @@ class SortAverageByNum implements Comparator<Object>{
 			}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])>Integer.parseInt(strs2[1])){
 				return 1;
 			}else{
-				return 0;
+				return -1;
 			}
 		}else if(this.option==0){
 			double[] nums1=po1.getPlayerData();
@@ -451,7 +452,7 @@ class SortAverageByNum implements Comparator<Object>{
 			if(nums1[comNum]>nums2[comNum]){
 				return 1;
 			}
-			return 0;
+			return -1;
 		}else if(this.option==2){
 			double[] nums1=po1.getPlayerData();
 			double[] nums2=po2.getPlayerData();
@@ -460,7 +461,7 @@ class SortAverageByNum implements Comparator<Object>{
 			if(num1>num2){
 				return 1;
 			}else{
-				return 0;
+				return -1;
 			}
 		}else if(this.option==3){
 			double[] nums1=po1.getPlayerData();
@@ -479,21 +480,21 @@ class SortAverageByNum implements Comparator<Object>{
 			if(nums2[7]>10)i2++;
 			if(nums2[8]>10)i2++;
 			if(i1>i2) return 1;
-			else return 0;
+			else return -1;
 		}else if(this.option==4){
 			int num1=po1.getCompeteNum();
 			int num2=po2.getCompeteNum();
 			if(num1>num2){
 				return 1;
 			}
-			return 0;
+			return -1;
 		}else if(this.option==5){
 			int num1=po1.getOffensiveNum();
 			int num2=po2.getOffensiveNum();
 			if(num1>num2){
 				return 1;
 			}
-			return 0;
+			return -1;
 		}else if(this.option==6){
 			String names[]=new String[2];
 			names[0]=po1.getName();
@@ -502,8 +503,8 @@ class SortAverageByNum implements Comparator<Object>{
 			if(names[1].equals(po1.getName())){
 				return 1;
 			}
-			return 0;
+			return -1;
 		}
-		return 0;
+		return -1;
 	}
 }

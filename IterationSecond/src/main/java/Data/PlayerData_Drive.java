@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import po.MatchPO;
+import po.MatchShortPO;
 import po.PlayerAllPlusRatePO;
 import po.PlayerAveragePlusRatePO;
 import po.PlayerBasicPO;
@@ -44,18 +45,18 @@ public static void main(String args[]){
 //		System.out.println(list1.get(i));
 //	}
 	//球员所属球队，提升率,average
-	ArrayList<PlayerAveragePlusRatePO> list=playerData.getPlayerAverage();
-	for(int i=0;i<list.size();i++){
-		PlayerAveragePlusRatePO player=list.get(i);
-		System.out.println(player.getName());
-		System.out.println(player.getCompeteNum());
-		System.out.println(player.getOffensiveNum());
-		System.out.println(player.getPlayingTime());
-		double[] data=player.getPlayerData();
-		for(int j=0;j<data.length;j++){
-			System.out.println(data[j]);
-	}
-	}
+//	ArrayList<PlayerAveragePlusRatePO> list=playerData.getPlayerAverage();
+//	for(int i=0;i<list.size();i++){
+//		PlayerAveragePlusRatePO player=list.get(i);
+//		System.out.println(player.getName());
+//		System.out.println(player.getCompeteNum());
+//		System.out.println(player.getOffensiveNum());
+//		System.out.println(player.getPlayingTime());
+//		double[] data=player.getPlayerData();
+//		for(int j=0;j<data.length;j++){
+//			System.out.println(data[j]);
+//	}
+//	}
 	
 //	PlayerAveragePlusRatePO po=playerData.getPlayerAverageByName("Aaron Brooks");
 //	System.out.println(po.getPlayingTime());
@@ -89,7 +90,11 @@ public static void main(String args[]){
 	
 	
 	
-//	MatchDataService matchData=new MatchData_Impl();
+	MatchDataService matchData=new MatchData_Impl();
+	ArrayList<MatchShortPO> list=matchData.getShortMatchByPeriod("13-14_01-01","13-14_02-01");
+	for(int i=0;i<list.size();i++){
+		System.out.println(list.get(i).getName());
+	}
 //	MatchPO match=matchData.getMatchByName("13-14_01-01_CHA-LAC");
 //	System.out.println(match.getName());
 //	System.out.println(match.getTeam1());

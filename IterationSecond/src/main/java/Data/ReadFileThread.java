@@ -139,7 +139,7 @@ private void readFile(String filename){
 		TeamData_Impl.addToTable(TeamNum2,opponentNum1,filestrs[1],team2, playerList2,i2);
 		PlayerData_Impl.addToTable(strlist1,filestrs[1],team1,nums1,teamTime1,nums2);
 		PlayerData_Impl.addToTable(strlist2,filestrs[1],team2,nums2,teamTime1,nums1);
-		MatchData_Impl.addToTable(filestrs[1], team1, teamTime1, strlist1, team2, strlist2, pointer, pointerpart);
+		MatchData_Impl.addToTable(filestrs[2], team1, teamTime1, strlist1, team2, strlist2, pointer, pointerpart);
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
         System.out.println("read file file notfound");

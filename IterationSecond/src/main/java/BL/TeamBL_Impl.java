@@ -121,7 +121,7 @@ public class TeamBL_Impl implements TeamBL{
 		case 7:Collections.sort(list, new TeamSortAverageByNum(17,0));
 		}
 		ArrayList<TeamAverageVO> result=new ArrayList<TeamAverageVO>();
-		for(int i=list.size()-1;i>list.size()-6;i++){
+		for(int i=list.size()-1;i>=list.size()-6;i--){
 			result.add(list.get(i));
 		}
 		return list;

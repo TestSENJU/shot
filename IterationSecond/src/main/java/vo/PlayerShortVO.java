@@ -13,7 +13,7 @@ public PlayerShortVO(String name){
 public PlayerShortVO(PlayerShortPO po){
 	this.playerName=po.getName();
 	this.team=po.getTeam();
-	this.location=po.getTeam();
+	this.location=po.getLocation();
 	this.num=po.getNum();
 }
 public String getPlayerName() {

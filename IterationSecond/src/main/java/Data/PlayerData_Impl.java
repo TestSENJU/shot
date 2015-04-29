@@ -222,9 +222,10 @@ public class PlayerData_Impl implements PlayerDataService{
     		ss[1]=today;
     		Arrays.sort(ss);
     		if(ss[0].equals(today)){
-    			today=ss[0];
+    			today=ss[1];
     			todayData.clear();
     			ArrayList<String>list=new ArrayList<String>();
+    			list.add(playerData);
     			String player[]=playerData.split(";");
     			todayData.put(player[0], list);
     		}
@@ -242,7 +243,7 @@ public class PlayerData_Impl implements PlayerDataService{
 			double data[]=allpo.getPlayerData();
 			shortpo.setNum(data[num]);
 			shortpo.setTeam(po.getTeam());
-			shortpo.setLocation("player\\info\\"+key);
+			shortpo.setLocation("players/info/"+key);
 			list.add(shortpo);
 		}
 		return list;
@@ -381,11 +382,11 @@ private String getPosition(String filename){
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			System.out.println("getpostion1");
-			e1.printStackTrace();
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("getpostion2");
-			e.printStackTrace();
+			return null;
 		}
 	
 	   return null;

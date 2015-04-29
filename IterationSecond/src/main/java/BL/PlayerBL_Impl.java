@@ -109,13 +109,11 @@ public class PlayerBL_Impl implements PlayerBL{
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO>list=getPlayerAverage();
 		switch(num){
-		case 0:Collections.sort(list, new SortAverageByNum(11,0));
-		case 1:Collections.sort(list, new SortAverageByNum(0,0));
-		case 2:Collections.sort(list, new SortAverageByNum(1,0));
+		case 0:Collections.sort(list, new SortAverageByNum(24,0));
+		case 1:Collections.sort(list, new SortAverageByNum(25,0));
+		case 2:Collections.sort(list, new SortAverageByNum(26,0));
 		}
-		
-		
-		return null;
+		return list;
 	}
 
 	public ArrayList<PlayerShortVO> getTodayHotPlayerByNum(int num) {
@@ -125,6 +123,7 @@ public class PlayerBL_Impl implements PlayerBL{
 		for(int i=0;i<polist.size();i++){
 			volist.add(new PlayerShortVO(polist.get(i)));
 		}
+		polist.clear();
 		Collections.sort(volist, new SortShortByNum());
 		if(volist.size()<=5){
 			return volist;
@@ -204,12 +203,17 @@ public class PlayerBL_Impl implements PlayerBL{
 	@SuppressWarnings("unused")
 	public PlayerBasicVO getPlayerBasicByName(String name) {
 		// TODO Auto-generated method stub
-		PlayerBasicVO vo=new PlayerBasicVO(playerData.getPlayerBasicByName(name));
-		if(vo!=null){
-			System.out.println(vo.getPlayerName());
-			return vo;
-		}else{
-			System.out.println("getplayerbasicbyname vo");
+		if(playerData.getPlayerBasicByName(name)!=null){
+			PlayerBasicVO vo=new PlayerBasicVO(playerData.getPlayerBasicByName(name));
+			if(vo!=null){
+				System.out.println(vo.getPlayerName());
+				return vo;
+			}else{
+				System.out.println("getplayerbasicbyname vo");
+				return null;
+			}
+		}
+		else{
 			return null;
 		}
 	}

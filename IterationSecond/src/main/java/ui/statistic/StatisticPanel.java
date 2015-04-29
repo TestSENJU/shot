@@ -48,7 +48,7 @@ public class StatisticPanel {
 	 * @version  June 12, 2015 11:41:31 AM
 	 * **/
 	private JPanel statisticPanel;
-	private JPanel tablePanel;
+	public static JPanel tablePanel;
 	private JButton playerAverage;
 	private JButton playerAll;
 	private JButton teamAverage;
@@ -71,7 +71,7 @@ public class StatisticPanel {
 	public static String playerCondition = "";
 	public static String teamCondition = "";
 	//tool panel
-	private JPanel toolPanel;
+	public static JPanel toolPanel;
 	private JComboBox<Object> position;
 	private JComboBox<Object> league;
 	private JComboBox<Object> sortBy;

@@ -2,7 +2,9 @@ package ui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -14,6 +16,9 @@ import ui.player.PlayerPanel;
 import ui.search.SearchPanel;
 import ui.statistic.StatisticPanel;
 import ui.team.TeamPanel;
+import vo.PlayerAverageVO;
+import BL.PlayerBL;
+import BL.PlayerBL_Impl;
 
 public class InitailizePanel {
 	/** 
@@ -33,8 +38,11 @@ public class InitailizePanel {
 	private JButton aboutus;
 	private JButton close;
 	private JButton min;
+	private JButton refresh;
 	private int width = 80;
 	private int height = 80;
+	
+	PlayerBL pbl = new PlayerBL_Impl();
 
 	public InitailizePanel() {
 	}
@@ -130,6 +138,15 @@ public class InitailizePanel {
 		min.addMouseListener(new MinListener());
 		land.add(min, 0);
 		
+		refresh = new JButton();
+		refresh.setBounds(1000-50-40-50, 20, 40, 30);
+		refresh.setBorderPainted(false);
+		refresh.setContentAreaFilled(false);
+		refresh.setIcon(AllImages.IMG_REFRESH);
+		refresh.setOpaque(false);
+		refresh.addMouseListener(new RefreshListener());
+		land.add(refresh, 0);
+		
 		infoPanel = new JPanel();
 		infoPanel.setLayout(null);
 		infoPanel.setBounds(130, 0, 1000-130, 700);
@@ -209,6 +226,56 @@ public class InitailizePanel {
 			StatisticPanel sp = new StatisticPanel();
 			JPanel s = sp.init();
 			bg.add(s, 0);
+			StatisticPanel.tempTableButton = "playerAverage";
+			ArrayList<PlayerAverageVO> playerAverageData = new ArrayList<PlayerAverageVO>();
+			playerAverageData = pbl.getPlayerAverage();
+			PlayWave.startClickSound();
+			StatisticPanel.tablePanel.removeAll();
+			String[] columnName = new String[] {"头像","球员名称","所属球队","参赛场数", "先发场数",
+					"篮板数", "助攻数", "在场时间","投篮命中率",
+					"三分命中率","罚球命中率","进攻数","防守数" ,
+					"抢断数","盖帽数","失误数" ,"犯规数",
+					"得分","效率" ,"GmSc效率值","真实命中数","投篮效率",
+					"篮板率","进攻篮板率","防守篮板率","助攻率",
+					"抢断率","盖帽率" ,
+					"失误率","使用率" };
+			Object[][] columnValues = new Object[playerAverageData.size()][columnName.length];
+			for (int i = 0; i < playerAverageData.size(); i++) {
+				columnValues[i][0] = new ImageIcon("playerImg/portrait/"+playerAverageData.get(i).getName()+".png");
+				columnValues[i][1] = playerAverageData.get(i).getName();
+				columnValues[i][2] = playerAverageData.get(i).getTeamList();
+				columnValues[i][3] = playerAverageData.get(i).getCompeteNum();
+				columnValues[i][4] = playerAverageData.get(i).getOffensiveNum();
+				columnValues[i][5] = playerAverageData.get(i).getPlayerData()[0];
+				columnValues[i][6] = playerAverageData.get(i).getPlayerData()[1];
+				columnValues[i][7] = playerAverageData.get(i).getPlayingTime();
+				columnValues[i][8] = playerAverageData.get(i).getPlayerData()[2];
+				columnValues[i][9] = playerAverageData.get(i).getPlayerData()[3];
+				columnValues[i][10] = playerAverageData.get(i).getPlayerData()[4];
+				columnValues[i][11] = playerAverageData.get(i).getPlayerData()[5];
+				columnValues[i][12] = playerAverageData.get(i).getPlayerData()[6];
+				columnValues[i][13] = playerAverageData.get(i).getPlayerData()[7];
+				columnValues[i][14] = playerAverageData.get(i).getPlayerData()[8];
+				columnValues[i][15] = playerAverageData.get(i).getPlayerData()[9];
+				columnValues[i][16] = playerAverageData.get(i).getPlayerData()[10];
+				columnValues[i][17] = playerAverageData.get(i).getPlayerData()[11];
+				columnValues[i][18] = playerAverageData.get(i).getPlayerData()[12];
+				columnValues[i][19] = playerAverageData.get(i).getPlayerData()[13];
+				columnValues[i][20] = playerAverageData.get(i).getPlayerData()[14];
+				columnValues[i][21] = playerAverageData.get(i).getPlayerData()[15];
+				columnValues[i][22] = playerAverageData.get(i).getPlayerData()[16];
+				columnValues[i][23] = playerAverageData.get(i).getPlayerData()[17];
+				columnValues[i][24] = playerAverageData.get(i).getPlayerData()[18];
+				columnValues[i][25] = playerAverageData.get(i).getPlayerData()[19];
+				columnValues[i][26] = playerAverageData.get(i).getPlayerData()[20];
+				columnValues[i][27] = playerAverageData.get(i).getPlayerData()[21];
+				columnValues[i][28] = playerAverageData.get(i).getPlayerData()[22];
+				columnValues[i][29] = playerAverageData.get(i).getPlayerData()[23];
+			}
+			StatisticPanel.tablePanel.add(sp.playerDataTable(columnValues, columnName));
+			StatisticPanel.tablePanel.repaint();
+			sp.initToolPanel();
+			StatisticPanel.toolPanel.repaint();
 			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
@@ -303,5 +370,20 @@ public class InitailizePanel {
 		public void mousePressed(MouseEvent e) {}
 
 		public void mouseReleased(MouseEvent e) {}
+	}
+	
+	class RefreshListener implements MouseListener {
+
+		public void mouseClicked(MouseEvent arg0) {
+			refresh.setIcon(AllImages.IMG_REFRESH);
+		}
+		public void mouseEntered(MouseEvent arg0) {
+		}
+		public void mouseExited(MouseEvent arg0) {
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
 	}
 }

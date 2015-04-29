@@ -23,6 +23,10 @@ public class AllImages {
 	public static final ImageIcon IMG_MIN = new ImageIcon("img/MIN_WHITE.png");
 	/**       *****************最小化frame图标 30x30***************       **/
 	public static final ImageIcon IMG_MIN_RED = new ImageIcon("img/MIN_RED.png");
+	/**       *****************刷新 frame图标 40x30***************       **/
+	public static final ImageIcon IMG_REFRESH = new ImageIcon("img/refresh.png");
+	/**       *****************刷新 frame图标 40x30***************       **/
+	public static final ImageIcon IMG_REFRESH_RED = new ImageIcon("img/refreshRed.png");
 	/**       *****************initailizePanel logo图标 120x120***************       **/
 	public static final ImageIcon IMG_LOGO = new ImageIcon("img/logo.png");
 	/**       *****************initailizePanel hot图标 80x80***************       **/

@@ -135,7 +135,7 @@ public class MyStringTable extends JTable {
 	            //tc.setPreferredWidth(80);
 	            tc.setPreferredWidth(getPreferredWidthForColumn(tc));
 	            tc.setMinWidth(80);
-	            tc.setMaxWidth(120);
+	            tc.setMaxWidth(140);
 	        }
 	        return tcm;
 	    }

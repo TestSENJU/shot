@@ -51,7 +51,7 @@ public PlayerAllVO(PlayerAllPlusRatePO po){
 	this.competeNum=po.getCompeteNum();
 	this.offensiveNum=po.getOffensiveNum();
 	for(int i=0;i<this.playerData.length;i++){
-		this.playerData[i]=po.getPlayerData()[i];
+		this.playerData[i]=(double)Math.round(po.getPlayerData()[i]*10)/10;
 	}
 
 }

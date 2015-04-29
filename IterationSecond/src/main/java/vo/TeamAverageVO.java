@@ -45,7 +45,9 @@ public class TeamAverageVO {
 		this.teamName=name;
 	}
 	public TeamAverageVO(TeamAveragePlusRatePO po){
-		this.teamData=po.getTeamData();
+		for(int i=0;i<this.teamData.length;i++){
+			this.teamData[i]=(double)Math.round(po.getTeamData()[i]*10)/10;
+		}
 		this.matchNum=po.getMatchNum();
 		this.playerList=po.getPlayerList();
 		this.teamName=po.teamName;

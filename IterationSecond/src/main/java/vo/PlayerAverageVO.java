@@ -58,9 +58,9 @@ public class PlayerAverageVO {
 		this.playingTime=po.getPlayingTime();
 		this.competeNum=po.getCompeteNum();
 		this.offensiveNum=po.getOffensiveNum();
-		this.playerData=po.getPlayerData();
-		
-		
+		for(int i=0;i<this.playerData.length;i++){
+			this.playerData[i]=(double)Math.round(po.getPlayerData()[i]*10)/10;
+		}	
 	}
 	public ArrayList<String> getTeamList() {
 		return teamList;

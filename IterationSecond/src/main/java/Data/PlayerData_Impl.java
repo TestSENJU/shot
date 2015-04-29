@@ -326,8 +326,8 @@ public class PlayerData_Impl implements PlayerDataService{
 					if(str.startsWith("║")){
 						String mass[]=str.split("║");
 						String contents[]=mass[1].split("│");
-						if((contents[3]+"-"+contents[4]).equals(league))
-						list.add(contents[3]+"-"+contents[4]);
+						if((contents[2]+"-"+contents[3]).equals(league))
+						list.add(contents[2]+"-"+contents[3]);
 					}
 				
 				}

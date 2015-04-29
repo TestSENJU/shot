@@ -14,7 +14,7 @@ public PlayerShortVO(PlayerShortPO po){
 	this.playerName=po.getName();
 	this.team=po.getTeam();
 	this.location=po.getLocation();
-	this.num=po.getNum();
+	this.num=(double)Math.round(po.getNum()*10)/10;
 }
 public String getPlayerName() {
 	return playerName;

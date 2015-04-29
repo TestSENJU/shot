@@ -115,7 +115,7 @@ private static String getTeamArea(String teamName,String path){
 					while((str=br.readLine())!=null){
 						  if(str.contains(teamName)){
 							  String strs[]=str.split("│");
-							  result= strs[3]+"-"+strs[4];
+							  result= strs[2]+"-"+strs[3];
 							 
 						  }
 					   }

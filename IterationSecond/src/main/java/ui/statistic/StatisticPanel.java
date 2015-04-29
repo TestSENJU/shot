@@ -641,7 +641,6 @@ public class StatisticPanel {
 		public void mouseReleased(MouseEvent arg0) {
 		}
 	}
-	//TODO 
 	class pTableListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {

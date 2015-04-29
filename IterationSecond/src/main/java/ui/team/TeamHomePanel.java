@@ -28,6 +28,8 @@ import ui.AllImages;
 import ui.IScrollBarUI;
 import ui.MyStringTable;
 import ui.MyTable;
+import ui.match.MatchHomePanel;
+import ui.player.PlayerHomePanel;
 import vo.MatchVO;
 import vo.PlayerBasicVO;
 import vo.TeamAllVO;
@@ -312,7 +314,7 @@ public class TeamHomePanel {
 		pTable.setBounds(30, 0, 1000-130-100, 450);
 		pTable.setOpaque(false);
 		
-		//pTable.addMouseListener(new TableListener());
+		pTable.addMouseListener(new TableListener());
 
 		pTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
@@ -371,7 +373,7 @@ public class TeamHomePanel {
 		rMTable.setBounds(30, 0, 1000-130-100, 450);
 		rMTable.setOpaque(false);
 		
-		//pTable.addMouseListener(new TableListener());
+		rMTable.addMouseListener(new RMTableListener());
 
 		rMTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
@@ -400,7 +402,7 @@ public class TeamHomePanel {
 		aMTable.setBounds(30, 0, 1000-130-100, 450);
 		aMTable.setOpaque(false);
 		
-		//pTable.addMouseListener(new TableListener());
+		aMTable.addMouseListener(new AMTableListener());
 
 		aMTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
@@ -610,5 +612,71 @@ public class TeamHomePanel {
 		}
 		public void mouseReleased(MouseEvent arg0) {
 		}		
+	}
+	
+	class TableListener implements MouseListener {
+		public void mouseClicked(MouseEvent e) {
+			if(e.getClickCount()==2){
+				System.out.println(pTable.getValueAt(pTable.getSelectedRow(), pTable.getSelectedColumn()+1));
+				if (pTable.getSelectedColumn()==0) {
+					TablePanel.removeAll();
+					teamHomePanel.removeAll();
+					PlayerHomePanel php = new PlayerHomePanel();
+					teamHomePanel.add(php.init(pTable.getValueAt(pTable.getSelectedRow(), pTable.getSelectedColumn()+1).toString()));
+					teamHomePanel.repaint();
+				}
+			}
+		}
+		public void mouseEntered(MouseEvent e) {
+		}
+		public void mouseExited(MouseEvent e) {
+		}
+		public void mousePressed(MouseEvent e) {
+		}
+		public void mouseReleased(MouseEvent e) {
+		}
+	}
+
+	class RMTableListener implements MouseListener {
+		public void mouseClicked(MouseEvent e) {
+			if (e.getClickCount()==2) {
+				if (rMTable.getSelectedColumn()==0) {
+					TablePanel.removeAll();
+					teamHomePanel.removeAll();
+					MatchHomePanel mhp = new MatchHomePanel();
+					teamHomePanel.add(mhp.init(rMTable.getValueAt(rMTable.getSelectedRow(), rMTable.getSelectedColumn()).toString()));
+					teamHomePanel.repaint();
+				}
+			}
+		}
+		public void mouseEntered(MouseEvent e) {
+		}
+		public void mouseExited(MouseEvent e) {
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
+	}
+	class AMTableListener implements MouseListener {
+		public void mouseClicked(MouseEvent e) {
+			if (e.getClickCount()==2) {
+				if (aMTable.getSelectedColumn()==0) {
+					TablePanel.removeAll();
+					teamHomePanel.removeAll();
+					MatchHomePanel mhp = new MatchHomePanel();
+					teamHomePanel.add(mhp.init(aMTable.getValueAt(aMTable.getSelectedRow(), aMTable.getSelectedColumn()).toString()));
+					teamHomePanel.repaint();
+				}
+			}
+		}
+		public void mouseEntered(MouseEvent arg0) {
+		}
+		public void mouseExited(MouseEvent arg0) {
+		}
+		public void mousePressed(MouseEvent arg0) {
+		}
+		public void mouseReleased(MouseEvent arg0) {
+		}
 	}
 }

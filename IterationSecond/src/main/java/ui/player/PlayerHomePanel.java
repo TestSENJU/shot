@@ -72,6 +72,15 @@ public class PlayerHomePanel {
 	private MyStringTable aMTable;
 	private JScrollPane aMScrollPane;
 	
+	private String basic_JerseyNum;
+	private String basic_Position;
+	private String basic_Height;
+	private String basic_Weight;
+	private String basic_Birth;
+	private String basic_Age;
+	private String basic_Exp;
+	private String basic_School;
+	
 	//
 	MatchBL mbl = new MatchBL_Impl();
 	PlayerBL pbl = new PlayerBL_Impl();
@@ -82,6 +91,25 @@ public class PlayerHomePanel {
 		playerTempID = playerID;
 		PlayerBasicVO pbasicList = new PlayerBasicVO(playerTempID);
 		pbasicList = pbl.getPlayerBasicByName(playerTempID);
+		if (pbasicList==null) {
+			basic_JerseyNum = "null";
+			basic_Position = "null";
+			basic_Height = "null";
+			basic_Weight = "null";
+			basic_Birth = "null";
+			basic_Age = "null";
+			basic_Exp = "null";
+			basic_School = "null";
+		} else {
+			basic_JerseyNum = pbasicList.getBasicInfo()[0];
+			basic_Position = pbasicList.getBasicInfo()[1];
+			basic_Height = pbasicList.getBasicInfo()[2];
+			basic_Weight = pbasicList.getBasicInfo()[3];
+			basic_Birth = pbasicList.getBasicInfo()[4];
+			basic_Age = pbasicList.getBasicInfo()[5];
+			basic_Exp = pbasicList.getBasicInfo()[6];
+			basic_School = pbasicList.getBasicInfo()[7];
+		}
 		PlayerAllVO playerAllList = new PlayerAllVO(playerTempID);
 		playerAllList = pbl.getPlayerAllByName(playerTempID);
 		
@@ -96,7 +124,7 @@ public class PlayerHomePanel {
 		playerPhoto.setOpaque(false);
 		playerPhoto.setContentAreaFilled(false);
 		playerPhoto.setBorderPainted(false);
-		playerPhoto.setIcon(new ImageIcon("playerImg/action/"+pbasicList.getPlayerName()+".png"));
+		playerPhoto.setIcon(new ImageIcon("playerImg/action/"+playerTempID+".png"));
 		pHomePanel.add(playerPhoto, 0);
 
 		// TODO basic info labels - name-jerseyNum-position-
@@ -121,7 +149,7 @@ public class PlayerHomePanel {
 		JLabel pName = new JLabel();
 		pName.setBounds(toLeftFirst + 100, 80, width, height);
 		pName.setOpaque(false);
-		pName.setText(pbasicList.getPlayerName());
+		pName.setText(playerTempID);
 		pName.setForeground(Color.WHITE);
 		pName.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pName, 0);
@@ -140,7 +168,7 @@ public class PlayerHomePanel {
 		JLabel pJerseyNum = new JLabel();
 		pJerseyNum.setBounds(toLeftFirst + 100, 130, width, height);
 		pJerseyNum.setOpaque(false);
-		pJerseyNum.setText(pbasicList.getBasicInfo()[0]);
+		pJerseyNum.setText(basic_JerseyNum);
 		pJerseyNum.setForeground(Color.WHITE);
 		pJerseyNum.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pJerseyNum, 0);
@@ -159,7 +187,7 @@ public class PlayerHomePanel {
 		JLabel pPosition = new JLabel();
 		pPosition.setBounds(toLeftFirst + 100, 180, width, height);
 		pPosition.setOpaque(false);
-		pPosition.setText(pbasicList.getBasicInfo()[1]);
+		pPosition.setText(basic_Position);
 		pPosition.setForeground(Color.WHITE);
 		pPosition.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pPosition, 0);
@@ -178,7 +206,7 @@ public class PlayerHomePanel {
 		JLabel pHeight = new JLabel();
 		pHeight.setBounds(toLeftFirst + 100, 230, width, height);
 		pHeight.setOpaque(false);
-		pHeight.setText(pbasicList.getBasicInfo()[2]);
+		pHeight.setText(basic_Height);
 		pHeight.setForeground(Color.WHITE);
 		pHeight.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pHeight, 0);
@@ -197,7 +225,7 @@ public class PlayerHomePanel {
 		JLabel pWeight = new JLabel();
 		pWeight.setBounds(toLeftFirst + 100, 280, width, height);
 		pWeight.setOpaque(false);
-		pWeight.setText(pbasicList.getBasicInfo()[3]);
+		pWeight.setText(basic_Weight);
 		pWeight.setForeground(Color.WHITE);
 		pWeight.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pWeight, 0);
@@ -217,7 +245,7 @@ public class PlayerHomePanel {
 		JLabel pBirth = new JLabel();
 		pBirth.setBounds(toLeftSecond + 100, 80, width, height);
 		pBirth.setOpaque(false);
-		pBirth.setText(pbasicList.getBasicInfo()[4]);
+		pBirth.setText(basic_Birth);
 		pBirth.setForeground(Color.WHITE);
 		pBirth.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pBirth, 0);
@@ -236,7 +264,7 @@ public class PlayerHomePanel {
 		JLabel pAge = new JLabel();
 		pAge.setBounds(toLeftSecond + 100, 130, width, height);
 		pAge.setOpaque(false);
-		pAge.setText(pbasicList.getBasicInfo()[5]);
+		pAge.setText(basic_Age);
 		pAge.setForeground(Color.WHITE);
 		pAge.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pAge, 0);
@@ -255,7 +283,7 @@ public class PlayerHomePanel {
 		JLabel pExp = new JLabel();
 		pExp.setBounds(toLeftSecond + 100, 180, width, height);
 		pExp.setOpaque(false);
-		pExp.setText(pbasicList.getBasicInfo()[6]);
+		pExp.setText(basic_Exp);
 		pExp.setForeground(Color.WHITE);
 		pExp.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pExp, 0);
@@ -274,7 +302,7 @@ public class PlayerHomePanel {
 		JLabel pSchool = new JLabel();
 		pSchool.setBounds(toLeftSecond + 100, 230, width, height);
 		pSchool.setOpaque(false);
-		pSchool.setText(pbasicList.getBasicInfo()[7]);
+		pSchool.setText(basic_School);
 		pSchool.setForeground(Color.WHITE);
 		pSchool.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		pHomePanel.add(pSchool, 0);
@@ -712,8 +740,8 @@ public class PlayerHomePanel {
 			ArrayList<MatchVO> playerMatch = new ArrayList<MatchVO>();
 			playerMatch = mbl.getMatchByPlayer(playerTempID);
 			String[] columnName_AM = new String[] { "比赛名称", "胜方", "负方", "比分", "时间" };
-			Object[][] columnAMValues = new Object[5][columnName_AM.length];
-			for (int i = 0; i < 5; i++) {
+			Object[][] columnAMValues = new Object[playerMatch.size()][columnName_AM.length];
+			for (int i = 0; i < playerMatch.size(); i++) {
 				columnAMValues[i][0] = playerMatch.get(i).getName();
 				columnAMValues[i][1] = playerMatch.get(i).getWinTeam();
 				columnAMValues[i][2] = playerMatch.get(i).getLostTeam();

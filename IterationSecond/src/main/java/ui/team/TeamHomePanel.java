@@ -67,7 +67,7 @@ public class TeamHomePanel {
 	private JButton initRecentMatchTable;
 	private JButton initAllMatch;
 	//
-	private JPanel TablePanel;
+	public static JPanel TablePanel;
 	private MyTable pTable;
 	private JScrollPane pScrollPane;
 	private MyStringTable tTable;

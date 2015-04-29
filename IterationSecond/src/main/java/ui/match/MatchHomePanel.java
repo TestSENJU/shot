@@ -372,7 +372,7 @@ public class MatchHomePanel {
 					"助攻数","抢断数","盖帽数","失误数","犯规数","得分"};
 			Object[][] columnPValues = new Object[2][columnName_Player.length];
 			for (int i = 0; i < 2; i++) {
-				columnPValues[i][0] = new ImageIcon("playerImg/portrait"+matchPD.get(i)[0]+".png");
+				columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+matchPD.get(i)[0]+".png");
 				columnPValues[i][1] = matchPD.get(i)[0];
 				columnPValues[i][2] = matchPD.get(i)[1];
 				columnPValues[i][3] = matchPD.get(i)[2];

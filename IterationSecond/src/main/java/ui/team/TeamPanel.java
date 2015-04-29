@@ -6,7 +6,9 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +24,11 @@ import org.apache.batik.swing.svg.SVGDocumentLoaderEvent;
 
 import ui.AllImages;
 import ui.IScrollBarUI;
+import vo.PlayerBasicVO;
+import BL.PlayerBL;
+import BL.PlayerBL_Impl;
+import BL.TeamBL;
+import BL.TeamBL_Impl;
 
 public class TeamPanel {
 	/**
@@ -74,6 +81,10 @@ public class TeamPanel {
 	JSVGCanvas svgCanvas28 = new JSVGCanvas();
 	JSVGCanvas svgCanvas29 = new JSVGCanvas();
 	JSVGCanvas svgCanvas30 = new JSVGCanvas();
+	
+	//
+	TeamBL tbl = new TeamBL_Impl();
+	PlayerBL pbl = new PlayerBL_Impl();
 
 	public JPanel init(){
 		basic = new JPanel();
@@ -1225,6 +1236,39 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("ATL"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("ATL");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
+				
 				basic.repaint();
 			}		
 		}
@@ -1244,6 +1288,39 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("CHA"));
+				
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("CHA");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1263,6 +1340,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("MIA"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("MIA");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1282,6 +1391,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("ORL"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("ORL");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1301,6 +1442,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("WAS"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("WAS");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1320,6 +1493,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("CHI"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("CHI");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1339,6 +1544,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("CLE"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("CLE");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1358,6 +1595,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("DET"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("DET");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1377,6 +1646,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("IND"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("IND");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1396,6 +1697,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("MIL"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("MIL");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1415,6 +1748,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("BOS"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("BOS");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1434,6 +1799,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("BKN"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("BKN");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1453,6 +1850,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("NYK"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("NYK");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1472,6 +1901,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("PHI"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("PHI");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1491,6 +1952,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("TOR"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("TOR");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1510,6 +2003,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("GSW"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("GSW");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1529,6 +2054,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("LAC"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("LAC");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1548,6 +2105,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("LAL"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("LAL");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1567,6 +2156,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("PHX"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("PHX");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1586,6 +2207,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("SAC"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("SAC");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1605,6 +2258,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("DEN"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("DEN");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1624,6 +2309,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("MIN"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("MIN");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1643,6 +2360,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("OKC"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("OKC");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1662,6 +2411,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("POR"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("POR");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1681,6 +2462,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("UTA"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("UTA");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1700,6 +2513,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("DAL"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("DAL");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1719,6 +2564,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("HOU"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("HOU");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1738,6 +2615,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("MEM"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("MEM");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1757,6 +2666,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("NOP"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("NOP");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}
@@ -1776,6 +2717,38 @@ public class TeamPanel {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
 				basic.add(thp.init("SAS"));
+				ArrayList<String> teamPlayerInfoList=tbl.getPlayerNamesOfTeam("SAS");
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
 				basic.repaint();
 			}		
 		}

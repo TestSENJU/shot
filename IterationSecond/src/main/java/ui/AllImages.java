@@ -115,4 +115,6 @@ public class AllImages {
 	public static final ImageIcon IMG_MATCH_WINNERTEAM = new ImageIcon("img/winnerTeam.png");
 	/**       *****************MatchHomePanel loserTeam button ICON 100x30***************       **/
 	public static final ImageIcon IMG_MATCH_LOSERTEAM = new ImageIcon("img/loserTeam.png");
+	/**       *****************AboutUsPanel about us button ICON 870x650***************       **/
+	public static final ImageIcon IMG_ABOUTUSICON = new ImageIcon("img/aboutusIcon.png");
 }

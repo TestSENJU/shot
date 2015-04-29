@@ -1,10 +1,9 @@
 package ui.aboutus;
 
-import java.awt.Color;
-import java.awt.Font;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import ui.AllImages;
 
 public class AboutUsPanel {
 	/**
@@ -17,17 +16,15 @@ public class AboutUsPanel {
 	public JPanel init(){
 		hotPanel = new JPanel();
 		hotPanel.setOpaque(false);
-		hotPanel.setBounds(0, 0, 1000-130, 700);
+		hotPanel.setBounds(130, 0, 1000-130, 700);
 		hotPanel.setLayout(null);
 		
 		JButton test = new JButton();
-		test.setBounds(0, 200, 120, 40);
+		test.setBounds(0, 50, 1000-130, 650);
 		test.setOpaque(false);
 		test.setContentAreaFilled(false);
-		test.setText("test");
-		test.setFont(new Font("Arial", Font.PLAIN, 20));
-		test.setForeground(Color.WHITE);
-		//Hello.setIcon(hello);
+		test.setBorderPainted(false);
+		test.setIcon(AllImages.IMG_ABOUTUSICON);
 		hotPanel.add(test, 0);
 		
 		return hotPanel;

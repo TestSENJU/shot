@@ -11,6 +11,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import sound.PlayWave;
+import ui.aboutus.AboutUsPanel;
 import ui.hot.HotInfoPanel;
 import ui.player.PlayerPanel;
 import ui.search.SearchPanel;
@@ -312,6 +313,11 @@ public class InitailizePanel {
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
 			//TODO
+			bg.remove(new Integer(1));
+			AboutUsPanel aup = new AboutUsPanel();
+			JPanel a = aup.init();
+			bg.add(a, 0);
+			bg.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
 			//PlayWave.startMoveButtonSound();

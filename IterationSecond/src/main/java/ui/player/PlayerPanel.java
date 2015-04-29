@@ -97,7 +97,7 @@ public class PlayerPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getClickCount()==2){
-				System.out.println(players.getValueAt(players.getSelectedRow(), players.getSelectedColumn()));
+				System.out.println(players.getValueAt(players.getSelectedRow(), players.getSelectedColumn()+1));
 				if (players.getSelectedColumn()==0) {
 					playerPanel.removeAll();
 					PlayerHomePanel php = new PlayerHomePanel();

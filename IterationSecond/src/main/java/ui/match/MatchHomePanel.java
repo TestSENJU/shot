@@ -31,14 +31,8 @@ import ui.MyStringTable;
 import ui.MyTable;
 import ui.player.PlayerHomePanel;
 import vo.MatchVO;
-import vo.PlayerBasicVO;
-import vo.TeamAllVO;
-import vo.TeamAverageVO;
-import vo.TeamBasicVO;
 import BL.MatchBL;
 import BL.MatchBL_Impl;
-import BL.TeamBL;
-import BL.TeamBL_Impl;
 
 public class MatchHomePanel {
 	/**
@@ -67,6 +61,7 @@ public class MatchHomePanel {
 	
 	public JPanel init(String matchID){
 		matchTempID = matchID;
+		MatchVO matchData = mbl.getMatchByName(matchTempID);
 		
 		matchHomePanel = new JPanel();
 		matchHomePanel.setOpaque(false);
@@ -83,7 +78,7 @@ public class MatchHomePanel {
 		JLabel winnerName = new JLabel();
 		winnerName.setOpaque(false);
 		winnerName.setBounds(235, 80, 120, 30);
-		winnerName.setText("winnerName");//full name
+		winnerName.setText(matchData.getWinTeam());//full name
 		winnerName.setHorizontalAlignment(SwingConstants.CENTER);
 		winnerName.setForeground(Color.WHITE);
 		winnerName.setFont(new Font("微软雅黑", Font.PLAIN, 15));
@@ -92,14 +87,14 @@ public class MatchHomePanel {
 		JLabel winnerScore = new JLabel();
 		winnerScore.setHorizontalAlignment(SwingConstants.CENTER);
 		winnerScore.setOpaque(false);
-		winnerScore.setText("99");// score
+		winnerScore.setText(matchData.getWinPointer());// score
 		winnerScore.setForeground(Color.WHITE);
 		winnerScore.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		winnerScore.setBounds(235, 140, 120, 30);
 		matchHomePanel.add(winnerScore, 0);
 		
 		JSVGCanvas winnerSvg = new JSVGCanvas();
-		File fw = new File("teamImg/"+"ATL"+".svg");
+		File fw = new File("teamImg/"+matchData.getWinTeam()+".svg");
 		winnerSvg.setBounds(235-120, 60, 120, 120);
 		winnerSvg.setURI(fw.toURI().toString());
 		winnerSvg.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter(){
@@ -127,7 +122,7 @@ public class MatchHomePanel {
 		JLabel loserName = new JLabel();
 		loserName.setOpaque(false);
 		loserName.setBounds(475, 80, 120, 30);
-		loserName.setText("loserName");
+		loserName.setText(matchData.getLostTeam());
 		loserName.setHorizontalAlignment(SwingConstants.CENTER);
 		loserName.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		loserName.setForeground(Color.WHITE);
@@ -136,14 +131,14 @@ public class MatchHomePanel {
 		JLabel loserScore = new JLabel();
 		loserScore.setOpaque(false);
 		loserScore.setBounds(475, 140, 120, 30);
-		loserScore.setText("97");
+		loserScore.setText(matchData.getLostPointer());
 		loserScore.setHorizontalAlignment(SwingConstants.CENTER);
 		loserScore.setForeground(Color.WHITE);
 		loserScore.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		matchHomePanel.add(loserScore, 0);
 		
 		JSVGCanvas loserSvg = new JSVGCanvas();
-		File fl = new File("teamImg/"+"ATL"+".svg");
+		File fl = new File("teamImg/"+matchData.getLostTeam()+".svg");
 		loserSvg.setBounds(475+120, 60, 120, 120);
 		loserSvg.setURI(fl.toURI().toString());
 		loserSvg.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter(){
@@ -177,7 +172,7 @@ public class MatchHomePanel {
 		matchTime.setOpaque(false);
 		matchTime.setContentAreaFilled(false);
 		matchTime.setBorderPainted(false);
-		matchTime.setText("Time");
+		matchTime.setText(matchData.getTime());
 		matchTime.setForeground(Color.GRAY);
 		matchTime.setFont(new Font("微软雅黑",Font.PLAIN, 15));
 		matchHomePanel.add(matchTime, 0);
@@ -192,12 +187,21 @@ public class MatchHomePanel {
 		//TODO
 		String[] columnName = new String[] { "球队名", "1", "2", "3", "4", "加时"};
 		Object[][] columnValues = new Object[2][columnName.length];
-		for (int i = 0; i < 2; i++) {
-			columnValues[i][0] = "ATL";
-			columnValues[i][1] = 19+i;
-			columnValues[i][2] = 19+i;
-			columnValues[i][3] = 19+i;
-			columnValues[i][4] = 19+i;
+		columnValues[0][0] = matchData.getWinPointer();
+		columnValues[0][1] = matchData.getPointerpart1().get(0);
+		columnValues[0][2] = matchData.getPointerpart1().get(1);
+		columnValues[0][3] = matchData.getPointerpart1().get(2);
+		columnValues[0][4] = matchData.getPointerpart1().get(3);
+		if(matchData.getPointerpart1().size()<=5){
+			columnValues[0][5] = matchData.getPointerpart1().get(4);
+		}
+		columnValues[1][0] = matchData.getWinPointer();
+		columnValues[1][1] = matchData.getPointerpart2().get(0);
+		columnValues[1][2] = matchData.getPointerpart2().get(1);
+		columnValues[1][3] = matchData.getPointerpart2().get(2);
+		columnValues[1][4] = matchData.getPointerpart2().get(3);
+		if(matchData.getPointerpart1().size()<=5){
+			columnValues[1][5] = matchData.getPointerpart2().get(4);
 		}
 		PlayWave.startClickSound();
         matchHomePanel.add(initSegTable(columnValues, columnName), 0);
@@ -290,32 +294,33 @@ public class MatchHomePanel {
 	class InitWPDTableListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			MatchVO matchData = mbl.getMatchByName(matchTempID);
+			ArrayList<String[]> matchPD = matchData.getWinList();
 			String[] columnName_Player = new String[] { "球员头像", "球员名称", "位置", "在场时间",
 					"投篮命中数","投篮出手数","三分命中数","三分出手数","罚球命中数",
 					"罚球出手数","进攻篮板数","防守篮板数","总篮板数",
 					"助攻数","抢断数","盖帽数","失误数","犯规数","得分"};
 			Object[][] columnPValues = new Object[2][columnName_Player.length];
 			for (int i = 0; i < 2; i++) {
-				columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+"Aaron Brooks"+".png");
-				columnPValues[i][1] = "Aaron Brooks";
-				columnPValues[i][2] = "前锋";
-				columnPValues[i][3] = "178:23";
-				columnPValues[i][4] = 0;
-				columnPValues[i][5] = 0;
-				columnPValues[i][6] = 0;
-				columnPValues[i][7] = 0;
-				columnPValues[i][8] = 0;
-				columnPValues[i][9] = 0;
-				columnPValues[i][10] = 0;
-				columnPValues[i][11] = 0;
-				columnPValues[i][12] = 0;
-				columnPValues[i][13] = 0;
-				columnPValues[i][14] = 0;
-				columnPValues[i][15] = 0;
-				columnPValues[i][16] = 0;
-				columnPValues[i][17] = 0;
-				columnPValues[i][18] = 0;
+				columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+matchPD.get(i)[0]+".png");
+				columnPValues[i][1] = matchPD.get(i)[0];
+				columnPValues[i][2] = matchPD.get(i)[1];
+				columnPValues[i][3] = matchPD.get(i)[2];
+				columnPValues[i][4] = matchPD.get(i)[3];
+				columnPValues[i][5] = matchPD.get(i)[4];
+				columnPValues[i][6] = matchPD.get(i)[5];
+				columnPValues[i][7] = matchPD.get(i)[6];
+				columnPValues[i][8] = matchPD.get(i)[7];
+				columnPValues[i][9] = matchPD.get(i)[8];
+				columnPValues[i][10] = matchPD.get(i)[9];
+				columnPValues[i][11] = matchPD.get(i)[10];
+				columnPValues[i][12] = matchPD.get(i)[11];
+				columnPValues[i][13] = matchPD.get(i)[12];
+				columnPValues[i][14] = matchPD.get(i)[13];
+				columnPValues[i][15] = matchPD.get(i)[14];
+				columnPValues[i][16] = matchPD.get(i)[15];
+				columnPValues[i][17] = matchPD.get(i)[16];
+				columnPValues[i][18] = matchPD.get(i)[17];
 			}
 			PlayWave.startClickSound();
 			tablePanel.removeAll();		
@@ -334,6 +339,7 @@ public class MatchHomePanel {
 	class TableListener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
+			
 			if(e.getClickCount()==2){
 				System.out.println(PlayerData.getValueAt(PlayerData.getSelectedRow(), PlayerData.getSelectedColumn()+1));
 				if (PlayerData.getSelectedColumn()==0) {
@@ -358,31 +364,33 @@ public class MatchHomePanel {
 	class InitLPDTableListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			MatchVO matchData = mbl.getMatchByName(matchTempID);
+			ArrayList<String[]> matchPD = matchData.getLostList();
 			String[] columnName_Player = new String[] { "球员头像", "球员名称", "位置", "在场时间",
 					"投篮命中数","投篮出手数","三分命中数","三分出手数","罚球命中数",
 					"罚球出手数","进攻篮板数","防守篮板数","总篮板数",
 					"助攻数","抢断数","盖帽数","失误数","犯规数","得分"};
 			Object[][] columnPValues = new Object[2][columnName_Player.length];
 			for (int i = 0; i < 2; i++) {
-				columnPValues[i][0] = new ImageIcon("playerImg/portrait"+"Aaron Brooks"+".png");
-				columnPValues[i][1] = "Aaron Brooks";
-				columnPValues[i][2] = "前锋";
-				columnPValues[i][3] = "178:23";
-				columnPValues[i][4] = 0;
-				columnPValues[i][5] = 0;
-				columnPValues[i][6] = 0;
-				columnPValues[i][7] = 0;
-				columnPValues[i][8] = 0;
-				columnPValues[i][9] = 0;
-				columnPValues[i][10] = 0;
-				columnPValues[i][11] = 0;
-				columnPValues[i][12] = 0;
-				columnPValues[i][13] = 0;
-				columnPValues[i][14] = 0;
-				columnPValues[i][15] = 0;
-				columnPValues[i][16] = 0;
-				columnPValues[i][17] = 0;
-				columnPValues[i][18] = 0;
+				columnPValues[i][0] = new ImageIcon("playerImg/portrait"+matchPD.get(i)[0]+".png");
+				columnPValues[i][1] = matchPD.get(i)[0];
+				columnPValues[i][2] = matchPD.get(i)[1];
+				columnPValues[i][3] = matchPD.get(i)[2];
+				columnPValues[i][4] = matchPD.get(i)[3];
+				columnPValues[i][5] = matchPD.get(i)[4];
+				columnPValues[i][6] = matchPD.get(i)[5];
+				columnPValues[i][7] = matchPD.get(i)[6];
+				columnPValues[i][8] = matchPD.get(i)[7];
+				columnPValues[i][9] = matchPD.get(i)[8];
+				columnPValues[i][10] = matchPD.get(i)[9];
+				columnPValues[i][11] = matchPD.get(i)[10];
+				columnPValues[i][12] = matchPD.get(i)[11];
+				columnPValues[i][13] = matchPD.get(i)[12];
+				columnPValues[i][14] = matchPD.get(i)[13];
+				columnPValues[i][15] = matchPD.get(i)[14];
+				columnPValues[i][16] = matchPD.get(i)[15];
+				columnPValues[i][17] = matchPD.get(i)[16];
+				columnPValues[i][18] = matchPD.get(i)[17];
 			}
 			PlayWave.startClickSound();
 			tablePanel.removeAll();		

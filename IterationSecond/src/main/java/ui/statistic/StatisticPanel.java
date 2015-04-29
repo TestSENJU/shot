@@ -74,7 +74,6 @@ public class StatisticPanel {
 	private JComboBox<Object> league;
 	private JComboBox<Object> sortBy;
 	private JButton sureTool;
-	
 	//TODO
 	PlayerBL pbl = new PlayerBL_Impl();
 	TeamBL tbl = new TeamBL_Impl();
@@ -1348,8 +1347,168 @@ public class StatisticPanel {
 	class SureToolListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			PlayWave.startClickSound();
 			System.out.println(position.getSelectedItem().toString()+league.getSelectedItem().toString()+sortBy.getSelectedItem().toString());
+			int num = -1;
+			String location = "";
+			String pLeague = "";
+			if (position.getSelectedItem().toString().equals("前锋")) {
+				location = "F";
+			} else if (position.getSelectedItem().toString().equals("中锋")) {
+				location = "C";
+			} else if (position.getSelectedItem().toString().equals("后卫")) {
+				location = "G";
+			} else {
+				location = "F";
+				System.out.println("StatisticPanel-SureToolListener-location invalid.default F");
+			}
+			/**"东部东南分区","东部中央分区","东部大西洋分区",
+				"西部太平洋分区","西部西北分区","西部西南分区"*/
+			if (league.getSelectedItem().toString().equals("东部东南分区")) {
+				pLeague = "E-Southeast";
+			} else if (league.getSelectedItem().toString().equals("东部中央分区")) {
+				pLeague = "E-Central";
+			} else if (league.getSelectedItem().toString().equals("东部大西洋分区")) {
+				pLeague = "E-Atlantic";
+			} else if (league.getSelectedItem().toString().equals("西部太平洋分区")) {
+				pLeague = "W-Pacific";
+			} else if (league.getSelectedItem().toString().equals("西部西北分区")) {
+				pLeague = "W-Northwest";
+			} else if (league.getSelectedItem().toString().equals("西部西南分区")) {
+				pLeague = "W-Southeast";
+			} else {
+				pLeague = "E-Southeast";
+				System.out.println("StatisticPanel-SureToolListener-league invalid.default E-Southeast");
+			}
+			if (sortBy.getSelectedItem().toString().equals("得分")) {
+				num = 0;
+			} else if (sortBy.getSelectedItem().toString().equals("篮板")) {
+				num = 1;
+			} else if (sortBy.getSelectedItem().toString().equals("助攻")) {
+				num = 2;
+			} else if (sortBy.getSelectedItem().toString().equals("得分/篮板/助攻")) {
+				num = 3;
+			} else if (sortBy.getSelectedItem().toString().equals("盖帽")) {
+				num = 4;
+			} else if (sortBy.getSelectedItem().toString().equals("抢断")) {
+				num = 5;
+			} else if (sortBy.getSelectedItem().toString().equals("犯规")) {
+				num = 6;
+			} else if (sortBy.getSelectedItem().toString().equals("失误")) {
+				num = 7;
+			} else if (sortBy.getSelectedItem().toString().equals("分钟")) {
+				num = 8;
+			} else if (sortBy.getSelectedItem().toString().equals("效率")) {
+				num = 9;
+			} else if (sortBy.getSelectedItem().toString().equals("投篮")) {
+				num = 10;
+			} else if (sortBy.getSelectedItem().toString().equals("三分")) {
+				num = 11;
+			} else if (sortBy.getSelectedItem().toString().equals("罚球")) {
+				num = 12;
+			} else if (sortBy.getSelectedItem().toString().equals("两双")) {
+				num = 13;
+			} else {
+				num = 0;
+				System.out.println("StatisticPanel-SureToolListener-num invalid.default 0");
+			}
+			if (tempTableButton.equals("playerAll")) {
+				ArrayList<PlayerAllVO> playerFilterAll = pbl.getPlayerAllByMultipleConRaising(location, pLeague, num);
+				String[] columnName = new String[] {"头像","球员名称","所属球队","参赛场数", "先发场数",
+						"篮板数", "助攻数", "在场时间","投篮命中率",
+						"三分命中率","罚球命中率","进攻数","防守数" ,
+						"抢断数","盖帽数","失误数" ,"犯规数",
+						"得分","效率" ,"GmSc效率值","真实命中数","投篮效率",
+						"篮板率","进攻篮板率","防守篮板率","助攻率",
+						"抢断率","盖帽率" ,
+						"失误率","使用率" };
+				Object[][] columnValues = new Object[playerFilterAll.size()][columnName.length];
+				for (int i = 0; i < playerFilterAll.size(); i++) {
+					columnValues[i][0] = new ImageIcon("playerImg/portrait/"+playerFilterAll.get(i).getPlayerName()+".png");
+					columnValues[i][1] = playerFilterAll.get(i).getPlayerName();
+					columnValues[i][2] = playerFilterAll.get(i).getTeamList();
+					columnValues[i][3] = playerFilterAll.get(i).getCompeteNum();
+					columnValues[i][4] = playerFilterAll.get(i).getOffensiveNum();
+					columnValues[i][5] = playerFilterAll.get(i).getPlayerData()[0];
+					columnValues[i][6] = playerFilterAll.get(i).getPlayerData()[1];
+					columnValues[i][7] = playerFilterAll.get(i).getPlayingTime();
+					columnValues[i][8] = playerFilterAll.get(i).getPlayerData()[2];
+					columnValues[i][9] = playerFilterAll.get(i).getPlayerData()[3];
+					columnValues[i][10] = playerFilterAll.get(i).getPlayerData()[4];
+					columnValues[i][11] = playerFilterAll.get(i).getPlayerData()[5];
+					columnValues[i][12] = playerFilterAll.get(i).getPlayerData()[6];
+					columnValues[i][13] = playerFilterAll.get(i).getPlayerData()[7];
+					columnValues[i][14] = playerFilterAll.get(i).getPlayerData()[8];
+					columnValues[i][15] = playerFilterAll.get(i).getPlayerData()[9];
+					columnValues[i][16] = playerFilterAll.get(i).getPlayerData()[10];
+					columnValues[i][17] = playerFilterAll.get(i).getPlayerData()[11];
+					columnValues[i][18] = playerFilterAll.get(i).getPlayerData()[12];
+					columnValues[i][19] = playerFilterAll.get(i).getPlayerData()[13];
+					columnValues[i][20] = playerFilterAll.get(i).getPlayerData()[14];
+					columnValues[i][21] = playerFilterAll.get(i).getPlayerData()[15];
+					columnValues[i][22] = playerFilterAll.get(i).getPlayerData()[16];
+					columnValues[i][23] = playerFilterAll.get(i).getPlayerData()[17];
+					columnValues[i][24] = playerFilterAll.get(i).getPlayerData()[18];
+					columnValues[i][25] = playerFilterAll.get(i).getPlayerData()[19];
+					columnValues[i][26] = playerFilterAll.get(i).getPlayerData()[20];
+					columnValues[i][27] = playerFilterAll.get(i).getPlayerData()[21];
+					columnValues[i][28] = playerFilterAll.get(i).getPlayerData()[22];
+					columnValues[i][29] = playerFilterAll.get(i).getPlayerData()[23];
+				}
+				tablePanel.removeAll();
+				tablePanel.add(playerDataTable(columnValues, columnName));
+				tablePanel.repaint();
+			} else if (tempTableButton.equals("playerAverage")) {
+				ArrayList<PlayerAverageVO> playerFilterAverage = pbl.getPlayerAverageByMultipleConRaising(location, pLeague, num);
+				tablePanel.removeAll();
+				String[] columnName = new String[] {"头像","球员名称","所属球队","参赛场数", "先发场数",
+						"篮板数", "助攻数", "在场时间","投篮命中率",
+						"三分命中率","罚球命中率","进攻数","防守数" ,
+						"抢断数","盖帽数","失误数" ,"犯规数",
+						"得分","效率" ,"GmSc效率值","真实命中数","投篮效率",
+						"篮板率","进攻篮板率","防守篮板率","助攻率",
+						"抢断率","盖帽率" ,
+						"失误率","使用率" };
+				Object[][] columnValues = new Object[playerFilterAverage.size()][columnName.length];
+				for (int i = 0; i < playerFilterAverage.size(); i++) {
+					columnValues[i][0] = new ImageIcon("playerImg/portrait/"+playerFilterAverage.get(i).getName()+".png");
+					columnValues[i][1] = playerFilterAverage.get(i).getName();
+					columnValues[i][2] = playerFilterAverage.get(i).getTeamList();
+					columnValues[i][3] = playerFilterAverage.get(i).getCompeteNum();
+					columnValues[i][4] = playerFilterAverage.get(i).getOffensiveNum();
+					columnValues[i][5] = playerFilterAverage.get(i).getPlayerData()[0];
+					columnValues[i][6] = playerFilterAverage.get(i).getPlayerData()[1];
+					columnValues[i][7] = playerFilterAverage.get(i).getPlayingTime();
+					columnValues[i][8] = playerFilterAverage.get(i).getPlayerData()[2];
+					columnValues[i][9] = playerFilterAverage.get(i).getPlayerData()[3];
+					columnValues[i][10] = playerFilterAverage.get(i).getPlayerData()[4];
+					columnValues[i][11] = playerFilterAverage.get(i).getPlayerData()[5];
+					columnValues[i][12] = playerFilterAverage.get(i).getPlayerData()[6];
+					columnValues[i][13] = playerFilterAverage.get(i).getPlayerData()[7];
+					columnValues[i][14] = playerFilterAverage.get(i).getPlayerData()[8];
+					columnValues[i][15] = playerFilterAverage.get(i).getPlayerData()[9];
+					columnValues[i][16] = playerFilterAverage.get(i).getPlayerData()[10];
+					columnValues[i][17] = playerFilterAverage.get(i).getPlayerData()[11];
+					columnValues[i][18] = playerFilterAverage.get(i).getPlayerData()[12];
+					columnValues[i][19] = playerFilterAverage.get(i).getPlayerData()[13];
+					columnValues[i][20] = playerFilterAverage.get(i).getPlayerData()[14];
+					columnValues[i][21] = playerFilterAverage.get(i).getPlayerData()[15];
+					columnValues[i][22] = playerFilterAverage.get(i).getPlayerData()[16];
+					columnValues[i][23] = playerFilterAverage.get(i).getPlayerData()[17];
+					columnValues[i][24] = playerFilterAverage.get(i).getPlayerData()[18];
+					columnValues[i][25] = playerFilterAverage.get(i).getPlayerData()[19];
+					columnValues[i][26] = playerFilterAverage.get(i).getPlayerData()[20];
+					columnValues[i][27] = playerFilterAverage.get(i).getPlayerData()[21];
+					columnValues[i][28] = playerFilterAverage.get(i).getPlayerData()[22];
+					columnValues[i][29] = playerFilterAverage.get(i).getPlayerData()[23];
+				}
+				tablePanel.add(playerDataTable(columnValues, columnName));
+				tablePanel.repaint();
+				initToolPanel();
+				toolPanel.repaint();
+			}
 			
+		
 		}
 		public void mouseEntered(MouseEvent arg0) {
 		}

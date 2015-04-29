@@ -499,6 +499,7 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
+			System.out.println(c.getSelectedItem().toString());
 			hotPlayerTodayTable(c.getSelectedItem().toString());
 			tablePanel.repaint();
 			hotPanel.repaint();

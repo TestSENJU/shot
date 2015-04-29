@@ -19,6 +19,7 @@ import sound.PlayWave;
 import ui.AllImages;
 import ui.IComboBox;
 import ui.IScrollBarUI;
+import ui.MyStringTable;
 import ui.MyTable;
 import ui.player.PlayerHomePanel;
 import ui.team.TeamHomePanel;
@@ -75,6 +76,7 @@ public class HotInfoPanel {
 	private Object[][] columnValues = null;
 	private JScrollPane scrollPane;
 	private MyTable topFive;
+	private MyStringTable teamTable;
 	PlayerBL pbl = new PlayerBL_Impl();
 	TeamBL tbl = new TeamBL_Impl();
 	
@@ -363,27 +365,28 @@ public class HotInfoPanel {
 		for (int i = 0; i < 5; i++) {
 			columnValues[i][0] = htsList.get(i).getTeamName();
 			TeamBasicVO forLeague = new TeamBasicVO(htsList.get(i).getTeamName());
+			forLeague = tbl.getTeamBasicByName(htsList.get(i).getTeamName());
 			columnValues[i][1] = forLeague.getTeamInfo()[3]+"-"+forLeague.getTeamInfo()[4];
 			columnValues[i][2] = htsList.get(i).getTeamData()[1];
 		}
 		
-		topFive = new MyTable(columnValues, columnName);
-		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		topFive.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		topFive.setForeground(Color.white);
-		topFive.setRowHeight(50);
-		topFive.setBounds(40, 50, 1000-130-100, 480);
-		topFive.setOpaque(false);
+		teamTable = new MyStringTable(columnValues, columnName);
+		teamTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		teamTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		teamTable.setForeground(Color.white);
+		teamTable.setRowHeight(35);
+		teamTable.setBounds(40, 50, 1000-130-100, 480);
+		teamTable.setOpaque(false);
 		
-		topFive.addMouseListener(new TableTListener());
+		teamTable.addMouseListener(new TableTListener());
 
-		topFive.setFont(new Font("微软雅黑", Font.PLAIN, 13));
+		teamTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
 	    scrollPane = new JScrollPane();
-	    scrollPane.setColumnHeaderView(topFive.getTableHeader());	//设置头部（HeaderView部分）  
+	    scrollPane.setColumnHeaderView(teamTable.getTableHeader());	//设置头部（HeaderView部分）  
 	    scrollPane.getColumnHeader().setOpaque(false);	//再取出头部，并设置为透明  
 	    
-	    scrollPane.setViewportView(topFive);	//装载表格  
+	    scrollPane.setViewportView(teamTable);	//装载表格  
 	    scrollPane.setOpaque(false);
 	    scrollPane.getViewport().setOpaque(false);
 	    scrollPane.getVerticalScrollBar().setUI(new IScrollBarUI());
@@ -539,6 +542,7 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
+			System.out.println(c.getSelectedItem().toString());
 			hotPlayerSeasonTable(c.getSelectedItem().toString());
 			tablePanel.repaint();
 			hotPanel.repaint();
@@ -578,6 +582,7 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
+			System.out.println(c.getSelectedItem().toString());
 			hotTeamSeasonTable(c.getSelectedItem().toString());
 			tablePanel.repaint();
 			hotPanel.repaint();
@@ -659,11 +664,11 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getClickCount()==2){
-				System.out.println(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()));
+				System.out.println(topFive.getValueAt(teamTable.getSelectedRow(), teamTable.getSelectedColumn()));
 				if (topFive.getSelectedColumn()==0) {
 					hotPanel.removeAll();
 					TeamHomePanel thp = new TeamHomePanel();
-					hotPanel.add(thp.init(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()+1).toString()));
+					hotPanel.add(thp.init(teamTable.getValueAt(topFive.getSelectedRow(), teamTable.getSelectedColumn()).toString()));
 					hotPanel.repaint();
 				}
 			}

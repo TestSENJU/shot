@@ -71,9 +71,8 @@ public class HotInfoPanel {
 	 * **/
 	public static JPanel hotPanel;
 	public static JPanel tablePanel;
+	private JPanel toolPanel;
 	public IComboBox c;
-	private String[] columnName = null;
-	private Object[][] columnValues = null;
 	private JScrollPane scrollPane;
 	private MyTable topFive;
 	private MyStringTable teamTable;
@@ -88,8 +87,13 @@ public class HotInfoPanel {
 		
 		tablePanel = new JPanel();
 		tablePanel.setOpaque(false);
-		tablePanel.setBounds(0, 100, 1000-130, 600);
+		tablePanel.setBounds(0, 130, 1000-130, 570);
 		tablePanel.setLayout(null);
+		
+		toolPanel = new JPanel();
+		toolPanel.setOpaque(false);
+		toolPanel.setBounds(0, 100, 1000-130, 30);
+		toolPanel.setLayout(null);
 		
 		int width = 100;
 		int height = 30;
@@ -129,7 +133,8 @@ public class HotInfoPanel {
 		bestPlayer.addMouseListener(new BestPlayerListener());
 		hotPanel.add(bestPlayer, 0);
 		
-		hotPanel.add(tablePanel);
+		hotPanel.add(tablePanel, 0);
+		hotPanel.add(toolPanel, 0);
 		return hotPanel;
 	}
 	
@@ -153,45 +158,21 @@ public class HotInfoPanel {
 		sure.setIcon(AllImages.IMG_SURE);
 		sure.setBounds(180, 0, 80, 30);
 		sure.addMouseListener(new HPTComboBoxListener());
-		tablePanel.add(c, 0);
-		tablePanel.add(sure, 0);
+		toolPanel.add(c, 0);
+		toolPanel.add(sure, 0);
 	}
 	/**TODO
 	 * for hotPlayerToday button
 	 * show five player info
 	 * */
-	public void hotPlayerTodayTable(String id){
-
-		ArrayList<PlayerShortVO> hptList = new ArrayList<PlayerShortVO>();
-		if (id.equals("篮板")) {
-			hptList = pbl.getTodayHotPlayerByNum(1);
-		} else if (id.equals("得分")) {
-			hptList = pbl.getTodayHotPlayerByNum(0);
-		} else if (id.equals("助攻")) {
-			hptList = pbl.getTodayHotPlayerByNum(2);
-		} else if (id.equals("抢断")) {
-			hptList = pbl.getTodayHotPlayerByNum(3);
-		} else if (id.equals("盖帽")) {
-			hptList = pbl.getTodayHotPlayerByNum(4);
-		} else {
-			System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
-		}
-		columnName = new String[] { "球员头像", "球员名称", "所属球队", "球员位置", "数据" ,"排名"};
-		columnValues = new Object[5][columnName.length];
-		for (int i = 0; i < 5; i++) {
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hptList.get(i).getPlayerName()+".png");
-			columnValues[i][1] = hptList.get(i).getPlayerName();
-			columnValues[i][2] = hptList.get(i).getTeam();
-			columnValues[i][3] = hptList.get(i).getLocation();
-			columnValues[i][4] = hptList.get(i).getNum();//
-			columnValues[i][5] = i+1;
-		}
+	public JScrollPane hotPlayerTodayTable(Object[][] columnValues, String[] columnName){
+		
 		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		topFive.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		topFive.setForeground(Color.white);
 		topFive.setRowHeight(50);
-		topFive.setBounds(40, 50, 1000-130-100, 480);
+		topFive.setBounds(40, 20, 1000-130-100, 480);
 		topFive.setOpaque(false);
 		
 		topFive.addMouseListener(new TablePListener());
@@ -208,9 +189,9 @@ public class HotInfoPanel {
 	    scrollPane.getVerticalScrollBar().setUI(new IScrollBarUI());
         scrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
 	    
-        tablePanel.add(scrollPane);
-		scrollPane.setBounds(40, 50, 1000-130-100, 480);
+		scrollPane.setBounds(40, 20, 1000-130-100, 480);
 		scrollPane.setOpaque(false);
+		return scrollPane;
 	}
 	/**TODO
 	 * for hotPlayerSeason button
@@ -232,60 +213,22 @@ public class HotInfoPanel {
 		sure.setIcon(AllImages.IMG_SURE);
 		sure.setBounds(180, 0, 80, 30);
 		sure.addMouseListener(new HPSComboBoxListener());
-		tablePanel.add(c, 0);
-		tablePanel.add(sure, 0);
+		toolPanel.add(c, 0);
+		toolPanel.add(sure, 0);
 	}
 	
 	/**TODO
 	 * for hotPlayerSeason button
 	 * show five player info
 	 * */
-	public void hotPlayerSeasonTable(String id){
-		ArrayList<PlayerShortVO> hpsList = new ArrayList<PlayerShortVO>();
-		/** 0场均得分
-	 * 1场均篮板
-	 * 2场均助攻
-	 * 3场均盖帽
-	 * 4场均抢断
-	 * 5三分命中率
-	 * 6投篮命中率
-	 * 7罚球命中率*/
-		if (id.equals("场均得分")) {
-			hpsList = pbl.getHotPlayerByNum(0);
-		} else if (id.equals("场均篮板")) {
-			hpsList = pbl.getHotPlayerByNum(1);
-		} else if (id.equals("场均助攻")) {
-			hpsList = pbl.getHotPlayerByNum(2);
-		} else if (id.equals("场均盖帽")) {
-			hpsList = pbl.getHotPlayerByNum(3);
-		} else if (id.equals("场均抢断")) {
-			hpsList = pbl.getHotPlayerByNum(4);
-		} else if (id.equals("三分命中率")) {
-			hpsList = pbl.getHotPlayerByNum(5);
-		} else if (id.equals("投篮命中率")) {
-			hpsList = pbl.getHotPlayerByNum(6);
-		} else if (id.equals("罚球命中率")) {
-			hpsList = pbl.getHotPlayerByNum(7);
-		} else {
-			System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
-		}
-		columnName = new String[] { "球员头像", "球员名称", "所属球队", "位置", "数据","排名" };
-		columnValues = new Object[5][columnName.length];
-		for (int i = 0; i < 5; i++) {
-
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hpsList.get(i).getPlayerName()+".png");
-			columnValues[i][1] = hpsList.get(i).getPlayerName();
-			columnValues[i][2] = hpsList.get(i).getTeam();
-			columnValues[i][3] =  hpsList.get(i).getLocation();
-			columnValues[i][4] = hpsList.get(i).getNum();
-			columnValues[i][5] = i+1;
-		}
+	public JScrollPane hotPlayerSeasonTable(Object[][] columnValues, String[] columnName){
+		
 		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		topFive.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		topFive.setForeground(Color.white);
 		topFive.setRowHeight(50);
-		topFive.setBounds(40, 50, 1000-130-100, 480);
+		topFive.setBounds(40, 20, 1000-130-100, 480);
 		topFive.setOpaque(false);
 		
 		topFive.addMouseListener(new TablePListener());
@@ -302,9 +245,9 @@ public class HotInfoPanel {
 	    scrollPane.getVerticalScrollBar().setUI(new IScrollBarUI());
         scrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
 	    
-        tablePanel.add(scrollPane);
-		scrollPane.setBounds(40, 50, 1000-130-100, 480);
+		scrollPane.setBounds(40, 20, 1000-130-100, 480);
 		scrollPane.setOpaque(false);
+		return scrollPane;
 	}
 	
 	/**TODO
@@ -327,55 +270,22 @@ public class HotInfoPanel {
 		sure.setIcon(AllImages.IMG_SURE);
 		sure.setBounds(180, 0, 80, 30);
 		sure.addMouseListener(new HTSComboBoxListener());
-		tablePanel.add(c, 0);
-		tablePanel.add(sure, 0);
+		toolPanel.add(c, 0);
+		toolPanel.add(sure, 0);
 	}
 	
 	/**TODO
 	 * for hotTeamSeason button
 	 * show five team info
 	 * */
-	public void hotTeamSeasonTable(String id){
-		//"场均得分","场均篮板","场均助攻","场均盖帽",
-		//"场均抢断","三分命中率","投篮命中率","罚球命中率"
-
-		ArrayList<TeamAverageVO> htsList = new ArrayList<TeamAverageVO>();
-		if (id.equals("场均得分")) {
-			htsList = tbl.getHotTeamByNum(14);
-		} else if (id.equals("场均篮板")) {
-			htsList = tbl.getHotTeamByNum(8);
-		} else if (id.equals("场均助攻")) {
-			htsList = tbl.getHotTeamByNum(9);
-		} else if (id.equals("场均盖帽")) {
-			htsList = tbl.getHotTeamByNum(11);
-		} else if (id.equals("场均抢断")) {
-			htsList = tbl.getHotTeamByNum(10);
-		} else if (id.equals("三分命中率")) {
-			htsList = tbl.getHotTeamByNum(16);
-		} else if (id.equals("投篮命中率")) {
-			htsList = tbl.getHotTeamByNum(15);
-		} else if (id.equals("罚球命中率")) {
-			htsList = tbl.getHotTeamByNum(17);
-		} else {
-			System.out.println("HotInfoPanel-hotTeamSeasonTable-InvalidInput.");
-		}
-		
-		columnName = new String[] { "球队名称", "联盟", "数据" };
-		columnValues = new Object[5][columnName.length];
-		for (int i = 0; i < 5; i++) {
-			columnValues[i][0] = htsList.get(i).getTeamName();
-			TeamBasicVO forLeague = new TeamBasicVO(htsList.get(i).getTeamName());
-			forLeague = tbl.getTeamBasicByName(htsList.get(i).getTeamName());
-			columnValues[i][1] = forLeague.getTeamInfo()[3]+"-"+forLeague.getTeamInfo()[4];
-			columnValues[i][2] = htsList.get(i).getTeamData()[1];
-		}
+	public JScrollPane hotTeamSeasonTable(Object[][] columnValues, String[] columnName){
 		
 		teamTable = new MyStringTable(columnValues, columnName);
 		teamTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		teamTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		teamTable.setForeground(Color.white);
 		teamTable.setRowHeight(35);
-		teamTable.setBounds(40, 50, 1000-130-100, 480);
+		teamTable.setBounds(40, 20, 1000-130-100, 480);
 		teamTable.setOpaque(false);
 		
 		teamTable.addMouseListener(new TableTListener());
@@ -392,9 +302,9 @@ public class HotInfoPanel {
 	    scrollPane.getVerticalScrollBar().setUI(new IScrollBarUI());
         scrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
 	    
-        tablePanel.add(scrollPane);
-		scrollPane.setBounds(40, 50, 1000-130-100, 480);
+		scrollPane.setBounds(40, 20, 1000-130-100, 480);
 		scrollPane.setOpaque(false);
+		return scrollPane;
 	}
 	
 	/**TODO
@@ -417,45 +327,22 @@ public class HotInfoPanel {
 		sure.setIcon(AllImages.IMG_SURE);
 		sure.setBounds(180, 0, 80, 30);
 		sure.addMouseListener(new BPComboBoxListener());
-		tablePanel.add(c, 0);
-		tablePanel.add(sure, 0);
+		toolPanel.add(c, 0);
+		toolPanel.add(sure, 0);
 	}
 	
 	/**TODO
 	 * for bestPlayer button
 	 * show five player info
 	 * */
-	public void bestPlayerTable(String id){
-		ArrayList<PlayerAverageVO> bpList = new ArrayList<PlayerAverageVO>();
-		//"场均得分","场均篮板","场均助攻"
-		/** 0场均得分
-	 * 1场均篮板
-	 * 2场均助攻*/
-		if (id.equals(id.equals("场均得分"))) {
-			bpList = pbl.getImprovedPlayerByNum(0);
-		} else if (id.equals("场均篮板")) {
-			bpList = pbl.getImprovedPlayerByNum(1);
-		} else if (id.equals("场均助攻")) {
-			bpList = pbl.getImprovedPlayerByNum(2);
-		} else {
-			System.out.println("HotInfoPanel-BestPlayerTable-InvalidInput");
-		}
-		columnName = new String[] { "球员头像", "球员名称", "所属球队", "最近五场比赛提升率","数据" };
-		columnValues = new Object[5][columnName.length];
-		for (int i = 0; i < 5; i++) {
-
-			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+bpList.get(i).getName()+".png");
-			columnValues[i][1] = bpList.get(i).getName();
-			columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
-			columnValues[i][3] = bpList.get(i).getPlayerData()[24];
-			columnValues[i][4] = bpList.get(i).getPlayerData()[18];//hehe
-		}
+	public JScrollPane bestPlayerTable(Object[][] columnValues, String[] columnName){
+		
 		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		topFive.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		topFive.setForeground(Color.white);
 		topFive.setRowHeight(50);
-		topFive.setBounds(40, 50, 1000-130-100, 480);
+		topFive.setBounds(40, 20, 1000-130-100, 480);
 		topFive.setOpaque(false);
 		
 		topFive.addMouseListener(new TablePListener());
@@ -472,9 +359,9 @@ public class HotInfoPanel {
 	    scrollPane.getVerticalScrollBar().setUI(new IScrollBarUI());
         scrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
 	    
-        tablePanel.add(scrollPane);
-		scrollPane.setBounds(40, 50, 1000-130-100, 480);
+		scrollPane.setBounds(40, 20, 1000-130-100, 480);
 		scrollPane.setOpaque(false);
+		return scrollPane;
 	}
 	
 	//TODO 
@@ -482,9 +369,11 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
-			tablePanel.removeAll();
+			toolPanel.removeAll();
 			hotPlayerTodayPanel();
-			tablePanel.repaint();
+			toolPanel.repaint();
+			tablePanel.removeAll();
+			tablePanel.removeAll();
 			hotPanel.repaint();
 		}
 		public void mouseEntered(MouseEvent e) {
@@ -501,9 +390,49 @@ public class HotInfoPanel {
 	class HPTComboBoxListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
+			String id = c.getSelectedItem().toString();
+			ArrayList<PlayerShortVO> hptList = new ArrayList<PlayerShortVO>();
+			if (id.equals("篮板")) {
+				hptList = pbl.getTodayHotPlayerByNum(1);
+				for (int i=0;i < hptList.size();i++) {
+					System.out.println("rebound+"+hptList.get(i).getPlayerName());
+				}
+			} else if (id.equals("得分")) {
+				hptList = pbl.getTodayHotPlayerByNum(0);
+				for (int i=0;i < hptList.size();i++) {
+					System.out.println("score+"+hptList.get(i).getPlayerName());
+				}
+			} else if (id.equals("助攻")) {
+				hptList = pbl.getTodayHotPlayerByNum(2);
+				for (int i=0;i < hptList.size();i++) {
+					System.out.println("assist+"+hptList.get(i).getPlayerName());
+				}
+			} else if (id.equals("抢断")) {
+				hptList = pbl.getTodayHotPlayerByNum(3);
+				for (int i=0;i < hptList.size();i++) {
+					System.out.println("steal+"+hptList.get(i).getPlayerName());
+				}
+			} else if (id.equals("盖帽")) {
+				hptList = pbl.getTodayHotPlayerByNum(4);
+				for (int i=0;i < hptList.size();i++) {
+					System.out.println("blockShot+"+hptList.get(i).getPlayerName());
+				}
+			} else {
+				System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
+			}
+			String[] columnName = new String[] { "球员头像", "球员名称", "所属球队", "球员位置", "数据" ,"排名"};
+			Object[][] columnValues = new Object[5][columnName.length];
+			for (int i = 0; i < 5; i++) {
+				columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hptList.get(i).getPlayerName()+".png");
+				columnValues[i][1] = hptList.get(i).getPlayerName();
+				columnValues[i][2] = hptList.get(i).getTeam();
+				columnValues[i][3] = hptList.get(i).getLocation();
+				columnValues[i][4] = hptList.get(i).getNum();//
+				columnValues[i][5] = i+1;
+			}
 			PlayWave.startClickSound();
-			System.out.println(c.getSelectedItem().toString());
-			hotPlayerTodayTable(c.getSelectedItem().toString());
+			tablePanel.removeAll();
+			tablePanel.add(hotPlayerTodayTable(columnValues, columnName), 0);
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -522,8 +451,10 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
-			tablePanel.removeAll();
+			toolPanel.removeAll();
 			hotPlayerSeasonPanel();
+			toolPanel.repaint();
+			tablePanel.removeAll();
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -541,9 +472,49 @@ public class HotInfoPanel {
 	class HPSComboBoxListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
+			String id = c.getSelectedItem().toString();
+			ArrayList<PlayerShortVO> hpsList = new ArrayList<PlayerShortVO>();
+			/** 0场均得分
+		 * 1场均篮板
+		 * 2场均助攻
+		 * 3场均盖帽
+		 * 4场均抢断
+		 * 5三分命中率
+		 * 6投篮命中率
+		 * 7罚球命中率*/
+			if (id.equals("场均得分")) {
+				hpsList = pbl.getHotPlayerByNum(0);
+			} else if (id.equals("场均篮板")) {
+				hpsList = pbl.getHotPlayerByNum(1);
+			} else if (id.equals("场均助攻")) {
+				hpsList = pbl.getHotPlayerByNum(2);
+			} else if (id.equals("场均盖帽")) {
+				hpsList = pbl.getHotPlayerByNum(3);
+			} else if (id.equals("场均抢断")) {
+				hpsList = pbl.getHotPlayerByNum(4);
+			} else if (id.equals("三分命中率")) {
+				hpsList = pbl.getHotPlayerByNum(5);
+			} else if (id.equals("投篮命中率")) {
+				hpsList = pbl.getHotPlayerByNum(6);
+			} else if (id.equals("罚球命中率")) {
+				hpsList = pbl.getHotPlayerByNum(7);
+			} else {
+				System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
+			}
+			String[] columnName = new String[] { "球员头像", "球员名称", "所属球队", "位置", "数据","排名" };
+			Object[][] columnValues = new Object[5][columnName.length];
+			for (int i = 0; i < 5; i++) {
+
+				columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hpsList.get(i).getPlayerName()+".png");
+				columnValues[i][1] = hpsList.get(i).getPlayerName();
+				columnValues[i][2] = hpsList.get(i).getTeam();
+				columnValues[i][3] =  hpsList.get(i).getLocation();
+				columnValues[i][4] = hpsList.get(i).getNum();
+				columnValues[i][5] = i+1;
+			}
 			PlayWave.startClickSound();
-			System.out.println(c.getSelectedItem().toString());
-			hotPlayerSeasonTable(c.getSelectedItem().toString());
+			tablePanel.removeAll();
+			tablePanel.add(hotPlayerSeasonTable(columnValues, columnName), 0);
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -562,8 +533,10 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
-			tablePanel.removeAll();
+			toolPanel.removeAll();
 			hotTeamSeasonPanel();
+			toolPanel.repaint();
+			tablePanel.removeAll();
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -581,9 +554,43 @@ public class HotInfoPanel {
 	class HTSComboBoxListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
+			//"场均得分","场均篮板","场均助攻","场均盖帽",
+			//"场均抢断","三分命中率","投篮命中率","罚球命中率"
+			String id = c.getSelectedItem().toString();
+			ArrayList<TeamAverageVO> htsList = new ArrayList<TeamAverageVO>();
+			if (id.equals("场均得分")) {
+				htsList = tbl.getHotTeamByNum(14);
+			} else if (id.equals("场均篮板")) {
+				htsList = tbl.getHotTeamByNum(8);
+			} else if (id.equals("场均助攻")) {
+				htsList = tbl.getHotTeamByNum(9);
+			} else if (id.equals("场均盖帽")) {
+				htsList = tbl.getHotTeamByNum(11);
+			} else if (id.equals("场均抢断")) {
+				htsList = tbl.getHotTeamByNum(10);
+			} else if (id.equals("三分命中率")) {
+				htsList = tbl.getHotTeamByNum(16);
+			} else if (id.equals("投篮命中率")) {
+				htsList = tbl.getHotTeamByNum(15);
+			} else if (id.equals("罚球命中率")) {
+				htsList = tbl.getHotTeamByNum(17);
+			} else {
+				System.out.println("HotInfoPanel-hotTeamSeasonTable-InvalidInput.");
+			}
+			
+			String[] columnName = new String[] { "球队名称", "联盟", "数据" };
+			Object[][] columnValues = new Object[5][columnName.length];
+			for (int i = 0; i < 5; i++) {
+				columnValues[i][0] = htsList.get(i).getTeamName();
+				TeamBasicVO forLeague = new TeamBasicVO(htsList.get(i).getTeamName());
+				forLeague = tbl.getTeamBasicByName(htsList.get(i).getTeamName());
+				columnValues[i][1] = forLeague.getTeamInfo()[3]+"-"+forLeague.getTeamInfo()[4];
+				columnValues[i][2] = htsList.get(i).getTeamData()[1];
+			}
+			
 			PlayWave.startClickSound();
-			System.out.println(c.getSelectedItem().toString());
-			hotTeamSeasonTable(c.getSelectedItem().toString());
+			tablePanel.removeAll();
+			tablePanel.add(hotTeamSeasonTable(columnValues, columnName), 0);
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -602,8 +609,10 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			PlayWave.startClickSound();
-			tablePanel.removeAll();
+			toolPanel.removeAll();
 			bestPlayerPanel();
+			toolPanel.repaint();
+			tablePanel.removeAll();
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -621,8 +630,34 @@ public class HotInfoPanel {
 	class BPComboBoxListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent e) {
+			String id = c.getSelectedItem().toString();
+			ArrayList<PlayerAverageVO> bpList = new ArrayList<PlayerAverageVO>();
+			//"场均得分","场均篮板","场均助攻"
+			/** 0场均得分
+		 * 1场均篮板
+		 * 2场均助攻*/
+			if (id.equals(id.equals("场均得分"))) {
+				bpList = pbl.getImprovedPlayerByNum(0);
+			} else if (id.equals("场均篮板")) {
+				bpList = pbl.getImprovedPlayerByNum(1);
+			} else if (id.equals("场均助攻")) {
+				bpList = pbl.getImprovedPlayerByNum(2);
+			} else {
+				System.out.println("HotInfoPanel-BestPlayerTable-InvalidInput");
+			}
+			String[] columnName = new String[] { "球员头像", "球员名称", "所属球队", "最近五场比赛提升率","数据" };
+			Object[][] columnValues = new Object[5][columnName.length];
+			for (int i = 0; i < 5; i++) {
+
+				columnValues[i][0] = new ImageIcon("playerImg/portrait/"+bpList.get(i).getName()+".png");
+				columnValues[i][1] = bpList.get(i).getName();
+				columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
+				columnValues[i][3] = bpList.get(i).getPlayerData()[24];
+				columnValues[i][4] = bpList.get(i).getPlayerData()[18];//hehe
+			}
 			PlayWave.startClickSound();
-			bestPlayerTable(c.getSelectedItem().toString());
+			tablePanel.removeAll();
+			tablePanel.add(bestPlayerTable(columnValues, columnName), 0);
 			tablePanel.repaint();
 			hotPanel.repaint();
 		}
@@ -641,7 +676,7 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getClickCount()==2){
-				System.out.println(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()));
+				System.out.println(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()+1));
 				if (topFive.getSelectedColumn()==0) {
 					hotPanel.removeAll();
 					PlayerHomePanel php = new PlayerHomePanel();

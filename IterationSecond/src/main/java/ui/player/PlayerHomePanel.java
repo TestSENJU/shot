@@ -80,10 +80,10 @@ public class PlayerHomePanel {
 
 	public JPanel init(String playerID) {
 		playerTempID = playerID;
-		PlayerBasicVO pbasicList = new PlayerBasicVO(playerID);
-		pbasicList = pbl.getPlayerBasicByName(playerID);
-		PlayerAllVO playerAllList = new PlayerAllVO(playerID);
-		playerAllList = pbl.getPlayerAllByName(playerID);
+		PlayerBasicVO pbasicList = new PlayerBasicVO(playerTempID);
+		pbasicList = pbl.getPlayerBasicByName(playerTempID);
+		PlayerAllVO playerAllList = new PlayerAllVO(playerTempID);
+		playerAllList = pbl.getPlayerAllByName(playerTempID);
 		
 		pHomePanel = new JPanel();
 		pHomePanel.setOpaque(false);

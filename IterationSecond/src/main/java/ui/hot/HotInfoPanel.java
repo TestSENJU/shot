@@ -172,7 +172,7 @@ public class HotInfoPanel {
 		} else {
 			System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
 		}
-		columnName = new String[] { "球员头像", "球员名称", "所属球队", "球员位置", "数据" };
+		columnName = new String[] { "球员头像", "球员名称", "所属球队", "球员位置", "数据" ,"排名"};
 		columnValues = new Object[5][columnName.length];
 		for (int i = 0; i < 5; i++) {
 			columnValues[i][0] = new ImageIcon("playerImg/portrait/"+hptList.get(i).getPlayerName()+".png");
@@ -180,6 +180,7 @@ public class HotInfoPanel {
 			columnValues[i][2] = hptList.get(i).getTeam();
 			columnValues[i][3] = hptList.get(i).getLocation();
 			columnValues[i][4] = hptList.get(i).getNum();//
+			columnValues[i][5] = i+1;
 		}
 		topFive = new MyTable(columnValues, columnName);
 		topFive.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

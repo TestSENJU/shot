@@ -425,9 +425,10 @@ public class TeamHomePanel {
 			Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
 			for (int i = 0; i < teamPlayerInfoList.size(); i++) {
 				PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
-				columnPValues[i][0] = new ImageIcon("playerImg/portrait"+teamPlayerInfoList.get(i)+".png");
+				columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
 				columnPValues[i][1] = teamPlayerInfoList.get(i);
 				columnPValues[i][2] = pbvo.getBasicInfo()[0];
+				System.out.println(pbvo.getBasicInfo()[0]);
 				columnPValues[i][3] = pbvo.getBasicInfo()[1];
 				columnPValues[i][4] = pbvo.getBasicInfo()[2];
 				columnPValues[i][5] = pbvo.getBasicInfo()[3];
@@ -549,9 +550,9 @@ public class TeamHomePanel {
 			for (int i = 0; i < teamMatch.size(); i++) {
 				columnRMValues[i][0] = teamMatch.get(i).getName();
 				columnRMValues[i][1] = teamMatch.get(i).getWinTeam();
-				columnRMValues[i][1] = teamMatch.get(i).getLostTeam();
+				columnRMValues[i][2] = teamMatch.get(i).getLostTeam();
 				columnRMValues[i][3] = teamMatch.get(i).getWinPointer()+":"+teamMatch.get(i).getLostPointer();
-				columnRMValues[i][1] = teamMatch.get(i).getTime();
+				columnRMValues[i][4] = teamMatch.get(i).getTime();
 			}
 			PlayWave.startClickSound();
 			TablePanel.removeAll();		
@@ -579,8 +580,8 @@ public class TeamHomePanel {
 				columnAMValues[i][0] = teamMatch.get(i).getName();
 				columnAMValues[i][1] = teamMatch.get(i).getWinTeam();
 				columnAMValues[i][2] = teamMatch.get(i).getLostTeam();
-				columnAMValues[i][2] = teamMatch.get(i).getWinPointer()+":"+teamMatch.get(i).getLostPointer();
-				columnAMValues[i][2] = teamMatch.get(i).getTime();
+				columnAMValues[i][3] = teamMatch.get(i).getWinPointer()+":"+teamMatch.get(i).getLostPointer();
+				columnAMValues[i][4] = teamMatch.get(i).getTime();
 			}
 			PlayWave.startClickSound();
 			TablePanel.removeAll();		

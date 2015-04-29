@@ -2423,6 +2423,7 @@ public class SearchPanel {
 			String forMatchFT = beginT[0].substring(2, 4) + "-" + endT[0].substring(2, 4) + "_" + beginT[1] + "-" + beginT[2];
 			String forMatchET = beginT[0].substring(2, 4) + "-" + endT[0].substring(2, 4) + "_" + endT[1] + "-" + endT[2];
 			ArrayList<MatchShortVO> matchData = mbl.getShortMatchByPeriod(forMatchFT, forMatchET);
+			System.out.println(forMatchFT+";;;;;;"+forMatchET);
 			String[] columnName_M = new String[] { "比赛名称", "胜方", "负方", "比分", "时间" };
 			Object[][] columnMValues = new Object[2][columnName_M.length];
 			for (int i = 0; i < 2; i++) {

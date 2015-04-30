@@ -2434,7 +2434,7 @@ public class SearchPanel {
 			String[] columnName_M = new String[] { "比赛名称", "胜方", "负方", "比分", "时间" };
 			Object[][] columnMValues = new Object[2][columnName_M.length];
 			for (int i = 0; i < 2; i++) {
-				columnMValues[i][0] = "<html><u>"+"ATL"+"</u></html>";//matchData.get(i).getName()
+				columnMValues[i][0] = "<html><u>"+matchData.get(i).getName()+"</u></html>";//matchData.get(i).getName()
 				columnMValues[i][1] = matchData.get(i).getWinTeam();
 				columnMValues[i][2] = matchData.get(i).getLostTeam();
 				columnMValues[i][3] = matchData.get(i).getWinPointer()+":"+matchData.get(i).getLostPointer();

@@ -566,7 +566,7 @@ public class PlayerHomePanel {
 		aMTable.setBounds(30, 10, 1000 - 130 - 100, 280);
 		aMTable.setOpaque(false);
 
-		// pTable.addMouseListener(new TableListener());
+		aMTable.addMouseListener(new TableListener());
 
 		aMTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 
@@ -790,5 +790,26 @@ public class PlayerHomePanel {
 
 		public void mouseReleased(MouseEvent arg0) {
 		}
+	}
+	class TableListener implements MouseListener {
+
+		public void mouseClicked(MouseEvent e) {
+			if (e.getClickCount()==2) {
+				
+			}
+		}
+
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		public void mouseExited(MouseEvent e) {
+		}
+
+		public void mousePressed(MouseEvent e) {
+		}
+
+		public void mouseReleased(MouseEvent e) {
+		}
+		
 	}
 }

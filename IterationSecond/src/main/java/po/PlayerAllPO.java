@@ -91,13 +91,16 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 			teamTime=refreshTime(teamTime,teamTimeList.get(key));
 			if(filenamelist!=null){
 				if(filenamelist.contains(key)){
-				raiseNum[0]+=Double.parseDouble(strs[14]);
-				raiseNum[1]+=Double.parseDouble(strs[8]);
-				raiseNum[2]+=Double.parseDouble(strs[9]);
-				raiseNumUsed[0]+=Double.parseDouble(strs[14]);
-				raiseNumUsed[1]+=Double.parseDouble(strs[8]);
-				raiseNumUsed[2]+=Double.parseDouble(strs[9]);
-				}	
+				raiseNum[0]+=Double.parseDouble(strs[17]);
+				raiseNum[1]+=Double.parseDouble(strs[11]);
+				raiseNum[2]+=Double.parseDouble(strs[12]);
+				
+				}else{
+					raiseNumUsed[0]+=Double.parseDouble(strs[17]);
+					raiseNumUsed[1]+=Double.parseDouble(strs[11]);
+					raiseNumUsed[2]+=Double.parseDouble(strs[12]);
+
+				}
 			}
 	}
 	if(filenamelist!=null){

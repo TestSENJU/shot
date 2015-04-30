@@ -678,8 +678,19 @@ public class HotInfoPanel {
 				}
 				columnValues[i][1] = bpList.get(i).getName();
 				columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
-				columnValues[i][3] = bpList.get(i).getPlayerData()[24];
-				columnValues[i][4] = bpList.get(i).getPlayerData()[18];//hehe
+				System.out.println(bpList.get(i).getName());
+				if (id.equals("场均得分")) {
+					columnValues[i][3] = bpList.get(i).getPlayerData()[24];
+					columnValues[i][4] = bpList.get(i).getPlayerData()[11]*10;//hehe
+				} else if (id.equals("场均篮板")) {
+					columnValues[i][3] = bpList.get(i).getPlayerData()[25];
+					columnValues[i][4] = bpList.get(i).getPlayerData()[0]*10;//hehe
+				} else if (id.equals("场均助攻")) {
+					columnValues[i][3] = bpList.get(i).getPlayerData()[26];
+					columnValues[i][4] = bpList.get(i).getPlayerData()[1]*10;//hehe
+				} else {
+					System.out.println("HotInfoPanel-BestPlayerTable-InvalidInput");
+				}
 			}
 			PlayWave.startClickSound();
 			tablePanel.removeAll();
@@ -702,7 +713,6 @@ public class HotInfoPanel {
 
 		public void mouseClicked(MouseEvent e) {
 			if(e.getClickCount()==2){
-				System.out.println(topFive.getValueAt(topFive.getSelectedRow(), topFive.getSelectedColumn()+1));
 				if (topFive.getSelectedColumn()==0) {
 					hotPanel.removeAll();
 					PlayerHomePanel php = new PlayerHomePanel();

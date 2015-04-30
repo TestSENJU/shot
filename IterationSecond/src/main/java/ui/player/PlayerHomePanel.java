@@ -27,6 +27,7 @@ import sound.PlayWave;
 import ui.AllImages;
 import ui.IScrollBarUI;
 import ui.MyStringTable;
+import ui.match.MatchHomePanel;
 import ui.team.TeamHomePanel;
 import vo.MatchVO;
 import vo.PlayerAllVO;
@@ -80,6 +81,7 @@ public class PlayerHomePanel {
 	private String basic_Age;
 	private String basic_Exp;
 	private String basic_School;
+	private static String tempButton;
 	
 	//
 	MatchBL mbl = new MatchBL_Impl();
@@ -535,7 +537,7 @@ public class PlayerHomePanel {
 		rMTable.setBounds(30, 10, 1000 - 130 - 100, 280);
 		rMTable.setOpaque(false);
 
-		// pTable.addMouseListener(new TableListener());
+		rMTable.addMouseListener(new TableListener());
 
 		rMTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 
@@ -588,6 +590,7 @@ public class PlayerHomePanel {
 	class PDListener implements MouseListener {
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			tempButton = "pd";
 			PlayWave.startClickSound();
 			PlayerAllVO pAllDataList = pbl.getPlayerAllByName(playerTempID);
 			PlayerAverageVO pAverageDataList = pbl.getPlayerAverageByName(playerTempID);
@@ -708,6 +711,7 @@ public class PlayerHomePanel {
 	class PRMListener implements MouseListener {
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			tempButton = "rm";
 			PlayWave.startClickSound();
 			ArrayList<MatchVO> playerMatch = new ArrayList<MatchVO>();
 			playerMatch = mbl.getRecentMatchByPlayer(playerTempID);
@@ -741,6 +745,7 @@ public class PlayerHomePanel {
 	class PAMListener implements MouseListener {
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			tempButton = "am";
 			PlayWave.startClickSound();
 			ArrayList<MatchVO> playerMatch = new ArrayList<MatchVO>();
 			playerMatch = mbl.getMatchByPlayer(playerTempID);
@@ -795,6 +800,19 @@ public class PlayerHomePanel {
 
 		public void mouseClicked(MouseEvent e) {
 			if (e.getClickCount()==2) {
+				if (tempButton.equals("rm")) {
+					System.out.println(rMTable.getValueAt(rMTable.getSelectedRow(), rMTable.getSelectedColumn()));
+					pHomePanel.removeAll();
+					MatchHomePanel mhp = new MatchHomePanel();
+					pHomePanel.add(mhp.init(rMTable.getValueAt(rMTable.getSelectedRow(), rMTable.getSelectedColumn()).toString()));
+					pHomePanel.repaint();
+				} else if (tempButton.equals("am")) {
+					System.out.println(aMTable.getValueAt(aMTable.getSelectedRow(), aMTable.getSelectedColumn()));
+					pHomePanel.removeAll();
+					MatchHomePanel mhp = new MatchHomePanel();
+					pHomePanel.add(mhp.init(aMTable.getValueAt(aMTable.getSelectedRow(), aMTable.getSelectedColumn()).toString()));
+					pHomePanel.repaint();
+				}
 				
 			}
 		}

@@ -192,7 +192,7 @@ public class MatchHomePanel {
 		columnValues[0][2] = matchData.getPointerpart1().get(1);
 		columnValues[0][3] = matchData.getPointerpart1().get(2);
 		columnValues[0][4] = matchData.getPointerpart1().get(3);
-		if(matchData.getPointerpart1().size()<=5){
+		if(matchData.getPointerpart1().size()>=5){
 			columnValues[0][5] = matchData.getPointerpart1().get(4);
 		}
 		columnValues[1][0] = matchData.getWinPointer();
@@ -200,7 +200,7 @@ public class MatchHomePanel {
 		columnValues[1][2] = matchData.getPointerpart2().get(1);
 		columnValues[1][3] = matchData.getPointerpart2().get(2);
 		columnValues[1][4] = matchData.getPointerpart2().get(3);
-		if(matchData.getPointerpart1().size()<=5){
+		if(matchData.getPointerpart1().size()>=5){
 			columnValues[1][5] = matchData.getPointerpart2().get(4);
 		}
 		PlayWave.startClickSound();
@@ -300,8 +300,8 @@ public class MatchHomePanel {
 					"投篮命中数","投篮出手数","三分命中数","三分出手数","罚球命中数",
 					"罚球出手数","进攻篮板数","防守篮板数","总篮板数",
 					"助攻数","抢断数","盖帽数","失误数","犯规数","得分"};
-			Object[][] columnPValues = new Object[2][columnName_Player.length];
-			for (int i = 0; i < 2; i++) {
+			Object[][] columnPValues = new Object[matchPD.size()][columnName_Player.length];
+			for (int i = 0; i < matchPD.size(); i++) {
 				File img = new File("playerImg/portrait/"+matchPD.get(i)[0]+".png");
 				if (img.exists()) {
 					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+matchPD.get(i)[0]+".png");
@@ -375,8 +375,8 @@ public class MatchHomePanel {
 					"投篮命中数","投篮出手数","三分命中数","三分出手数","罚球命中数",
 					"罚球出手数","进攻篮板数","防守篮板数","总篮板数",
 					"助攻数","抢断数","盖帽数","失误数","犯规数","得分"};
-			Object[][] columnPValues = new Object[2][columnName_Player.length];
-			for (int i = 0; i < 2; i++) {
+			Object[][] columnPValues = new Object[matchPD.size()][columnName_Player.length];
+			for (int i = 0; i < matchPD.size(); i++) {
 				File img = new File("playerImg/portrait/"+matchPD.get(i)[0]+".png");
 				if (img.exists()) {
 					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+matchPD.get(i)[0]+".png");

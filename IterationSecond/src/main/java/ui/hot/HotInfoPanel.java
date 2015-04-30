@@ -562,33 +562,52 @@ public class HotInfoPanel {
 			String id = c.getSelectedItem().toString();
 			ArrayList<TeamAverageVO> htsList = new ArrayList<TeamAverageVO>();
 			if (id.equals("场均得分")) {
-				htsList = tbl.getHotTeamByNum(14);
+				htsList = tbl.getHotTeamByNum(0);
 			} else if (id.equals("场均篮板")) {
-				htsList = tbl.getHotTeamByNum(8);
+				htsList = tbl.getHotTeamByNum(1);
 			} else if (id.equals("场均助攻")) {
-				htsList = tbl.getHotTeamByNum(9);
+				htsList = tbl.getHotTeamByNum(2);
 			} else if (id.equals("场均盖帽")) {
-				htsList = tbl.getHotTeamByNum(11);
+				htsList = tbl.getHotTeamByNum(3);
 			} else if (id.equals("场均抢断")) {
-				htsList = tbl.getHotTeamByNum(10);
+				htsList = tbl.getHotTeamByNum(4);
 			} else if (id.equals("三分命中率")) {
-				htsList = tbl.getHotTeamByNum(16);
+				htsList = tbl.getHotTeamByNum(5);
 			} else if (id.equals("投篮命中率")) {
-				htsList = tbl.getHotTeamByNum(15);
+				htsList = tbl.getHotTeamByNum(6);
 			} else if (id.equals("罚球命中率")) {
-				htsList = tbl.getHotTeamByNum(17);
+				htsList = tbl.getHotTeamByNum(7);
 			} else {
 				System.out.println("HotInfoPanel-hotTeamSeasonTable-InvalidInput.");
 			}
 			
 			String[] columnName = new String[] { "球队名称", "联盟", "数据" };
 			Object[][] columnValues = new Object[5][columnName.length];
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i <5; i++) {
 				columnValues[i][0] = htsList.get(i).getTeamName();
 				TeamBasicVO forLeague = new TeamBasicVO(htsList.get(i).getTeamName());
 				forLeague = tbl.getTeamBasicByName(htsList.get(i).getTeamName());
-				columnValues[i][1] = forLeague.getTeamInfo()[3]+"-"+forLeague.getTeamInfo()[4];
-				columnValues[i][2] = htsList.get(i).getTeamData()[1];
+				columnValues[i][1] = forLeague.getTeamInfo()[2]+"-"+forLeague.getTeamInfo()[3];
+				if (id.equals("场均得分")) {
+					columnValues[i][2] = htsList.get(i).getTeamData()[14];
+				} else if (id.equals("场均篮板")) {
+					columnValues[i][2] = htsList.get(i).getTeamData()[8];
+				} else if (id.equals("场均助攻")) {
+					columnValues[i][2] = htsList.get(i).getTeamData()[9];
+				} else if (id.equals("场均盖帽")) {
+					columnValues[i][2] = htsList.get(i).getTeamData()[11];
+				} else if (id.equals("场均抢断")) {
+					columnValues[i][2] = htsList.get(i).getTeamData()[10];
+				} else if (id.equals("三分命中率")) {
+					columnValues[i][2] = htsList.get(i).getTeamData()[16];
+				} else if (id.equals("投篮命中率")) {
+					columnValues[i][2] = htsList.get(i).getTeamData()[15];
+				} else if (id.equals("罚球命中率")) {
+					columnValues[i][2] = htsList.get(i).getTeamData()[17];
+				} else {
+					System.out.println("HotInfoPanel-hotTeamSeasonTable-InvalidInput.");
+				}
+				
 			}
 			
 			PlayWave.startClickSound();
@@ -639,7 +658,6 @@ public class HotInfoPanel {
 			/** 0场均得分
 		 * 1场均篮板
 		 * 2场均助攻*/
-			System.out.println(id);
 			if (id.equals("场均得分")) {
 				bpList = pbl.getImprovedPlayerByNum(0);
 			} else if (id.equals("场均篮板")) {
@@ -658,6 +676,7 @@ public class HotInfoPanel {
 				} else {
 					columnValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
 				}
+				columnValues[i][0] = new ImageIcon("playerImg/portrait/"+bpList.get(i).getName()+".png");
 				columnValues[i][1] = bpList.get(i).getName();
 				columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
 				columnValues[i][3] = bpList.get(i).getPlayerData()[24];

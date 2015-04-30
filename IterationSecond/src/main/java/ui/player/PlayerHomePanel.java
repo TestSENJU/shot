@@ -112,8 +112,6 @@ public class PlayerHomePanel {
 			basic_Exp = pbasicList.getBasicInfo()[6];
 			basic_School = pbasicList.getBasicInfo()[7];
 		}
-		PlayerAllVO playerAllList = new PlayerAllVO(playerTempID);
-		playerAllList = pbl.getPlayerAllByName(playerTempID);
 		
 		pHomePanel = new JPanel();
 		pHomePanel.setOpaque(false);
@@ -326,6 +324,8 @@ public class PlayerHomePanel {
 		pHomePanel.add(playerTeam, 0);
 
 		// logoIcon
+		//PlayerAllVO playerAllList = new PlayerAllVO(playerTempID);
+		PlayerAllVO playerAllList = pbl.getPlayerAllByName(playerTempID);
 		JSVGCanvas svgCanvas = new JSVGCanvas();
 		File f1 = new File("teamImg/"+playerAllList.getTeamList().get(playerAllList.getTeamList().size()-1)+".svg");
 		teamTempID = playerAllList.getTeamList().get(playerAllList.getTeamList().size()-1);

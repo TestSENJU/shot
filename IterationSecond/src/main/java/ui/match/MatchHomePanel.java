@@ -30,9 +30,15 @@ import ui.IScrollBarUI;
 import ui.MyStringTable;
 import ui.MyTable;
 import ui.player.PlayerHomePanel;
+import ui.team.TeamHomePanel;
 import vo.MatchVO;
+import vo.PlayerBasicVO;
 import BL.MatchBL;
 import BL.MatchBL_Impl;
+import BL.PlayerBL;
+import BL.PlayerBL_Impl;
+import BL.TeamBL;
+import BL.TeamBL_Impl;
 
 public class MatchHomePanel {
 	/**
@@ -55,9 +61,14 @@ public class MatchHomePanel {
 	private MyTable PlayerData;
 	private JScrollPane pdScrollPane;
 	
+	private String winnerNameTemp;
+	private String loserNameTemp;
+	
 	//
 	private String matchTempID;
 	MatchBL mbl = new MatchBL_Impl();
+	PlayerBL pbl = new PlayerBL_Impl();
+	TeamBL tbl = new TeamBL_Impl();
 	
 	public JPanel init(String matchID){
 		matchTempID = matchID;
@@ -83,6 +94,8 @@ public class MatchHomePanel {
 		winnerName.setForeground(Color.WHITE);
 		winnerName.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		matchHomePanel.add(winnerName, 0);
+		
+		winnerNameTemp = matchData.getWinTeam();
 		
 		JLabel winnerScore = new JLabel();
 		winnerScore.setHorizontalAlignment(SwingConstants.CENTER);
@@ -117,6 +130,7 @@ public class MatchHomePanel {
 				 System.out.println(1);
 			 }
 		});
+		winnerSvg.addMouseListener(new WinnerTeamListener());
 		matchHomePanel.add(winnerSvg, 0);
 		
 		JLabel loserName = new JLabel();
@@ -127,6 +141,8 @@ public class MatchHomePanel {
 		loserName.setFont(new Font("微软雅黑", Font.PLAIN, 15));
 		loserName.setForeground(Color.WHITE);
 		matchHomePanel.add(loserName, 0);
+		
+		loserNameTemp = matchData.getLostTeam();
 		
 		JLabel loserScore = new JLabel();
 		loserScore.setOpaque(false);
@@ -161,6 +177,7 @@ public class MatchHomePanel {
 				 System.out.println(1);
 			 }
 		});
+		loserSvg.addMouseListener(new LoserTeamListener());
 		matchHomePanel.add(loserSvg, 0);
 		
 		// title info
@@ -413,6 +430,126 @@ public class MatchHomePanel {
 		}
 		public void mousePressed(MouseEvent arg0) {
 		}
+		public void mouseReleased(MouseEvent arg0) {
+		}		
+	}
+	
+	class WinnerTeamListener implements MouseListener {
+
+		public void mouseClicked(MouseEvent e) {
+			if(e.getClickCount()==2){
+				
+					matchHomePanel.removeAll();
+					TeamHomePanel thp = new TeamHomePanel();
+					matchHomePanel.add(thp.init(winnerNameTemp));
+					
+					ArrayList<String> teamPlayerInfoList = tbl.getPlayerNamesOfTeam(winnerNameTemp);
+					
+					String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+					Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+					for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+						PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+						pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+						columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+						columnPValues[i][1] = teamPlayerInfoList.get(i);
+						if (pbvo==null) {
+							columnPValues[i][2] = "null";
+							columnPValues[i][3] = "null";
+							columnPValues[i][4] = "null";
+							columnPValues[i][5] = "null";
+							columnPValues[i][6] = "null";
+							columnPValues[i][7] = "null";
+							columnPValues[i][8] = "null";
+							columnPValues[i][9] = "null";
+						} else {
+							columnPValues[i][2] = pbvo.getBasicInfo()[0];
+							columnPValues[i][3] = pbvo.getBasicInfo()[1];
+							columnPValues[i][4] = pbvo.getBasicInfo()[2];
+							columnPValues[i][5] = pbvo.getBasicInfo()[3];
+							columnPValues[i][6] = pbvo.getBasicInfo()[4];
+							columnPValues[i][7] = pbvo.getBasicInfo()[5];
+							columnPValues[i][8] = pbvo.getBasicInfo()[6];
+							columnPValues[i][9] = pbvo.getBasicInfo()[7];
+						}	
+					}
+					TeamHomePanel.TablePanel.removeAll();		
+					TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+					TeamHomePanel.TablePanel.repaint();
+					
+					matchHomePanel.repaint();
+				}
+			
+		}
+
+		public void mouseEntered(MouseEvent arg0) {
+		}
+
+		public void mouseExited(MouseEvent arg0) {
+		}
+
+		public void mousePressed(MouseEvent arg0) {
+		}
+
+		public void mouseReleased(MouseEvent arg0) {
+		}		
+	}
+	
+	class LoserTeamListener implements MouseListener {
+
+		public void mouseClicked(MouseEvent e) {
+			if(e.getClickCount()==2){
+				
+				matchHomePanel.removeAll();
+				TeamHomePanel thp = new TeamHomePanel();
+				matchHomePanel.add(thp.init(loserNameTemp));
+				
+				ArrayList<String> teamPlayerInfoList = tbl.getPlayerNamesOfTeam(loserNameTemp);
+				
+				String[] columnName_Player = new String[] { "球员头像", "球员名称", "球衣号码", "球员位置", "身高","体重","生日","年龄","球龄","毕业学校" };
+				Object[][] columnPValues = new Object[teamPlayerInfoList.size()][columnName_Player.length];
+				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
+					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
+					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
+					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					columnPValues[i][1] = teamPlayerInfoList.get(i);
+					if (pbvo==null) {
+						columnPValues[i][2] = "null";
+						columnPValues[i][3] = "null";
+						columnPValues[i][4] = "null";
+						columnPValues[i][5] = "null";
+						columnPValues[i][6] = "null";
+						columnPValues[i][7] = "null";
+						columnPValues[i][8] = "null";
+						columnPValues[i][9] = "null";
+					} else {
+						columnPValues[i][2] = pbvo.getBasicInfo()[0];
+						columnPValues[i][3] = pbvo.getBasicInfo()[1];
+						columnPValues[i][4] = pbvo.getBasicInfo()[2];
+						columnPValues[i][5] = pbvo.getBasicInfo()[3];
+						columnPValues[i][6] = pbvo.getBasicInfo()[4];
+						columnPValues[i][7] = pbvo.getBasicInfo()[5];
+						columnPValues[i][8] = pbvo.getBasicInfo()[6];
+						columnPValues[i][9] = pbvo.getBasicInfo()[7];
+					}	
+				}
+				TeamHomePanel.TablePanel.removeAll();		
+				TeamHomePanel.TablePanel.add(thp.initPTable(columnPValues, columnName_Player), 0);
+				TeamHomePanel.TablePanel.repaint();
+				
+				matchHomePanel.repaint();
+			}
+		
+		}
+
+		public void mouseEntered(MouseEvent arg0) {
+		}
+
+		public void mouseExited(MouseEvent arg0) {
+		}
+
+		public void mousePressed(MouseEvent arg0) {
+		}
+
 		public void mouseReleased(MouseEvent arg0) {
 		}		
 	}

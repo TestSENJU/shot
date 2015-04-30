@@ -287,9 +287,10 @@ public class TeamData_Impl implements TeamDataService{
 			@SuppressWarnings("resource")
 			BufferedReader br=new BufferedReader(new FileReader(filename));
 		    String str="";
+		    System.out.println(teamName);
+		    if(teamName.equals("NOH"))teamName="NOP";
 		    while((str=br.readLine())!=null){
 		    	if(str.contains(teamName)){
-		    		if(str.startsWith("║")){
 						String mass[]=str.split("║");
 						String strs[]=mass[1].split("│");
 		    		String teamInfo[]=new String[6];
@@ -309,7 +310,7 @@ public class TeamData_Impl implements TeamDataService{
 		    		teamBasic.setLongName("Pelicans");}
 		    		return teamBasic;
 		    	}
-		    	}
+		    	
 		    }
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

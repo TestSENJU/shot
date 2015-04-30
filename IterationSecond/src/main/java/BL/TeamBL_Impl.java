@@ -48,12 +48,11 @@ public class TeamBL_Impl implements TeamBL{
 		return volist;
 	}
 
-	@SuppressWarnings("unused")
 	public TeamBasicVO getTeamBasicByName(String name) {
 		// TODO Auto-generated method stub
-		TeamBasicVO vo=new TeamBasicVO(teamData.getTeamBasicByName(name));
-		if(vo!=null){
-			return vo;
+		if(teamData.getTeamBasicByName(name)!=null){
+			TeamBasicVO vo=new TeamBasicVO(teamData.getTeamBasicByName(name));
+	        return vo;	
 		}else{
 			System.out.println("getTeamBasicByName vo");
 			return null;
@@ -110,6 +109,7 @@ public class TeamBL_Impl implements TeamBL{
 	public ArrayList<TeamAverageVO> getHotTeamByNum(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAverageVO> list=getTeamAverage();
+		
 		switch(num){
 		case 0:Collections.sort(list, new TeamSortAverageByNum(14,0));break;
 		case 1:Collections.sort(list, new TeamSortAverageByNum(8,0));break;
@@ -121,7 +121,8 @@ public class TeamBL_Impl implements TeamBL{
 		case 7:Collections.sort(list, new TeamSortAverageByNum(17,0));break;
 		}
 		ArrayList<TeamAverageVO> result=new ArrayList<TeamAverageVO>();
-		for(int i=list.size()-1;i>=list.size()-6;i--){
+		for(int i=list.size()-1;i>list.size()-6;i--){
+			
 			result.add(list.get(i));
 		}
 		return list;
@@ -189,12 +190,12 @@ class TeamSortAllByNum implements Comparator<Object>{
 		// TODO Auto-generated method stub
 		TeamAllVO po1=(TeamAllVO) o1;
 		TeamAllVO po2=(TeamAllVO)o2;
-		if(option==0){
+		if(this.option==0){
 		double[] nums1=po1.getTeamData();
 		double[] nums2=po2.getTeamData();
-		if(nums1[comNum]>nums2[comNum]){
+		if(nums1[this.comNum]>nums2[this.comNum]){
 			return 1;
-		}else if(nums1[comNum]==nums2[comNum])
+		}else if(nums1[this.comNum]==nums2[this.comNum])
 		return 0;
 		else return -1;
 		}else{
@@ -224,10 +225,10 @@ class TeamSortAverageByNum implements Comparator<Object>{
 		TeamAverageVO po2=(TeamAverageVO)o2;
 		double[] nums1=po1.getTeamData();
 		double[] nums2=po2.getTeamData();
-		if(option==0){
-			if(nums1[comNum]>nums2[comNum]){
+		if(this.option==0){
+			if(nums1[this.comNum]>nums2[this.comNum]){
 				return 1;
-			}else if(nums1[comNum]>nums2[comNum]){
+			}else if(nums1[this.comNum]==nums2[this.comNum]){
 				return 0;
 			}else 
 			return -1;

@@ -108,11 +108,13 @@ public class PlayerBL_Impl implements PlayerBL{
 	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO>list=getPlayerAverage();
+		
 		switch(num){
+		
 		case 0:Collections.sort(list, new SortAverageByNum(24,0));break;
 		case 1:Collections.sort(list, new SortAverageByNum(25,0));break;
 		case 2:Collections.sort(list, new SortAverageByNum(26,0));break;
-		}
+		}System.out.println(list.get(list.size()-1).getName());
 		ArrayList<PlayerAverageVO> result=new ArrayList<PlayerAverageVO>();
 		for(int i=list.size()-1;i>list.size()-6;i--){
 			result.add(list.get(i));
@@ -153,7 +155,6 @@ public class PlayerBL_Impl implements PlayerBL{
 		case 6:polist=playerData.getShortPlayerByNum(2);break;
 		case 7:polist=playerData.getShortPlayerByNum(4);break;
 		}
-
 		if(polist!=null){
 		
 			ArrayList<PlayerShortVO> volist=new ArrayList<PlayerShortVO>();

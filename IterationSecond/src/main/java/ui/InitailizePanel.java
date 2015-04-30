@@ -28,7 +28,7 @@ public class InitailizePanel {
 	 * @version  June 12, 2015 11:41:31 AM
 	 * **/
 	public static JLayeredPane bg;
-	private LandingPanel land;
+	public static LandingPanel land;
 	public static JPanel infoPanel;
 	private JButton logo;
 	private JButton hot;
@@ -39,7 +39,7 @@ public class InitailizePanel {
 	private JButton aboutus;
 	private JButton close;
 	private JButton min;
-	private JButton refresh;
+	public static JButton refresh;
 	private int width = 80;
 	private int height = 80;
 	
@@ -381,7 +381,17 @@ public class InitailizePanel {
 	class RefreshListener implements MouseListener {
 
 		public void mouseClicked(MouseEvent arg0) {
+			PlayWave.startClickSound();
+			bg.removeAll();
+			init();
+			HotInfoPanel hp = new HotInfoPanel();
+			JPanel h = hp.init();
+			bg.add(h, new Integer(1));
+			hp.hotPlayerTodayPanel();
+			HotInfoPanel.hotPanel.repaint();
+			bg.repaint();
 			refresh.setIcon(AllImages.IMG_REFRESH);
+			
 		}
 		public void mouseEntered(MouseEvent arg0) {
 		}

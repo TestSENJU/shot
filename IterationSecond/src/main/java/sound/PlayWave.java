@@ -16,20 +16,10 @@ import javax.sound.sampled.SourceDataLine;
  */
 public class PlayWave extends Thread {
 
-	/**
-	 * 
-	 * @author forIris
-	 * @version May 20, 2014 6:18:00 PM
-	 */
 	public static void startMoveButtonSound () {
 		new PlayWave("music/click3.wav").start();
 	}
 
-	/**
-	 * 
-	 * @author forIris
-	 * @version May 25, 2014 2:09:50 PM
-	 */
 	public static void startClickSound () {
 		new PlayWave("music/click.wav").start();
 	}

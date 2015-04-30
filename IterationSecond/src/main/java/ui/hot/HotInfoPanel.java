@@ -639,6 +639,7 @@ public class HotInfoPanel {
 			/** 0场均得分
 		 * 1场均篮板
 		 * 2场均助攻*/
+			System.out.println(id);
 			if (id.equals(id.equals("场均得分"))) {
 				bpList = pbl.getImprovedPlayerByNum(0);
 			} else if (id.equals("场均篮板")) {
@@ -657,7 +658,6 @@ public class HotInfoPanel {
 				} else {
 					columnValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
 				}
-				columnValues[i][0] = new ImageIcon("playerImg/portrait/"+bpList.get(i).getName()+".png");
 				columnValues[i][1] = bpList.get(i).getName();
 				columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
 				columnValues[i][3] = bpList.get(i).getPlayerData()[24];

@@ -12,6 +12,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import launch.Change;
 import sound.PlayWave;
 import ui.hot.HotInfoPanel;
 import ui.match.MatchHomePanel;
@@ -98,6 +99,8 @@ public class Controller {
 			InitailizePanel.bg.add(h, new Integer(1));
 			hp.hotPlayerTodayPanel();
 			HotInfoPanel.hotPanel.repaint();
+			/*Monitor.startMonitor();
+			Change.startChange();*/
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();

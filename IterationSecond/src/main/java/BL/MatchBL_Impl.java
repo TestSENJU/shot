@@ -56,9 +56,16 @@ public ArrayList<MatchVO> getRecentMatchByPlayer(String playerName) {
 	nameList=match.getMatchNamesByPlayer(playerName);
 	nameList.sort(null);
 	ArrayList<MatchVO> list=new ArrayList<MatchVO>();
-	for(int i=nameList.size()-1;i>nameList.size()-6;i--){
+	if(nameList.size()<5){
+		for(int i=nameList.size()-1;i>=0;i--){
+			list.add(new MatchVO(match.getMatchByName(nameList.get(i))));
+		}
+	}else{
+		for(int i=nameList.size()-1;i>nameList.size()-6;i--){
 		list.add(new MatchVO(match.getMatchByName(nameList.get(i))));
 	}
+	}
+	
 	return list;
 }
 

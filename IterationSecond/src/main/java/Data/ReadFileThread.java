@@ -1,9 +1,11 @@
 package Data;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,12 +30,19 @@ public void run(){
 			System.out.println("readFileThread sleep");
 		}
 		String[] fileNames=new File(path).list();
-		
+
 		if(filenames!=null){
 			if(fileNames!=null){
 				
-				if(fileNames.length>filenames.length){
-			
+				if(fileNames.length>filenames.length){			
+					try {
+						BufferedWriter bw=new BufferedWriter(new FileWriter(new File("newFile.txt")));
+						bw.write("1");
+						bw.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				ArrayList<String> list=new ArrayList<String>();
 				Arrays.sort(filenames);
 				Arrays.sort(fileNames);
@@ -44,7 +53,7 @@ public void run(){
                         readFile(this.path+"//"+list.get(i));
 				     }	
 				    this.filenames=fileNames;
-				}			
+				}	
 			}			
 		}else{
 			this.filenames=fileNames;
@@ -56,9 +65,8 @@ public void run(){
 
 public void start(){
 		for(int i=0;i<filenames.length;i++){
-//		   	System.out.println(filenames[i]);
 			readFile(this.path+"//"+filenames[i]);
-		}	
+}	
 }
 
 private void readFile(String filename){

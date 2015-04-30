@@ -758,7 +758,13 @@ public class StatisticPanel {
 										"失误率","使用率" };
 								Object[][] columnValues = new Object[playerAllData.size()][columnName.length];
 								for (int i = 0; i < playerAllData.size(); i++) {
-									columnValues[i][0] = new ImageIcon("playerImg/portrait/"+playerAllData.get(i).getPlayerName()+".png");
+									File img = new File("playerImg/portrait/"+playerAllData.get(i).getPlayerName()+".png");
+									if (img.exists()) {
+										columnValues[i][0] = new ImageIcon("playerImg/portrait/"+playerAllData.get(i).getPlayerName()+".png");
+									} else {
+										columnValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
+									}
+									
 									columnValues[i][1] = playerAllData.get(i).getPlayerName();
 									columnValues[i][2] = playerAllData.get(i).getTeamList();
 									columnValues[i][3] = playerAllData.get(i).getCompeteNum();
@@ -807,7 +813,13 @@ public class StatisticPanel {
 										"失误率","使用率" };
 								Object[][] columnValues = new Object[playerAverageData.size()][columnName.length];
 								for (int i = 0; i < playerAverageData.size(); i++) {
-									columnValues[i][0] = new ImageIcon("playerImg/portrait/"+playerAverageData.get(i).getName()+".png");
+									File img = new File("playerImg/portrait/"+playerAverageData.get(i).getName()+".png");
+									if (img.exists()) {
+										columnValues[i][0] = new ImageIcon("playerImg/portrait/"+playerAverageData.get(i).getName()+".png");
+									} else {
+										columnValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
+									}
+									
 									columnValues[i][1] = playerAverageData.get(i).getName();
 									columnValues[i][2] = playerAverageData.get(i).getTeamList();
 									columnValues[i][3] = playerAverageData.get(i).getCompeteNum();

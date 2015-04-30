@@ -364,7 +364,7 @@ public class PlayerHomePanel {
 
 		PlayerAllVO pAllDataList = pbl.getPlayerAllByName(playerTempID);
 		PlayerAverageVO pAverageDataList = pbl.getPlayerAverageByName(playerTempID);
-		String[] columnName = new String[] { "TAG", "参赛场数", "先发场数", "篮板数", "助攻数",
+		String[] columnName = new String[] {"TAG", "参赛场数", "先发场数", "篮板数", "助攻数",
 				"在场时间", "投篮命中率", "三分命中率", "罚球命中率", "进攻数",
 				"防守数", "抢断数",
 				"盖帽数", "失误数", "犯规数", "得分", "效率", "GmSc效率值",
@@ -437,16 +437,16 @@ public class PlayerHomePanel {
 
 		morePanel.add(initDataTable(columnValues, columnName), 0);
 
-		// TODO average match data table
+		/*// TODO average match data table
 		JLabel pTable = new JLabel();
 		pTable.setBounds(30, 5, 80, 30);
 		pTable.setOpaque(false);
 		pTable.setText("比赛数据");
 		pTable.setForeground(Color.WHITE);
 		pTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
-		morePanel.add(pTable, 0);
+		morePanel.add(pTable, 0);*/
 
-		JLabel pAver = new JLabel();
+		/*JLabel pAver = new JLabel();
 		pAver.setBounds(30, 40 - 5, 60, 30);
 		pAver.setOpaque(false);
 		pAver.setText("场均");
@@ -457,11 +457,11 @@ public class PlayerHomePanel {
 		JLabel pAll = new JLabel();
 		pAll.setBounds(30, 70 - 5, 60, 30);
 		pAll.setOpaque(false);
-		pAll.setText("总赛季");
+		pAll.setText("");
 		pAll.setForeground(Color.WHITE);
 		pAll.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		morePanel.add(pAll, 0);
-		morePanel.repaint();
+		morePanel.repaint();*/
 
 		// TODO button data recentM allM
 		data = new JButton();
@@ -502,7 +502,7 @@ public class PlayerHomePanel {
 		dataTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		dataTable.setForeground(Color.white);
 		dataTable.setRowHeight(30);
-		dataTable.setBounds(90, 10, 1000 - 130 - 100 - 60, 105);
+		dataTable.setBounds(30, 10, 1000 - 130 - 100 - 60, 105);
 		dataTable.setOpaque(false);
 		dataTable.setFont(new Font("微软雅黑", Font.PLAIN, 13));
 		
@@ -516,7 +516,7 @@ public class PlayerHomePanel {
 	    dataScrollPane.getVerticalScrollBar().setUI(new IScrollBarUI());
 	    dataScrollPane.getHorizontalScrollBar().setUI(new IScrollBarUI());
 	    
-	    dataScrollPane.setBounds(90, 10, 1000-130-60-100, 105);
+	    dataScrollPane.setBounds(30, 10, 1000-130-60-100, 105);
 	    dataScrollPane.setBorder(null);
 	    dataScrollPane.setOpaque(false);
 

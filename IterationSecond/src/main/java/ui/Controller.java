@@ -149,10 +149,7 @@ public class Controller {
 
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			land.setVisible(false);
-			MatchHomePanel mhp = new MatchHomePanel();
-			f.getContentPane().add(mhp.init("ATL"));
-			f.repaint();
+			PlayWave.startMoveButtonSound();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 		}

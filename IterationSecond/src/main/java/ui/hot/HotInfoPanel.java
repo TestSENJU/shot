@@ -640,7 +640,7 @@ public class HotInfoPanel {
 		 * 1场均篮板
 		 * 2场均助攻*/
 			System.out.println(id);
-			if (id.equals(id.equals("场均得分"))) {
+			if (id.equals("场均得分")) {
 				bpList = pbl.getImprovedPlayerByNum(0);
 			} else if (id.equals("场均篮板")) {
 				bpList = pbl.getImprovedPlayerByNum(1);

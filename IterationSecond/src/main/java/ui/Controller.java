@@ -97,8 +97,8 @@ public class Controller {
 			InitailizePanel.bg.add(h, new Integer(1));
 			hp.hotPlayerTodayPanel();
 			HotInfoPanel.hotPanel.repaint();
-			/*Monitor.startMonitor();
-			Change.startChange();*/
+			Monitor.startMonitor();
+			//Change.startChange();*/
 		}
 		public void mouseEntered(MouseEvent e) {
 			PlayWave.startMoveButtonSound();

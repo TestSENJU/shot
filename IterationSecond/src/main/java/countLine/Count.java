@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class Count {
 	public static void main(String[] args) throws FileNotFoundException {
-		final String path = "src/main/java";
+		final String path = "src/main/java/ui";
 		final Count count = new Count(path);
 		JFrame frame = new JFrame();
 		frame.add(new JPanel() {

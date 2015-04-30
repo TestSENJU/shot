@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -608,7 +609,7 @@ public class HotInfoPanel {
 				System.out.println("HotInfoPanel-hotTeamSeasonTable-InvalidInput.");
 			}
 			
-			String[] columnName = new String[] { "球队名称", "联盟", "数据" };
+			String[] columnName = new String[] { "球队名称", "联盟", "数据" ,"排名"};
 			Object[][] columnValues = new Object[5][columnName.length];
 			for (int i = 0; i <5; i++) {
 				columnValues[i][0] = htsList.get(i).getTeamName();
@@ -634,6 +635,7 @@ public class HotInfoPanel {
 				} else {
 					System.out.println("HotInfoPanel-hotTeamSeasonTable-InvalidInput.");
 				}
+				columnValues[i][3] = 5-i;
 				
 			}
 			
@@ -707,13 +709,18 @@ public class HotInfoPanel {
 				columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
 				System.out.println(bpList.get(i).getName());
 				if (id.equals("场均得分")) {
-					columnValues[i][3] = bpList.get(i).getPlayerData()[24];
-					columnValues[i][4] = bpList.get(i).getPlayerData()[11]*10;//hehe
-				} else if (id.equals("场均篮板")) {
-					columnValues[i][3] = bpList.get(i).getPlayerData()[25];
+					 BigDecimal bg = new BigDecimal(bpList.get(i).getPlayerData()[24]);
+				        double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+				        System.out.println(bpList.get(i).getPlayerData()[24]);
+					//columnValues[i][3] = (double)Math.round((bpList.get(i).getPlayerData()[24])*10)/10;
+				        columnValues[i][3] = f1;
+				        System.out.println(f1);
+				        columnValues[i][4] = bpList.get(i).getPlayerData()[11]*10;//hehe
+				} else if (id.equals("场均篮板")) {System.out.println(bpList.get(i).getPlayerData()[25]);
+					columnValues[i][3] =  (double)Math.round((bpList.get(i).getPlayerData()[25])*10)/10;
 					columnValues[i][4] = bpList.get(i).getPlayerData()[0]*10;//hehe
 				} else if (id.equals("场均助攻")) {
-					columnValues[i][3] = bpList.get(i).getPlayerData()[26];
+					columnValues[i][3] =  (double)Math.round((bpList.get(i).getPlayerData()[26])*10)/10;
 					columnValues[i][4] = bpList.get(i).getPlayerData()[1]*10;//hehe
 				} else {
 					System.out.println("HotInfoPanel-BestPlayerTable-InvalidInput");

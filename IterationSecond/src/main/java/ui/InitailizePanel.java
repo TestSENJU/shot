@@ -397,7 +397,8 @@ public class InitailizePanel {
 			HotInfoPanel.hotPanel.repaint();
 			bg.repaint();
 			refresh.setIcon(AllImages.IMG_REFRESH);
-			
+			Write w = new Write();
+			w.writeTxtFile();
 		}
 		public void mouseEntered(MouseEvent arg0) {
 		}

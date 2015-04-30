@@ -1,10 +1,8 @@
 package ui;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.InputStreamReader;
 
 public class Read {
@@ -22,7 +20,6 @@ public class Read {
                        if (lineTxt.equals("0")) {
                     	   InitailizePanel.refresh.setIcon(AllImages.IMG_REFRESH);
                     	   InitailizePanel.land.repaint();
-                    	   writeTxtFile();
                        } else {
                     	   InitailizePanel.refresh.setIcon(AllImages.IMG_REFRESH_RED);
                     	   InitailizePanel.land.repaint();
@@ -38,20 +35,4 @@ public class Read {
         }
      
     }
-	public void writeTxtFile(){
-		try {
-			File file = new File("E:/test.txt");
-
-			if (file.isFile() && file.exists()) {
-				BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-				bw.write("1");
-				bw.close();
-			} else {
-				file.createNewFile();
-			}
-		} catch (Exception e) {
-			System.out.println("写入文件内容操作出错！");
-			e.printStackTrace();
-		}
-	}
 }

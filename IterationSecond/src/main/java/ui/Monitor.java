@@ -15,7 +15,7 @@ public class Monitor extends Thread {
 				e.printStackTrace();
 			}
 			Read r = new Read();
-			r.readTxtFile("E:/test.txt");
+			r.readTxtFile("newFile.txt");
 		}		
 	}
 }

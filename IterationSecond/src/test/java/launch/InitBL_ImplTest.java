@@ -5,26 +5,30 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import BL.BaseBL;
+import BL.InitBL;
+import BL.InitBL_Impl;
 
 public class InitBL_ImplTest {
-	BaseBL i;
+	InitBL i;
 
 	@Before
 	public void before() {
-		i = new BaseBL();
+		i = new InitBL_Impl("D://newData");
 	}
 
 	@Test
-	public void testGetMatchLogic1() {
-		assertTrue(i.getMatchLogic(1) != null);
-
+	public void testGetMatchLogic() {
+		assertTrue(i.getMatchLogic() != null);
 	}
 
 	@Test
-	public void testGetMatchLogic2() {
-		assertTrue(i.getMatchLogic(2) == null);
-
+	public void testGetPlayerLogic() {
+		assertTrue(i.getPlayerLogic() != null);
+	}
+	
+	@Test
+	public void testGetTeamLogic() {
+		assertTrue(i.getTeamLogic() != null);
 	}
 
 }

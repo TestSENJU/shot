@@ -418,7 +418,17 @@ public class HotInfoPanel {
 				columnValues[i][1] = hptList.get(i).getPlayerName();
 				columnValues[i][2] = hptList.get(i).getTeam();
 				columnValues[i][3] = hptList.get(i).getLocation();
-				columnValues[i][4] = hptList.get(i).getNum();//
+				if (id.equals("篮板")) {
+					columnValues[i][4] = hptList.get(i).getNum();
+				} else if (id.equals("得分")) {
+					columnValues[i][4] = hptList.get(i).getNum();
+				} else if (id.equals("助攻")) {
+					columnValues[i][4] = hptList.get(i).getNum()/10;
+				} else if (id.equals("抢断")) {
+					columnValues[i][4] = hptList.get(i).getNum()/10;
+				} else if (id.equals("盖帽")) {
+					columnValues[i][4] = hptList.get(i).getNum()/10;
+				}
 				columnValues[i][5] = i+1;
 			}
 			PlayWave.startClickSound();
@@ -512,7 +522,24 @@ public class HotInfoPanel {
 				columnValues[i][1] = hpsList.get(i).getPlayerName();
 				columnValues[i][2] = hpsList.get(i).getTeam();
 				columnValues[i][3] =  hpsList.get(i).getLocation();
-				columnValues[i][4] = hpsList.get(i).getNum();
+				if (id.equals("场均得分")) {
+					columnValues[i][4] = hpsList.get(i).getNum()/10;
+				} else if (id.equals("场均篮板")) {
+					columnValues[i][4] = hpsList.get(i).getNum()/10;
+				} else if (id.equals("场均助攻")) {
+					columnValues[i][4] = hpsList.get(i).getNum()/10;
+				} else if (id.equals("场均盖帽")) {
+					columnValues[i][4] = hpsList.get(i).getNum()/10;
+				} else if (id.equals("场均抢断")) {
+					columnValues[i][4] = hpsList.get(i).getNum()/10;
+				} else if (id.equals("三分命中率")) {
+					columnValues[i][4] = hpsList.get(i).getNum();
+				} else if (id.equals("投篮命中率")) {
+					columnValues[i][4] = hpsList.get(i).getNum();
+				} else if (id.equals("罚球命中率")) {
+					columnValues[i][4] = hpsList.get(i).getNum();
+				}
+
 				columnValues[i][5] = i+1;
 			}
 			PlayWave.startClickSound();

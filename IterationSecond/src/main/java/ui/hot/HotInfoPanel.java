@@ -676,7 +676,6 @@ public class HotInfoPanel {
 				} else {
 					columnValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
 				}
-				columnValues[i][0] = new ImageIcon("playerImg/portrait/"+bpList.get(i).getName()+".png");
 				columnValues[i][1] = bpList.get(i).getName();
 				columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
 				columnValues[i][3] = bpList.get(i).getPlayerData()[24];

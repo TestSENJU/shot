@@ -13,7 +13,7 @@ public class Launcher {
 		
 		ui.layout();
 		
-		InitBL init=new InitBL_Impl("E://newData");
+		InitBL init=new InitBL_Impl("D://newData");
 	
 		
 	}

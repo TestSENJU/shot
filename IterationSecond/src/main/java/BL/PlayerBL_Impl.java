@@ -114,7 +114,7 @@ public class PlayerBL_Impl implements PlayerBL{
 		case 0:Collections.sort(list, new SortAverageByNum(24,0));break;
 		case 1:Collections.sort(list, new SortAverageByNum(25,0));break;
 		case 2:Collections.sort(list, new SortAverageByNum(26,0));break;
-		}System.out.println(list.get(list.size()-1).getName());
+		}
 		ArrayList<PlayerAverageVO> result=new ArrayList<PlayerAverageVO>();
 		for(int i=list.size()-1;i>list.size()-6;i--){
 			result.add(list.get(i));

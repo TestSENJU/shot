@@ -1289,7 +1289,6 @@ public class TeamPanel {
 	}
 	class Svg2Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -1346,7 +1345,6 @@ public class TeamPanel {
 	}
 	class Svg3Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -1402,7 +1400,6 @@ public class TeamPanel {
 	}
 	class Svg4Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -1514,7 +1511,6 @@ public class TeamPanel {
 	}
 	class Svg6Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -1570,7 +1566,6 @@ public class TeamPanel {
 	}
 	class Svg7Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -1626,7 +1621,6 @@ public class TeamPanel {
 	}
 	class Svg8Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -1682,7 +1676,6 @@ public class TeamPanel {
 	}
 	class Svg9Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -2631,7 +2624,6 @@ public class TeamPanel {
 	}
 	class Svg26Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -2643,7 +2635,12 @@ public class TeamPanel {
 				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
 					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
 					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
-					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					File img = new File("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					if (img.exists()) {
+						columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					} else {
+						columnPValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
+					}
 					columnPValues[i][1] = teamPlayerInfoList.get(i);
 					if (pbvo==null) {
 						columnPValues[i][2] = "null";
@@ -2682,7 +2679,6 @@ public class TeamPanel {
 	}
 	class Svg27Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -2694,7 +2690,12 @@ public class TeamPanel {
 				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
 					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
 					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
-					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					File img = new File("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					if (img.exists()) {
+						columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					} else {
+						columnPValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
+					}
 					columnPValues[i][1] = teamPlayerInfoList.get(i);
 					if (pbvo==null) {
 						columnPValues[i][2] = "null";
@@ -2733,7 +2734,6 @@ public class TeamPanel {
 	}
 	class Svg28Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -2745,7 +2745,12 @@ public class TeamPanel {
 				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
 					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
 					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
-					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					File img = new File("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					if (img.exists()) {
+						columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					} else {
+						columnPValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
+					}
 					columnPValues[i][1] = teamPlayerInfoList.get(i);
 					if (pbvo==null) {
 						columnPValues[i][2] = "null";
@@ -2784,7 +2789,6 @@ public class TeamPanel {
 	}
 	class Svg29Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -2796,7 +2800,12 @@ public class TeamPanel {
 				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
 					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
 					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
-					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					File img = new File("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					if (img.exists()) {
+						columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					} else {
+						columnPValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
+					}
 					columnPValues[i][1] = teamPlayerInfoList.get(i);
 					if (pbvo==null) {
 						columnPValues[i][2] = "null";
@@ -2835,7 +2844,6 @@ public class TeamPanel {
 	}
 	class Svg30Listener implements MouseListener{
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 			if (e.getClickCount()==2) {
 				basic.removeAll();
 				TeamHomePanel thp = new TeamHomePanel();
@@ -2847,7 +2855,12 @@ public class TeamPanel {
 				for (int i = 0; i < teamPlayerInfoList.size(); i++) {
 					PlayerBasicVO pbvo = new PlayerBasicVO(teamPlayerInfoList.get(i));
 					pbvo = pbl.getPlayerBasicByName(teamPlayerInfoList.get(i));
-					columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					File img = new File("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					if (img.exists()) {
+						columnPValues[i][0] = new ImageIcon("playerImg/portrait/"+teamPlayerInfoList.get(i)+".png");
+					} else {
+						columnPValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
+					}
 					columnPValues[i][1] = teamPlayerInfoList.get(i);
 					if (pbvo==null) {
 						columnPValues[i][2] = "null";

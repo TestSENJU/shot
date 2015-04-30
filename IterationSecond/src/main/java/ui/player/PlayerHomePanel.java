@@ -717,6 +717,7 @@ public class PlayerHomePanel {
 			playerMatch = mbl.getRecentMatchByPlayer(playerTempID);
 			String[] columnName_RM = new String[] { "比赛名称", "胜方", "负方", "比分", "时间" };
 			Object[][] columnRMValues = new Object[5][columnName_RM.length];
+			
 			for (int i = 0; i < 5; i++) {
 				columnRMValues[i][0] = playerMatch.get(i).getName();
 				columnRMValues[i][1] = playerMatch.get(i).getWinTeam();

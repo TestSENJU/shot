@@ -21,6 +21,7 @@ public TeamAllPO(String name){
 	this.teamName=name;
 }
 public void addPlayer(String playername){
+	if(!this.playerList.contains(playername))
 	this.playerList.add(playername);
 }
 public void addTeamData(String matchName,double[]teamData){

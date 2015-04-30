@@ -126,7 +126,6 @@ private void readFile(String filename){
 			teamTime1=refreshTime(teamTime1,strs[2]);
 			playerList1.add(strs[0]);
 		}
-		System.out.println(playerList1.size()+"ewfq5hy45g34brtfgr");
 		for(int j=0;j<list2.size();j++){
 			String[] strs=list2.get(j).split(";");
 			strlist2.add(strs);

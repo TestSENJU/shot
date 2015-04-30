@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -242,7 +243,12 @@ public class InitailizePanel {
 					"失误率","使用率" };
 			Object[][] columnValues = new Object[playerAverageData.size()][columnName.length];
 			for (int i = 0; i < playerAverageData.size(); i++) {
-				columnValues[i][0] = new ImageIcon("playerImg/portrait/"+playerAverageData.get(i).getName()+".png");
+				File img = new File("playerImg/portrait/"+playerAverageData.get(i).getName()+".png");
+				if (img.exists()) {
+					columnValues[i][0] = new ImageIcon("playerImg/portrait/"+playerAverageData.get(i).getName()+".png");
+				} else {
+					columnValues[i][0] = AllImages.IMG_DEFAULTPLAYER;
+				}
 				columnValues[i][1] = playerAverageData.get(i).getName();
 				columnValues[i][2] = playerAverageData.get(i).getTeamList();
 				columnValues[i][3] = playerAverageData.get(i).getCompeteNum();

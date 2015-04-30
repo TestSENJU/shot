@@ -120,11 +120,16 @@ public class PlayerHomePanel {
 
 		// TODO player photo
 		playerPhoto = new JButton();
-		playerPhoto.setBounds(30, 50, 176, 280);
+		playerPhoto.setBounds(40, 50, 176, 280);
 		playerPhoto.setOpaque(false);
 		playerPhoto.setContentAreaFilled(false);
 		playerPhoto.setBorderPainted(false);
-		playerPhoto.setIcon(new ImageIcon("playerImg/action/"+playerTempID+".png"));
+		File action = new File("playerImg/action/"+playerTempID+".png");
+		if (action.exists()) {
+			playerPhoto.setIcon(new ImageIcon("playerImg/action/"+playerTempID+".png"));
+		} else {
+			playerPhoto.setIcon(AllImages.IMG_DEFAULT_ACTION);
+		}
 		pHomePanel.add(playerPhoto, 0);
 
 		// TODO basic info labels - name-jerseyNum-position-

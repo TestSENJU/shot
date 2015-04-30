@@ -12,10 +12,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import launch.Change;
 import sound.PlayWave;
 import ui.hot.HotInfoPanel;
-import ui.match.MatchHomePanel;
 
 public class Controller {
 	/** 

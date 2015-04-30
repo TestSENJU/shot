@@ -119,4 +119,6 @@ public class AllImages {
 	public static final ImageIcon IMG_ABOUTUSICON = new ImageIcon("img/aboutusIcon.png");
 	/**       *****************PlayerTable defaultIcon 50x50***************       **/
 	public static final ImageIcon IMG_DEFAULTPLAYER = new ImageIcon("img/defaultPlayer.png");
+	/**       *****************PlayerHomePanel defaultActionPhoto 176x280***************       **/
+	public static final ImageIcon IMG_DEFAULT_ACTION = new ImageIcon("img/actionDefault.png");
 }

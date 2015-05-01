@@ -235,6 +235,5 @@ public class MatchData_Impl implements MatchDataService{
 			}
 		}
 	}
-
 	
 }

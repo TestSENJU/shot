@@ -105,7 +105,7 @@ private void readFile(String filename){
 		    }else{
 		    	if(haveTeam){
 		    		//TODO
-		    		if(checkData(str)){
+		    	//	if(checkData(str)){
 		    			if(team2!=""){
 							list2.add(str);
 						}else{
@@ -114,7 +114,7 @@ private void readFile(String filename){
 		    		}
 				}
 		    }		
-		}
+		//}
         
 		ArrayList<String[]>strlist1=new ArrayList<String[]>();
 		ArrayList<String[]>strlist2=new ArrayList<String[]>();
@@ -228,26 +228,27 @@ private static double[] getTeamDataByStr(ArrayList<String[]> list){
 	}			
 	return nums1;
 }
-private static boolean checkData(String s){
-	boolean right=true;
-	String strs[]=s.split(";");
-	String ss[]=strs[2].split(":");
-	if(ss.length!=2)right=false;
-	 double nums[]=new double[15];
-	for(int i=0;i<nums.length;i++){
-		double num;
-		try {
-			num = Double.parseDouble(strs[i+3]);
-			nums[i]=num;
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			right=false;
-		}
-      }
-	 if((nums[0]>nums[1]||nums[2]>nums[3]||
-			 nums[4]>nums[5]||nums[6]+nums[7]!=nums[8])){
-		 right=false;
-	 }
-	return right;
-}
+//最简单的错误逻辑处理
+//private static boolean checkData(String s){
+//	boolean right=true;
+//	String strs[]=s.split(";");
+//	String ss[]=strs[2].split(":");
+//	if(ss.length!=2)right=false;
+//	 double nums[]=new double[15];
+//	for(int i=0;i<nums.length;i++){
+//		double num;
+//		try {
+//			num = Double.parseDouble(strs[i+3]);
+//			nums[i]=num;
+//		} catch (NumberFormatException e) {
+//			// TODO Auto-generated catch block
+//			right=false;
+//		}
+//      }
+//	 if((nums[0]>nums[1]||nums[2]>nums[3]||
+//			 nums[4]>nums[5]||nums[6]+nums[7]!=nums[8])){
+//		 right=false;
+//	 }
+//	return right;
+//}
 }

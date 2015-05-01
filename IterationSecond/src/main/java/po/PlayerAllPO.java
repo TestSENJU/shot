@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
+
+import Data.CheckDataTool;
 /**
  * 
  * @author wyt
@@ -56,13 +58,15 @@ public String getTeam(){
 	}
 }
 public PlayerAllPlusRatePO makeDetailedAllPO(){
+	CheckDataTool tool=new CheckDataTool();
 	PlayerAllPlusRatePO allData=new PlayerAllPlusRatePO(this.name);
+	//参赛场数设置
 	allData.addCompeteNum(playerDataList.size());
 	for(int i=0;i<teamList.size();i++){
+		//所属队伍设置
 		allData.addTeam(teamList.get(i));
 	}
 	Set<String>keys=playerDataList.keySet();
-	//ArrayList<Integer>errorNumList=new ArrayList<Integer>();
 	double [] nums=new double[15];
 	double[] teamNums=new double[7];
 	double[] opponentNums=new double[7];
@@ -76,17 +80,21 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 		String strs[]=playerDataList.get(key);
 		double dnums1[]=teamDataList.get(key);
 		double dnums2[]=competeDataList.get(key);
-		
+		//先发场数
 		if(strs[1].equals("F")||strs[1].equals("C")||strs[2].equals("G")) allData.addOffensiveNum(1);
 		
+			nums=tool.getDoubleData(strs);
 			for(int i=0;i<nums.length;i++){
-				nums[i]+=Double.parseDouble(strs[i+3]);
-		   }
+				if(nums[i]<0){
+					
+				}
+			}
 			for(int i=0;i<teamNums.length;i++){
 				teamNums[i]+=dnums1[i];
 				opponentNums[i]+=dnums2[i];
 			}
 			time=refreshTime(time,strs[2]);
+			//球员的
 			allData.addPlayingTime(strs[2]);
 			teamTime=refreshTime(teamTime,teamTimeList.get(key));
 			if(filenamelist!=null){
@@ -157,10 +165,16 @@ public PlayerAllPlusRatePO makeDetailedAllPO(){
 }
 //获取最近五场比赛的名字
 private ArrayList<String> getRecentFiveMatches(){
+	    String matchnames[]=getMatchNamesAll();
+		ArrayList<String>names=new ArrayList<String>();
+		for(int j=matchnames.length;j>matchnames.length-5;j--){
+			names.add(matchnames[j-1]);
+		}
+		return names;
+	
+}
+private String[] getMatchNamesAll(){
 	Set<String>keys=playerDataList.keySet();
-	if(keys.size()<=5){
-		return null;
-	}else{
 		String matchnames[]=new String[keys.size()];
 		int i=0;
 		for(String key:keys){
@@ -168,14 +182,50 @@ private ArrayList<String> getRecentFiveMatches(){
 			i++;
 		}
 		Arrays.sort(matchnames);
-		ArrayList<String>names=new ArrayList<String>();
-		System.out.println(matchnames.length);
-		for(int j=matchnames.length;j>matchnames.length-5;j--){
-			names.add(matchnames[j-1]);
+		return matchnames;
+}
+private ArrayList<String> getAroundMatches(String key){
+	ArrayList<String>list=new ArrayList<String>();
+	String names[]=getMatchNamesAll();
+	if(names.length<5){
+		return (ArrayList<String>) Arrays.asList(names);
+	}else{
+		for(int i=0;i<names.length;i++){
+			if(names[i].equals(key)){
+				if(i==0){
+					for(int j=1;j<5;j++){
+						list.add(names[j]);
+					}
+				}else if(i==1){
+					list.add(names[0]);
+					for(int j=2;j<5;j++){
+						list.add(names[j]);
+					}
+				}else if(i==names.length-1){
+					for(int j=names.length-5;j<names.length-1;j++){
+						list.add(names[j]);
+					}
+				}else if(i==names.length-2){
+					list.add(names[names.length-1]);
+					for(int j=names.length-5;j<names.length-1;j++){
+						list.add(names[j]);
+					}
+				}else {
+				list.add(names[i-2]);
+				list.add(names[i-1]);
+				list.add(names[i+1]);
+				}
+			
+				
+			}
 		}
-		return names;
+		return list;
 	}
-	
+
+}
+private ArrayList<String> getAnotherMatches(String key,int num ){
+	ArrayList<String> list=new ArrayList<String>();
+	return list;
 }
 private String refreshTime(String teamTime1,String timeAdd){
 	String s[]=teamTime1.split(":");

@@ -52,6 +52,7 @@ public class TeamAllVO {
 		this.usedLongName=po.getUsedLongName();
 		this.teamNameLong=po.getTeamNameLong();
 		this.matchNum=po.getMatchNum();
+		System.out.println(this.matchNum+this.teamName);
 		this.winNum=po.getWinNum();
 		for(int i=0;i<this.teamData.length;i++){
 			this.teamData[i]=(double)Math.round(po.getTeamData()[i]*10)/10;

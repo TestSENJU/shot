@@ -115,7 +115,6 @@ public ArrayList<MatchShortVO> getShortMatchByPeriod(String beginTime,
 		String endTime) {
 	// TODO Auto-generated method stub
 ArrayList<MatchShortPO> polist=match.getShortMatchByPeriod(beginTime, endTime);
-	
 	if(polist!=null){
 		ArrayList<MatchShortVO> list=new ArrayList<MatchShortVO>();
 		for(int i=0;i<polist.size();i++){

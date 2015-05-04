@@ -215,9 +215,6 @@ public class TeamData_Impl implements TeamDataService{
         	}
 		}else{
 			if(teamTable.containsKey(teamName)){
-				if(win==1){
-					teamTable.get(teamName).addWinMatchNum(filename);
-				}
 				for(int j=0;j<nameList.size();j++){
             		teamTable.get(teamName).addPlayer(nameList.get(j));
         		}

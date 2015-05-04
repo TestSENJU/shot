@@ -111,14 +111,16 @@ public class MatchData_Impl implements MatchDataService{
 		ArrayList<MatchShortPO> list=new ArrayList<MatchShortPO>();
 		for(String key:keys){
 			String[] times=new String[3];
+			String []strs=key.split("_");
 			times[0]=beigin;
 			times[1]=end;
-			times[2]=key;
+			times[2]=strs[0]+"_"+strs[1];
 			Arrays.sort(times);
-			if(times[1].equals(key)){
+			if(times[1].equals(strs[0]+"_"+strs[1])){
 				list.add(getMatchShortPOByMatchPO(matchTable.get(key)));
 			}
 		}
+		System.out.println("Csbgnhtrmt");
 		return list;
 	}
 

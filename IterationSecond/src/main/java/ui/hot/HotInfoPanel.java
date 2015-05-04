@@ -424,11 +424,11 @@ public class HotInfoPanel {
 				} else if (id.equals("得分")) {
 					columnValues[i][4] = hptList.get(i).getNum();
 				} else if (id.equals("助攻")) {
-					columnValues[i][4] = hptList.get(i).getNum()/10;
+					columnValues[i][4] = hptList.get(i).getNum();
 				} else if (id.equals("抢断")) {
-					columnValues[i][4] = hptList.get(i).getNum()/10;
+					columnValues[i][4] = hptList.get(i).getNum();
 				} else if (id.equals("盖帽")) {
-					columnValues[i][4] = hptList.get(i).getNum()/10;
+					columnValues[i][4] = hptList.get(i).getNum();
 				}
 				columnValues[i][5] = i+1;
 			}
@@ -524,15 +524,15 @@ public class HotInfoPanel {
 				columnValues[i][2] = hpsList.get(i).getTeam();
 				columnValues[i][3] =  hpsList.get(i).getLocation();
 				if (id.equals("场均得分")) {
-					columnValues[i][4] = hpsList.get(i).getNum()/10;
+					columnValues[i][4] = hpsList.get(i).getNum();
 				} else if (id.equals("场均篮板")) {
-					columnValues[i][4] = hpsList.get(i).getNum()/10;
+					columnValues[i][4] = hpsList.get(i).getNum();
 				} else if (id.equals("场均助攻")) {
-					columnValues[i][4] = hpsList.get(i).getNum()/10;
+					columnValues[i][4] = hpsList.get(i).getNum();
 				} else if (id.equals("场均盖帽")) {
-					columnValues[i][4] = hpsList.get(i).getNum()/10;
+					columnValues[i][4] = hpsList.get(i).getNum();
 				} else if (id.equals("场均抢断")) {
-					columnValues[i][4] = hpsList.get(i).getNum()/10;
+					columnValues[i][4] = hpsList.get(i).getNum();
 				} else if (id.equals("三分命中率")) {
 					columnValues[i][4] = hpsList.get(i).getNum();
 				} else if (id.equals("投篮命中率")) {
@@ -715,13 +715,13 @@ public class HotInfoPanel {
 					//columnValues[i][3] = (double)Math.round((bpList.get(i).getPlayerData()[24])*10)/10;
 				        columnValues[i][3] = f1;
 				        System.out.println(f1);
-				        columnValues[i][4] = bpList.get(i).getPlayerData()[11]*10;//hehe
+				        columnValues[i][4] = bpList.get(i).getPlayerData()[11];//hehe
 				} else if (id.equals("场均篮板")) {System.out.println(bpList.get(i).getPlayerData()[25]);
 					columnValues[i][3] =  (double)Math.round((bpList.get(i).getPlayerData()[25])*10)/10;
-					columnValues[i][4] = bpList.get(i).getPlayerData()[0]*10;//hehe
+					columnValues[i][4] = bpList.get(i).getPlayerData()[0];//hehe
 				} else if (id.equals("场均助攻")) {
 					columnValues[i][3] =  (double)Math.round((bpList.get(i).getPlayerData()[26])*10)/10;
-					columnValues[i][4] = bpList.get(i).getPlayerData()[1]*10;//hehe
+					columnValues[i][4] = bpList.get(i).getPlayerData()[1];//hehe
 				} else {
 					System.out.println("HotInfoPanel-BestPlayerTable-InvalidInput");
 				}

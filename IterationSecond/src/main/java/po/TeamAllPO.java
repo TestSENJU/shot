@@ -54,15 +54,26 @@ public TeamAllPlusRatePO makeDetailedAllPO(){
             oppData[i]+=opponentData[i];
     	}
     }
+    //投篮命中率
 	data[15]=data[0]/data[1];
+	//三分命中率
 	data[16]=data[2]/data[3];
+	//罚球命中率
 	data[17]=data[4]/data[5];
-	data[18]=winMatchList.size()/teamDataList.size();
-	data[19]=data[1]+0.4*data[5]-1.07*(data[6]/(data[6]+data[7])*data[12])+1.07*data[12];
+	//胜率
+	data[18]=(double)winMatchList.size()/teamDataList.size();
+	//进攻回合
+	data[19]=data[1]+0.4*data[5]-1.07*(data[6]/(data[6]+data[7])*(data[1]-data[0]))+1.07*data[12];
+	//进攻效率
 	data[20]=data[14]/data[19]*100;
+	//防守效率
 	data[21]=oppData[2]/data[19]*100;
+	//篮板效率
 	data[22]=(data[6]+data[7])/(data[6]+oppData[1]+data[7]+oppData[0]);
-	data[24]=data[9]/data[19];
+	//抢断效率
+	data[23]=data[10]/data[19]*100;
+	//助攻率
+	data[24]=data[9]/data[19]*100;
 	
 	allData.setTeamData(data);
 	return allData;

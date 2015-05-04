@@ -82,8 +82,12 @@ private void readFile(String filename){
         int i=0;
         ArrayList<String> list1=new ArrayList<String>();
         ArrayList<String>list2=new ArrayList<String>();
-        double[] nums1=new double[]{0,0,0,0,0,0,0,0};
-        double[] nums2=new double[]{0,0,0,0,0,0,0,0};
+        double[] nums1=new double[8];
+        double[] nums2=new double[8];
+        for(int j=0;j<nums1.length;j++){
+        	nums1[j]=0.0;
+        	nums2[j]=0.0;
+        }
         String str1=br.readLine();
         String str1sp[]=str1.split(";");
         String pointer=str1sp[2];
@@ -180,75 +184,79 @@ private static String refreshTime(String teamTime1,String timeAdd){
 }
 private static double[] getTeamAllDataByStrs(ArrayList<String[]>list){
 	double[] nums=new double[15];
-	for(int i=0;i<nums.length;i++)nums[i]=0;
+	int error[]=new int[15];
+	int rightNum[]=new int[15];
+	for(int i=0;i<error.length;i++){
+		error[i]=0;
+		rightNum[i]=0;
+	}
 	for(int j=0;j<list.size();j++){
 		String strs[]=list.get(j);
-		nums[0]+=Double.parseDouble(strs[3]);
-		nums[1]+=Double.parseDouble(strs[4]);
-		nums[2]+=Double.parseDouble(strs[5]);
-		nums[3]+=Double.parseDouble(strs[6]);
-		nums[4]+=Double.parseDouble(strs[7]);
-		nums[5]+=Double.parseDouble(strs[8]);
-		nums[6]+=Double.parseDouble(strs[9]);
-		nums[7]+=Double.parseDouble(strs[10]);
-		nums[8]+=Double.parseDouble(strs[11]);
-		nums[9]+=Double.parseDouble(strs[12]);
-		nums[10]+=Double.parseDouble(strs[13]);
-		nums[11]+=Double.parseDouble(strs[14]);
-		nums[12]+=Double.parseDouble(strs[15]);
-		nums[13]+=Double.parseDouble(strs[16]);
-		nums[14]+=Double.parseDouble(strs[17]);
+		CheckDataTool tool=new CheckDataTool();
+		double result[]=tool.getDoubleData(strs);
+		for(int i=0;i<result.length;i++){
+			if(result[i]<0){
+				error[i]++;			
+			}else{
+				rightNum[i]++;
+				nums[i]+=result[i];
+			}
+		}
+	}
+	//如果有错误数据，直接先不加这个数字，然后取整个队伍的平均值
+	for(int i=0;i<nums.length;i++){
+		nums[i]+=error[i]*(nums[i]/rightNum[i]);
 	}
 	return nums;
 }
 private static double[] getOpponentDataByStrs(ArrayList<String[]>list){
+	CheckDataTool tool=new CheckDataTool();
 	double[] nums=new double[]{0,0,0};
+	int error[]=new int[3];
+	int rightNum[]=new int[3];
+	for(int i=0;i<error.length;i++){
+		error[i]=0;
+		rightNum[i]=0;
+	}
 	for(int i=0;i<list.size();i++){
-		String strs[]=list.get(i);
-		nums[0]+=Double.parseDouble(strs[6]);
-		nums[1]+=Double.parseDouble(strs[7]);
-		nums[2]+=Double.parseDouble(strs[14]);
+		double result[]=tool.getDoubleOpponentData(list.get(i));
+		for(int j=0;j<result.length;j++){
+			if(result[j]<0){
+				error[j]++;
+			}else{
+				rightNum[j]++;
+				nums[j]+=result[j];
+			}
+		}
+	}
+	for(int i=0;i<nums.length;i++){
+		nums[i]+=error[i]*(nums[i]/rightNum[i]);
 	}
 	return nums;
 }
 private static double[] getTeamDataByStr(ArrayList<String[]> list){
-	   double[] nums1=new double[]{0,0,0,0,0,0,0,0};
+	   double[] nums=new double[]{0,0,0,0,0,0,0,0};
+	   int error[]=new int[8];
+	   int rightNum[]=new int[8];
+	   for(int i=0;i<error.length;i++){
+		   error[i]=0;
+		   rightNum[i]=0;
+	   }
+	   CheckDataTool tool=new CheckDataTool();
 	for(int j=0;j<list.size();j++){
-		String strs[]=list.get(j);
-							
-		nums1[0]+=Double.parseDouble(strs[3]);
-		nums1[1]+=Double.parseDouble(strs[4]);
-		nums1[2]+=Double.parseDouble(strs[6]);
-		nums1[3]+=Double.parseDouble(strs[8]);
-		nums1[4]+=Double.parseDouble(strs[9]);
-		nums1[5]+=Double.parseDouble(strs[10]);
-		nums1[6]+=Double.parseDouble(strs[11]);
-		nums1[7]=Double.parseDouble(strs[15]);
-			
-	}			
-	return nums1;
+		double result[]=tool.getTeamData(list.get(j));
+		for(int i=0;i<result.length;i++){
+			if(result[i]<0){
+				error[i]++;
+			}else{
+				rightNum[i]++;
+				nums[i]+=result[i];
+			}
+		}
+	}	
+	for(int i=0;i<nums.length;i++){
+		nums[i]+=error[i]*(nums[i]/rightNum[i]);
+	}
+	return nums;
 }
-//最简单的错误逻辑处理
-//private static boolean checkData(String s){
-//	boolean right=true;
-//	String strs[]=s.split(";");
-//	String ss[]=strs[2].split(":");
-//	if(ss.length!=2)right=false;
-//	 double nums[]=new double[15];
-//	for(int i=0;i<nums.length;i++){
-//		double num;
-//		try {
-//			num = Double.parseDouble(strs[i+3]);
-//			nums[i]=num;
-//		} catch (NumberFormatException e) {
-//			// TODO Auto-generated catch block
-//			right=false;
-//		}
-//      }
-//	 if((nums[0]>nums[1]||nums[2]>nums[3]||
-//			 nums[4]>nums[5]||nums[6]+nums[7]!=nums[8])){
-//		 right=false;
-//	 }
-//	return right;
-//}
 }

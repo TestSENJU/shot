@@ -25,5 +25,8 @@
 	<classpathentry kind="lib" path="batik-all-1.7.jar"/>
 	<classpathentry kind="lib" path="xml-apis-ext-1.3.04.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="F:/课件/课件_软件工程与计算Ⅲ/Ref/docs/功能测试/testData.jar"/>
+	<classpathentry kind="lib" path="F:/课件/课件_软件工程与计算Ⅲ/prog/Test Tool V1.2 Beta 1/batch/lib/de.tototec.cmdoption-0.3.2.jar"/>
+	<classpathentry kind="lib" path="F:/课件/课件_软件工程与计算Ⅲ/prog/Test Tool V1.2 Beta 1/batch/lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -707,16 +707,12 @@ public class HotInfoPanel {
 				}
 				columnValues[i][1] = bpList.get(i).getName();
 				columnValues[i][2] = bpList.get(i).getTeamList().get(bpList.get(i).getTeamList().size()-1);
-				System.out.println(bpList.get(i).getName());
 				if (id.equals("场均得分")) {
 					 BigDecimal bg = new BigDecimal(bpList.get(i).getPlayerData()[24]);
 				        double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-				        System.out.println(bpList.get(i).getPlayerData()[24]);
-					//columnValues[i][3] = (double)Math.round((bpList.get(i).getPlayerData()[24])*10)/10;
 				        columnValues[i][3] = f1;
-				        System.out.println(f1);
 				        columnValues[i][4] = bpList.get(i).getPlayerData()[11];//hehe
-				} else if (id.equals("场均篮板")) {System.out.println(bpList.get(i).getPlayerData()[25]);
+				} else if (id.equals("场均篮板")) {
 					columnValues[i][3] =  (double)Math.round((bpList.get(i).getPlayerData()[25])*10)/10;
 					columnValues[i][4] = bpList.get(i).getPlayerData()[0];//hehe
 				} else if (id.equals("场均助攻")) {

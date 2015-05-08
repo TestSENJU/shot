@@ -45,6 +45,11 @@ public class Console {
 		}
 		if (args[0].equals("-player")) {
 			if (player.isHot) {
+				if(player.isSeason){
+					
+				}else if{
+					
+				}
 				// TODO
 				// This is an demo
 				getMostImprovedPlayer(player.hotField, player.getTopnumber());
@@ -84,7 +89,7 @@ public class Console {
 
 	void getMostImprovedPlayer(String hotField, int topNumber) {
 		// This is an demo
-		PlayerHotInfo thePlayer = new PlayerHotInfo();
+
 		// TODO
 		out.print(thePlayer);
 	}

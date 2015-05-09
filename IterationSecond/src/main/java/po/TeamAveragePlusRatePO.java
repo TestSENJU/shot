@@ -19,7 +19,7 @@ public class TeamAveragePlusRatePO {
 public String teamName;
 private String teamNameLong;
 private int matchNum;
-private double[] teamData=new double[25];
+private double[] teamData=new double[27];
 private String usedName;
 private String usedLongName;
 private int winNum;
@@ -40,7 +40,7 @@ public TeamAveragePlusRatePO(TeamAllPlusRatePO allData){
 	for(int i=0;i<15;i++){
 		this.teamData[i]=nums[i]/this.matchNum;
 	}
-	for(int i=15;i<25;i++){
+	for(int i=15;i<27;i++){
 		this.teamData[i]=nums[i];
 	}
 }

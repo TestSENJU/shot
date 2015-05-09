@@ -74,7 +74,10 @@ public TeamAllPlusRatePO makeDetailedAllPO(){
 	data[23]=data[10]/data[19]*100;
 	//助攻率
 	data[24]=data[9]/data[19]*100;
-	
+	//进攻篮板效率
+	data[25]=data[6]/(data[6]+oppData[0]);
+	//防守篮板效率
+	data[26]=data[7]/(data[7]+oppData[1]);
 	allData.setTeamData(data);
 	return allData;
 }

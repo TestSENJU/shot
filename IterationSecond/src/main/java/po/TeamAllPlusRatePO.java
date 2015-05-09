@@ -41,6 +41,8 @@ import java.util.ArrayList;
  *  22篮板效率
  *  23抢断效率
  *  24助攻率
+ *  25进攻篮板效率
+ *  26防守篮板效率
  *@param matchNum
  *@param usedName
  *@param usedLongName
@@ -54,7 +56,7 @@ private String teamNameLong;
 private String usedLongName;
 private int matchNum;
 private int winNum;
-private double[] teamData=new double[25];
+private double[] teamData=new double[27];
 private ArrayList<String> playerList=new ArrayList<String>();
 public TeamAllPlusRatePO(String name){
 	this.teamName=name;

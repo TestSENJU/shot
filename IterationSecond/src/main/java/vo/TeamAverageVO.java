@@ -34,6 +34,8 @@ public class TeamAverageVO {
  *  22篮板效率
  *  23抢断效率
  *  24助攻率
+ *  25进攻
+ *  26防守
 	 */
 	private double[] teamData=new double[25];
 	private String usedName;//球队曾经用过的缩写名

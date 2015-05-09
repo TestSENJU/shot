@@ -30,6 +30,8 @@ public interface PlayerBL {
 	 * @return
 	 */
 	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(String location,String league,int num);
+	//howmany是指筛选出多少个球员 raising接口返回的是最好的
+	public ArrayList<PlayerAllVO> getPlayerAllByConRaisingAndNum(String location,String league,int num,int howmany);
 	/**
 	 * 根据球员位置、球员联盟、排序依据场均数据50人升序
 	 * @param location
@@ -38,6 +40,8 @@ public interface PlayerBL {
 	 * @return
 	 */
 	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConRaising(String location,String league,int num);
+	
+	public ArrayList<PlayerAverageVO> getPlayerAverageByConRaisingAndNum(String location,String league,int num,int howmany);
 	/**
 	 * 根据球员位置、球员联盟、排序依据总赛季数据50人降序
 	 * @param location
@@ -53,8 +57,12 @@ public interface PlayerBL {
 	 * @param num
 	 * @return
 	 */
+	public ArrayList<PlayerAllVO> getPlayerAllByConDecliningAndNum(String location,String league,int num,int howmany);
+	//declining接口返回的是最差的
 	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConDeclining(String location,String league,int num);
 
+	public ArrayList<PlayerAverageVO> getPlayerAverageConDecliningAndNum(String location,String league,int num,int howmany);
+	
 	/**
 	 * 返回降序排列的前五名进步最快球员
 	 * @param num
@@ -140,4 +148,11 @@ public interface PlayerBL {
 	
 	//根据基本信息的文件夹返回球员姓名
 	public ArrayList<String> getPlayerNamesByBasic();
+	//根据球员位置返回球员名字
+	public ArrayList<String> getPlayerNamesByPosition(String position);
+	//根据球员联盟返回球员名字
+	public ArrayList<String> getPlayerNamesByLeague(String league);
+	//根据年龄返回球员名字
+	public ArrayList<String> getPlayerNamesByAge(String age);
+	
 }

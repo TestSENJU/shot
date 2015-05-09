@@ -39,5 +39,7 @@ public interface PlayerDataService {
 	public ArrayList<String> getPlayerByLeague(String league);
 	//根据位置返回球员名
 	public ArrayList<String> getPlayerByPosition(String position);
+	//根据年龄返回球员名字
+	public ArrayList<String> getPlayerByAge(String age);
 
 }

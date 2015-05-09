@@ -238,8 +238,19 @@ private java.lang.String teamName
 private double winRate 
 胜率 
  */
-public TeamHighInfo getTeamHigh(){
-	
+public TeamHighInfo getTeamHigh(TeamAverageVO average){
+	TeamHighInfo info=new TeamHighInfo();
+	double nums[]=average.getTeamData();
+	info.setAssistEfficient(nums[24]);
+	info.setDefendEfficient(nums[21]);
+	info.setDefendReboundEfficient(nums[25]);
+	info.setOffendEfficient(nums[20]);
+	info.setOffendReboundEfficient(nums[26]);
+	info.setOffendRound(nums[19]);
+	info.setStealEfficient(nums[23]);
+	info.setTeamName(average.getTeamName());
+	info.setWinRate(nums[18]);
+	return info;
 }
 /**
  * private java.lang.String field 
@@ -252,9 +263,13 @@ private java.lang.String teamName
 private double value 
 热门属性具体的值 
  */
-public TeamHotInfo getTeamHot(){
+public TeamHotInfo getTeamHot(TeamAverageVO average,int i,String league,String field){
 	TeamHotInfo team=new TeamHotInfo();
-	
+	team.setField(field);
+	team.setLeague(league);
+	team.setTeamName(average.getTeamName());
+	team.setValue(average.getTeamData()[i]);
+	return team;
 }
 /**
  * private double assist 

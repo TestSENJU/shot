@@ -23,10 +23,19 @@ public class PlayerBL_Impl implements PlayerBL{
 	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(
 			String location, String league, int num) {
 		// TODO Auto-generated method stub
-		ArrayList<String> listLocation=playerData.getPlayerByPosition(location);
-		ArrayList<String> listLeague=playerData.getPlayerByLeague(league);
-		ArrayList<String>list=new ArrayList<String>(listLocation);
-		list.retainAll(listLeague);
+		ArrayList<String>list=new ArrayList<String>();
+		if(location!=null&&league!=null){
+			ArrayList<String> listLocation=playerData.getPlayerByPosition(location);
+			ArrayList<String> listLeague=playerData.getPlayerByLeague(league);
+			list=new ArrayList<String>(listLocation);
+			list.retainAll(listLeague);
+		}else if(location!=null&&league==null){
+			ArrayList<String> listLocation=playerData.getPlayerByPosition(location);
+			list=new ArrayList<String>(listLocation);
+		}	else if(location==null&&league!=null){
+			ArrayList<String> listLeague=playerData.getPlayerByLeague(league);
+			list=new ArrayList<String>(listLeague);
+		}
 		if(list!=null){
 			ArrayList<PlayerAllVO>result=new ArrayList<PlayerAllVO>();
 			for(int i=0;i<list.size();i++){
@@ -52,6 +61,7 @@ public class PlayerBL_Impl implements PlayerBL{
 		}else{
 			return null;
 		}		
+	
 	}
 
 	@SuppressWarnings("unused")
@@ -315,6 +325,45 @@ public class PlayerBL_Impl implements PlayerBL{
 	public ArrayList<String> getPlayerNamesByBasic() {
 		// TODO Auto-generated method stub
 		return playerData.getPlayerNamesByBasic("players/info");
+	}
+
+	public ArrayList<String> getPlayerNamesByPosition(String position) {
+		// TODO Auto-generated method stub
+		return playerData.getPlayerByPosition(position);
+	}
+
+	public ArrayList<String> getPlayerNamesByLeague(String league) {
+		// TODO Auto-generated method stub
+		return playerData.getPlayerByLeague(league);
+	}
+
+	public ArrayList<String> getPlayerNamesByAge(String age) {
+		// TODO Auto-generated method stub
+		return playerData.getPlayerByAge(age);
+	}
+
+	public ArrayList<PlayerAllVO> getPlayerAllByConRaisingAndNum(
+			String location, String league, int num, int howmany) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerAverageVO> getPlayerAverageByConRaisingAndNum(
+			String location, String league, int num, int howmany) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerAllVO> getPlayerAllByConDecliningAndNum(
+			String location, String league, int num, int howmany) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<PlayerAverageVO> getPlayerAverageConDecliningAndNum(
+			String location, String league, int num, int howmany) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

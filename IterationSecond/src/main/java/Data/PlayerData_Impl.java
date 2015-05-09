@@ -394,4 +394,48 @@ private String getPosition(String filename){
 	
 	   return null;
    }
+@SuppressWarnings("resource")
+private String getAge(String filename){
+	BufferedReader br;
+	try {
+		br = new BufferedReader(new FileReader(new File(filename)));
+		String str=""; 
+		while((str=br.readLine())!=null){
+				if(str.contains("│")&&str.contains("Position")){
+					String strs[]=str.split("│");
+
+					return strs[1].substring(0, 1);
+				}
+			}
+	
+	} catch (FileNotFoundException e1) {
+		// TODO Auto-generated catch block
+		System.out.println("getpostion1");
+		return null;
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		System.out.println("getpostion2");
+		return null;
+	}
+
+   return null;
+}
+public ArrayList<String> getPlayerByAge(String age) {
+	// TODO Auto-generated method stub
+	ArrayList<String>list=new ArrayList<String>();
+	String filenames[]=new File("players/info").list();
+	for(int i=0;i<filenames.length;i++){
+		String position1=getAge("players/info/"+filenames[i]);
+		if(position1.equals(age)){
+			 list.add(filenames[i]);	
+		}
+
+	}
+	if(list.size()!=0)
+	return list;
+	else{
+		System.out.println(" playerdataimpl getPlayerByAge");
+		return null;
+	}
+}
 }

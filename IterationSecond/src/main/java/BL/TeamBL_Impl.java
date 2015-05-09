@@ -83,7 +83,7 @@ public class TeamBL_Impl implements TeamBL{
 		}
 	}
 
-	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num) {
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAllVO> list=getTeamAll();
 		if(num==25){
@@ -91,10 +91,22 @@ public class TeamBL_Impl implements TeamBL{
 		}else{
 			Collections.sort(list, new TeamSortAllByNum(num,0));
 		}	
-		return list;
+		   if(list!=null){
+	        	if(many<30){
+	    			ArrayList<TeamAllVO> result=new ArrayList<TeamAllVO>();
+	    			for(int i=list.size()-1;i>list.size()-(many+1);i--){				
+	    				result.add(list.get(i));
+	    			}
+	    			return result;
+	    		}else{
+	    			return list;
+	    		}	
+	        }else{
+	        	return null;
+	        }
 	}
 
-	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num) {
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAverageVO> list=getTeamAverage();
 		if(num==25){
@@ -102,11 +114,22 @@ public class TeamBL_Impl implements TeamBL{
 		}else{
 			Collections.sort(list, new TeamSortAverageByNum(num,0));
 		}
-
-		return list;
+        if(list!=null){
+        	if(many<30){
+    			ArrayList<TeamAverageVO> result=new ArrayList<TeamAverageVO>();
+    			for(int i=list.size()-1;i>list.size()-(many+1);i--){				
+    				result.add(list.get(i));
+    			}
+    			return result;
+    		}else{
+    			return list;
+    		}	
+        }else{
+        	return null;
+        }
 	}
 
-	public ArrayList<TeamAverageVO> getHotTeamByNum(int num) {
+	public ArrayList<TeamAverageVO> getHotTeamByNum(int num,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAverageVO> list=getTeamAverage();
 		
@@ -119,13 +142,25 @@ public class TeamBL_Impl implements TeamBL{
 		case 5:Collections.sort(list, new TeamSortAverageByNum(16,0));break;
 		case 6:Collections.sort(list, new TeamSortAverageByNum(15,0));break;
 		case 7:Collections.sort(list, new TeamSortAverageByNum(17,0));break;
+		case 8:Collections.sort(list, new TeamSortAverageByNum(13,0));break;
+		case 9:Collections.sort(list, new TeamSortAverageByNum(12,0));break;
+		case 10:Collections.sort(list, new TeamSortAverageByNum(6,0));break;
+		case 11:Collections.sort(list, new TeamSortAverageByNum(7,0));break;
 		}
-		ArrayList<TeamAverageVO> result=new ArrayList<TeamAverageVO>();
-		for(int i=list.size()-1;i>list.size()-6;i--){
-			
-			result.add(list.get(i));
+		if(list!=null){
+					if(many<30){
+			ArrayList<TeamAverageVO> result=new ArrayList<TeamAverageVO>();
+			for(int i=list.size()-1;i>list.size()-(many+1);i--){				
+				result.add(list.get(i));
+			}
+			return result;
+		}else{
+			return list;
+		}	
 		}
-		return list;
+		else {
+			return null;
+		}
 	}
 
 	public String getLongNameByShortName(String shortName) {
@@ -159,15 +194,15 @@ public class TeamBL_Impl implements TeamBL{
 		return teamData.getPlayerNamesOfTeam(teamName);
 	}
 
-	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num) {
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num,int many) {
 		// TODO Auto-generated method stub
-		ArrayList<TeamAverageVO>list=getTeamAverageRankingByNum(num);
+		ArrayList<TeamAverageVO>list=getTeamAverageRankingByNum(num,many);
 		Collections.reverse(list);
 		return list;
 	}
-	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(int num) {
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(int num,int many) {
 		// TODO Auto-generated method stub
-		ArrayList<TeamAllVO> list=getTeamAllRankingByNumRaising(num);
+		ArrayList<TeamAllVO> list=getTeamAllRankingByNumRaising(num,many);
 		Collections.reverse(list);
 		
 		return list;

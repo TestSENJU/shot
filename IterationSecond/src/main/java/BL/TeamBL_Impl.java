@@ -1,6 +1,7 @@
 package BL;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -238,10 +239,25 @@ class TeamSortAllByNum implements Comparator<Object>{
 		if(nums1[this.comNum]>nums2[this.comNum]){
 			return 1;
 		}else if(nums1[this.comNum]==nums2[this.comNum]){
+			
 			if(this.comNum1==-1){
+				String teamnames[]=new String[2];
+				teamnames[0]=po1.getTeamName();
+				teamnames[1]=po2.getTeamName();
+				Arrays.sort(teamnames);
+				if(po1.getTeamName().equals(teamnames[1])){
+					return 1;
+				}else
 				return 0;
 			}else{
 			if(nums1[this.comNum1]==nums2[this.comNum1]){
+				String teamnames[]=new String[2];
+				teamnames[0]=po1.getTeamName();
+				teamnames[1]=po2.getTeamName();
+				Arrays.sort(teamnames);
+				if(po1.getTeamName().equals(teamnames[1])){
+					return 1;
+				}else
 				return 0;
 			}else if(nums1[this.comNum1]>nums2[this.comNum1]){
 				return 1;
@@ -259,11 +275,25 @@ class TeamSortAllByNum implements Comparator<Object>{
 			}else if(num1==num2){
 
 				if(this.comNum1==-1){
+					String teamnames[]=new String[2];
+					teamnames[0]=po1.getTeamName();
+					teamnames[1]=po2.getTeamName();
+					Arrays.sort(teamnames);
+					if(po1.getTeamName().equals(teamnames[1])){
+						return 1;
+					}else
 					return 0;
 				}else{
 					double[] nums1=po1.getTeamData();
 					double[] nums2=po2.getTeamData();
 				if(nums1[this.comNum1]==nums2[this.comNum1]){
+					String teamnames[]=new String[2];
+					teamnames[0]=po1.getTeamName();
+					teamnames[1]=po2.getTeamName();
+					Arrays.sort(teamnames);
+					if(po1.getTeamName().equals(teamnames[1])){
+						return 1;
+					}else
 					return 0;
 				}else if(nums1[this.comNum1]>nums2[this.comNum1]){
 					return 1;
@@ -299,9 +329,23 @@ class TeamSortAverageByNum implements Comparator<Object>{
 				return 1;
 			}else if(nums1[this.comNum]==nums2[this.comNum]){
 				if(this.comNum1==-1){
+					String teamnames[]=new String[2];
+					teamnames[0]=po1.getTeamName();
+					teamnames[1]=po2.getTeamName();
+					Arrays.sort(teamnames);
+					if(po1.getTeamName().equals(teamnames[1])){
+						return 1;
+					}else
 					return 0;
 				}else{
 				if(nums1[this.comNum1]==nums2[this.comNum1]){
+					String teamnames[]=new String[2];
+					teamnames[0]=po1.getTeamName();
+					teamnames[1]=po2.getTeamName();
+					Arrays.sort(teamnames);
+					if(po1.getTeamName().equals(teamnames[1])){
+						return 1;
+					}else
 					return 0;
 				}else if(nums1[this.comNum1]>nums2[this.comNum1]){
 					return 1;
@@ -321,11 +365,25 @@ class TeamSortAverageByNum implements Comparator<Object>{
 
 
 				if(this.comNum1==-1){
+					String teamnames[]=new String[2];
+					teamnames[0]=po1.getTeamName();
+					teamnames[1]=po2.getTeamName();
+					Arrays.sort(teamnames);
+					if(po1.getTeamName().equals(teamnames[1])){
+						return 1;
+					}else
 					return 0;
 				}else{
 					double[] nums1=po1.getTeamData();
 					double[] nums2=po2.getTeamData();
 				if(nums1[this.comNum1]==nums2[this.comNum1]){
+					String teamnames[]=new String[2];
+					teamnames[0]=po1.getTeamName();
+					teamnames[1]=po2.getTeamName();
+					Arrays.sort(teamnames);
+					if(po1.getTeamName().equals(teamnames[1])){
+						return 1;
+					}else
 					return 0;
 				}else if(nums1[this.comNum1]>nums2[this.comNum1]){
 					return 1;

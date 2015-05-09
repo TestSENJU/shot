@@ -27,9 +27,9 @@ public interface TeamBL {
 	 * 25比赛场数
 	 * @return
 	 */
-	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num,int many);
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num,int many,int num1);
 	//根据排序的依据返回升序的球队的所有的场均数据 raising
-	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num,int many);
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num,int many,int num1);
 	///根据排序依据返回热点球队的五个球队的场均数据
 	/**
 	 * 
@@ -60,9 +60,9 @@ public interface TeamBL {
 	//根据球队名返回这个球队的球员名字
 	public ArrayList<String> getPlayerNamesOfTeam(String teamName);
 	
-	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(int num,int many);
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(int num,int many,int num1);
 	
-	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num,int many);
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num,int many,int num1);
 
 	public String getShortName(String longName);
 	

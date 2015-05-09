@@ -83,13 +83,13 @@ public class TeamBL_Impl implements TeamBL{
 		}
 	}
 
-	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num,int many) {
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num,int many,int num1) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAllVO> list=getTeamAll();
 		if(num==25){
-			Collections.sort(list, new TeamSortAllByNum(0,1));
+			Collections.sort(list, new TeamSortAllByNum(0,1,num1));
 		}else{
-			Collections.sort(list, new TeamSortAllByNum(num,0));
+			Collections.sort(list, new TeamSortAllByNum(num,0,num1));
 		}	
 		   if(list!=null){
 	        	if(many<30){
@@ -106,13 +106,13 @@ public class TeamBL_Impl implements TeamBL{
 	        }
 	}
 
-	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num,int many) {
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num,int many,int num1) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAverageVO> list=getTeamAverage();
 		if(num==25){
-			Collections.sort(list, new TeamSortAverageByNum(0,1));
+			Collections.sort(list, new TeamSortAverageByNum(0,1,num1));
 		}else{
-			Collections.sort(list, new TeamSortAverageByNum(num,0));
+			Collections.sort(list, new TeamSortAverageByNum(num,0,num1));
 		}
         if(list!=null){
         	if(many<30){
@@ -134,18 +134,18 @@ public class TeamBL_Impl implements TeamBL{
 		ArrayList<TeamAverageVO> list=getTeamAverage();
 		
 		switch(num){
-		case 0:Collections.sort(list, new TeamSortAverageByNum(14,0));break;
-		case 1:Collections.sort(list, new TeamSortAverageByNum(8,0));break;
-		case 2:Collections.sort(list, new TeamSortAverageByNum(9,0));break;
-		case 3:Collections.sort(list, new TeamSortAverageByNum(11,0));break;
-		case 4:Collections.sort(list, new TeamSortAverageByNum(10,0));break;
-		case 5:Collections.sort(list, new TeamSortAverageByNum(16,0));break;
-		case 6:Collections.sort(list, new TeamSortAverageByNum(15,0));break;
-		case 7:Collections.sort(list, new TeamSortAverageByNum(17,0));break;
-		case 8:Collections.sort(list, new TeamSortAverageByNum(13,0));break;
-		case 9:Collections.sort(list, new TeamSortAverageByNum(12,0));break;
-		case 10:Collections.sort(list, new TeamSortAverageByNum(6,0));break;
-		case 11:Collections.sort(list, new TeamSortAverageByNum(7,0));break;
+		case 0:Collections.sort(list, new TeamSortAverageByNum(14,0,-1));break;
+		case 1:Collections.sort(list, new TeamSortAverageByNum(8,0,-1));break;
+		case 2:Collections.sort(list, new TeamSortAverageByNum(9,0,-1));break;
+		case 3:Collections.sort(list, new TeamSortAverageByNum(11,0,-1));break;
+		case 4:Collections.sort(list, new TeamSortAverageByNum(10,0,-1));break;
+		case 5:Collections.sort(list, new TeamSortAverageByNum(16,0,-1));break;
+		case 6:Collections.sort(list, new TeamSortAverageByNum(15,0,-1));break;
+		case 7:Collections.sort(list, new TeamSortAverageByNum(17,0,-1));break;
+		case 8:Collections.sort(list, new TeamSortAverageByNum(13,0,-1));break;
+		case 9:Collections.sort(list, new TeamSortAverageByNum(12,0,-1));break;
+		case 10:Collections.sort(list, new TeamSortAverageByNum(6,0,-1));break;
+		case 11:Collections.sort(list, new TeamSortAverageByNum(7,0,-1));break;
 		}
 		if(list!=null){
 					if(many<30){
@@ -194,15 +194,15 @@ public class TeamBL_Impl implements TeamBL{
 		return teamData.getPlayerNamesOfTeam(teamName);
 	}
 
-	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num,int many) {
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num,int many,int num1) {
 		// TODO Auto-generated method stub
-		ArrayList<TeamAverageVO>list=getTeamAverageRankingByNum(num,many);
+		ArrayList<TeamAverageVO>list=getTeamAverageRankingByNum(num,many,num1);
 		Collections.reverse(list);
 		return list;
 	}
-	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(int num,int many) {
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(int num,int many,int num1) {
 		// TODO Auto-generated method stub
-		ArrayList<TeamAllVO> list=getTeamAllRankingByNumRaising(num,many);
+		ArrayList<TeamAllVO> list=getTeamAllRankingByNumRaising(num,many,num1);
 		Collections.reverse(list);
 		
 		return list;
@@ -222,9 +222,11 @@ public class TeamBL_Impl implements TeamBL{
 class TeamSortAllByNum implements Comparator<Object>{
 	int comNum;
 	int option;
-    public TeamSortAllByNum(int num,int op){
+	int comNum1;
+    public TeamSortAllByNum(int num,int op,int num1){
     	this.comNum=num;
     	this.option=op;
+    	this.comNum1=num1;
     }
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
@@ -235,8 +237,19 @@ class TeamSortAllByNum implements Comparator<Object>{
 		double[] nums2=po2.getTeamData();
 		if(nums1[this.comNum]>nums2[this.comNum]){
 			return 1;
-		}else if(nums1[this.comNum]==nums2[this.comNum])
-		return 0;
+		}else if(nums1[this.comNum]==nums2[this.comNum]){
+			if(this.comNum1==-1){
+				return 0;
+			}else{
+			if(nums1[this.comNum1]==nums2[this.comNum1]){
+				return 0;
+			}else if(nums1[this.comNum1]>nums2[this.comNum1]){
+				return 1;
+			}else{
+				return -1;
+			}
+			}
+		}
 		else return -1;
 		}else{
 			int num1=po1.getMatchNum();
@@ -244,32 +257,58 @@ class TeamSortAllByNum implements Comparator<Object>{
 			if(num1>num2){
 				return 1;
 			}else if(num1==num2){
-				return 0;
+
+				if(this.comNum1==-1){
+					return 0;
+				}else{
+					double[] nums1=po1.getTeamData();
+					double[] nums2=po2.getTeamData();
+				if(nums1[this.comNum1]==nums2[this.comNum1]){
+					return 0;
+				}else if(nums1[this.comNum1]>nums2[this.comNum1]){
+					return 1;
+				}else{
+					return -1;
+				}
+				}
+			
 			}else {
 				return -1;
 			}
-		}
-	
+		}	
 	}
 }
 class TeamSortAverageByNum implements Comparator<Object>{
 	int comNum;
 	int option;
-    public TeamSortAverageByNum(int num,int op){
+	int comNum1;
+    public TeamSortAverageByNum(int num,int op,int num1){
     	this.comNum=num;
     	this.option=op;
+    	this.comNum1=num1;
     }
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
 		TeamAverageVO po1=(TeamAverageVO) o1;
 		TeamAverageVO po2=(TeamAverageVO)o2;
-		double[] nums1=po1.getTeamData();
-		double[] nums2=po2.getTeamData();
+
 		if(this.option==0){
+			double[] nums1=po1.getTeamData();
+			double[] nums2=po2.getTeamData();
 			if(nums1[this.comNum]>nums2[this.comNum]){
 				return 1;
 			}else if(nums1[this.comNum]==nums2[this.comNum]){
-				return 0;
+				if(this.comNum1==-1){
+					return 0;
+				}else{
+				if(nums1[this.comNum1]==nums2[this.comNum1]){
+					return 0;
+				}else if(nums1[this.comNum1]>nums2[this.comNum1]){
+					return 1;
+				}else{
+					return -1;
+				}
+				}			
 			}else 
 			return -1;
 		}else{
@@ -279,7 +318,21 @@ class TeamSortAverageByNum implements Comparator<Object>{
 			if(num1>num2){
 				return 1;
 			}else if(num1==num2){
-				return 0;
+
+
+				if(this.comNum1==-1){
+					return 0;
+				}else{
+					double[] nums1=po1.getTeamData();
+					double[] nums2=po2.getTeamData();
+				if(nums1[this.comNum1]==nums2[this.comNum1]){
+					return 0;
+				}else if(nums1[this.comNum1]>nums2[this.comNum1]){
+					return 1;
+				}else{
+					return -1;
+				}
+				}			
 			}else 
 	          return -1;	
 		}

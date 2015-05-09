@@ -284,7 +284,6 @@ public class TeamData_Impl implements TeamDataService{
 			@SuppressWarnings("resource")
 			BufferedReader br=new BufferedReader(new FileReader(filename));
 		    String str="";
-		    System.out.println(teamName);
 		    if(teamName.equals("NOH"))teamName="NOP";
 		    while((str=br.readLine())!=null){
 		    	if(str.contains(teamName)){
@@ -323,5 +322,30 @@ public class TeamData_Impl implements TeamDataService{
 		// TODO Auto-generated method stub
 		TeamAllPlusRatePO po=getTeamAllByName(teamName);
 		return po.getPlayerList();
+	}
+
+	@SuppressWarnings("resource")
+	public String getLeague(String teamName) {
+		// TODO Auto-generated method stub
+			BufferedReader br;
+			try {
+				br = new BufferedReader(new FileReader(filename));
+			    String str="";
+			    if(teamName.equals("NOH"))teamName="NOP";
+			    while((str=br.readLine())!=null){
+			    	if(str.contains(teamName)){
+							String mass[]=str.split("║");
+							String strs[]=mass[1].split("│");
+			    		return strs[3];
+			    	}
+	}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+      return null;
 	}
 }

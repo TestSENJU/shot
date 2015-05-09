@@ -213,6 +213,11 @@ public class TeamBL_Impl implements TeamBL{
 		return teamData.getTeamShortName(longName);
 	}
 
+	public String getLleague(String shortName) {
+		// TODO Auto-generated method stub
+		return teamData.getLeague(shortName);
+	}
+
 }
 class TeamSortAllByNum implements Comparator<Object>{
 	int comNum;

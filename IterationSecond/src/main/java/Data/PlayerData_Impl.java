@@ -401,7 +401,7 @@ private String getAge(String filename){
 		br = new BufferedReader(new FileReader(new File(filename)));
 		String str=""; 
 		while((str=br.readLine())!=null){
-				if(str.contains("│")&&str.contains("Position")){
+				if(str.contains("│")&&str.contains("Age")){
 					String strs[]=str.split("│");
 
 					return strs[1].substring(0, 1);

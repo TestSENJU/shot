@@ -9,62 +9,59 @@ import vo.PlayerShortVO;
 
 public interface PlayerBL {
 	/**
-	 * 根据球员位置、球员联盟、排序依据总赛季数据升序
-	 * @param location
-	 * @param league
+	 *  *0篮板数
+ *1助攻数
+ *2投篮命中率
+ *3三分命中率
+ *4罚球命中率
+ *5进攻数
+ *6防守数
+ *7抢断数
+ *8盖帽数
+ *9失误数
+ *10犯规数
+ *11得分
+ *12效率
+ *13GmSc效率值
+ *14真实命中率
+ *15投篮效率
+ *16篮板率
+ *17进攻篮板率
+ *18防守篮板率
+ *19助攻率
+ *20抢断率
+ *21盖帽率
+ *22失误率
+ *23使用率
+ *24得分提升率
+ *25篮板提升率
+ *26助攻提升率
 	 * @param num
-	 * 0得分
-	 * 1篮板
-	 * 2助攻
-	 * 3得分篮板助攻1：1:1
-	 * 4盖帽
-	 * 5抢断
-	 * 6犯规
-	 * 7失误
-	 * 8分钟
-	 * 9效率
-	 * 10投篮
-	 * 11三分
-	 * 12罚球
-	 * 13两双
+	 * 0-23数组数字
+	 * 24时间
+	 * 25参赛场数
+	 * 26先发场数
+	 * 27字典序
 	 * @return
 	 */
 	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(String location,String league,String age,int num,int num1,int many);
 	//howmany是指筛选出多少个球员 raising接口返回的是最好的
-	/**
-	 * 根据球员位置、球员联盟、排序依据场均数据50人升序
-	 * @param location
-	 * @param league
-	 * @param num
-	 * @return
-	 */
+
 	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConRaising(String location,String league,String age,int num,int num1,int many);
-		/**
-	 * 根据球员位置、球员联盟、排序依据总赛季数据50人降序
-	 * @param location
-	 * @param league
-	 * @param num
-	 * @return
-	 */
+
 	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConDeclining(String location,String league,String age,int num,int num1,int many);
-	/**
-	 * 根据球员位置、球员联盟、排序依据场均数据50人降序
-	 * @param location
-	 * @param league
-	 * @param num
-	 * @return
-	 */
+
 	//declining接口返回的是最差的
 	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConDeclining(String location,String league,String age,int num,int num1,int many);	
 	/**
 	 * 返回降序排列的前五名进步最快球员
 	 * @param num
-	 * 0场均得分
-	 * 1场均篮板
-	 * 2场均助攻
+	 * 24场均得分
+	 * 25场均篮板
+	 * 26场均助攻
 	 * @return
 	 */
-	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num);
+	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num,int num1,int many);
 	
 	/**
 	 * 降序排列的当天热点球员前五名
@@ -76,7 +73,7 @@ public interface PlayerBL {
 	 * 4抢断
 	 * @return
 	 */
-	public ArrayList<PlayerShortVO> getTodayHotPlayerByNum(int num);
+	public ArrayList<PlayerShortVO> getTodayHotPlayerByNum(int num,int many);
 	
 	/**
 	 * 返回降序排列的前五名赛季热点球员
@@ -91,7 +88,7 @@ public interface PlayerBL {
 	 * 7罚球命中率
 	 * @return
 	 */
-	public ArrayList<PlayerShortVO>getHotPlayerByNum(int num);
+	public ArrayList<PlayerShortVO>getHotPlayerByNum(int num,int many);
 	
     //返回所有球员的名字，包括有基本信息的，还有在比赛中出现过的
 	public ArrayList<String> getPlayerNames();

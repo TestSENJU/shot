@@ -19,119 +19,123 @@ import vo.PlayerShortVO;
 public class PlayerBL_Impl implements PlayerBL{
     PlayerDataService playerData=new PlayerData_Impl();
     
-	@SuppressWarnings("unused")
-	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(
-			String location, String league, int num) {
+	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(String location,String league,String age,int num,int num1,int many) {
 		// TODO Auto-generated method stub
-		ArrayList<String>list=new ArrayList<String>();
-		if(location!=null&&league!=null){
-			ArrayList<String> listLocation=playerData.getPlayerByPosition(location);
-			ArrayList<String> listLeague=playerData.getPlayerByLeague(league);
-			list=new ArrayList<String>(listLocation);
-			list.retainAll(listLeague);
-		}else if(location!=null&&league==null){
-			ArrayList<String> listLocation=playerData.getPlayerByPosition(location);
-			list=new ArrayList<String>(listLocation);
-		}	else if(location==null&&league!=null){
-			ArrayList<String> listLeague=playerData.getPlayerByLeague(league);
-			list=new ArrayList<String>(listLeague);
-		}
+	ArrayList<String>list=getPlayerNamesByCon(location,league,age);
 		if(list!=null){
 			ArrayList<PlayerAllVO>result=new ArrayList<PlayerAllVO>();
+			if(list.size()!=0){					
 			for(int i=0;i<list.size();i++){
 				result.add(new PlayerAllVO(playerData.getPlayerAllByName(list.get(i))));
 			}
-			switch(num){
-			case 0:Collections.sort(result, new SortAllByNum(11, 0));break;
-			case 1:Collections.sort(result, new SortAllByNum(0,0));break;
-			case 2:Collections.sort(result, new SortAllByNum(1,0));break;
-			case 3:Collections.sort(result, new SortAllByNum(0,2));break;
-			case 4:Collections.sort(result, new SortAllByNum(8,0));break;
-			case 5:Collections.sort(result, new SortAllByNum(7,0));break;
-			case 6:Collections.sort(result, new SortAllByNum(10,0));break;
-			case 7:Collections.sort(result, new SortAllByNum(9,0));break;
-			case 8:Collections.sort(result, new SortAllByNum(0,1));break;
-			case 9:Collections.sort(result, new SortAllByNum(15,0));break;
-			case 10:Collections.sort(result, new SortAllByNum(2,0));break;
-			case 11:Collections.sort(result, new SortAllByNum(3,0));break;
-			case 12:Collections.sort(result, new SortAllByNum(4,0));break;
-			case 13:Collections.sort(result, new SortAllByNum(0,3));break;
+			int com[]=getCompareNum(num,num1);
+			Collections.sort(result, new SortAllByNum(com[0],com[1],com[2],com[3]));		
+			}else{
+				result=getPlayerAllRankingByNumRaising(num,num1);			
 			}
-			return result;
+			if(many>result.size()){
+				return result;
+			}else{
+				ArrayList<PlayerAllVO> returnlist=new ArrayList<PlayerAllVO>();
+				for(int i=result.size()-1;i>result.size()-(many+1);i--){
+					returnlist.add(result.get(i));
+				}
+				return returnlist;
+			}
 		}else{
 			return null;
 		}		
 	
 	}
-
-	@SuppressWarnings("unused")
-	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConRaising(
-			String location, String league, int num) {
-		// TODO Auto-generated method stub
-		ArrayList<String> listLocation=playerData.getPlayerByPosition(location);
-		ArrayList<String> listLeague=playerData.getPlayerByLeague(league);
-		ArrayList<String>list=new ArrayList<String>(listLocation);
+private ArrayList<String> getPlayerNamesByCon(String location,String league,String age){
+	ArrayList<String>list=new ArrayList<String>();
+	ArrayList<String> listLocation=playerData.getPlayerByPosition(location);
+	ArrayList<String> listLeague=playerData.getPlayerByLeague(league);
+	ArrayList<String> listAge=playerData.getPlayerByAge(age);
+	if(location!=null&&league!=null&&age!=null){
+		list=new ArrayList<String>(listLocation);
 		list.retainAll(listLeague);
+		list.retainAll(listAge);
+	}else if(location!=null&&league==null&&age!=null){
+		list=new ArrayList<String>(listLocation);
+		list.retainAll(listAge);
+	}	else if(location==null&&league!=null&&age!=null){
+		list=new ArrayList<String>(listLeague);
+		list.retainAll(listAge);
+	}else if(location!=null&&league!=null&&age==null){
+		list=new ArrayList<String>(listLocation);
+		list.retainAll(listLeague);
+	}else if(location==null&&league==null&&age==null){
+		
+	}else if(location==null&&league==null&&age!=null){
+		list=new ArrayList<String>(listAge);
+	}else if(location!=null&&league==null&&age==null){
+		list=new ArrayList<String>(listLocation);
+	}else if(location==null&&league!=null&&age==null){
+		list=new ArrayList<String>(listLeague);
+	}
+	return list;
+}
+	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConRaising(String location,String league,String age,int num,int num1,int many) {
+		// TODO Auto-generated method stub
+		ArrayList<String>list=getPlayerNamesByCon(location,league,age);
 		if(list!=null){
 			ArrayList<PlayerAverageVO>result=new ArrayList<PlayerAverageVO>();
+			if(list.size()!=0){					
 			for(int i=0;i<list.size();i++){
 				result.add(new PlayerAverageVO(playerData.getPlayerAverageByName(list.get(i))));
 			}
-			switch(num){
-			case 0:Collections.sort(result, new SortAverageByNum(11,0));break;
-			case 1:Collections.sort(result, new SortAverageByNum(0,0));break;
-			case 2:Collections.sort(result, new SortAverageByNum(1,0));break;
-			case 3:Collections.sort(result, new SortAverageByNum(0,2));break;
-			case 4:Collections.sort(result, new SortAverageByNum(8,0));break;
-			case 5:Collections.sort(result, new SortAverageByNum(7,0));break;
-			case 6:Collections.sort(result, new SortAverageByNum(10,0));break;
-			case 7:Collections.sort(result, new SortAverageByNum(9,0));break;
-			case 8:Collections.sort(result, new SortAverageByNum(0,1));break;
-			case 9:Collections.sort(result, new SortAverageByNum(15,0));break;
-			case 10:Collections.sort(result, new SortAverageByNum(2,0));break;
-			case 11:Collections.sort(result, new SortAverageByNum(3,0));break;
-			case 12:Collections.sort(result, new SortAverageByNum(4,0));break;
-			case 13:Collections.sort(result, new SortAverageByNum(0,3));break;
+			int com[]=getCompareNum(num,num1);
+			Collections.sort(result, new SortAverageByNum(com[0],com[1],com[2],com[3]));		
+			}else{
+				result=getPlayerAvergaeRankingByNumRaising(num,num1);			
 			}
-			return result;
-		} else
-			return null;		
+			if(many>result.size()){
+				return result;
+			}else{
+				ArrayList<PlayerAverageVO> returnlist=new ArrayList<PlayerAverageVO>();
+				for(int i=result.size()-1;i>result.size()-(many+1);i--){
+					returnlist.add(result.get(i));
+				}
+				return returnlist;
+			}
+		}else{
+			return null;
+		}		
 	}
 
-	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConDeclining(
-			String location, String league, int num) {
+	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConDeclining(String location,String league,String age,int num,int num1,int many) {
 		// TODO Auto-generated method stub
-		ArrayList<PlayerAllVO> list=getPlayerAllByMultipleConRaising(location,league,num);
+		ArrayList<PlayerAllVO> list=getPlayerAllByMultipleConRaising(location,league,age,num,num1,many);
 		Collections.reverse(list);
 		
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConDeclining(
-			String location, String league, int num) {
+	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConDeclining(String location,String league,String age,int num,int num1,int many) {
 		// TODO Auto-generated method stub
-		ArrayList<PlayerAverageVO>list=getPlayerAverageByMultipleConRaising(location,league,num);
+		ArrayList<PlayerAverageVO>list=getPlayerAverageByMultipleConRaising(location,league,age,num,num1,many);
 		Collections.reverse(list);
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num) {
+	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num,int num1,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO>list=getPlayerAverage();
-		switch(num){
-		
-		case 0:Collections.sort(list, new SortAverageByNum(24,0));break;
-		case 1:Collections.sort(list, new SortAverageByNum(25,0));break;
-		case 2:Collections.sort(list, new SortAverageByNum(26,0));break;
-		}
+		int com[]=getCompareNum(num,num1);
+		Collections.sort(list, new SortAverageByNum(com[0],com[1],com[2],com[3]));
 		ArrayList<PlayerAverageVO> result=new ArrayList<PlayerAverageVO>();
-		for(int i=list.size()-1;i>list.size()-6;i--){
-			result.add(list.get(i));
+		if(many>list.size()){
+			Collections.reverse(list);
+			return list;
+		}else{
+			for(int i=list.size()-1;i>list.size()-many;i--){
+				result.add(list.get(i));
+			}
+			return result;
 		}
-		return result;
 	}
-
-	public ArrayList<PlayerShortVO> getTodayHotPlayerByNum(int num) {
+	public ArrayList<PlayerShortVO> getTodayHotPlayerByNum(int num,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerShortPO> polist=playerData.getShortPlayerToday(num);
 		ArrayList<PlayerShortVO> volist=new ArrayList<PlayerShortVO>();
@@ -141,6 +145,7 @@ public class PlayerBL_Impl implements PlayerBL{
 		polist.clear();
 		Collections.sort(volist, new SortShortByNum());
 		if(volist.size()<=5){
+			Collections.reverse(volist);
 			return volist;
 		}else{
 			ArrayList<PlayerShortVO> list=new ArrayList<PlayerShortVO>();
@@ -151,7 +156,7 @@ public class PlayerBL_Impl implements PlayerBL{
 		}
 	}
 
-	public ArrayList<PlayerShortVO> getHotPlayerByNum(int num) {
+	public ArrayList<PlayerShortVO> getHotPlayerByNum(int num,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerShortPO> polist=new ArrayList<PlayerShortPO>();
 		switch(num){
@@ -272,52 +277,68 @@ public class PlayerBL_Impl implements PlayerBL{
 		
 	}
 
-	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumRaising(int num) {
+	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumRaising(int num,int num1) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAllVO> list=getPlayerAll();
-		if(num>=0&&num<=23){
-			Collections.sort(list, new SortAllByNum(num,0));
-		}else if(num==24){
-			Collections.sort(list, new SortAllByNum(0,1));
-		}else if(num==25){
-			Collections.sort(list, new SortAllByNum(0,4));
-		}else if(num==26){
-			Collections.sort(list, new SortAllByNum(0,5));
-		}else if(num==27){
-			Collections.sort(list, new SortAllByNum(0,6));
+		int com[]=getCompareNum(num,num1);
 
-		}
-		
+			Collections.sort(list, new SortAllByNum(com[0],com[1],com[2],com[3]));
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumRaising(int num) {
+	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumRaising(int num,int num1) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO> list=getPlayerAverage();
-		if(num>=0&&num<=23){
-			Collections.sort(list, new SortAverageByNum(num,0));
-		}else if(num==24){
-			Collections.sort(list, new SortAverageByNum(0,1));
-		}else if(num==25){
-			Collections.sort(list, new SortAverageByNum(0,4));
-		}else if(num==26){
-			Collections.sort(list, new SortAverageByNum(0,5));
-		}else if(num==27){
-			Collections.sort(list, new SortAverageByNum(0,6));
-		}
+		int com[]=getCompareNum(num,num1);
+			Collections.sort(list, new SortAverageByNum(com[0],com[1],com[2],com[3]));
 		return list;
 	}
-
-	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumDeclining(int num) {
+private int[] getCompareNum(int num,int num1){
+	int result[]=new int[4];
+	if(num>=0&&num<=23){
+		result[0]=num;
+		result[1]=0;
+	}else if(num==24){
+		result[0]=0;
+		result[1]=1;
+	}else if(num==25){
+		result[0]=0;
+		result[1]=4;
+	}else if(num==26){
+		result[0]=0;
+		result[1]=5;
+	}else if(num==27){
+		result[0]=0;
+		result[1]=6;
+	}
+	if(num1>=0&&num1<=23){
+		result[2]=num1;
+		result[3]=0;
+	}else if(num1==24){
+		result[2]=0;
+		result[3]=1;
+	}else if(num1==25){
+		result[2]=0;
+		result[3]=4;
+	}else if(num1==26){
+		result[2]=0;
+		result[3]=5;
+	}else if(num1==27){
+		result[2]=0;
+		result[3]=6;
+	}
+	return result;
+}
+	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumDeclining(int num,int num1) {
 		// TODO Auto-generated method stub
-		ArrayList<PlayerAllVO> list=getPlayerAllRankingByNumRaising(num);
+		ArrayList<PlayerAllVO> list=getPlayerAllRankingByNumRaising(num,num1);
 		Collections.reverse(list);
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumDeclining(int num) {
+	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumDeclining(int num,int num1) {
 		// TODO Auto-generated method stub
-		ArrayList<PlayerAverageVO> list=getPlayerAvergaeRankingByNumDeclining(num);
+		ArrayList<PlayerAverageVO> list=getPlayerAvergaeRankingByNumDeclining(num,num1);
 		Collections.reverse(list);
 		return list;
 	}
@@ -341,31 +362,6 @@ public class PlayerBL_Impl implements PlayerBL{
 		// TODO Auto-generated method stub
 		return playerData.getPlayerByAge(age);
 	}
-
-	public ArrayList<PlayerAllVO> getPlayerAllByConRaisingAndNum(
-			String location, String league, int num, int howmany) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<PlayerAverageVO> getPlayerAverageByConRaisingAndNum(
-			String location, String league, int num, int howmany) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<PlayerAllVO> getPlayerAllByConDecliningAndNum(
-			String location, String league, int num, int howmany) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ArrayList<PlayerAverageVO> getPlayerAverageConDecliningAndNum(
-			String location, String league, int num, int howmany) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
 /**
  * 
@@ -382,9 +378,13 @@ public class PlayerBL_Impl implements PlayerBL{
 class SortAllByNum implements Comparator<Object>{
 	int comNum;
 	int option;
-    public SortAllByNum(int num,int op){
+	int comNum1;
+	int option1;
+    public SortAllByNum(int num,int op,int num1,int op1){
     	this.comNum=num;
     	this.option=op;
+    	this.comNum1=num1;
+    	this.option1=op1;
     }
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
@@ -493,9 +493,12 @@ class SortShortByNum implements Comparator<Object>{
 class SortAverageByNum implements Comparator<Object>{
 	int comNum;
 	int option;
-    public SortAverageByNum(int num,int op){
+	int comNum1;
+	int option1;
+    public SortAverageByNum(int num,int op,int num1,int op1){
     	this.comNum=num;
     	this.option=op;
+this.option1=op1;
     }
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub

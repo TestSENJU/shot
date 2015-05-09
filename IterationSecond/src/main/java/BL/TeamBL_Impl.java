@@ -100,6 +100,7 @@ public class TeamBL_Impl implements TeamBL{
 	    			}
 	    			return result;
 	    		}else{
+	    			Collections.reverse(list);
 	    			return list;
 	    		}	
 	        }else{
@@ -123,6 +124,7 @@ public class TeamBL_Impl implements TeamBL{
     			}
     			return result;
     		}else{
+    			Collections.reverse(list);
     			return list;
     		}	
         }else{
@@ -156,6 +158,7 @@ public class TeamBL_Impl implements TeamBL{
 			}
 			return result;
 		}else{
+			Collections.reverse(list);
 			return list;
 		}	
 		}

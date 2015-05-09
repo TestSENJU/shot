@@ -1,6 +1,10 @@
 import java.io.PrintStream;
+import java.util.Hashtable;
 
-import test.data.PlayerHotInfo;
+import vo.PlayerAllVO;
+import vo.PlayerAverageVO;
+import vo.TeamAllVO;
+import vo.TeamAverageVO;
 import BL.InitBL;
 import BL.InitBL_Impl;
 import BL.MatchBL;
@@ -43,44 +47,304 @@ public class Console {
 		} catch (CmdlineParserException e) {
 			e.printStackTrace();
 		}
-		if (args[0].equals("-player")) {
+		if (args[0].contains("player")) {
+			// TODO 记住有个数量要求 number
+			Hashtable<String, ?> vo;
+			if (team.isTotal) {
+				vo = new Hashtable<String, PlayerAllVO>();
+			} else {
+				vo = new Hashtable<String, PlayerAverageVO>();
+			}
 			if (player.isHot) {
-				if(player.isSeason){
-					
-				}else if{
-					
+				if (player.isSeason) {
+					// TODO
+					// This is an demo
+					getMostImprovedPlayer(player.hotField,
+							player.getTopnumber());
+				} else {
+					// TODO
 				}
-				// TODO
-				// This is an demo
-				getMostImprovedPlayer(player.hotField, player.getTopnumber());
 			} else if (player.isKing) {
-				if (player.isDaily) {
+				if (player.isSeason) {
 					// TODO
 				} else {
 					// TODO
 				}
 			} else {
 				if (player.isFilter && !player.isSort) {
-					// TODO
+					String[] spl = player.filterField.split(",");
+					for (String s : spl) {
+						if (s.contains("F")) {
+							// TODO
+						} else if (s.contains("G")) {
+							// TODO
+						} else if (s.contains("C")) {
+							// TODO
+						} else if (s.contains("A")) {
+							// TODO
+						} else if (s.contains("WEST")) {
+							// TODO
+						} else if (s.contains("EAST")) {
+							// TODO
+						} else if (s.contains("ALL")) {
+							// TODO
+						}
+					}
 				} else if (player.isSort && !player.isFilter) {
-					// TODO
+					String[] spl = player.sortField.split(",");
+					for (String s : spl) {
+						if (s.contains("point")) {
+
+						} else if (s.contains("rebound")) {
+
+						} else if (s.contains("assit")) {
+
+						} else if (s.contains("blockShot")) {
+
+						} else if (s.contains("steal")) {
+
+						} else if (s.contains("foul")) {
+
+						} else if (s.contains("fault")) {
+
+						} else if (s.contains("minute")) {
+
+						} else if (s.contains("efficient")) {
+
+						} else if (s.contains("shot")) {
+
+						} else if (s.contains("three")) {
+
+						} else if (s.contains("penalty")) {
+
+						} else if (s.contains("doubleTwo")) {
+
+						} else if (s.contains("realShot")) {
+
+						} else if (s.contains("GmSc")) {
+
+						} else if (s.contains("shotEfficient")) {
+
+						} else if (s.contains("reboundEfficient")) {
+
+						} else if (s.contains("offendReboundEfficient")) {
+
+						} else if (s.contains("defendReboundEfficient")) {
+
+						} else if (s.contains("assitEfficient")) {
+
+						} else if (s.contains("stealEfficient")) {
+
+						} else if (s.contains("blockShotEfficient")) {
+
+						} else if (s.contains("faultEfficient")) {
+
+						} else if (s.contains("frequency")) {
+
+						}
+					}
+					if (player.sortField.contains("asc")) {
+
+					} else if (player.sortField.contains("desc")) {
+
+					}
 				} else if (player.isFilter && player.isSort) {
-					// TODO
+					String[] spl = player.filterField.split(",");
+					for (String s : spl) {
+						if (s.contains("F")) {
+							// TODO
+						} else if (s.contains("G")) {
+							// TODO
+						} else if (s.contains("C")) {
+							// TODO
+						} else if (s.contains("A")) {
+							// TODO
+						} else if (s.contains("WEST")) {
+							// TODO
+						} else if (s.contains("EAST")) {
+							// TODO
+						} else if (s.contains("ALL")) {
+							// TODO
+						}
+					}
+					String[] spl2 = player.sortField.split(",");
+					for (String s : spl2) {
+						if (s.contains("point")) {
+
+						} else if (s.contains("rebound")) {
+
+						} else if (s.contains("assit")) {
+
+						} else if (s.contains("blockShot")) {
+
+						} else if (s.contains("steal")) {
+
+						} else if (s.contains("foul")) {
+
+						} else if (s.contains("fault")) {
+
+						} else if (s.contains("minute")) {
+
+						} else if (s.contains("efficient")) {
+
+						} else if (s.contains("shot")) {
+
+						} else if (s.contains("three")) {
+
+						} else if (s.contains("penalty")) {
+
+						} else if (s.contains("doubleTwo")) {
+
+						} else if (s.contains("realShot")) {
+
+						} else if (s.contains("GmSc")) {
+
+						} else if (s.contains("shotEfficient")) {
+
+						} else if (s.contains("reboundEfficient")) {
+
+						} else if (s.contains("offendReboundEfficient")) {
+
+						} else if (s.contains("defendReboundEfficient")) {
+
+						} else if (s.contains("assitEfficient")) {
+
+						} else if (s.contains("stealEfficient")) {
+
+						} else if (s.contains("blockShotEfficient")) {
+
+						} else if (s.contains("faultEfficient")) {
+
+						} else if (s.contains("frequency")) {
+
+						}
+					}
+					if (player.sortField.contains("asc")) {
+
+					} else if (player.sortField.contains("desc")) {
+
+					}
+
 				} else if (!player.isFilter && !player.isSort) {
-					// TODO
+					String[] spl = player.filterField.split(",");
+					for (String s : spl) {
+						if (s.contains("F")) {
+							// TODO
+						} else if (s.contains("G")) {
+							// TODO
+						} else if (s.contains("C")) {
+							// TODO
+						} else if (s.contains("A")) {
+							// TODO
+						} else if (s.contains("WEST")) {
+							// TODO
+						} else if (s.contains("EAST")) {
+							// TODO
+						} else if (s.contains("ALL")) {
+							// TODO
+						}
+					}
 				}
 			}
-		} else {
+		}
+		// --------------team-----------------------
+		else {
+			// TODO 记住有个数量要求 number
 			if (team.isHot) {
-				// TODO
+				if (team.hotField.contains("score")) {
+
+				} else if (team.hotField.contains("rebound")) {
+
+				} else if (team.hotField.contains("assit")) {
+
+				} else if (team.hotField.contains("blockShot")) {
+
+				} else if (team.hotField.contains("steal")) {
+
+				} else if (team.hotField.contains("foul")) {
+
+				} else if (team.hotField.contains("fault")) {
+
+				} else if (team.hotField.contains("shot")) {
+
+				} else if (team.hotField.contains("three")) {
+
+				} else if (team.hotField.contains("penalty")) {
+
+				} else if (team.hotField.contains("defendRebound")) {
+
+				} else if (team.hotField.contains("offendRebound")) {
+
+				} else if (team.hotField.contains("rebound")) {
+
+				}
 			} else {
+				Hashtable<String, ?> vo;
+				if (team.isTotal) {
+					vo = new Hashtable<String, TeamAllVO>();
+				} else {
+					vo = new Hashtable<String, TeamAverageVO>();
+				}
 				if (team.isSort) {
-					// TODO
+					String[] spl = team.sortField.split(",");
+					for (String s : spl) {
+						if (s.contains("point")) {
+
+						} else if (s.contains("rebound")) {
+
+						} else if (s.contains("assit")) {
+
+						} else if (s.contains("blockShot")) {
+
+						} else if (s.contains("steal")) {
+
+						} else if (s.contains("foul")) {
+
+						} else if (s.contains("fault")) {
+
+						} else if (s.contains("shot")) {
+
+						} else if (s.contains("three")) {
+
+						} else if (s.contains("penalty")) {
+
+						} else if (s.contains("defendRebound")) {
+
+						} else if (s.contains("offendRebound")) {
+
+						} else if (s.contains("rebound")) {
+
+						} else if (s.contains("winRate")) {
+
+						} else if (s.contains("offendRebound")) {
+
+						} else if (s.contains("offendEfficient")) {
+
+						} else if (s.contains("defendEfficient")) {
+
+						} else if (s.contains("offendReboundEfficient")) {
+
+						} else if (s.contains("defendReboundEfficient")) {
+
+						} else if (s.contains("assitEfficient")) {
+
+						}
+					}
+					if (team.sortField.contains("asc")) {
+
+					} else if (team.sortField.contains("desc")) {
+
+					}
+					if (team.isHigh) {
+
+					} else {
+
+					}
 				} else if (!team.isSort) {
 					if (team.isHigh) {
-						// TODO
+
 					} else {
-						// TODO
+
 					}
 				}
 			}
@@ -217,7 +481,7 @@ public class Console {
 		private boolean isAll = true;
 		private boolean isHot;
 		private String hotField;
-		private boolean isHigh;
+		private boolean isHigh = false;
 		private int num = 30;
 		private boolean isSort;
 		private String sortField;
@@ -260,6 +524,11 @@ public class Console {
 			sortField = tmpStr[0];
 			if (tmpStr[1].equals("asc"))
 				ifAscSort = true;
+		}
+
+		@CmdOption(names = { "-high" }, args = { "field" }, maxCount = 1, minCount = 0)
+		private void setHigh() {
+			isHigh = true;
 		}
 	}
 }

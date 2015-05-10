@@ -58,6 +58,7 @@ public class TeamAverageVO {
 		this.usedLongName=po.getUsedLongName();
 		this.usedName=po.getUsedName();
 		this.winNum=po.getWinNum();
+		this.league=po.getLeague();
 	}
 	public String getTeamNameLong() {
 		return teamNameLong;

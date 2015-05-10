@@ -22,9 +22,12 @@ TeamBL teambl=new TeamBL_Impl();
 ArrayList<Integer>nums=new ArrayList<Integer>();
 nums.add(0);
 nums.add(25);
-ArrayList<TeamAverageVO> list=teambl.getHotTeamByNum(nums, 20);
-System.out.println(list.get(0).getTeamName());
 
+//ArrayList<TeamAverageVO> list=teambl.getHotTeamByNum(nums, 20);
+//System.out.println(list.get(0).getTeamName());
+
+ArrayList<TeamAverageVO>list=teambl.getTeamAverageRankingByNum(nums, 20);
+System.out.println(list.get(0).getLeague());
 //	PlayerBL playerbl=new PlayerBL_Impl();
 //	ArrayList<Integer> nums=new ArrayList<Integer>();
 //	nums.add(11);

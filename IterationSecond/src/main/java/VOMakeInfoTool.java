@@ -88,8 +88,13 @@ public PlayerHighInfo getPlayerAverageHigh(PlayerAverageVO playerAverage,PlayerB
 	return thePlayer;
 }
 //TODO
-public PlayerHotInfo getPlayerHot(PlayerAverageVO player){
+public PlayerHotInfo getPlayerHot(PlayerShortVO player,String filed){
 	PlayerHotInfo thePlayer=new PlayerHotInfo();
+	thePlayer.setField(filed);
+	thePlayer.setName(player.getPlayerName());
+	thePlayer.setPosition(player.getLocation());
+	thePlayer.setTeamName(player.getTeam());
+	thePlayer.setValue(player.getNum());
 	return thePlayer;
 }
 /**

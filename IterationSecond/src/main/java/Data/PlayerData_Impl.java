@@ -240,6 +240,14 @@ public class PlayerData_Impl implements PlayerDataService{
 			PlayerShortPO shortpo=new PlayerShortPO(key);
 			double data[]=allpo.getPlayerData();
 			shortpo.setNum(data[num]);
+			if(num==11){
+				shortpo.setRate(data[24]);
+			}else if(num==0){
+				shortpo.setRate(data[25]);
+			}else if(num==1){
+				shortpo.setRate(data[26]);
+			}
+
 			shortpo.setTeam(po.getTeam());
 			shortpo.setLocation(getPosition("players/info/"+key));
 			list.add(shortpo);

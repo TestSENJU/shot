@@ -7,6 +7,7 @@ String playerName;
 private String team;
 private String location;
 private double num;
+private double rate;
 public PlayerShortVO(String name){
 	this.playerName=name;
 }
@@ -36,6 +37,12 @@ public double getNum() {
 }
 public void setNum(double num) {
 	this.num = num;
+}
+public double getRate() {
+	return rate;
+}
+public void setRate(double rate) {
+	this.rate = rate;
 }
 
 }

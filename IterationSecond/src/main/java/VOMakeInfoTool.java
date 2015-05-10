@@ -95,6 +95,7 @@ public PlayerHotInfo getPlayerHot(PlayerShortVO player,String filed){
 	thePlayer.setPosition(player.getLocation());
 	thePlayer.setTeamName(player.getTeam());
 	thePlayer.setValue(player.getNum());
+	thePlayer.setUpgradeRate(player.getRate());
 	return thePlayer;
 }
 /**

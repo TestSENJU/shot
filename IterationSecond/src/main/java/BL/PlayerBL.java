@@ -36,13 +36,12 @@ public interface PlayerBL {
  *24得分提升率
  *25篮板提升率
  *26助攻提升率
-	 * @param num
-	 * 0-23数组数字
-	 * 24时间
-	 * 25参赛场数
-	 * 26先发场数
-	 * 27字典序
-	 * @return
+ * 27时间
+ * 28得分篮板助攻
+ * 29两双
+ * 30比赛场数
+ * 31先发场数
+ *  32字典序
 	 */
 	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(String location,String league,String age,ArrayList<Integer>nums,int many);
 	//howmany是指筛选出多少个球员 raising接口返回的是最好的
@@ -56,9 +55,9 @@ public interface PlayerBL {
 	/**
 	 * 返回降序排列的前五名进步最快球员
 	 * @param num
-	 * 24场均得分
-	 * 25场均篮板
-	 * 26场均助攻
+	 * 24场均得分提升率
+	 * 25场均篮板提升率
+	 * 26场均助攻提升率
 	 * @return
 	 */
 	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num,int many);
@@ -66,11 +65,9 @@ public interface PlayerBL {
 	/**
 	 * 降序排列的当天热点球员前五名
 	 * @param num
-	 * 0得分
-	 * 1篮板
-	 * 2助攻
-	 * 3盖帽
-	 * 4抢断
+     * 11场均得分
+	 * 0场均篮板
+	 * 1场均助攻
 	 * @return
 	 */
 	public ArrayList<PlayerShortVO> getTodayHotPlayerByNum(int num,int many);
@@ -78,14 +75,9 @@ public interface PlayerBL {
 	/**
 	 * 返回降序排列的前五名赛季热点球员
 	 * @param num
-	 * 0场均得分
-	 * 1场均篮板
-	 * 2场均助攻
-	 * 3场均盖帽
-	 * 4场均抢断
-	 * 5三分命中率
-	 * 6投篮命中率
-	 * 7罚球命中率
+	 * 11场均得分
+	 * 0场均篮板
+	 * 1场均助攻
 	 * @return
 	 */
 	public ArrayList<PlayerShortVO>getHotPlayerByNum(int num,int many);
@@ -116,14 +108,39 @@ public interface PlayerBL {
 	
 	//根据排序依据的数字返回所有球员的总数据升序
 	/**
-	 * 
-	 * @param num
-	 * 0-23数组数字
-	 * 24时间
-	 * 25参赛场数
-	 * 26先发场数
-	 * 27字典序
-	 * @return
+	 *  *0篮板数
+ *1助攻数
+ *2投篮命中率
+ *3三分命中率
+ *4罚球命中率
+ *5进攻数
+ *6防守数
+ *7抢断数
+ *8盖帽数
+ *9失误数
+ *10犯规数
+ *11得分
+ *12效率
+ *13GmSc效率值
+ *14真实命中率
+ *15投篮效率
+ *16篮板率
+ *17进攻篮板率
+ *18防守篮板率
+ *19助攻率
+ *20抢断率
+ *21盖帽率
+ *22失误率
+ *23使用率
+ *24得分提升率
+ *25篮板提升率
+ *26助攻提升率
+ * 27时间
+ * 28得分篮板助攻
+ * 29两双
+ * 30比赛场数
+ * 31先发场数
+ *  32字典序
 	 */
 	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumRaising(ArrayList<Integer>nums);
 	

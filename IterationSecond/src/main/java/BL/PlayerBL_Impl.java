@@ -25,7 +25,7 @@ public class PlayerBL_Impl implements PlayerBL{
 		if(list!=null){
 			ArrayList<PlayerAllVO>result=new ArrayList<PlayerAllVO>();
 			if(list.size()!=0){					
-			for(int i=0;i<list.size()-1;i++){
+			for(int i=0;i<list.size();i++){
 				result.add(new PlayerAllVO(playerData.getPlayerAllByName(list.get(i))));
 			}
 			list=null;
@@ -297,27 +297,37 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 private ArrayList<int[]> getCompareNum(ArrayList<Integer>nums){
 	ArrayList<int[]>result=new ArrayList<int[]>();
 	for(int i=0;i<nums.size();i++){
-		if(nums.get(i)>=0&&nums.get(i)<=23){
+		if(nums.get(i)>=0&&nums.get(i)<=26){
 		   int n[]=new int[2];
 		   n[0]=nums.get(i);
 		   n[1]=0;
 		   result.add(n);
-		}else if(nums.get(i)==24){
+		}else if(nums.get(i)==27){
 			int n[]=new int[2];
 			n[0]=0;
 			n[1]=1;
 			result.add(n);
-		}else if(nums.get(i)==25){
+		}else if(nums.get(i)==28){
+			int n[]=new int[2];
+			n[0]=0;
+			n[1]=2;
+			result.add(n);
+		}else if(nums.get(i)==29){
+			int n[]=new int[2];
+			n[0]=0;
+			n[1]=3;
+			result.add(n);
+		}else if(nums.get(i)==30){
 			int n[]=new int[2];
 			n[0]=0;
 			n[1]=4;
 			result.add(n);
-		}else if(nums.get(i)==26){
+		}else if(nums.get(i)==31){
 			int n[]=new int[2];
 			n[0]=0;
 			n[1]=5;
 			result.add(n);
-		}else if(nums.get(i)==27){
+		}else if(nums.get(i)==32){
 			int n[]=new int[2];
 			n[0]=0;
 			n[1]=6;

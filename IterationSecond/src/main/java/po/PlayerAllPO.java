@@ -332,10 +332,23 @@ private ArrayList<String> getAnotherMatches(String key){
 	}
 }
 private String refreshTime(String teamTime1,String timeAdd){
-	String s[]=teamTime1.split(":");
-		String ss[]=timeAdd.split(":");
-
-		int seconds=Integer.parseInt(ss[1])+Integer.parseInt(s[1]);
+	String ss[]=new String[2];
+	String s[]=new String[2];
+	if(timeAdd==null){
+		ss[0]=0+"";
+		ss[1]=0+"";
+		
+	}else{
+		if(timeAdd.charAt(0)<='9'&&timeAdd.charAt(0)>='0'){
+			ss=timeAdd.split(":");			
+		}else{			
+				ss[0]=0+"";
+			ss[1]=0+"";
+		}
+	}
+	  s=teamTime1.split(":");		
+		int seconds=0;
+		seconds=Integer.parseInt(ss[1])+Integer.parseInt(s[1]);
 		if(seconds<60){
 			teamTime1=(Integer.parseInt(ss[0])+Integer.parseInt(s[0])+"")
 					+":"	+(seconds+"");	

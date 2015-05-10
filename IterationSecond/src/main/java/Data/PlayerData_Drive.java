@@ -1,18 +1,18 @@
 package Data;
 
-import java.io.File;
-import java.util.ArrayList;
-
-import po.MatchPO;
-import po.MatchShortPO;
-import po.PlayerAllPlusRatePO;
-import po.PlayerAveragePlusRatePO;
-import po.PlayerBasicPO;
-import po.PlayerShortPO;
-import po.TeamAllPlusRatePO;
-import po.TeamAveragePlusRatePO;
-import po.TeamBasicPO;
-import vo.MatchVO;
+//import java.io.File;
+//import java.util.ArrayList;
+//
+//import po.MatchPO;
+//import po.MatchShortPO;
+//import po.PlayerAllPlusRatePO;
+//import po.PlayerAveragePlusRatePO;
+//import po.PlayerBasicPO;
+//import po.PlayerShortPO;
+//import po.TeamAllPlusRatePO;
+//import po.TeamAveragePlusRatePO;
+//import po.TeamBasicPO;
+//import vo.MatchVO;
 
 public class PlayerData_Drive {
 public static void main(String args[]){
@@ -24,7 +24,7 @@ public static void main(String args[]){
 
 	rft.start();rft.run();
 //	rft.run();
-	PlayerDataService playerData=new PlayerData_Impl();
+//	PlayerDataService playerData=new PlayerData_Impl();
 //	ArrayList<PlayerShortPO> list=playerData.getShortPlayerByNum(1);
 //	ArrayList<PlayerShortPO> list1=playerData.getShortPlayerToday(1);
 //	for(int i=0;i<list1.size();i++){
@@ -81,8 +81,8 @@ public static void main(String args[]){
 //		System.out.println(list.get(i));
 //	}
 	
-	PlayerAllPlusRatePO player=playerData.getPlayerAllByName("	Joel Freeland");
-	System.out.println(player.getPlayerData()[24]);
+//	PlayerAllPlusRatePO player=playerData.getPlayerAllByName("	Joel Freeland");
+//	System.out.println(player.getPlayerData()[24]);
 //	System.out.println(player.getName());
 //	System.out.println(player.getCompeteNum());
 //	System.out.println(player.getOffensiveNum());
@@ -153,7 +153,7 @@ public static void main(String args[]){
 //	}
 	
 	// 赢得比赛的数量
-	TeamDataService team=new TeamData_Impl();
+//	TeamDataService team=new TeamData_Impl();
 //	ArrayList<String>list=team.getAllTeamNames();
 //	for(int i=0;i<list.size();i++){
 //		System.out.println(list.get(i));

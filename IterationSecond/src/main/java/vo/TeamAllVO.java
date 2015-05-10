@@ -37,10 +37,12 @@ public class TeamAllVO {
  *  22篮板效率
  *  23抢断效率
  *  24助攻率
+ *  25进攻
+ *  26防守
 	 */
 	private int winNum;//球队比赛胜利的数量
 	
-	private double[] teamData=new double[25];
+	private double[] teamData=new double[27];
 	//球队的球员名字
 	private ArrayList<String> playerList=new ArrayList<String>();
 	public TeamAllVO(String name){
@@ -52,7 +54,6 @@ public class TeamAllVO {
 		this.usedLongName=po.getUsedLongName();
 		this.teamNameLong=po.getTeamNameLong();
 		this.matchNum=po.getMatchNum();
-		System.out.println(this.matchNum+this.teamName);
 		this.winNum=po.getWinNum();
 		for(int i=0;i<this.teamData.length;i++){
 			this.teamData[i]=(double)Math.round(po.getTeamData()[i]*10)/10;

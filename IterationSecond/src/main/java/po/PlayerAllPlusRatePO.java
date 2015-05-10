@@ -70,17 +70,30 @@ public PlayerAllPlusRatePO(String playerName){
 	}
 }
 public void addPlayingTime(String time){
-	String s[]=this.playingTime.split(":");
-	String ss[]=time.split(":");
-
-	int seconds=Integer.parseInt(ss[1])+Integer.parseInt(s[1]);
-	if(seconds<60){
-		this.playingTime=(Integer.parseInt(ss[0])+Integer.parseInt(s[0])+"")
-				+":"	+(seconds+"");	
+	String ss[]=new String[2];
+	String s[]=new String[2];
+	if(time==null){
+		ss[0]=0+"";
+		ss[1]=0+"";
+		
 	}else{
-		this.playingTime=(Integer.parseInt(ss[0])+Integer.parseInt(s[0])+1+"")
-				+":"	+(seconds-60+"");	
-	}	
+		if(time.charAt(0)<='9'&&time.charAt(0)>='0'){
+			ss=time.split(":");			
+		}else{			
+				ss[0]=0+"";
+			ss[1]=0+"";
+		}
+	}
+	  s=this.playingTime.split(":");		
+		int seconds=0;
+		seconds=Integer.parseInt(ss[1])+Integer.parseInt(s[1]);
+		if(seconds<60){
+			this.playingTime=(Integer.parseInt(ss[0])+Integer.parseInt(s[0])+"")
+					+":"	+(seconds+"");	
+		}else{
+			this.playingTime=(Integer.parseInt(ss[0])+Integer.parseInt(s[0])+1+"")
+					+":"	+(seconds-60+"");	
+		}	
 }
 public void addCompeteNum(int num){
 	this.competeNum+=num;

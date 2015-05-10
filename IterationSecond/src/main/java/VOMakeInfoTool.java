@@ -252,6 +252,20 @@ public TeamHighInfo getTeamHigh(TeamAverageVO average){
 	info.setWinRate(nums[18]);
 	return info;
 }
+public TeamHighInfo geTeamHighByAll(TeamAllVO all){
+	TeamHighInfo info=new TeamHighInfo();
+	double nums[]=all.getTeamData();
+	info.setAssistEfficient(nums[24]);
+	info.setDefendEfficient(nums[21]);
+	info.setDefendReboundEfficient(nums[25]);
+	info.setOffendEfficient(nums[20]);
+	info.setOffendReboundEfficient(nums[26]);
+	info.setOffendRound(nums[19]);
+	info.setStealEfficient(nums[23]);
+	info.setTeamName(all.getTeamName());
+	info.setWinRate(nums[18]);
+	return info;
+}
 /**
  * private java.lang.String field 
 热门球队的热门属性

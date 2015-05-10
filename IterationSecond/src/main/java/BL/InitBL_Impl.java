@@ -11,7 +11,7 @@ public class InitBL_Impl implements InitBL{
     public InitBL_Impl(String rootname){
     	this.root=rootname;
     	rft=new ReadFileThread(this.root);
-    	rft.start();rft.run();
+    	rft.start();
     	matchService=new MatchBL_Impl();
     	playerService=new PlayerBL_Impl();
     	teamService=new TeamBL_Impl();

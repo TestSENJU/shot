@@ -2,17 +2,16 @@ package BL;
 
 import java.util.ArrayList;
 
-
-
-
 import vo.PlayerAllVO;
+import vo.PlayerAverageVO;
+import vo.PlayerShortVO;
 import Data.ReadFileThread;
 
 public class playerBL_Drive {
 public static void main(String args[]){	
-	ReadFileThread rft=new ReadFileThread("D://newData");
+	ReadFileThread rft=new ReadFileThread("D://newData//matches");
 	rft.start();
-//TeamBL teambl=new TeamBL_Impl();
+TeamBL teambl=new TeamBL_Impl();
 ArrayList<Integer>nums=new ArrayList<Integer>();
 nums.add(0);
 nums.add(25);
@@ -25,12 +24,12 @@ nums.add(25);
 //ArrayList<TeamAllVO>list=teambl.getTeamAllRankingByNumDeclining(nums, 20);
 
 //ArrayList<TeamAverageVO>list=teambl.getTeamAverageRankingByNum(nums, 20);
-	PlayerBL playerbl=new PlayerBL_Impl();
+//	PlayerBL playerbl=new PlayerBL_Impl();
 //	ArrayList<Integer> nums=new ArrayList<Integer>();
 //	nums.add(11);
 //	nums.add(1);
-	ArrayList<PlayerAllVO>list=playerbl.getPlayerAllByMultipleConRaising("F", "E", "22",nums , 50);
-    System.out.println(list.get(0).getPlayerName());
+//	ArrayList<PlayerAllVO>list=playerbl.getPlayerAllByMultipleConRaising("F", "E", "22",nums , 50);
+//    System.out.println(list.get(0).getPlayerName());
 //	ArrayList<PlayerAverageVO>list=playerbl.getPlayerAverageByMultipleConRaising("F", "E", "22",nums , 50);
 //	System.out.println(list.get(0).getName());
 	
@@ -43,7 +42,7 @@ nums.add(25);
 //	ArrayList<PlayerShortVO>list=playerbl.getTodayHotPlayerByNum(0, 20);
 //	System.out.println(list.get(0).getPlayerName());
 	
-	//	ArrayList<PlayerShortVO> polist1=playerbl.getHotPlayerByNum(0);
+//		ArrayList<PlayerShortVO> polist1=playerbl.getHotPlayerByNum(0, 10);
 //	ArrayList<PlayerShortVO> polist2=playerbl.getTodayHotPlayerByNum(0);
 //	for(int i=0;i<polist1.size();i++){
 //		System.out.println(polist1.get(i).getPlayerName()+polist1.get(i).getNum());

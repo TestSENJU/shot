@@ -203,7 +203,7 @@ public class PlayerData_Impl implements PlayerDataService{
 
     public static void addToToday(String matchName,String playerData){
     	String strs[]=matchName.split("_");
-    	if((strs[0]+"_"+strs[1]).equals(today)){
+    	if((strs[0].concat("_").concat(strs[1])).equals(today)){
     		String player[]=playerData.split(";");
     		if(todayData.contains(player[0])){
     			todayData.get(player[0]).add(playerData);
@@ -214,7 +214,7 @@ public class PlayerData_Impl implements PlayerDataService{
     		}
     	}else{
     		String ss[]=new String[2];
-    		ss[0]=strs[0]+"_"+strs[1];
+    		ss[0]=strs[0].concat("_").concat(strs[1]);
     		ss[1]=today;
     		Arrays.sort(ss);
     		if(ss[0].equals(today)){
@@ -252,7 +252,7 @@ public class PlayerData_Impl implements PlayerDataService{
 	}
     private PlayerShortPO getShortPlayerByArrayList(String key,ArrayList<String>list,int num){
     	PlayerShortPO po=new PlayerShortPO(key);
-    	String filename="players/info/"+key;
+    	String filename="players/info/".concat(key);
     	po.setLocation(getPosition(filename));
     	double result=0;
     	for(int i=0;i<list.size();i++){
@@ -384,8 +384,7 @@ private String getPosition(String filename){
 		
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
-			System.out.println("getpostion1");
-			return null;
+			return "";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("getpostion2");

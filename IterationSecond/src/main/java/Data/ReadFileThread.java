@@ -65,7 +65,7 @@ public void run(){
 
 public void start(){
 		for(int i=0;i<filenames.length;i++){
-			readFile(this.path+"//"+filenames[i]);
+			readFile(this.path+"//".concat(filenames[i]));
 }	
 }
 
@@ -130,6 +130,7 @@ private void readFile(String filename){
 			teamTime1=refreshTime(teamTime1,strs[2]);
 			playerList1.add(strs[0]);
 		}
+	
 		for(int j=0;j<list2.size();j++){
 			String[] strs=list2.get(j).split(";");
 			strlist2.add(strs);
@@ -146,19 +147,19 @@ private void readFile(String filename){
 		if(TeamNum1[14]>TeamNum2[14]){i1=1;i2=0;}else{i1=0;i2=1;}
 		String filestrs[]=filename.split("//");
 		
-		TeamData_Impl.addToTable(TeamNum1, opponentNum2, filestrs[2], team1, playerList1,i1);
-		TeamData_Impl.addToTable(TeamNum2,opponentNum1,filestrs[2],team2, playerList2,i2);
+		TeamData_Impl.addToTable(TeamNum1, opponentNum2, filestrs[filestrs.length-1], team1, playerList1,i1);
+		TeamData_Impl.addToTable(TeamNum2,opponentNum1,filestrs[filestrs.length-1],team2, playerList2,i2);
 		
 
-		MatchData_Impl.addToTable(filestrs[2], team1, teamTime1, strlist1, team2, strlist2, pointer, pointerpart);
+		MatchData_Impl.addToTable(filestrs[filestrs.length-1], team1, teamTime1, strlist1, team2, strlist2, pointer, pointerpart);
 		for(int k=0;k<list1.size();k++){
-			PlayerData_Impl.addToToday(filestrs[2], list1.get(k));
-			PlayerData_Impl.addToTable(strlist1.get(k),filestrs[2],team1,nums1,teamTime1,nums2);
+			PlayerData_Impl.addToToday(filestrs[filestrs.length-1], list1.get(k));
+			PlayerData_Impl.addToTable(strlist1.get(k),filestrs[filestrs.length-1],team1,nums1,teamTime1,nums2);
 		}
 		for(int k=0;k<list2.size();k++){
-			PlayerData_Impl.addToToday(filestrs[2], list2.get(k));
+			PlayerData_Impl.addToToday(filestrs[filestrs.length-1], list2.get(k));
 			
-			PlayerData_Impl.addToTable(strlist2.get(k),filestrs[2],team2,nums2,teamTime2,nums1);
+			PlayerData_Impl.addToTable(strlist2.get(k),filestrs[filestrs.length-1],team2,nums2,teamTime2,nums1);
 		}
 	} catch (FileNotFoundException e) {
 		// TODO Auto-generated catch block
@@ -169,10 +170,23 @@ private void readFile(String filename){
 	}
 }
 private static String refreshTime(String teamTime1,String timeAdd){
-	String s[]=teamTime1.split(":");
-		String ss[]=timeAdd.split(":");
-
-		int seconds=Integer.parseInt(ss[1])+Integer.parseInt(s[1]);
+	String ss[]=new String[2];
+	String s[]=new String[2];
+	if(timeAdd==null){
+		ss[0]=0+"";
+		ss[1]=0+"";
+		
+	}else{
+		if(timeAdd.charAt(0)<='9'&&timeAdd.charAt(0)>='0'){
+			ss=timeAdd.split(":");			
+		}else{			
+				ss[0]=0+"";
+			ss[1]=0+"";
+		}
+	}
+	  s=teamTime1.split(":");		
+		int seconds=0;
+		seconds=Integer.parseInt(ss[1])+Integer.parseInt(s[1]);
 		if(seconds<60){
 			teamTime1=(Integer.parseInt(ss[0])+Integer.parseInt(s[0])+"")
 					+":"	+(seconds+"");	

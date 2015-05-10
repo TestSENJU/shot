@@ -38,7 +38,7 @@ public class TeamAverageVO {
  *  25进攻
  *  26防守
 	 */
-	private double[] teamData=new double[25];
+	private double[] teamData=new double[27];
 	private String usedName;//球队曾经用过的缩写名
 	private String usedLongName;//球队的曾经使用过的全名
 	private int winNum;//球队比赛胜利的数量

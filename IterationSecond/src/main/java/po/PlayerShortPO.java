@@ -5,6 +5,7 @@ String name;
 private String location;
 private double num;
 private String team;
+private double rate;
 public PlayerShortPO(String playerName){
 	this.name=playerName;
 	
@@ -29,6 +30,12 @@ public String getTeam() {
 }
 public void setTeam(String team) {
 	this.team = team;
+}
+public double getRate() {
+	return rate;
+}
+public void setRate(double rate) {
+	this.rate = rate;
 }
 
 }

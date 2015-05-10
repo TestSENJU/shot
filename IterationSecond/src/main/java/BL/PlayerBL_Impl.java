@@ -146,12 +146,12 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 		}
 		polist.clear();
 		Collections.sort(volist, new SortShortByNum());
-		if(volist.size()<=5){
+		if(volist.size()<many){
 			Collections.reverse(volist);
 			return volist;
 		}else{
 			ArrayList<PlayerShortVO> list=new ArrayList<PlayerShortVO>();
-			for(int i=volist.size()-1;i>volist.size()-6;i--){
+			for(int i=volist.size()-1;i>volist.size()-many-1;i--){
 				list.add(volist.get(i));
 			}
 			return list;
@@ -161,16 +161,7 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 	public ArrayList<PlayerShortVO> getHotPlayerByNum(int num,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerShortPO> polist=new ArrayList<PlayerShortPO>();
-		switch(num){
-		case 0:polist=playerData.getShortPlayerByNum(11);break;
-		case 1:polist=playerData.getShortPlayerByNum(0);break;
-		case 2:polist=playerData.getShortPlayerByNum(1);break;
-		case 3:polist=playerData.getShortPlayerByNum(8);break;
-		case 4:polist=playerData.getShortPlayerByNum(7);break;
-		case 5:polist=playerData.getShortPlayerByNum(3);break;
-		case 6:polist=playerData.getShortPlayerByNum(2);break;
-		case 7:polist=playerData.getShortPlayerByNum(4);break;
-		}
+		polist=playerData.getShortPlayerByNum(num);
 		if(polist!=null){
 		
 			ArrayList<PlayerShortVO> volist=new ArrayList<PlayerShortVO>();
@@ -179,9 +170,13 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 			}
 			Collections.sort(volist, new SortShortByNum());
 			ArrayList<PlayerShortVO> list=new ArrayList<PlayerShortVO>();
-			for(int i=volist.size()-1;i>=volist.size()-6;i--){
+			if(many>volist.size()){
+				Collections.reverse(volist);
+			}else{
+				for(int i=volist.size()-1;i>=volist.size()-many-1;i--){
 				list.add(volist.get(i));
 			}
+			}		
 			return list;
 		}else{
 			return null;

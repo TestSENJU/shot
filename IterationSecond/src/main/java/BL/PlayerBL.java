@@ -44,15 +44,15 @@ public interface PlayerBL {
 	 * 27字典序
 	 * @return
 	 */
-	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(String location,String league,String age,int num,int num1,int many);
+	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(String location,String league,String age,ArrayList<Integer>nums,int many);
 	//howmany是指筛选出多少个球员 raising接口返回的是最好的
 
-	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConRaising(String location,String league,String age,int num,int num1,int many);
+	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConRaising(String location,String league,String age,ArrayList<Integer>nums,int many);
 
-	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConDeclining(String location,String league,String age,int num,int num1,int many);
+	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConDeclining(String location,String league,String age,ArrayList<Integer>nums,int many);
 
 	//declining接口返回的是最差的
-	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConDeclining(String location,String league,String age,int num,int num1,int many);	
+	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConDeclining(String location,String league,String age,ArrayList<Integer>nums,int many);	
 	/**
 	 * 返回降序排列的前五名进步最快球员
 	 * @param num
@@ -61,7 +61,7 @@ public interface PlayerBL {
 	 * 26场均助攻
 	 * @return
 	 */
-	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num,int num1,int many);
+	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(ArrayList<Integer>nums,int many);
 	
 	/**
 	 * 降序排列的当天热点球员前五名
@@ -125,16 +125,16 @@ public interface PlayerBL {
 	 * 27字典序
 	 * @return
 	 */
-	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumRaising(int num,int num1);
+	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumRaising(ArrayList<Integer>nums);
 	
 	//根据排序依据的数字返回所有球员的平均数据升序
-	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumRaising(int num,int num1);
+	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumRaising(ArrayList<Integer>nums);
 	
 	//根据排序依据的数字返回所有球员的总数据降序
-	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumDeclining(int num,int num1);
+	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumDeclining(ArrayList<Integer>nums);
 	
 	//根据排序依据的数字返回所有球员的平均数据降序
-	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumDeclining(int num,int num1);
+	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumDeclining(ArrayList<Integer>nums);
 	
 	//根据基本信息的文件夹返回球员姓名
 	public ArrayList<String> getPlayerNamesByBasic();

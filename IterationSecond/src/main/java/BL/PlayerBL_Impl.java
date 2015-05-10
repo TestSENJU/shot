@@ -19,7 +19,7 @@ import vo.PlayerShortVO;
 public class PlayerBL_Impl implements PlayerBL{
     PlayerDataService playerData=new PlayerData_Impl();
     
-	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(String location,String league,String age,int num,int num1,int many) {
+	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConRaising(String location,String league,String age,ArrayList<Integer>nums,int many) {
 		// TODO Auto-generated method stub
 	ArrayList<String>list=getPlayerNamesByCon(location,league,age);
 		if(list!=null){
@@ -28,10 +28,10 @@ public class PlayerBL_Impl implements PlayerBL{
 			for(int i=0;i<list.size();i++){
 				result.add(new PlayerAllVO(playerData.getPlayerAllByName(list.get(i))));
 			}
-			int com[]=getCompareNum(num,num1);
-			Collections.sort(result, new SortAllByNum(com[0],com[1],com[2],com[3]));		
+			ArrayList<int[]>numbers=getCompareNum(nums);
+			Collections.sort(result, new SortAllByNum(numbers));		
 			}else{
-				result=getPlayerAllRankingByNumRaising(num,num1);			
+				result=getPlayerAllRankingByNumRaising(nums);			
 			}
 			if(many>result.size()){
 				return result;
@@ -76,7 +76,7 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 	}
 	return list;
 }
-	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConRaising(String location,String league,String age,int num,int num1,int many) {
+	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConRaising(String location,String league,String age,ArrayList<Integer>nums,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<String>list=getPlayerNamesByCon(location,league,age);
 		if(list!=null){
@@ -85,10 +85,10 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 			for(int i=0;i<list.size();i++){
 				result.add(new PlayerAverageVO(playerData.getPlayerAverageByName(list.get(i))));
 			}
-			int com[]=getCompareNum(num,num1);
-			Collections.sort(result, new SortAverageByNum(com[0],com[1],com[2],com[3]));		
+			ArrayList<int[]>numbers=getCompareNum(nums);
+			Collections.sort(result, new SortAverageByNum(numbers));		
 			}else{
-				result=getPlayerAvergaeRankingByNumRaising(num,num1);			
+				result=getPlayerAvergaeRankingByNumRaising(nums);			
 			}
 			if(many>result.size()){
 				return result;
@@ -104,26 +104,26 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 		}		
 	}
 
-	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConDeclining(String location,String league,String age,int num,int num1,int many) {
+	public ArrayList<PlayerAllVO> getPlayerAllByMultipleConDeclining(String location,String league,String age,ArrayList<Integer>nums,int many) {
 		// TODO Auto-generated method stub
-		ArrayList<PlayerAllVO> list=getPlayerAllByMultipleConRaising(location,league,age,num,num1,many);
+		ArrayList<PlayerAllVO> list=getPlayerAllByMultipleConRaising(location,league,age,nums,many);
 		Collections.reverse(list);
 		
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConDeclining(String location,String league,String age,int num,int num1,int many) {
+	public ArrayList<PlayerAverageVO> getPlayerAverageByMultipleConDeclining(String location,String league,String age,ArrayList<Integer>nums,int many) {
 		// TODO Auto-generated method stub
-		ArrayList<PlayerAverageVO>list=getPlayerAverageByMultipleConRaising(location,league,age,num,num1,many);
+		ArrayList<PlayerAverageVO>list=getPlayerAverageByMultipleConRaising(location,league,age,nums,many);
 		Collections.reverse(list);
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num,int num1,int many) {
+	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(ArrayList<Integer>nums,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO>list=getPlayerAverage();
-		int com[]=getCompareNum(num,num1);
-		Collections.sort(list, new SortAverageByNum(com[0],com[1],com[2],com[3]));
+		ArrayList<int[]>numbers=getCompareNum(nums);
+		Collections.sort(list, new SortAverageByNum(numbers));
 		ArrayList<PlayerAverageVO> result=new ArrayList<PlayerAverageVO>();
 		if(many>list.size()){
 			Collections.reverse(list);
@@ -277,68 +277,53 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 		
 	}
 
-	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumRaising(int num,int num1) {
+	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumRaising(ArrayList<Integer>nums) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAllVO> list=getPlayerAll();
-		int com[]=getCompareNum(num,num1);
-
-			Collections.sort(list, new SortAllByNum(com[0],com[1],com[2],com[3]));
+		ArrayList<int[]>numbers=getCompareNum(nums);
+			Collections.sort(list, new SortAllByNum(numbers));
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumRaising(int num,int num1) {
+	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumRaising(ArrayList<Integer>nums) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO> list=getPlayerAverage();
-		int com[]=getCompareNum(num,num1);
-			Collections.sort(list, new SortAverageByNum(com[0],com[1],com[2],com[3]));
+		ArrayList<int[]>numbers=getCompareNum(nums);
+			Collections.sort(list, new SortAverageByNum(numbers));
 		return list;
 	}
-private int[] getCompareNum(int num,int num1){
-	int result[]=new int[4];
-	if(num>=0&&num<=23){
-		result[0]=num;
-		result[1]=0;
-	}else if(num==24){
-		result[0]=0;
-		result[1]=1;
-	}else if(num==25){
-		result[0]=0;
-		result[1]=4;
-	}else if(num==26){
-		result[0]=0;
-		result[1]=5;
-	}else if(num==27){
-		result[0]=0;
-		result[1]=6;
-	}
-	if(num1>=0&&num1<=23){
-		result[2]=num1;
-		result[3]=0;
-	}else if(num1==24){
-		result[2]=0;
-		result[3]=1;
-	}else if(num1==25){
-		result[2]=0;
-		result[3]=4;
-	}else if(num1==26){
-		result[2]=0;
-		result[3]=5;
-	}else if(num1==27){
-		result[2]=0;
-		result[3]=6;
+private ArrayList<int[]> getCompareNum(ArrayList<Integer>nums){
+	ArrayList<int[]>result=new ArrayList<int[]>();
+	for(int i=0;i<nums.size();i++){
+		if(nums.get(i)>=0&&nums.get(i)<=23){
+			result.get(i)[0]=nums.get(i);
+			result.get(i)[1]=0;
+		}else if(nums.get(i)==24){
+			result.get(i)[0]=0;
+			result.get(i)[1]=1;
+		}else if(nums.get(i)==25){
+			result.get(i)[0]=0;
+			result.get(i)[1]=4;
+		}else if(nums.get(i)==26){
+			result.get(i)[0]=0;
+			result.get(i)[1]=5;
+		}else if(nums.get(i)==27){
+			result.get(i)[0]=0;
+			result.get(i)[1]=6;
+		}
 	}
 	return result;
 }
-	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumDeclining(int num,int num1) {
+	public ArrayList<PlayerAllVO> getPlayerAllRankingByNumDeclining(ArrayList<Integer>nums) {
 		// TODO Auto-generated method stub
-		ArrayList<PlayerAllVO> list=getPlayerAllRankingByNumRaising(num,num1);
+		ArrayList<PlayerAllVO> list=getPlayerAllRankingByNumRaising(nums);
 		Collections.reverse(list);
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumDeclining(int num,int num1) {
+	public ArrayList<PlayerAverageVO> getPlayerAvergaeRankingByNumDeclining(ArrayList<Integer>nums) {
 		// TODO Auto-generated method stub
-		ArrayList<PlayerAverageVO> list=getPlayerAvergaeRankingByNumDeclining(num,num1);
+		ArrayList<PlayerAverageVO> list=getPlayerAvergaeRankingByNumDeclining(nums);
 		Collections.reverse(list);
 		return list;
 	}
@@ -376,104 +361,113 @@ private int[] getCompareNum(int num,int num1){
  *  6字典序
  */
 class SortAllByNum implements Comparator<Object>{
-	int comNum;
-	int option;
-	int comNum1;
-	int option1;
-    public SortAllByNum(int num,int op,int num1,int op1){
-    	this.comNum=num;
-    	this.option=op;
-    	this.comNum1=num1;
-    	this.option1=op1;
+	ArrayList<Integer>numbers;
+	ArrayList<Integer>options;
+    public SortAllByNum(ArrayList<int[]>nums){
+    	for(int i=0;i<nums.size()-1;i++){
+    		numbers.add(nums.get(i)[0]);
+    		options.add(nums.get(i)[1]);
+    	}
     }
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
 		PlayerAllVO po1=(PlayerAllVO) o1;
 		PlayerAllVO po2=(PlayerAllVO)o2;
-		if(this.option==1){
-			String time1=po1.getPlayingTime();
-			String time2=po2.getPlayingTime();
-			String strs1[]=time1.split(":");
-			String strs2[]=time2.split(":");
-			if(Integer.parseInt(strs1[0])>Integer.parseInt(strs2[0])){
-				return 1;
-			}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])>Integer.parseInt(strs2[1])){
-				return 1;
-			}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])==Integer.parseInt(strs2[1])){
-				return 0;
-			}else{
+		for(int i=0;i<this.numbers.size()-1;i++){
+			if(this.options.get(i)==1){
+				String time1=po1.getPlayingTime();
+				String time2=po2.getPlayingTime();
+				String strs1[]=time1.split(":");
+				String strs2[]=time2.split(":");
+				if(Integer.parseInt(strs1[0])>Integer.parseInt(strs2[0])){
+					return 1;
+				}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])>Integer.parseInt(strs2[1])){
+					return 1;
+				}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])==Integer.parseInt(strs2[1])){
+				}else{
+					return -1;
+				}
+			}else if(this.options.get(i)==0){
+				double[] nums1=po1.getPlayerData();
+				double[] nums2=po2.getPlayerData();
+				if(nums1[this.numbers.get(i)]>nums2[this.numbers.get(i)]){
+					return 1;
+				}else if(nums1[this.numbers.get(i)]==nums2[this.numbers.get(i)]){
+				}
+				return -1;
+			}else if(this.options.get(i)==2){
+				double[] nums1=po1.getPlayerData();
+				double[] nums2=po2.getPlayerData();
+				double num1=nums1[11]+nums1[0]+nums1[1];
+				double num2=nums2[11]+nums2[0]+nums2[1];
+				if(num1>num2){
+					return 1;
+				}else if(num1==num2){
+					
+				}else {
+					return -1;
+				}
+			}else if(this.options.get(i)==3){
+				double[] nums1=po1.getPlayerData();
+				double[] nums2=po2.getPlayerData();
+				int i1=0;
+				int i2=0;
+				if(nums1[11]>10)i1++;
+				if(nums1[0]>10)i1++;
+				if(nums1[1]>10)i1++;
+				if(nums1[7]>10)i1++;
+				if(nums1[8]>10)i1++;
+				
+				if(nums2[11]>10)i2++;
+				if(nums2[0]>10)i2++;
+				if(nums2[1]>10)i2++;
+				if(nums2[7]>10)i2++;
+				if(nums2[8]>10)i2++;
+				if(i1>i2) return 1;
+				else return -1;
+			}else if(this.options.get(i)==4){
+				int num1=po1.getCompeteNum();
+				int num2=po2.getCompeteNum();
+				if(num1>num2){
+					return 1;
+				}else if(num1==num2){
+					
+				}else
+				return -1;
+			}else if(this.options.get(i)==5){
+				int num1=po1.getOffensiveNum();
+				int num2=po2.getOffensiveNum();
+				if(num1>num2){
+					return 1;
+				}else if(num1==num2){
+				   
+				}else
+				return -1;
+			}else if(this.options.get(i)==6){
+				String names[]=new String[2];
+				names[0]=po1.getPlayerName();
+				names[1]=po2.getPlayerName();
+				Arrays.sort(names);
+				if(names[1].equals(po1.getPlayerName())){
+					return 1;
+				}else if(names[0].equals(names[1])){
+					
+				}else
 				return -1;
 			}
-		}else if(this.option==0){
-			double[] nums1=po1.getPlayerData();
-			double[] nums2=po2.getPlayerData();
-			if(nums1[comNum]>nums2[comNum]){
-				return 1;
-			}else if(nums1[comNum]==nums2[comNum]){
-				return 0;
-			}else 
-			return -1;
-		}else if(this.option==2){
-			double[] nums1=po1.getPlayerData();
-			double[] nums2=po2.getPlayerData();
-			double num1=nums1[11]+nums1[0]+nums1[1];
-			double num2=nums2[11]+nums2[0]+nums2[1];
-			if(num1>num2){
-				return 1;
-			}else if(num1==num2){
-				return 0;
-			}else return -1;
-		}else if(this.option==3){
-			double[] nums1=po1.getPlayerData();
-			double[] nums2=po2.getPlayerData();
-			int i1=0;
-			int i2=0;
-			if(nums1[11]>10)i1++;
-			if(nums1[0]>10)i1++;
-			if(nums1[1]>10)i1++;
-			if(nums1[7]>10)i1++;
-			if(nums1[8]>10)i1++;
 			
-			if(nums2[11]>10)i2++;
-			if(nums2[0]>10)i2++;
-			if(nums2[1]>10)i2++;
-			if(nums2[7]>10)i2++;
-			if(nums2[8]>10)i2++;
-			if(i1>i2) return 1;
-			else if(i1==i2) return 0;
-			else return -1;
-		}else if(this.option==4){
-			int num1=po1.getCompeteNum();
-			int num2=po2.getCompeteNum();
-			if(num1>num2){
-				return 1;
-			}else if(num1==num2){
-				return 0;
-			}else 
-			return -1;
-		}else if(this.option==5){
-			int num1=po1.getOffensiveNum();
-			int num2=po2.getOffensiveNum();
-			if(num1>num2){
-				return 1;
-			}else if(num1==num2){
-				return 0;
-			}else
-			return -1;
-		}else if(this.option==6){
-			String names[]=new String[2];
-			names[0]=po1.getPlayerName();
-			names[1]=po2.getPlayerName();
-			Arrays.sort(names);
-			if(names[1].equals(po1.getPlayerName())){
-				return 1;
-			}else if(names[0].equals(names[1])){
-				return 0;
-			}else
-			return -1;
 		}
-		return 0;
-	}
+		String names[]=new String[2];
+		names[0]=po1.getPlayerName();
+		names[1]=po2.getPlayerName();
+		Arrays.sort(names);
+		if(names[1].equals(po1.getPlayerName())){
+			return 1;
+		}else if(names[0].equals(names[1])){
+			return 0;
+		}else
+		return -1;
+}
 }
 class SortShortByNum implements Comparator<Object>{
 	public int compare(Object o1, Object o2) {
@@ -491,102 +485,113 @@ class SortShortByNum implements Comparator<Object>{
 	
 }
 class SortAverageByNum implements Comparator<Object>{
-	int comNum;
-	int option;
-	int comNum1;
-	int option1;
-    public SortAverageByNum(int num,int op,int num1,int op1){
-    	this.comNum=num;
-    	this.option=op;
-this.option1=op1;
+	ArrayList<Integer>numbers;
+	ArrayList<Integer>options;
+    public SortAverageByNum(ArrayList<int[]>nums){
+    	for(int i=0;i<nums.size()-1;i++){
+    		numbers.add(nums.get(i)[0]);
+    		options.add(nums.get(i)[1]);
+    	}
     }
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
 		PlayerAverageVO po1=(PlayerAverageVO) o1;
 		PlayerAverageVO po2=(PlayerAverageVO)o2;
-		if(this.option==1){
-			String time1=po1.getPlayingTime();
-			String time2=po2.getPlayingTime();
-			String strs1[]=time1.split(":");
-			String strs2[]=time2.split(":");
-			if(Integer.parseInt(strs1[0])>Integer.parseInt(strs2[0])){
-				return 1;
-			}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])>Integer.parseInt(strs2[1])){
-				return 1;
-			}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])==Integer.parseInt(strs2[1])){
-			    return 0;
-			}else{
+		for(int i=0;i<this.numbers.size()-1;i++){
+			if(this.options.get(i)==1){
+				String time1=po1.getPlayingTime();
+				String time2=po2.getPlayingTime();
+				String strs1[]=time1.split(":");
+				String strs2[]=time2.split(":");
+				if(Integer.parseInt(strs1[0])>Integer.parseInt(strs2[0])){
+					return 1;
+				}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])>Integer.parseInt(strs2[1])){
+					return 1;
+				}else if(Integer.parseInt(strs1[0])==Integer.parseInt(strs2[0])&&Integer.parseInt(strs1[1])==Integer.parseInt(strs2[1])){
+				}else{
+					return -1;
+				}
+			}else if(this.options.get(i)==0){
+				double[] nums1=po1.getPlayerData();
+				double[] nums2=po2.getPlayerData();
+				if(nums1[this.numbers.get(i)]>nums2[this.numbers.get(i)]){
+					return 1;
+				}else if(nums1[this.numbers.get(i)]==nums2[this.numbers.get(i)]){
+				}
+				return -1;
+			}else if(this.options.get(i)==2){
+				double[] nums1=po1.getPlayerData();
+				double[] nums2=po2.getPlayerData();
+				double num1=nums1[11]+nums1[0]+nums1[1];
+				double num2=nums2[11]+nums2[0]+nums2[1];
+				if(num1>num2){
+					return 1;
+				}else if(num1==num2){
+					
+				}else {
+					return -1;
+				}
+			}else if(this.options.get(i)==3){
+				double[] nums1=po1.getPlayerData();
+				double[] nums2=po2.getPlayerData();
+				int i1=0;
+				int i2=0;
+				if(nums1[11]>10)i1++;
+				if(nums1[0]>10)i1++;
+				if(nums1[1]>10)i1++;
+				if(nums1[7]>10)i1++;
+				if(nums1[8]>10)i1++;
+				
+				if(nums2[11]>10)i2++;
+				if(nums2[0]>10)i2++;
+				if(nums2[1]>10)i2++;
+				if(nums2[7]>10)i2++;
+				if(nums2[8]>10)i2++;
+				if(i1>i2) return 1;
+				else return -1;
+			}else if(this.options.get(i)==4){
+				int num1=po1.getCompeteNum();
+				int num2=po2.getCompeteNum();
+				if(num1>num2){
+					return 1;
+				}else if(num1==num2){
+					
+				}else
+				return -1;
+			}else if(this.options.get(i)==5){
+				int num1=po1.getOffensiveNum();
+				int num2=po2.getOffensiveNum();
+				if(num1>num2){
+					return 1;
+				}else if(num1==num2){
+				   
+				}else
+				return -1;
+			}else if(this.options.get(i)==6){
+				String names[]=new String[2];
+				names[0]=po1.getName();
+				names[1]=po2.getName();
+				Arrays.sort(names);
+				if(names[1].equals(po1.getName())){
+					return 1;
+				}else if(names[0].equals(names[1])){
+					
+				}else
 				return -1;
 			}
-		}else if(this.option==0){
-			double[] nums1=po1.getPlayerData();
-			double[] nums2=po2.getPlayerData();
-			if(nums1[comNum]>nums2[comNum]){
-				return 1;
-			}else if(nums1[comNum]==nums2[comNum]){
-				return 0;
-			}
-			return -1;
-		}else if(this.option==2){
-			double[] nums1=po1.getPlayerData();
-			double[] nums2=po2.getPlayerData();
-			double num1=nums1[11]+nums1[0]+nums1[1];
-			double num2=nums2[11]+nums2[0]+nums2[1];
-			if(num1>num2){
-				return 1;
-			}else if(num1==num2){
-				return 0;
-			}else {
-				return -1;
-			}
-		}else if(this.option==3){
-			double[] nums1=po1.getPlayerData();
-			double[] nums2=po2.getPlayerData();
-			int i1=0;
-			int i2=0;
-			if(nums1[11]>10)i1++;
-			if(nums1[0]>10)i1++;
-			if(nums1[1]>10)i1++;
-			if(nums1[7]>10)i1++;
-			if(nums1[8]>10)i1++;
 			
-			if(nums2[11]>10)i2++;
-			if(nums2[0]>10)i2++;
-			if(nums2[1]>10)i2++;
-			if(nums2[7]>10)i2++;
-			if(nums2[8]>10)i2++;
-			if(i1>i2) return 1;
-			else return -1;
-		}else if(this.option==4){
-			int num1=po1.getCompeteNum();
-			int num2=po2.getCompeteNum();
-			if(num1>num2){
-				return 1;
-			}else if(num1==num2){
-				return 0;
-			}else
-			return -1;
-		}else if(this.option==5){
-			int num1=po1.getOffensiveNum();
-			int num2=po2.getOffensiveNum();
-			if(num1>num2){
-				return 1;
-			}else if(num1==num2){
-				return 0;
-			}else
-			return -1;
-		}else if(this.option==6){
-			String names[]=new String[2];
-			names[0]=po1.getName();
-			names[1]=po2.getName();
-			Arrays.sort(names);
-			if(names[1].equals(po1.getName())){
-				return 1;
-			}else if(names[0].equals(names[1])){
-				return 0;
-			}else
+		}
+		String names[]=new String[2];
+		names[0]=po1.getName();
+		names[1]=po2.getName();
+		Arrays.sort(names);
+		if(names[1].equals(po1.getName())){
+			return 1;
+		}else if(names[0].equals(names[1])){
+			return 0;
+		}else{
 			return -1;
 		}
-		return -1;
+		
 	}
 }

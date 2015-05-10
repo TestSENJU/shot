@@ -294,10 +294,10 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 	}
 private ArrayList<int[]> getCompareNum(ArrayList<Integer>nums){
 	ArrayList<int[]>result=new ArrayList<int[]>();
-	for(int i=0;i<nums.size();i++){
+	for(int i=0;i<nums.size()-1;i++){
 		if(nums.get(i)>=0&&nums.get(i)<=23){
-			result.get(i)[0]=nums.get(i);
-			result.get(i)[1]=0;
+		   int nums[]=new int[2];
+		   
 		}else if(nums.get(i)==24){
 			result.get(i)[0]=0;
 			result.get(i)[1]=1;

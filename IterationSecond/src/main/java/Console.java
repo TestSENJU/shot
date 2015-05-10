@@ -58,12 +58,8 @@ public class Console {
 			if (player.isHot) {
 				if (player.isSeason) {
 					// TODO
-					// This is an demo
-					getMostImprovedPlayer(player.hotField,
-							player.getTopnumber());
-				} else {
-					// TODO
-				}
+					
+				} 
 			} else if (player.isKing) {
 				if (player.isSeason) {
 					// TODO
@@ -349,13 +345,6 @@ public class Console {
 				}
 			}
 		}
-	}
-
-	void getMostImprovedPlayer(String hotField, int topNumber) {
-		// This is an demo
-
-		// TODO
-		out.print(thePlayer);
 	}
 
 	class TestConfig {

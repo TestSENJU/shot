@@ -329,7 +329,7 @@ public class PlayerData_Impl implements PlayerDataService{
 					if(str.startsWith("║")){
 						String mass[]=str.split("║");
 						String contents[]=mass[1].split("│");
-						if((contents[3]+"-"+contents[4]).equals(league+"\t"))
+						if((contents[3]).equals(league))
 						list.add(contents[1]);
 					}
 				
@@ -424,12 +424,28 @@ public ArrayList<String> getPlayerByAge(String age) {
 	// TODO Auto-generated method stub
 	ArrayList<String>list=new ArrayList<String>();
 	String filenames[]=new File("players/info").list();
+	int agenum=Integer.parseInt(age);
+	
 	for(int i=0;i<filenames.length;i++){
 		String position1=getAge("players/info/"+filenames[i]);
-		if(position1.equals(age)){
-			 list.add(filenames[i]);	
+		int number=Integer.parseInt(position1);
+		if(agenum==22){
+			if(number<=22){
+				 list.add(filenames[i]);	
+			}
+		}else if(agenum==25){
+			if(number>22&&number<=25){
+				list.add(filenames[i]);
+			}
+		}else if(agenum==30){
+			if(number>25&&number<=30){
+				list.add(filenames[i]);
+			}
+		}else if(agenum==40){
+			if(number>30){
+				list.add(filenames[i]);
+			}
 		}
-
 	}
 	if(list.size()!=0)
 	return list;

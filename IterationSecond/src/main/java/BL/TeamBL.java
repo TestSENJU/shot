@@ -27,9 +27,9 @@ public interface TeamBL {
 	 * 25比赛场数
 	 * @return
 	 */
-	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num,int many,int num1);
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(ArrayList<Integer>nums,int many);
 	//根据排序的依据返回升序的球队的所有的场均数据 raising
-	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num,int many,int num1);
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(ArrayList<Integer>nums,int many);
 	///根据排序依据返回热点球队的五个球队的场均数据
 	/**
 	 * 
@@ -48,7 +48,7 @@ public interface TeamBL {
 	 * 11防守篮板数
 	 * @return
 	 */
-	public ArrayList<TeamAverageVO> getHotTeamByNum(int num,int many);
+	public ArrayList<TeamAverageVO> getHotTeamByNum(ArrayList<Integer>nums,int many);
 	//根据缩写名返回全名
 	public String getLongNameByShortName(String shortName);
 	//根据字符串返回接近的球队缩写名
@@ -60,9 +60,9 @@ public interface TeamBL {
 	//根据球队名返回这个球队的球员名字
 	public ArrayList<String> getPlayerNamesOfTeam(String teamName);
 	
-	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(int num,int many,int num1);
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(ArrayList<Integer>nums,int many);
 	
-	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num,int many,int num1);
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(ArrayList<Integer>nums,int many);
 
 	public String getShortName(String longName);
 	

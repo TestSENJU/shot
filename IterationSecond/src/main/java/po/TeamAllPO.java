@@ -41,7 +41,7 @@ public TeamAllPlusRatePO makeDetailedAllPO(){
 		allData.setUsedName("NOH");
 	}
 	allData.addWinNum(winMatchList.size());
-    double[] data=new double[25];
+    double[] data=new double[27];
     double [] oppData=new double[3];
     Set<String>keys=teamDataList.keySet();
     for(String key:keys){

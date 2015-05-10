@@ -1,5 +1,9 @@
 package po;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +23,7 @@ public class TeamAveragePlusRatePO {
 public String teamName;
 private String teamNameLong;
 private int matchNum;
+private String league;
 private double[] teamData=new double[27];
 private String usedName;
 private String usedLongName;
@@ -43,6 +48,7 @@ public TeamAveragePlusRatePO(TeamAllPlusRatePO allData){
 	for(int i=15;i<27;i++){
 		this.teamData[i]=nums[i];
 	}
+	this.league=getTeamLeague(this.teamName);
 }
 public void addWinNnum(int i){
 	this.winNum+=i;
@@ -61,6 +67,35 @@ public int getMatchNum() {
 }
 public void setMatchNum(int matchNum) {
 	this.matchNum = matchNum;
+}
+@SuppressWarnings("resource")
+private String getTeamLeague(String teamname){
+	BufferedReader br;
+	try {
+		br = new BufferedReader(new FileReader("teams"));
+	    String str="";
+	    if(teamname.equals("NOH"))teamname="NOP";
+	    while((str=br.readLine())!=null){
+	    	if(str.contains(teamname)){
+					String mass[]=str.split("║");
+					String strs[]=mass[1].split("│");
+	    		return strs[3];
+	    	}
+}
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+return null;
+}
+public String getLeague() {
+	return league;
+}
+public void setLeague(String league) {
+	this.league = league;
 }
 public double[] getTeamData() {
 	return teamData;

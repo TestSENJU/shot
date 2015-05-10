@@ -1,5 +1,11 @@
 package BL;
 
+import java.util.ArrayList;
+
+
+
+import vo.TeamAllVO;
+import vo.TeamAverageVO;
 //
 //import java.util.ArrayList;
 //
@@ -12,6 +18,12 @@ public class playerBL_Drive {
 public static void main(String args[]){	
 	ReadFileThread rft=new ReadFileThread("D://newData");
 	rft.start();
+TeamBL teambl=new TeamBL_Impl();
+ArrayList<Integer>nums=new ArrayList<Integer>();
+nums.add(0);
+nums.add(25);
+ArrayList<TeamAverageVO> list=teambl.getHotTeamByNum(nums, 20);
+System.out.println(list.get(0).getTeamName());
 
 //	PlayerBL playerbl=new PlayerBL_Impl();
 //	ArrayList<Integer> nums=new ArrayList<Integer>();

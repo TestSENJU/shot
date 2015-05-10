@@ -8,6 +8,7 @@ public class TeamAverageVO {
 	String teamName;//球队缩写名
 	private String teamNameLong;//球队的全名
 	private int matchNum;//球队参加比赛的数量
+	private String league;
 	/*
 	 *  *  0投篮命中数
  *  1投篮出手数
@@ -75,6 +76,13 @@ public class TeamAverageVO {
 	}
 	public double[] getTeamData() {
 		return teamData;
+	}
+	
+	public String getLeague() {
+		return league;
+	}
+	public void setLeague(String league) {
+		this.league = league;
 	}
 	public void setTeamData(double[] teamData) {
 		this.teamData = teamData;

@@ -2,11 +2,13 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import test.data.PlayerHotInfo;
 import test.data.TeamHighInfo;
 import test.data.TeamHotInfo;
 import test.data.TeamNormalInfo;
 import vo.PlayerAllVO;
 import vo.PlayerAverageVO;
+import vo.PlayerShortVO;
 import vo.TeamAllVO;
 import vo.TeamAverageVO;
 import BL.InitBL;
@@ -53,6 +55,7 @@ public class Console {
 		}
 		if (args[0].contains("player")) {
 			// TODO 记住有个数量要求 number
+			VOMakeInfoTool tool = new VOMakeInfoTool();
 			Hashtable<String, ?> vo;
 			if (team.isTotal) {
 				vo = new Hashtable<String, PlayerAllVO>();
@@ -60,8 +63,21 @@ public class Console {
 				vo = new Hashtable<String, PlayerAverageVO>();
 			}
 			if (player.isHot) {
+				int hotNum = 11;
+				if (player.hotField.contains("score")) {
+					hotNum = 11;
+				} else if (player.hotField.contains("rebound")) {
+					hotNum = 0;
+				} else if (player.hotField.contains("assit")) {
+					hotNum = 1;
+				}
 				if (player.isSeason) {
-					// TODO
+					ArrayList<PlayerShortVO> svo = p.getHotPlayerByNum(hotNum,
+							player.num);
+					for (PlayerShortVO pvo : svo) {
+						// TODO
+					}
+				} else {
 
 				}
 			} else if (player.isKing) {
@@ -73,6 +89,7 @@ public class Console {
 			} else {
 				if (player.isFilter && !player.isSort) {
 					String[] spl = player.filterField.split(",");
+					ArrayList<Integer> nums = new ArrayList<Integer>();
 					for (String s : spl) {
 						if (s.contains("F")) {
 							// TODO
@@ -92,33 +109,62 @@ public class Console {
 					}
 				} else if (player.isSort && !player.isFilter) {
 					String[] spl = player.sortField.split(",");
+					ArrayList<Integer> nums = new ArrayList<Integer>();
+					int i = 0;
+					String field = "";
 					for (String s : spl) {
-						if (s.contains("point")) {
-
-						} else if (s.contains("rebound")) {
-
-						} else if (s.contains("assit")) {
-
-						} else if (s.contains("blockShot")) {
-
-						} else if (s.contains("steal")) {
-
-						} else if (s.contains("foul")) {
-
-						} else if (s.contains("fault")) {
-
+						if (team.hotField.contains("score")) {
+							nums.set(0, 11);
+							i = 11;
+							field = "score";
+						} else if (team.hotField.contains("rebound")) {
+							nums.set(0, 0);
+							i = 0;
+							field = "rebound";
+						} else if (team.hotField.contains("assit")) {
+							nums.set(0, 1);
+							i = 1;
+							field = "assit";
+						} else if (team.hotField.contains("blockShot")) {
+							nums.set(0, 8);
+							i = 8;
+							field = "blockShot";
+						} else if (team.hotField.contains("steal")) {
+							nums.set(0, 7);
+							i = 7;
+							field = "steal";
+						} else if (team.hotField.contains("foul")) {
+							nums.set(0, 10);
+							i = 10;
+							field = "foul";
+						} else if (team.hotField.contains("fault")) {
+							nums.set(0, 9);
+							i = 9;
+							field = "fault";
 						} else if (s.contains("minute")) {
-
+							nums.set(0, 27);
+							i = 27;
+							field = "minute";
 						} else if (s.contains("efficient")) {
-
+							nums.set(0, 12);
+							i = 12;
+							field = "efficient";
 						} else if (s.contains("shot")) {
-
+							nums.set(0, 2);
+							i = 2;
+							field = "shot";
 						} else if (s.contains("three")) {
-
+							nums.set(0, 3);
+							i = 3;
+							field = "three";
 						} else if (s.contains("penalty")) {
-
+							nums.set(0, 4);
+							i = 4;
+							field = "penalty";
 						} else if (s.contains("doubleTwo")) {
-
+							nums.set(0, 29);
+							i = 29;
+							field = "doubleTwo";
 						} else if (s.contains("realShot")) {
 
 						} else if (s.contains("GmSc")) {
@@ -307,9 +353,8 @@ public class Console {
 				ArrayList<TeamAverageVO> vo = t.getHotTeamByNum(nums, team.num);
 
 				for (int k = 0; k < vo.size(); k++) {
-					TeamHotInfo tio = tool
-							.getTeamHot(vo.get(k), i, null, field);
-					// TODO
+					TeamHotInfo tio = tool.getTeamHot(vo.get(k), i, vo.get(k)
+							.getLeague(), field);
 					out.print(tio);
 				}
 			} else {
@@ -352,11 +397,9 @@ public class Console {
 						} else if (s.contains("defendEfficient")) {
 							nums.add(21);
 						} else if (s.contains("offendReboundEfficient")) {
-							nums.add(null);
-							// TODO
+							nums.add(25);
 						} else if (s.contains("defendReboundEfficient")) {
-							nums.add(null);
-							// TODO
+							nums.add(26);
 						} else if (s.contains("stealEfficient")) {
 							nums.add(23);
 						} else if (s.contains("assitEfficient")) {
@@ -381,7 +424,8 @@ public class Console {
 					if (team.isHigh) {
 						if (team.isAll) {
 							for (int k = 0; k < vo.size(); k++) {
-								// TODO
+								TeamHighInfo tio = tool.getTeamHigh(avo.get(k));
+								out.print(tio);
 							}
 						} else {
 							for (int k = 0; k < vo.size(); k++) {
@@ -407,7 +451,19 @@ public class Console {
 				} else if (!team.isSort) {
 					if (team.isHigh) {
 						if (team.isAll) {
-							// TODO
+							vo = t.getTeamAll();
+							for (int k = 0; k < vo.size(); k++) {
+								TeamNormalInfo tio = tool.getTeamAllNormal(vo
+										.get(k));
+								out.print(tio);
+							}
+						} else {
+							avo = t.getTeamAverage();
+							for (int k = 0; k < vo.size(); k++) {
+								TeamNormalInfo tio = tool
+										.getTeamAverageNormal(avo.get(k));
+								out.print(tio);
+							}
 						}
 					} else {
 						if (team.isAll) {

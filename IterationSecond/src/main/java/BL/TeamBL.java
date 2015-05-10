@@ -31,22 +31,32 @@ public interface TeamBL {
 	//根据排序的依据返回升序的球队的所有的场均数据 raising
 	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(ArrayList<Integer>nums,int many);
 	///根据排序依据返回热点球队的五个球队的场均数据
-	/**
-	 * 
-	 * @param num
-	 * 0场均得分
-	 * 1场均篮板
-	 * 2场均助攻
-	 * 3场均盖帽
-	 * 4场均抢断
-	 * 5三分命中率
-	 * 6投篮命中率
-	 * 7罚球命中率
-	 * 8犯规数
-	 * 9失误数
-	 * 10进攻篮板数
-	 * 11防守篮板数
-	 * @return
+	/*
+	 *  *  0投篮命中数
+ *  1投篮出手数
+ *  2三分命中数
+ *  3三分出手数
+ *  4罚球命中数
+ *  5罚球出手数
+ *  6进攻前场篮板数
+ *  7进攻后场篮板数
+ *  8总篮板数
+ *  9助攻数
+ *  10抢断数
+ *  11盖帽数
+ *  12失误数
+ *  13犯规数
+ *  14个人得分
+ *  15投篮命中率
+ *  16三分命中率
+ *  17罚球命中率
+ *  18胜率
+ *  19进攻回合
+ *  20进攻效率
+ *  21防守效率
+ *  22篮板效率
+ *  23抢断效率
+ *  24助攻率
 	 */
 	public ArrayList<TeamAverageVO> getHotTeamByNum(ArrayList<Integer>nums,int many);
 	//根据缩写名返回全名

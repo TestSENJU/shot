@@ -61,7 +61,7 @@ public interface PlayerBL {
 	 * 26场均助攻
 	 * @return
 	 */
-	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(ArrayList<Integer>nums,int many);
+	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num,int many);
 	
 	/**
 	 * 降序排列的当天热点球员前五名

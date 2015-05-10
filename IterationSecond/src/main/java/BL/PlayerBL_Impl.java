@@ -25,9 +25,10 @@ public class PlayerBL_Impl implements PlayerBL{
 		if(list!=null){
 			ArrayList<PlayerAllVO>result=new ArrayList<PlayerAllVO>();
 			if(list.size()!=0){					
-			for(int i=0;i<list.size();i++){
+			for(int i=0;i<list.size()-1;i++){
 				result.add(new PlayerAllVO(playerData.getPlayerAllByName(list.get(i))));
 			}
+			list=null;
 			ArrayList<int[]>numbers=getCompareNum(nums);
 			Collections.sort(result, new SortAllByNum(numbers));		
 			}else{
@@ -119,17 +120,18 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 		return list;
 	}
 
-	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(ArrayList<Integer>nums,int many) {
+	public ArrayList<PlayerAverageVO> getImprovedPlayerByNum(int num,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerAverageVO>list=getPlayerAverage();
-		ArrayList<int[]>numbers=getCompareNum(nums);
-		Collections.sort(list, new SortAverageByNum(numbers));
+		ArrayList<int[]>nums=new ArrayList<int[]>();
+		nums.add(new int[]{num,0});
+		Collections.sort(list, new SortAverageByNum(nums));
 		ArrayList<PlayerAverageVO> result=new ArrayList<PlayerAverageVO>();
 		if(many>list.size()){
 			Collections.reverse(list);
 			return list;
 		}else{
-			for(int i=list.size()-1;i>list.size()-many;i--){
+			for(int i=list.size()-1;i>list.size()-many-1;i--){
 				result.add(list.get(i));
 			}
 			return result;
@@ -294,22 +296,32 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 	}
 private ArrayList<int[]> getCompareNum(ArrayList<Integer>nums){
 	ArrayList<int[]>result=new ArrayList<int[]>();
-	for(int i=0;i<nums.size()-1;i++){
+	for(int i=0;i<nums.size();i++){
 		if(nums.get(i)>=0&&nums.get(i)<=23){
-		   int nums[]=new int[2];
-		   
+		   int n[]=new int[2];
+		   n[0]=nums.get(i);
+		   n[1]=0;
+		   result.add(n);
 		}else if(nums.get(i)==24){
-			result.get(i)[0]=0;
-			result.get(i)[1]=1;
+			int n[]=new int[2];
+			n[0]=0;
+			n[1]=1;
+			result.add(n);
 		}else if(nums.get(i)==25){
-			result.get(i)[0]=0;
-			result.get(i)[1]=4;
+			int n[]=new int[2];
+			n[0]=0;
+			n[1]=4;
+			result.add(n);
 		}else if(nums.get(i)==26){
-			result.get(i)[0]=0;
-			result.get(i)[1]=5;
+			int n[]=new int[2];
+			n[0]=0;
+			n[1]=5;
+			result.add(n);
 		}else if(nums.get(i)==27){
-			result.get(i)[0]=0;
-			result.get(i)[1]=6;
+			int n[]=new int[2];
+			n[0]=0;
+			n[1]=6;
+			result.add(n);
 		}
 	}
 	return result;
@@ -361,12 +373,12 @@ private ArrayList<int[]> getCompareNum(ArrayList<Integer>nums){
  *  6字典序
  */
 class SortAllByNum implements Comparator<Object>{
-	ArrayList<Integer>numbers;
-	ArrayList<Integer>options;
+	ArrayList<Integer>numbers=new ArrayList<Integer>();
+	ArrayList<Integer>options=new ArrayList<Integer>();
     public SortAllByNum(ArrayList<int[]>nums){
-    	for(int i=0;i<nums.size()-1;i++){
-    		numbers.add(nums.get(i)[0]);
-    		options.add(nums.get(i)[1]);
+    	for(int i=0;i<nums.size();i++){
+    		this.numbers.add(nums.get(i)[0]);
+    		this.options.add(nums.get(i)[1]);
     	}
     }
 	public int compare(Object o1, Object o2) {
@@ -485,10 +497,10 @@ class SortShortByNum implements Comparator<Object>{
 	
 }
 class SortAverageByNum implements Comparator<Object>{
-	ArrayList<Integer>numbers;
-	ArrayList<Integer>options;
+	ArrayList<Integer>numbers=new ArrayList<Integer>();
+	ArrayList<Integer>options=new ArrayList<Integer>();
     public SortAverageByNum(ArrayList<int[]>nums){
-    	for(int i=0;i<nums.size()-1;i++){
+    	for(int i=0;i<nums.size();i++){
     		numbers.add(nums.get(i)[0]);
     		options.add(nums.get(i)[1]);
     	}

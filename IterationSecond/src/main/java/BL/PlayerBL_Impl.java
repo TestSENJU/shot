@@ -29,8 +29,12 @@ public class PlayerBL_Impl implements PlayerBL{
 				result.add(new PlayerAllVO(playerData.getPlayerAllByName(list.get(i))));
 			}
 			list=null;
-			ArrayList<int[]>numbers=getCompareNum(nums);
-			Collections.sort(result, new SortAllByNum(numbers));		
+			if(nums!=null)
+			{
+				ArrayList<int[]>numbers=getCompareNum(nums);
+				Collections.sort(result, new SortAllByNum(numbers));		
+			}
+
 			}else{
 				result=getPlayerAllRankingByNumRaising(nums);			
 			}
@@ -86,8 +90,11 @@ private ArrayList<String> getPlayerNamesByCon(String location,String league,Stri
 			for(int i=0;i<list.size();i++){
 				result.add(new PlayerAverageVO(playerData.getPlayerAverageByName(list.get(i))));
 			}
-			ArrayList<int[]>numbers=getCompareNum(nums);
+			if(nums!=null){
+				ArrayList<int[]>numbers=getCompareNum(nums);
 			Collections.sort(result, new SortAverageByNum(numbers));		
+			}
+			
 			}else{
 				result=getPlayerAvergaeRankingByNumRaising(nums);			
 			}

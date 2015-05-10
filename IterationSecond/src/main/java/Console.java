@@ -2,7 +2,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import test.data.TeamHighInfo;
 import test.data.TeamHotInfo;
+import test.data.TeamNormalInfo;
 import vo.PlayerAllVO;
 import vo.PlayerAverageVO;
 import vo.TeamAllVO;
@@ -247,6 +249,7 @@ public class Console {
 		}
 		// --------------team-----------------------
 		else {
+			VOMakeInfoTool tool = new VOMakeInfoTool();
 			// TODO 记住有个数量要求 number
 			if (team.isHot) {
 				ArrayList<Integer> nums = new ArrayList<Integer>();
@@ -302,139 +305,125 @@ public class Console {
 					field = "offendRebound";
 				}
 				ArrayList<TeamAverageVO> vo = t.getHotTeamByNum(nums, team.num);
-				VOMakeInfoTool tool = new VOMakeInfoTool();
+
 				for (int k = 0; k < vo.size(); k++) {
 					TeamHotInfo tio = tool
 							.getTeamHot(vo.get(k), i, null, field);
+					// TODO
 					out.print(tio);
 				}
 			} else {
-				if (team.isTotal) {
-					ArrayList<TeamAllVO> vo = t.getTeamAll();
-					if (team.isSort) {
-						String[] spl = team.sortField.split(",");
-						for (String s : spl) {
-							if (s.contains("point")) {
-
-							} else if (s.contains("rebound")) {
-
-							} else if (s.contains("assit")) {
-
-							} else if (s.contains("blockShot")) {
-
-							} else if (s.contains("steal")) {
-
-							} else if (s.contains("foul")) {
-
-							} else if (s.contains("fault")) {
-
-							} else if (s.contains("shot")) {
-
-							} else if (s.contains("three")) {
-
-							} else if (s.contains("penalty")) {
-
-							} else if (s.contains("defendRebound")) {
-
-							} else if (s.contains("offendRebound")) {
-
-							} else if (s.contains("rebound")) {
-
-							} else if (s.contains("winRate")) {
-
-							} else if (s.contains("offendRebound")) {
-
-							} else if (s.contains("offendEfficient")) {
-
-							} else if (s.contains("defendEfficient")) {
-
-							} else if (s.contains("offendReboundEfficient")) {
-
-							} else if (s.contains("defendReboundEfficient")) {
-
-							} else if (s.contains("assitEfficient")) {
-
-							}
-						}
-						if (team.sortField.contains("asc")) {
-
-						} else if (team.sortField.contains("desc")) {
-
-						}
-						if (team.isHigh) {
-
-						} else {
-
-						}
-					} else if (!team.isSort) {
-						if (team.isHigh) {
-
-						} else {
-
+				ArrayList<TeamAllVO> vo = new ArrayList<TeamAllVO>();
+				ArrayList<TeamAverageVO> avo = new ArrayList<TeamAverageVO>();
+				if (team.isSort) {
+					String[] spl = team.sortField.split(",");
+					ArrayList<Integer> nums = new ArrayList<Integer>();
+					for (String s : spl) {
+						if (s.contains("point")) {
+							nums.add(14);
+						} else if (s.contains("rebound")) {
+							nums.add(8);
+						} else if (s.contains("assit")) {
+							nums.add(9);
+						} else if (s.contains("blockShot")) {
+							nums.add(11);
+						} else if (s.contains("steal")) {
+							nums.add(10);
+						} else if (s.contains("foul")) {
+							nums.add(13);
+						} else if (s.contains("fault")) {
+							nums.add(12);
+						} else if (s.contains("shot")) {
+							nums.add(15);
+						} else if (s.contains("three")) {
+							nums.add(16);
+						} else if (s.contains("penalty")) {
+							nums.add(17);
+						} else if (s.contains("defendRebound")) {
+							nums.add(7);
+						} else if (s.contains("offendRebound")) {
+							nums.add(6);
+						} else if (s.contains("winRate")) {
+							nums.add(18);
+						} else if (s.contains("offendRebound")) {
+							nums.add(19);
+						} else if (s.contains("offendEfficient")) {
+							nums.add(20);
+						} else if (s.contains("defendEfficient")) {
+							nums.add(21);
+						} else if (s.contains("offendReboundEfficient")) {
+							nums.add(null);
+							// TODO
+						} else if (s.contains("defendReboundEfficient")) {
+							nums.add(null);
+							// TODO
+						} else if (s.contains("stealEfficient")) {
+							nums.add(23);
+						} else if (s.contains("assitEfficient")) {
+							nums.add(24);
 						}
 					}
-				} else {
-					ArrayList<TeamAverageVO> vo = t.getTeamAverage();
-					if (team.isSort) {
-						String[] spl = team.sortField.split(",");
-						for (String s : spl) {
-							if (s.contains("point")) {
 
-							} else if (s.contains("rebound")) {
-
-							} else if (s.contains("assit")) {
-
-							} else if (s.contains("blockShot")) {
-
-							} else if (s.contains("steal")) {
-
-							} else if (s.contains("foul")) {
-
-							} else if (s.contains("fault")) {
-
-							} else if (s.contains("shot")) {
-
-							} else if (s.contains("three")) {
-
-							} else if (s.contains("penalty")) {
-
-							} else if (s.contains("defendRebound")) {
-
-							} else if (s.contains("offendRebound")) {
-
-							} else if (s.contains("rebound")) {
-
-							} else if (s.contains("winRate")) {
-
-							} else if (s.contains("offendRebound")) {
-
-							} else if (s.contains("offendEfficient")) {
-
-							} else if (s.contains("defendEfficient")) {
-
-							} else if (s.contains("offendReboundEfficient")) {
-
-							} else if (s.contains("defendReboundEfficient")) {
-
-							} else if (s.contains("assitEfficient")) {
-
+					if (team.isAll) {
+						if (team.ifAscSort) {
+							vo = t.getTeamAllRankingByNumRaising(nums, team.num);
+						} else {
+							vo = t.getTeamAllRankingByNumDeclining(nums,
+									team.num);
+						}
+					} else {
+						if (team.ifAscSort) {
+							avo = t.getTeamAverageRankingByNum(nums, team.num);
+						} else {
+							avo = t.getTeamAverageRankingByNum(nums, team.num);
+						}
+					}
+					if (team.isHigh) {
+						if (team.isAll) {
+							for (int k = 0; k < vo.size(); k++) {
+								// TODO
+							}
+						} else {
+							for (int k = 0; k < vo.size(); k++) {
+								TeamHighInfo tio = tool.getTeamHigh(avo.get(k));
+								out.print(tio);
 							}
 						}
-						if (team.sortField.contains("asc")) {
-
-						} else if (team.sortField.contains("desc")) {
-
-						}
-						if (team.isHigh) {
-
+					} else {
+						if (team.isAll) {
+							for (int k = 0; k < vo.size(); k++) {
+								TeamNormalInfo tio = tool.getTeamAllNormal(vo
+										.get(k));
+								out.print(tio);
+							}
 						} else {
-
+							for (int k = 0; k < vo.size(); k++) {
+								TeamNormalInfo tio = tool
+										.getTeamAverageNormal(avo.get(k));
+								out.print(tio);
+							}
 						}
-					} else if (!team.isSort) {
-						if (team.isHigh) {
-
+					}
+				} else if (!team.isSort) {
+					if (team.isHigh) {
+						if (team.isAll) {
+							// TODO
+						}
+					} else {
+						if (team.isAll) {
+							vo = t.getTeamAll();
+							for (int k = 0; k < vo.size(); k++) {
+								TeamNormalInfo tio = tool.getTeamAllNormal(vo
+										.get(k));
+								out.print(tio);
+							}
 						} else {
-
+							avo = t.getTeamAverage();
+							for (int k = 0; k < vo.size(); k++) {
+								TeamNormalInfo tio = tool
+										.getTeamAverageNormal(avo.get(k));
+								out.print(tio);
+							}
 						}
 					}
 				}

@@ -395,15 +395,15 @@ public class HotInfoPanel {
 			String id = c.getSelectedItem().toString();
 			ArrayList<PlayerShortVO> hptList = new ArrayList<PlayerShortVO>();
 			if (id.equals("篮板")) {
-				hptList = pbl.getTodayHotPlayerByNum(1);
+				//hptList = pbl.getTodayHotPlayerByNum(1);
 			} else if (id.equals("得分")) {
-				hptList = pbl.getTodayHotPlayerByNum(0);
+				//hptList = pbl.getTodayHotPlayerByNum(0);
 			} else if (id.equals("助攻")) {
-				hptList = pbl.getTodayHotPlayerByNum(2);
+				//hptList = pbl.getTodayHotPlayerByNum(2);
 			} else if (id.equals("抢断")) {
-				hptList = pbl.getTodayHotPlayerByNum(3);
+				//hptList = pbl.getTodayHotPlayerByNum(3);
 			} else if (id.equals("盖帽")) {
-				hptList = pbl.getTodayHotPlayerByNum(4);
+				//hptList = pbl.getTodayHotPlayerByNum(4);
 			} else {
 				System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
 			}
@@ -485,28 +485,28 @@ public class HotInfoPanel {
 		 * 6投篮命中率
 		 * 7罚球命中率*/
 			if (id.equals("场均得分")) {
-				hpsList = pbl.getHotPlayerByNum(0);
+				//hpsList = pbl.getHotPlayerByNum(0);
 				
 			} else if (id.equals("场均篮板")) {
-				hpsList = pbl.getHotPlayerByNum(1);
+				//hpsList = pbl.getHotPlayerByNum(1);
 				
 			} else if (id.equals("场均助攻")) {
-				hpsList = pbl.getHotPlayerByNum(2);
+				//hpsList = pbl.getHotPlayerByNum(2);
 				
 			} else if (id.equals("场均盖帽")) {
-				hpsList = pbl.getHotPlayerByNum(3);
+				//hpsList = pbl.getHotPlayerByNum(3);
 				
 			} else if (id.equals("场均抢断")) {
-				hpsList = pbl.getHotPlayerByNum(4);
+				//hpsList = pbl.getHotPlayerByNum(4);
 				
 			} else if (id.equals("三分命中率")) {
-				hpsList = pbl.getHotPlayerByNum(5);
+				//hpsList = pbl.getHotPlayerByNum(5);
 				
 			} else if (id.equals("投篮命中率")) {
-				hpsList = pbl.getHotPlayerByNum(6);
+				//hpsList = pbl.getHotPlayerByNum(6);
 				
 			} else if (id.equals("罚球命中率")) {
-				hpsList = pbl.getHotPlayerByNum(7);
+				//hpsList = pbl.getHotPlayerByNum(7);
 				
 			} else {
 				System.out.println("HotInfoPanel-hotPlayerToday-InvalidChoose.");
@@ -590,21 +590,21 @@ public class HotInfoPanel {
 			String id = c.getSelectedItem().toString();
 			ArrayList<TeamAverageVO> htsList = new ArrayList<TeamAverageVO>();
 			if (id.equals("场均得分")) {
-				htsList = tbl.getHotTeamByNum(0);
+				//htsList = tbl.getHotTeamByNum(0);
 			} else if (id.equals("场均篮板")) {
-				htsList = tbl.getHotTeamByNum(1);
+				//htsList = tbl.getHotTeamByNum(1);
 			} else if (id.equals("场均助攻")) {
-				htsList = tbl.getHotTeamByNum(2);
+				//htsList = tbl.getHotTeamByNum(2);
 			} else if (id.equals("场均盖帽")) {
-				htsList = tbl.getHotTeamByNum(3);
+				//htsList = tbl.getHotTeamByNum(3);
 			} else if (id.equals("场均抢断")) {
-				htsList = tbl.getHotTeamByNum(4);
+				//htsList = tbl.getHotTeamByNum(4);
 			} else if (id.equals("三分命中率")) {
-				htsList = tbl.getHotTeamByNum(5);
+				//htsList = tbl.getHotTeamByNum(5);
 			} else if (id.equals("投篮命中率")) {
-				htsList = tbl.getHotTeamByNum(6);
+				//htsList = tbl.getHotTeamByNum(6);
 			} else if (id.equals("罚球命中率")) {
-				htsList = tbl.getHotTeamByNum(7);
+				//htsList = tbl.getHotTeamByNum(7);
 			} else {
 				System.out.println("HotInfoPanel-hotTeamSeasonTable-InvalidInput.");
 			}
@@ -688,11 +688,11 @@ public class HotInfoPanel {
 		 * 1场均篮板
 		 * 2场均助攻*/
 			if (id.equals("场均得分")) {
-				bpList = pbl.getImprovedPlayerByNum(0);
+				//bpList = pbl.getImprovedPlayerByNum(0);
 			} else if (id.equals("场均篮板")) {
-				bpList = pbl.getImprovedPlayerByNum(1);
+				//bpList = pbl.getImprovedPlayerByNum(1);
 			} else if (id.equals("场均助攻")) {
-				bpList = pbl.getImprovedPlayerByNum(2);
+				//bpList = pbl.getImprovedPlayerByNum(2);
 			} else {
 				System.out.println("HotInfoPanel-BestPlayerTable-InvalidInput");
 			}

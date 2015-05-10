@@ -2,6 +2,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import test.data.TeamHotInfo;
 import vo.PlayerAllVO;
 import vo.PlayerAverageVO;
 import vo.TeamAllVO;
@@ -248,32 +249,64 @@ public class Console {
 		else {
 			// TODO 记住有个数量要求 number
 			if (team.isHot) {
+				ArrayList<Integer> nums = new ArrayList<Integer>();
+				String field = "";
+				int i = 0;
 				if (team.hotField.contains("score")) {
-
+					nums.set(0, 14);
+					i = 14;
+					field = "score";
 				} else if (team.hotField.contains("rebound")) {
-
+					nums.set(0, 8);
+					i = 8;
+					field = "rebound";
 				} else if (team.hotField.contains("assit")) {
-
+					nums.set(0, 9);
+					i = 9;
+					field = "assit";
 				} else if (team.hotField.contains("blockShot")) {
-
+					nums.set(0, 11);
+					i = 11;
+					field = "blockShot";
 				} else if (team.hotField.contains("steal")) {
-
+					nums.set(0, 10);
+					i = 10;
+					field = "steal";
 				} else if (team.hotField.contains("foul")) {
-
+					nums.set(0, 13);
+					i = 13;
+					field = "foul";
 				} else if (team.hotField.contains("fault")) {
-
+					nums.set(0, 12);
+					i = 12;
+					field = "fault";
 				} else if (team.hotField.contains("shot")) {
-
+					nums.set(0, 15);
+					i = 15;
+					field = "shot";
 				} else if (team.hotField.contains("three")) {
-
+					nums.set(0, 16);
+					i = 16;
+					field = "three";
 				} else if (team.hotField.contains("penalty")) {
-
+					nums.set(0, 17);
+					i = 17;
+					field = "penalty";
 				} else if (team.hotField.contains("defendRebound")) {
-
+					nums.set(0, 7);
+					i = 7;
+					field = "defendRebound";
 				} else if (team.hotField.contains("offendRebound")) {
-
-				} else if (team.hotField.contains("rebound")) {
-
+					nums.set(0, 6);
+					i = 6;
+					field = "offendRebound";
+				}
+				ArrayList<TeamAverageVO> vo = t.getHotTeamByNum(nums, team.num);
+				VOMakeInfoTool tool = new VOMakeInfoTool();
+				for (int k = 0; k < vo.size(); k++) {
+					TeamHotInfo tio = tool
+							.getTeamHot(vo.get(k), i, null, field);
+					out.print(tio);
 				}
 			} else {
 				if (team.isTotal) {

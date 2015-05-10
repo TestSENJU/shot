@@ -166,27 +166,49 @@ public class Console {
 							i = 29;
 							field = "doubleTwo";
 						} else if (s.contains("realShot")) {
-
+							nums.set(0, 14);
+							i = 14;
+							field = "doubleTwo";
 						} else if (s.contains("GmSc")) {
-
+							nums.set(0, 13);
+							i = 13;
+							field = "GmSc";
 						} else if (s.contains("shotEfficient")) {
-
+							nums.set(0, 15);
+							i = 15;
+							field = "shotEfficient";
 						} else if (s.contains("reboundEfficient")) {
-
+							nums.set(0, 16);
+							i = 16;
+							field = "reboundEfficient";
 						} else if (s.contains("offendReboundEfficient")) {
-
+							nums.set(0, 17);
+							i = 17;
+							field = "offendReboundEfficient";
 						} else if (s.contains("defendReboundEfficient")) {
-
+							nums.set(0, 18);
+							i = 18;
+							field = "defendReboundEfficient";
 						} else if (s.contains("assitEfficient")) {
-
+							nums.set(0, 19);
+							i = 19;
+							field = "defendReboundEfficient";
 						} else if (s.contains("stealEfficient")) {
-
+							nums.set(0, 20);
+							i = 20;
+							field = "stealEfficient";
 						} else if (s.contains("blockShotEfficient")) {
-
+							nums.set(0, 21);
+							i = 21;
+							field = "blockShotEfficient";
 						} else if (s.contains("faultEfficient")) {
-
+							nums.set(0, 22);
+							i = 22;
+							field = "faultEfficient";
 						} else if (s.contains("frequency")) {
-
+							nums.set(0, 23);
+							i = 23;
+							field = "faultEfficient";
 						}
 					}
 					if (player.sortField.contains("asc")) {
@@ -215,54 +237,105 @@ public class Console {
 					}
 					String[] spl2 = player.sortField.split(",");
 					for (String s : spl2) {
-						if (s.contains("point")) {
-
+						ArrayList<Integer> nums = new ArrayList<Integer>();
+						int i = 0;
+						String field = "";
+						if (s.contains("score")) {
+							nums.set(0, 11);
+							i = 11;
+							field = "score";
 						} else if (s.contains("rebound")) {
-
+							nums.set(0, 0);
+							i = 0;
+							field = "rebound";
 						} else if (s.contains("assit")) {
-
+							nums.set(0, 1);
+							i = 1;
+							field = "assit";
 						} else if (s.contains("blockShot")) {
-
+							nums.set(0, 8);
+							i = 8;
+							field = "blockShot";
 						} else if (s.contains("steal")) {
-
+							nums.set(0, 7);
+							i = 7;
+							field = "steal";
 						} else if (s.contains("foul")) {
-
+							nums.set(0, 10);
+							i = 10;
+							field = "foul";
 						} else if (s.contains("fault")) {
-
+							nums.set(0, 9);
+							i = 9;
+							field = "fault";
 						} else if (s.contains("minute")) {
-
+							nums.set(0, 27);
+							i = 27;
+							field = "minute";
 						} else if (s.contains("efficient")) {
-
+							nums.set(0, 12);
+							i = 12;
+							field = "efficient";
 						} else if (s.contains("shot")) {
-
+							nums.set(0, 2);
+							i = 2;
+							field = "shot";
 						} else if (s.contains("three")) {
-
+							nums.set(0, 3);
+							i = 3;
+							field = "three";
 						} else if (s.contains("penalty")) {
-
+							nums.set(0, 4);
+							i = 4;
+							field = "penalty";
 						} else if (s.contains("doubleTwo")) {
-
+							nums.set(0, 29);
+							i = 29;
+							field = "doubleTwo";
 						} else if (s.contains("realShot")) {
-
+							nums.set(0, 14);
+							i = 14;
+							field = "doubleTwo";
 						} else if (s.contains("GmSc")) {
-
+							nums.set(0, 13);
+							i = 13;
+							field = "GmSc";
 						} else if (s.contains("shotEfficient")) {
-
+							nums.set(0, 15);
+							i = 15;
+							field = "shotEfficient";
 						} else if (s.contains("reboundEfficient")) {
-
+							nums.set(0, 16);
+							i = 16;
+							field = "reboundEfficient";
 						} else if (s.contains("offendReboundEfficient")) {
-
+							nums.set(0, 17);
+							i = 17;
+							field = "offendReboundEfficient";
 						} else if (s.contains("defendReboundEfficient")) {
-
+							nums.set(0, 18);
+							i = 18;
+							field = "defendReboundEfficient";
 						} else if (s.contains("assitEfficient")) {
-
+							nums.set(0, 19);
+							i = 19;
+							field = "defendReboundEfficient";
 						} else if (s.contains("stealEfficient")) {
-
+							nums.set(0, 20);
+							i = 20;
+							field = "stealEfficient";
 						} else if (s.contains("blockShotEfficient")) {
-
+							nums.set(0, 21);
+							i = 21;
+							field = "blockShotEfficient";
 						} else if (s.contains("faultEfficient")) {
-
+							nums.set(0, 22);
+							i = 22;
+							field = "faultEfficient";
 						} else if (s.contains("frequency")) {
-
+							nums.set(0, 23);
+							i = 23;
+							field = "faultEfficient";
 						}
 					}
 					if (player.sortField.contains("asc")) {

@@ -84,14 +84,11 @@ public class TeamBL_Impl implements TeamBL{
 		}
 	}
 
-	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(int num,int many,int num1) {
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumRaising(ArrayList<Integer>nums,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAllVO> list=getTeamAll();
-		if(num==25){
-			Collections.sort(list, new TeamSortAllByNum(0,1,num1));
-		}else{
-			Collections.sort(list, new TeamSortAllByNum(num,0,num1));
-		}	
+		ArrayList<int[]>numbers=getCompareNum(nums);
+			Collections.sort(list, new TeamSortAllByNum(numbers));
 		   if(list!=null){
 	        	if(many<30){
 	    			ArrayList<TeamAllVO> result=new ArrayList<TeamAllVO>();
@@ -108,14 +105,11 @@ public class TeamBL_Impl implements TeamBL{
 	        }
 	}
 
-	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(int num,int many,int num1) {
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNum(ArrayList<Integer>nums,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAverageVO> list=getTeamAverage();
-		if(num==25){
-			Collections.sort(list, new TeamSortAverageByNum(0,1,num1));
-		}else{
-			Collections.sort(list, new TeamSortAverageByNum(num,0,num1));
-		}
+		ArrayList<int[]>numbers=getCompareNum(nums);
+			Collections.sort(list, new TeamSortAverageByNum(numbers));
         if(list!=null){
         	if(many<30){
     			ArrayList<TeamAverageVO> result=new ArrayList<TeamAverageVO>();
@@ -131,25 +125,28 @@ public class TeamBL_Impl implements TeamBL{
         	return null;
         }
 	}
-
-	public ArrayList<TeamAverageVO> getHotTeamByNum(int num,int many) {
+private ArrayList<int[]>getCompareNum(ArrayList<Integer>list){
+	ArrayList<int[]>nums=new ArrayList<int[]>();
+	for(int i=0;i<list.size();i++){
+		if(list.get(i)<25){
+			int n[]=new int[2];
+			n[0]=list.get(i);
+			n[1]=0;
+			nums.add(n);
+		}else{
+			int n[]=new int[2];
+			n[0]=0;
+			n[1]=1;
+			nums.add(n);
+		}
+	}
+	return nums;
+}
+	public ArrayList<TeamAverageVO> getHotTeamByNum(ArrayList<Integer>nums,int many) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamAverageVO> list=getTeamAverage();
-		
-		switch(num){
-		case 0:Collections.sort(list, new TeamSortAverageByNum(14,0,-1));break;
-		case 1:Collections.sort(list, new TeamSortAverageByNum(8,0,-1));break;
-		case 2:Collections.sort(list, new TeamSortAverageByNum(9,0,-1));break;
-		case 3:Collections.sort(list, new TeamSortAverageByNum(11,0,-1));break;
-		case 4:Collections.sort(list, new TeamSortAverageByNum(10,0,-1));break;
-		case 5:Collections.sort(list, new TeamSortAverageByNum(16,0,-1));break;
-		case 6:Collections.sort(list, new TeamSortAverageByNum(15,0,-1));break;
-		case 7:Collections.sort(list, new TeamSortAverageByNum(17,0,-1));break;
-		case 8:Collections.sort(list, new TeamSortAverageByNum(13,0,-1));break;
-		case 9:Collections.sort(list, new TeamSortAverageByNum(12,0,-1));break;
-		case 10:Collections.sort(list, new TeamSortAverageByNum(6,0,-1));break;
-		case 11:Collections.sort(list, new TeamSortAverageByNum(7,0,-1));break;
-		}
+		ArrayList<int[]>numbers=getCompareNum(nums);
+		Collections.sort(list, new TeamSortAverageByNum(numbers));
 		if(list!=null){
 					if(many<30){
 			ArrayList<TeamAverageVO> result=new ArrayList<TeamAverageVO>();
@@ -198,15 +195,15 @@ public class TeamBL_Impl implements TeamBL{
 		return teamData.getPlayerNamesOfTeam(teamName);
 	}
 
-	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(int num,int many,int num1) {
+	public ArrayList<TeamAverageVO> getTeamAverageRankingByNumDeclining(ArrayList<Integer>nums,int many) {
 		// TODO Auto-generated method stub
-		ArrayList<TeamAverageVO>list=getTeamAverageRankingByNum(num,many,num1);
+		ArrayList<TeamAverageVO>list=getTeamAverageRankingByNum(nums,many);
 		Collections.reverse(list);
 		return list;
 	}
-	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(int num,int many,int num1) {
+	public ArrayList<TeamAllVO> getTeamAllRankingByNumDeclining(ArrayList<Integer>nums,int many) {
 		// TODO Auto-generated method stub
-		ArrayList<TeamAllVO> list=getTeamAllRankingByNumRaising(num,many,num1);
+		ArrayList<TeamAllVO> list=getTeamAllRankingByNumRaising(nums,many);
 		Collections.reverse(list);
 		
 		return list;
@@ -224,26 +221,38 @@ public class TeamBL_Impl implements TeamBL{
 
 }
 class TeamSortAllByNum implements Comparator<Object>{
-	int comNum;
-	int option;
-	int comNum1;
-    public TeamSortAllByNum(int num,int op,int num1){
-    	this.comNum=num;
-    	this.option=op;
-    	this.comNum1=num1;
+	ArrayList<Integer>numbers=new ArrayList<Integer>();
+	ArrayList<Integer>options=new ArrayList<Integer>();
+	
+    public TeamSortAllByNum(ArrayList<int[]>nums){
+    	for(int i=0;i<nums.size();i++){
+    	this.numbers.add(nums.get(i)[0]);
+    	this.options.add(nums.get(i)[1]);
+    	}
     }
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
 		TeamAllVO po1=(TeamAllVO) o1;
 		TeamAllVO po2=(TeamAllVO)o2;
-		if(this.option==0){
-		double[] nums1=po1.getTeamData();
-		double[] nums2=po2.getTeamData();
-		if(nums1[this.comNum]>nums2[this.comNum]){
-			return 1;
-		}else if(nums1[this.comNum]==nums2[this.comNum]){
-			
-			if(this.comNum1==-1){
+		for(int i=0;i<this.numbers.size();i++){
+			if(this.options.get(i)==0){
+				double[] nums1=po1.getTeamData();
+				double[] nums2=po2.getTeamData();
+				if(nums1[this.numbers.get(i)]>nums2[this.numbers.get(i)]){
+					return 1;
+				}else if(nums1[this.numbers.get(i)]==nums2[this.numbers.get(i)]){}
+				else return -1;
+				}else{
+					int num1=po1.getMatchNum();
+					int num2=po2.getMatchNum();
+					if(num1>num2){
+						return 1;
+					}else if(num1==num2){
+					}else{
+						return -1;
+					}					
+					}
+				}	
 				String teamnames[]=new String[2];
 				teamnames[0]=po1.getTeamName();
 				teamnames[1]=po2.getTeamName();
@@ -252,151 +261,48 @@ class TeamSortAllByNum implements Comparator<Object>{
 					return 1;
 				}else
 				return 0;
-			}else{
-			if(nums1[this.comNum1]==nums2[this.comNum1]){
-				String teamnames[]=new String[2];
-				teamnames[0]=po1.getTeamName();
-				teamnames[1]=po2.getTeamName();
-				Arrays.sort(teamnames);
-				if(po1.getTeamName().equals(teamnames[1])){
-					return 1;
-				}else
-				return 0;
-			}else if(nums1[this.comNum1]>nums2[this.comNum1]){
-				return 1;
-			}else{
-				return -1;
-			}
 			}
 		}
-		else return -1;
-		}else{
-			int num1=po1.getMatchNum();
-			int num2=po2.getMatchNum();
-			if(num1>num2){
-				return 1;
-			}else if(num1==num2){
-
-				if(this.comNum1==-1){
-					String teamnames[]=new String[2];
-					teamnames[0]=po1.getTeamName();
-					teamnames[1]=po2.getTeamName();
-					Arrays.sort(teamnames);
-					if(po1.getTeamName().equals(teamnames[1])){
-						return 1;
-					}else
-					return 0;
-				}else{
-					double[] nums1=po1.getTeamData();
-					double[] nums2=po2.getTeamData();
-				if(nums1[this.comNum1]==nums2[this.comNum1]){
-					String teamnames[]=new String[2];
-					teamnames[0]=po1.getTeamName();
-					teamnames[1]=po2.getTeamName();
-					Arrays.sort(teamnames);
-					if(po1.getTeamName().equals(teamnames[1])){
-						return 1;
-					}else
-					return 0;
-				}else if(nums1[this.comNum1]>nums2[this.comNum1]){
-					return 1;
-				}else{
-					return -1;
-				}
-				}
-			
-			}else {
-				return -1;
-			}
-		}	
-	}
-}
 class TeamSortAverageByNum implements Comparator<Object>{
-	int comNum;
-	int option;
-	int comNum1;
-    public TeamSortAverageByNum(int num,int op,int num1){
-    	this.comNum=num;
-    	this.option=op;
-    	this.comNum1=num1;
+	ArrayList<Integer>numbers=new ArrayList<Integer>();
+	ArrayList<Integer>options=new ArrayList<Integer>();
+    public TeamSortAverageByNum(ArrayList<int[]>nums){
+    	for(int i=0;i<nums.size();i++){
+        	this.numbers.add(nums.get(i)[0]);
+        	this.options.add(nums.get(i)[1]);
+        	}
     }
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
 		TeamAverageVO po1=(TeamAverageVO) o1;
 		TeamAverageVO po2=(TeamAverageVO)o2;
 
-		if(this.option==0){
-			double[] nums1=po1.getTeamData();
-			double[] nums2=po2.getTeamData();
-			if(nums1[this.comNum]>nums2[this.comNum]){
-				return 1;
-			}else if(nums1[this.comNum]==nums2[this.comNum]){
-				if(this.comNum1==-1){
-					String teamnames[]=new String[2];
-					teamnames[0]=po1.getTeamName();
-					teamnames[1]=po2.getTeamName();
-					Arrays.sort(teamnames);
-					if(po1.getTeamName().equals(teamnames[1])){
-						return 1;
-					}else
-					return 0;
-				}else{
-				if(nums1[this.comNum1]==nums2[this.comNum1]){
-					String teamnames[]=new String[2];
-					teamnames[0]=po1.getTeamName();
-					teamnames[1]=po2.getTeamName();
-					Arrays.sort(teamnames);
-					if(po1.getTeamName().equals(teamnames[1])){
-						return 1;
-					}else
-					return 0;
-				}else if(nums1[this.comNum1]>nums2[this.comNum1]){
+		for(int i=0;i<this.numbers.size();i++){
+			if(this.options.get(i)==0){
+				double[] nums1=po1.getTeamData();
+				double[] nums2=po2.getTeamData();
+				if(nums1[this.numbers.get(i)]>nums2[this.numbers.get(i)]){
 					return 1;
+				}else if(nums1[this.numbers.get(i)]==nums2[this.numbers.get(i)]){}
+				else return -1;
 				}else{
-					return -1;
-				}
-				}			
-			}else 
-			return -1;
-		}else{
-
-			int num1=po1.getMatchNum();
-			int num2=po2.getMatchNum();
-			if(num1>num2){
-				return 1;
-			}else if(num1==num2){
-
-
-				if(this.comNum1==-1){
-					String teamnames[]=new String[2];
-					teamnames[0]=po1.getTeamName();
-					teamnames[1]=po2.getTeamName();
-					Arrays.sort(teamnames);
-					if(po1.getTeamName().equals(teamnames[1])){
+					int num1=po1.getMatchNum();
+					int num2=po2.getMatchNum();
+					if(num1>num2){
 						return 1;
-					}else
-					return 0;
-				}else{
-					double[] nums1=po1.getTeamData();
-					double[] nums2=po2.getTeamData();
-				if(nums1[this.comNum1]==nums2[this.comNum1]){
-					String teamnames[]=new String[2];
-					teamnames[0]=po1.getTeamName();
-					teamnames[1]=po2.getTeamName();
-					Arrays.sort(teamnames);
-					if(po1.getTeamName().equals(teamnames[1])){
-						return 1;
-					}else
-					return 0;
-				}else if(nums1[this.comNum1]>nums2[this.comNum1]){
+					}else if(num1==num2){
+					}else{
+						return -1;
+					}					
+					}
+				}	
+				String teamnames[]=new String[2];
+				teamnames[0]=po1.getTeamName();
+				teamnames[1]=po2.getTeamName();
+				Arrays.sort(teamnames);
+				if(po1.getTeamName().equals(teamnames[1])){
 					return 1;
-				}else{
-					return -1;
-				}
-				}			
-			}else 
-	          return -1;	
-		}
-	
-	}
+				}else
+				return 0;
+			}
 }

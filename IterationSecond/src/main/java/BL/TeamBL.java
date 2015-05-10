@@ -57,6 +57,7 @@ public interface TeamBL {
  *  22篮板效率
  *  23抢断效率
  *  24助攻率
+ *  25比赛场数
 	 */
 	public ArrayList<TeamAverageVO> getHotTeamByNum(ArrayList<Integer>nums,int many);
 	//根据缩写名返回全名

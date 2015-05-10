@@ -59,8 +59,8 @@ public class Console {
 			if (player.isHot) {
 				if (player.isSeason) {
 					// TODO
-					
-				} 
+
+				}
 			} else if (player.isKing) {
 				if (player.isSeason) {
 					// TODO
@@ -276,14 +276,12 @@ public class Console {
 
 				}
 			} else {
-				ArrayList<TeamAllVO> vo;
 				if (team.isTotal) {
-					vo = t.getTeamAll();
+					ArrayList<TeamAllVO> vo = t.getTeamAll();
 					if (team.isSort) {
 						String[] spl = team.sortField.split(",");
 						for (String s : spl) {
 							if (s.contains("point")) {
-								
 
 							} else if (s.contains("rebound")) {
 
@@ -343,7 +341,7 @@ public class Console {
 						}
 					}
 				} else {
-					
+					ArrayList<TeamAverageVO> vo = t.getTeamAverage();
 					if (team.isSort) {
 						String[] spl = team.sortField.split(",");
 						for (String s : spl) {
@@ -407,7 +405,7 @@ public class Console {
 						}
 					}
 				}
-				
+
 			}
 		}
 	}

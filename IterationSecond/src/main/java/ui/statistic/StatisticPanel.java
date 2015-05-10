@@ -10,7 +10,7 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.swing.ButtonGroup;
+//import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,8 +26,8 @@ import ui.AllImages;
 import ui.DialogPanel;
 import ui.IComboBox;
 import ui.IScrollBarUI;
-import ui.MyDialog;
-import ui.MyDialog.DialogWindow;
+//import ui.MyDialog;
+//import ui.MyDialog.DialogWindow;
 import ui.MyStringTable;
 import ui.MyTable;
 import ui.player.PlayerHomePanel;
@@ -60,13 +60,13 @@ public class StatisticPanel {
 	private MyStringTable tDataTable;
 	//
 	protected DialogPanel dPanel;
-	private DialogWindow dw;
+	//private DialogWindow dw;
 	protected JButton sure;
 	protected JButton cancel;
 	protected JLabel choose;
 	protected JRadioButton ascend;
 	protected JRadioButton descend;
-	private ButtonGroup group;
+	//private ButtonGroup group;
 	public static String AorD = "";
 	public static String tempTableButton = "";
 	public static String playerCondition = "";
@@ -684,7 +684,7 @@ public class StatisticPanel {
 	class pTableHeaderListener implements MouseListener{
 
 		public void mouseClicked(MouseEvent et) {
-			PlayWave.startClickSound();
+			/*PlayWave.startClickSound();
 			if(et.getClickCount()==2){
 				System.out.println(pDataTable.getColumnName(pDataTable.getTableHeader().columnAtPoint(et.getPoint())));
 				playerCondition = pDataTable.getColumnName(pDataTable.getTableHeader().columnAtPoint(et.getPoint()));
@@ -1007,7 +1007,7 @@ public class StatisticPanel {
 				});
 				dPanel.add(cancel, 0);
 	
-			}
+			}*/
 		}
 		public void mouseEntered(MouseEvent e) {
 		}
@@ -1094,7 +1094,7 @@ public class StatisticPanel {
 		class tTableHeaderListener implements MouseListener{
 
 			public void mouseClicked(MouseEvent e) {
-				PlayWave.startClickSound();
+				/*PlayWave.startClickSound();
 				if(e.getClickCount()==2){
 					System.out.println(tDataTable.getColumnName(tDataTable.getTableHeader().columnAtPoint(e.getPoint())));
 					teamCondition = tDataTable.getColumnName(tDataTable.getTableHeader().columnAtPoint(e.getPoint()));
@@ -1387,7 +1387,7 @@ public class StatisticPanel {
 					});
 					dPanel.add(cancel, 0);
 		
-				}
+				}*/
 			}
 			public void mouseEntered(MouseEvent e) {
 			}
@@ -1416,7 +1416,7 @@ public class StatisticPanel {
 	class SureToolListener implements MouseListener{
 		public void mouseClicked(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			PlayWave.startClickSound();
+			/*PlayWave.startClickSound();
 			System.out.println(position.getSelectedItem().toString()+league.getSelectedItem().toString()+sortBy.getSelectedItem().toString());
 			int num = -1;
 			String location = "";
@@ -1432,7 +1432,7 @@ public class StatisticPanel {
 				System.out.println("StatisticPanel-SureToolListener-location invalid.default F");
 			}
 			/**"东部东南分区","东部中央分区","东部大西洋分区",
-				"西部太平洋分区","西部西北分区","西部西南分区"*/
+				"西部太平洋分区","西部西北分区","西部西南分区"
 			if (league.getSelectedItem().toString().equals("东部东南分区")) {
 				pLeague = "E-Southeast";
 			} else if (league.getSelectedItem().toString().equals("东部中央分区")) {
@@ -1577,7 +1577,7 @@ public class StatisticPanel {
 				toolPanel.repaint();
 			}
 			
-		
+		*/
 		}
 		public void mouseEntered(MouseEvent arg0) {
 		}

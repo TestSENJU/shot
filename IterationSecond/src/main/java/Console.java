@@ -1,4 +1,5 @@
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import vo.PlayerAllVO;
@@ -58,8 +59,8 @@ public class Console {
 			if (player.isHot) {
 				if (player.isSeason) {
 					// TODO
-					
-				} 
+
+				}
 			} else if (player.isKing) {
 				if (player.isSeason) {
 					// TODO
@@ -275,74 +276,136 @@ public class Console {
 
 				}
 			} else {
-				Hashtable<String, ?> vo;
 				if (team.isTotal) {
-					vo = new Hashtable<String, TeamAllVO>();
-				} else {
-					vo = new Hashtable<String, TeamAverageVO>();
-				}
-				if (team.isSort) {
-					String[] spl = team.sortField.split(",");
-					for (String s : spl) {
-						if (s.contains("point")) {
+					ArrayList<TeamAllVO> vo = t.getTeamAll();
+					if (team.isSort) {
+						String[] spl = team.sortField.split(",");
+						for (String s : spl) {
+							if (s.contains("point")) {
 
-						} else if (s.contains("rebound")) {
+							} else if (s.contains("rebound")) {
 
-						} else if (s.contains("assit")) {
+							} else if (s.contains("assit")) {
 
-						} else if (s.contains("blockShot")) {
+							} else if (s.contains("blockShot")) {
 
-						} else if (s.contains("steal")) {
+							} else if (s.contains("steal")) {
 
-						} else if (s.contains("foul")) {
+							} else if (s.contains("foul")) {
 
-						} else if (s.contains("fault")) {
+							} else if (s.contains("fault")) {
 
-						} else if (s.contains("shot")) {
+							} else if (s.contains("shot")) {
 
-						} else if (s.contains("three")) {
+							} else if (s.contains("three")) {
 
-						} else if (s.contains("penalty")) {
+							} else if (s.contains("penalty")) {
 
-						} else if (s.contains("defendRebound")) {
+							} else if (s.contains("defendRebound")) {
 
-						} else if (s.contains("offendRebound")) {
+							} else if (s.contains("offendRebound")) {
 
-						} else if (s.contains("rebound")) {
+							} else if (s.contains("rebound")) {
 
-						} else if (s.contains("winRate")) {
+							} else if (s.contains("winRate")) {
 
-						} else if (s.contains("offendRebound")) {
+							} else if (s.contains("offendRebound")) {
 
-						} else if (s.contains("offendEfficient")) {
+							} else if (s.contains("offendEfficient")) {
 
-						} else if (s.contains("defendEfficient")) {
+							} else if (s.contains("defendEfficient")) {
 
-						} else if (s.contains("offendReboundEfficient")) {
+							} else if (s.contains("offendReboundEfficient")) {
 
-						} else if (s.contains("defendReboundEfficient")) {
+							} else if (s.contains("defendReboundEfficient")) {
 
-						} else if (s.contains("assitEfficient")) {
+							} else if (s.contains("assitEfficient")) {
+
+							}
+						}
+						if (team.sortField.contains("asc")) {
+
+						} else if (team.sortField.contains("desc")) {
+
+						}
+						if (team.isHigh) {
+
+						} else {
+
+						}
+					} else if (!team.isSort) {
+						if (team.isHigh) {
+
+						} else {
 
 						}
 					}
-					if (team.sortField.contains("asc")) {
+				} else {
+					ArrayList<TeamAverageVO> vo = t.getTeamAverage();
+					if (team.isSort) {
+						String[] spl = team.sortField.split(",");
+						for (String s : spl) {
+							if (s.contains("point")) {
 
-					} else if (team.sortField.contains("desc")) {
+							} else if (s.contains("rebound")) {
 
-					}
-					if (team.isHigh) {
+							} else if (s.contains("assit")) {
 
-					} else {
+							} else if (s.contains("blockShot")) {
 
-					}
-				} else if (!team.isSort) {
-					if (team.isHigh) {
+							} else if (s.contains("steal")) {
 
-					} else {
+							} else if (s.contains("foul")) {
 
+							} else if (s.contains("fault")) {
+
+							} else if (s.contains("shot")) {
+
+							} else if (s.contains("three")) {
+
+							} else if (s.contains("penalty")) {
+
+							} else if (s.contains("defendRebound")) {
+
+							} else if (s.contains("offendRebound")) {
+
+							} else if (s.contains("rebound")) {
+
+							} else if (s.contains("winRate")) {
+
+							} else if (s.contains("offendRebound")) {
+
+							} else if (s.contains("offendEfficient")) {
+
+							} else if (s.contains("defendEfficient")) {
+
+							} else if (s.contains("offendReboundEfficient")) {
+
+							} else if (s.contains("defendReboundEfficient")) {
+
+							} else if (s.contains("assitEfficient")) {
+
+							}
+						}
+						if (team.sortField.contains("asc")) {
+
+						} else if (team.sortField.contains("desc")) {
+
+						}
+						if (team.isHigh) {
+
+						} else {
+
+						}
+					} else if (!team.isSort) {
+						if (team.isHigh) {
+
+						} else {
+
+						}
 					}
 				}
+
 			}
 		}
 	}

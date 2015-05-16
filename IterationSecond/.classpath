@@ -22,6 +22,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="batik-all-1.7.jar"/>
+	<classpathentry kind="lib" path="xml-apis-ext-1.3.04.jar"/>
 	<classpathentry kind="lib" path="testData.jar"/>
 	<classpathentry kind="lib" path="de.tototec.cmdoption-0.3.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>

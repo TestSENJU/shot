@@ -22,7 +22,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/eclipse/jar/htmlparser.jar"/>
-	<classpathentry kind="lib" path="D:/eclipse/jar/commons-httpclient-3.0.jar"/>
+	<classpathentry kind="lib" path="commons-httpclient-3.0.jar"/>
+	<classpathentry kind="lib" path="htmlparser.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

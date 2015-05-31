@@ -70,6 +70,7 @@ public void init(){
 	west.setBackground(MyColor.WHITE.getColor());
 		
 	frame=new JFrame();
+
 	frame.setSize(1000, 600);	
 	frame.setLayout(null);
 	frame.setLocationRelativeTo(null);

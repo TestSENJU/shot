@@ -2,16 +2,13 @@ package BL;
 
 import java.util.ArrayList;
 
-import vo.PlayerAllVO;
-import vo.PlayerAverageVO;
-import vo.PlayerShortVO;
 import Data.ReadFileThread;
 
 public class playerBL_Drive {
 public static void main(String args[]){	
 	ReadFileThread rft=new ReadFileThread("D://newData//matches");
 	rft.start();
-TeamBL teambl=new TeamBL_Impl();
+//TeamBL teambl=new TeamBL_Impl();
 ArrayList<Integer>nums=new ArrayList<Integer>();
 nums.add(0);
 nums.add(25);

@@ -32,7 +32,7 @@ JLabel search,showall;
 JPanel left,right;
 JLabel tip;
 private ArrayList<String>list=new ArrayList<String>();
-private String titlename[]=new String[]{"��Ƭ","����","����","λ��"};
+private String titlename[]=new String[]{"头像","姓名","球队","位置"};
 public PlayerExplorerPanel(){
 	init();
 	addComponent();
@@ -54,8 +54,8 @@ public void init(){
 	right.setBackground(MyColor.WHITE.getColor());
 	right.setBorder(new MatteBorder(1,1,1,1,MyColor.GREY.getColor()));
 	
-	title=new JLabel("��Ա�б�");
-	title.setFont(new Font("����",Font.PLAIN,20));
+	title=new JLabel("球队列表");
+	title.setFont(new Font("黑体",Font.PLAIN,20));
 	title.setForeground(MyColor.BLUE.getColor());
 	title.setBounds(30,20,120,50);
 
@@ -64,18 +64,18 @@ public void init(){
 	text=new JTextField(null);
 	text.setBounds(200, 35, 110, 25);
 	
-	search=new JLabel("����");
+	search=new JLabel("搜索");
 	search.setForeground(MyColor.BLUE.getColor());
-	search.setFont(new Font("����",Font.PLAIN,12));
+	search.setFont(new Font("黑体",Font.PLAIN,12));
 	search.setBounds(320, 35,30,25);
-	showall=new JLabel("��ʾȫ��");
+	showall=new JLabel("显示所有");
 	showall.setForeground(MyColor.BLUE.getColor());
-	showall.setFont(new Font("����",Font.PLAIN,12));
+	showall.setFont(new Font("黑体",Font.PLAIN,12));
 	showall.setBounds(350, 35,50,25);
 	
-	tip=new JLabel("��ѡ������б�����Ա����ʾ");
+	tip=new JLabel("选择左侧列表中的球员来显示详细信息");
 	tip.setForeground(MyColor.BLUE.getColor());
-	tip.setFont(new Font("����",Font.PLAIN,16));
+	tip.setFont(new Font("黑体",Font.PLAIN,16));
 	tip.setBounds(150, 275,300,25);
 
 	model=new DefaultTableModel(null, titlename){
@@ -113,7 +113,7 @@ public void init(){
 public void initTable(){
 	for(int i=0;i<200;i++){
 		Object[] ob=new Object[4];
-		ob[0]=new ImageIcon("myimg/search.png");
+		ob[0]=new ImageIcon("img/search.png");
 		ob[1]="Lebron James";
 		ob[2]="NOP";
 		ob[3]="A";
@@ -121,7 +121,7 @@ public void initTable(){
 		list.add((String) ob[1]);
 	}
 	Object[] ob=new Object[4];
-	ob[0]=new ImageIcon("myimg/search.png");
+	ob[0]=new ImageIcon("img/search.png");
 	ob[1]="Aaron Brooks";
 	ob[2]="NOP";
 	ob[3]="A";

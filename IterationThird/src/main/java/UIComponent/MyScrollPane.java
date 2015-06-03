@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.border.MatteBorder;
-//��д��jscrollpane�������˰�ɫ�ı�����ɫ���������µĹ������������˱߿�,�������µ�corner
+
 public class MyScrollPane extends JScrollPane{
 	/**
 	 * 

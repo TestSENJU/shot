@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
+import UIComponent.Match.MatchExplorerPanel;
 import UIComponent.Player.PlayerExplorerPanel;
 import UIComponent.Team.TeamExplorerPanel;
 
@@ -19,7 +20,7 @@ JFrame frame;
 JPanel west,center;
 JPanel title;
 JPanel total,detail;
-JLabel first,player,team,statics,search,refresh;
+JLabel first,player,team,match,statics,search,refresh;
 CloseButton closeButton;
 MiniButton miniButton;
 public MainFrame(){
@@ -38,18 +39,20 @@ public void open(){
 public void init(){
 	miniButton=new MiniButton();
 	closeButton=new CloseButton();
-	first=new JLabel(new ImageIcon("myimg/firstpage.png"));
-	first.setBounds(0,50 ,100 ,100 );
-	player=new JLabel(new ImageIcon("myimg/player.png"));
-	player.setBounds(0,150 ,100 ,100 );
-	team=new JLabel(new ImageIcon("myimg/team.png"));
-	team.setBounds(0,250 ,100 ,100 );
-	statics=new JLabel(new ImageIcon("myimg/statics.png"));
-	statics.setBounds(0, 350, 100, 100);
-	search=new JLabel(new ImageIcon("myimg/search.png"));
-	search.setBounds(0,450 ,100 ,100 );
-	refresh=new JLabel(new ImageIcon("myimg/refresh.png"));
-	refresh.setBounds(0,550,20,20);
+	first=new JLabel(new ImageIcon("img/home.png"));
+	first.setBounds(20,40 ,60 ,80 );
+	player=new JLabel(new ImageIcon("img/player.png"));
+	player.setBounds(20,120 ,60 ,80 );
+	team=new JLabel(new ImageIcon("img/team.png"));
+	team.setBounds(20,200 ,60 ,80 );
+	match=new JLabel(new ImageIcon("img/match.png"));
+	match.setBounds(20,280 ,60 ,80 );
+	statics=new JLabel(new ImageIcon("img/statics.png"));
+	statics.setBounds(20,360 ,60 ,80 );
+	search=new JLabel(new ImageIcon("img/search.png"));
+	search.setBounds(20,440 ,60 ,80 );
+	refresh=new JLabel(new ImageIcon("img/refresh.png"));
+	refresh.setBounds(20,520 ,60 ,80 );
 	
 	center=new JPanel();
 	center.setBackground(MyColor.WHITE.getColor());
@@ -86,13 +89,12 @@ public void addComponent(){
    west.add(first);
    west.add(player);
    west.add(team);
+   west.add(match);
    west.add(search);
    west.add(statics);
    west.add(refresh);
    
 	center.add(title);
-//	center.add(total);
-//	center.add(detail);
 	
 	frame.getContentPane().add(west);
 	frame.getContentPane().add(center);
@@ -123,6 +125,16 @@ public void setListener(){
 	player.addMouseListener(new MouseAdapter(){
 		public void mouseClicked(MouseEvent e){
 			PlayerExplorerPanel total=new PlayerExplorerPanel();
+			center.removeAll();
+			center.add(title);
+			center.add(total);
+			center.repaint();
+		}
+	});
+	match.addMouseListener(new MouseAdapter(){
+          public void mouseClicked(MouseEvent e){
+			
+			MatchExplorerPanel total=new MatchExplorerPanel();
 			center.removeAll();
 			center.add(title);
 			center.add(total);

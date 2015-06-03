@@ -33,9 +33,9 @@ public class MyComboBoxRenderer implements ListCellRenderer<Object> {
 			renderer.setForeground(MyColor.BLACK.getColor());
 			renderer.setBackground(MyColor.WHITE.getColor());
 		}
-		list.setSelectionBackground(Color.WHITE);
+		list.setSelectionBackground(new Color(245,245,245));
 		list.setBorder(null);
-		renderer.setFont(new Font("����", Font.PLAIN, 12));
+		renderer.setFont(new Font("黑体", Font.PLAIN, 12));
 		renderer.setHorizontalAlignment(JLabel.LEFT);
 		return renderer;
 	}

@@ -16,7 +16,7 @@ public class MiniButton extends JButton{
 	 public MiniButton(){ 
 	  this.setForeground(Color.white); 
 	  this.setUI(new BasicButtonUI()); 
-	  this.setToolTipText("��С��"); 
+	  this.setToolTipText("最小化"); 
 	  this.setBorderPainted(false); 
 	  this.setPreferredSize(dem);  
 	  this.addMouseListener(new MouseAdapter(){

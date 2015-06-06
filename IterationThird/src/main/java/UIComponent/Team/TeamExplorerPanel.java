@@ -22,7 +22,7 @@ public class TeamExplorerPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 JLabel west,east;
-JPanel right;
+JPanel jp;
 JPanel left;
 MyScrollPane jsp;
 JLabel tip;
@@ -201,85 +201,84 @@ public void initLabel(){
 	tip=new JLabel("选择左侧列表中的球队来显示详细信息");
 	tip.setForeground(MyColor.BLUE.getColor());
 	tip.setFont(new Font("黑体",Font.PLAIN,16));
-	tip.setBounds(130, 275,300,25);
+	tip.setBounds(530, 275,300,25);
 }
 public void initPanel(){
-
-	right=new JPanel();
-	right.setLayout(null);
-	right.setBounds(400,20,500, 580);
-	right.setBackground(MyColor.WHITE.getColor());
-	right.setBorder(new MatteBorder(0,1,1,1,MyColor.GREY.getColor()));
-	right.add(tip);
 	
-	   left=new JPanel();
-	   left.setLayout(null);
-	   left.setBackground(MyColor.WHITE.getColor());
-	   left.setPreferredSize(new Dimension(400,1600));
-	   left.add(east);
-			left.add(eastsouthlabel);
-			left.add(centerlabel);
-			left.add(westoceanlabel);
+	   jp=new JPanel();
+	   jp.setLayout(null);
+	   jp.setBackground(MyColor.WHITE.getColor());
+	   jp.setPreferredSize(new Dimension(400,1600));
+	        jp.add(east);
+			jp.add(eastsouthlabel);
+			jp.add(centerlabel);
+			jp.add(westoceanlabel);
 			for(int i=0;i<5;i++){
-				left.add(eastsouthicons[i]);
+				jp.add(eastsouthicons[i]);
 			}
 			for(int i=0;i<5;i++){
-				left.add(centericons[i]);
+				jp.add(centericons[i]);
 			}
 			for(int i=0;i<5;i++){
-				left.add(westoceanicons[i]);
+				jp.add(westoceanicons[i]);
 			}
 			for(int i=0;i<5;i++){
-				left.add(westsouthicons[i]);
+				jp.add(westsouthicons[i]);
 			}
 			for(int i=0;i<5;i++){
-				left.add(westnorthicons[i]);
+				jp.add(westnorthicons[i]);
 			}
 			for(int i=0;i<5;i++){
-				left.add(oceanicons[i]);
+				jp.add(oceanicons[i]);
 			}
 			
 			for(int i=0;i<5;i++){
-				left.add(eastsouthtexts[i]);
+				jp.add(eastsouthtexts[i]);
 			}
 			for(int i=0;i<5;i++){
-				left.add(centertexts[i]);
+				jp.add(centertexts[i]);
 			}
 			for(int i=0;i<5;i++){
-				left.add(westoceantexts[i]);
+				jp.add(westoceantexts[i]);
 			}
 			for(int i=0;i<5;i++){
-				left.add(westsouthtexts[i]);
+				jp.add(westsouthtexts[i]);
 			}
 			for(int i=0;i<5;i++){
-				left.add(westnorthtexts[i]);
+				jp.add(westnorthtexts[i]);
 			}
 			for(int i=0;i<5;i++){
-				left.add(oceantexts[i]);
+				jp.add(oceantexts[i]);
 			}
-			left.add(west);
-			left.add(westsouthlabel);
-			left.add(westnorthlabel);
-			left.add(oceanlabel);
-			left.add(centerlabel);
-			
-			
-		    jsp=new MyScrollPane(left);
+			jp.add(west);
+			jp.add(westsouthlabel);
+			jp.add(westnorthlabel);
+			jp.add(oceanlabel);
+			jp.add(centerlabel);
+					
+		    jsp=new MyScrollPane(jp);
+		    jsp.setVisible(true);
 		    jsp.setOpaque(false);
-			jsp.setBounds(0, 20, 400, 580);
+			jsp.setBounds(0,0, 400, 580);
 			jsp.setBorder(new MatteBorder(0,1,1,1,MyColor.GREY.getColor()));
 		    jsp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		    jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
+		    
+		    left=new JPanel();
+		    left.setBackground(MyColor.WHITE.getColor());
+		    left.setLayout(null);
+		    left.setBounds(0, 0, 400, 580);
 }
 public void initFrame(){
-	this.setBounds(0, 0, 900, 600);
-	this.setBackground(MyColor.WHITE.getColor());
-	this.setBorder(new MatteBorder(1,1,1,1,MyColor.GREY.getColor()));
-	this.setLayout(null);
-	this.add(jsp);
-	this.add(right);
+	left.add(jsp);
 	
+	this.setLayout(null);
+	this.setBounds(0, 20, 900, 580);
+	this.setBackground(MyColor.WHITE.getColor());
+	this.setBorder(new MatteBorder(0,1,1,1,MyColor.GREY.getColor()));
+	this.add(left);
+	this.add(tip);
+
 }
 public void setListener(){
 	for(int i=0;i<5;i++){
@@ -298,9 +297,24 @@ public void setListener(){
 		         tmp.setForeground(MyColor.RED.getColor());
                 String str=tmp.getText();
                 String s[]=str.split(">")[2].split("<");
-                right.removeAll();
-                right.add(new TeamDetailPanel(s[0]));
-                right.repaint();
+                if(getComponentAt(530,275)instanceof JLabel){
+                	 remove(tip);
+                     TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                     team.setBounds(400, 20, 500, 580);
+                     add(team);
+                     repaint();
+                }else if(getComponentAt(530,275)instanceof TeamDetailPanel){
+                	TeamDetailPanel teamold=(TeamDetailPanel)getComponentAt(530,275);
+                	if(s[0].equals(teamold.getTeam())){
+                	}else{
+                		 TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                         team.setBounds(400, 20, 500, 580);
+                         remove(getComponentAt(530,275));
+                         add(team);
+                         repaint();
+                	}
+                }
+               
 			}
 		});
 	}
@@ -320,9 +334,23 @@ public void setListener(){
 		         tmp.setForeground(MyColor.RED.getColor());
               String str=tmp.getText();
               String s[]=str.split(">")[2].split("<");
-              right.removeAll();
-              right.add(new TeamDetailPanel(s[0]));
-              right.repaint();
+              if(getComponentAt(530,275)instanceof JLabel){
+             	 remove(tip);
+                  TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                  team.setBounds(400, 20, 500, 580);
+                  add(team);
+                  repaint();
+             }else if(getComponentAt(530,275)instanceof TeamDetailPanel){
+             	TeamDetailPanel teamold=(TeamDetailPanel)getComponentAt(530,275);
+             	if(s[0].equals(teamold.getTeam())){
+             	}else{
+             		 TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                      team.setBounds(400, 20, 500, 580);
+                      remove(getComponentAt(530,275));
+                      add(team);
+                      repaint();
+             	}
+             }
 			}
 		});
 	}
@@ -342,9 +370,23 @@ public void setListener(){
 		         tmp.setForeground(MyColor.RED.getColor());
               String str=tmp.getText();
               String s[]=str.split(">")[2].split("<");
-              right.removeAll();
-              right.add(new TeamDetailPanel(s[0]));
-              right.repaint();
+              if(getComponentAt(530,275)instanceof JLabel){
+             	 remove(tip);
+                  TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                  team.setBounds(400, 20, 500, 580);
+                  add(team);
+                  repaint();
+             }else if(getComponentAt(530,275)instanceof TeamDetailPanel){
+             	TeamDetailPanel teamold=(TeamDetailPanel)getComponentAt(530,275);
+             	if(s[0].equals(teamold.getTeam())){
+             	}else{
+             		 TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                      team.setBounds(400, 20, 500, 580);
+                      remove(getComponentAt(530,275));
+                      add(team);
+                      repaint();
+             	}
+             }
 			}
 		});
 	}
@@ -364,9 +406,23 @@ public void setListener(){
 		         tmp.setForeground(MyColor.RED.getColor());
               String str=tmp.getText();
               String s[]=str.split(">")[2].split("<");
-              right.removeAll();
-              right.add(new TeamDetailPanel(s[0]));
-              right.repaint();
+              if(getComponentAt(530,275)instanceof JLabel){
+             	 remove(tip);
+                  TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                  team.setBounds(400, 20, 500, 580);
+                  add(team);
+                  repaint();
+             }else if(getComponentAt(530,275)instanceof TeamDetailPanel){
+             	TeamDetailPanel teamold=(TeamDetailPanel)getComponentAt(530,275);
+             	if(s[0].equals(teamold.getTeam())){
+             	}else{
+             		 TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                      team.setBounds(400, 20, 500, 580);
+                      remove(getComponentAt(530,275));
+                      add(team);
+                      repaint();
+             	}
+             }
 			}
 		});
 	}
@@ -386,9 +442,23 @@ public void setListener(){
 		         tmp.setForeground(MyColor.RED.getColor());
               String str=tmp.getText();
               String s[]=str.split(">")[2].split("<");
-              right.removeAll();
-              right.add(new TeamDetailPanel(s[0]));
-              right.repaint();
+              if(getComponentAt(530,275)instanceof JLabel){
+             	 remove(tip);
+                  TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                  team.setBounds(400, 20, 500, 580);
+                  add(team);
+                  repaint();
+             }else if(getComponentAt(530,275)instanceof TeamDetailPanel){
+             	TeamDetailPanel teamold=(TeamDetailPanel)getComponentAt(530,275);
+             	if(s[0].equals(teamold.getTeam())){
+             	}else{
+             		 TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                      team.setBounds(400, 20, 500, 580);
+                      remove(getComponentAt(530,275));
+                      add(team);
+                      repaint();
+             	}
+             }
 			}
 		});
 	}
@@ -408,9 +478,23 @@ public void setListener(){
 		      tmp.setForeground(MyColor.RED.getColor());
               String str=tmp.getText();
               String s[]=str.split(">")[2].split("<");
-              right.removeAll();
-              right.add(new TeamDetailPanel(s[0]));
-              right.repaint();
+              if(getComponentAt(530,275)instanceof JLabel){
+             	 remove(tip);
+                  TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                  team.setBounds(400, 20, 500, 580);
+                  add(team);
+                  repaint();
+             }else if(getComponentAt(530,275)instanceof TeamDetailPanel){
+             	TeamDetailPanel teamold=(TeamDetailPanel)getComponentAt(530,275);
+             	if(s[0].equals(teamold.getTeam())){
+             	}else{
+             		 TeamDetailPanel team=new TeamDetailPanel(s[0]);
+                      team.setBounds(400, 20, 500, 580);
+                      remove(getComponentAt(530,275));
+                      add(team);
+                      repaint();
+             	}
+             }
 			}
 		});
 	}

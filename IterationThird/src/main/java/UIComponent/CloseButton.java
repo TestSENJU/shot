@@ -17,7 +17,8 @@ public class CloseButton extends JButton{
  public CloseButton(){ 
   this.setForeground(Color.white); 
   this.setPreferredSize(dem); 
-  this.setToolTipText("�ر�");
+  this.setToolTipText("关闭");
+  
   this.setBorderPainted(false);
  
   this.addMouseListener(new MouseAdapter(){

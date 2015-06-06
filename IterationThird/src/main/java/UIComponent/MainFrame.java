@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -16,13 +17,16 @@ import UIComponent.Player.PlayerExplorerPanel;
 import UIComponent.Team.TeamExplorerPanel;
 
 public class MainFrame {
-JFrame frame;
+static JFrame frame;
 JPanel west,center;
 JPanel title;
 JPanel total,detail;
 JLabel first,player,team,match,statics,search,refresh;
 CloseButton closeButton;
 MiniButton miniButton;
+private int xx, yy;
+private boolean isDraging = false;
+
 public MainFrame(){
 
 	init();
@@ -94,7 +98,7 @@ public void addComponent(){
    west.add(statics);
    west.add(refresh);
    
-	center.add(title);
+	center.add(title,0);
 	
 	frame.getContentPane().add(west);
 	frame.getContentPane().add(center);
@@ -115,6 +119,28 @@ public void setBasicListener(){
 	});
 }
 public void setListener(){
+       frame.addMouseListener(new MouseAdapter() {
+		 public void mousePressed(MouseEvent e) {
+
+		isDraging = true;
+		xx = e.getX();
+		yy = e.getY();
+		 }
+
+		 public void mouseReleased(MouseEvent e) {
+		isDraging = false;
+		 }
+		 });
+	frame.addMouseMotionListener(new MouseMotionAdapter() {
+		 public void mouseDragged(MouseEvent e) {
+
+		if (isDraging) {
+		 int left = frame.getLocation().x;
+		 int top = frame.getLocation().y;
+		 frame.setLocation(left + e.getX() - xx, top + e.getY() - yy);
+		} 
+		 }
+		 });
 	first.addMouseListener(new MouseAdapter(){
 		public void mouseClicked(MouseEvent e){
 			center.removeAll();
@@ -124,31 +150,36 @@ public void setListener(){
 	});
 	player.addMouseListener(new MouseAdapter(){
 		public void mouseClicked(MouseEvent e){
-			PlayerExplorerPanel total=new PlayerExplorerPanel();
-			center.removeAll();
-			center.add(title);
-			center.add(total);
-			center.repaint();
+			if(!(center.getComponentAt(0,20) instanceof PlayerExplorerPanel)){
+					PlayerExplorerPanel total=new PlayerExplorerPanel();
+					center.removeAll();
+					center.add(title);
+					center.add(total);
+					center.repaint();
+			}
 		}
 	});
 	match.addMouseListener(new MouseAdapter(){
           public void mouseClicked(MouseEvent e){
-			
-			MatchExplorerPanel total=new MatchExplorerPanel();
+  			if(!(center.getComponentAt(0,20) instanceof MatchExplorerPanel)){
+  				MatchExplorerPanel total=new MatchExplorerPanel();
 			center.removeAll();
 			center.add(title);
 			center.add(total);
 			center.repaint();
+  			}		
 		}
 	});
 	team.addMouseListener(new MouseAdapter(){
 		public void mouseClicked(MouseEvent e){
-			
-			TeamExplorerPanel total=new TeamExplorerPanel();
+  			if(!(center.getComponentAt(0,20) instanceof TeamExplorerPanel)){
+  					TeamExplorerPanel total=new TeamExplorerPanel();
 			center.removeAll();
 			center.add(title);
 			center.add(total);
 			center.repaint();
+  			}
+		
 		}
 	});
 	statics.addMouseListener(new MouseAdapter(){
@@ -162,8 +193,24 @@ public void setListener(){
 		}
 	});
 }
+
 public static void main(String args[]){
-	MainFrame frame=new MainFrame();
-	frame.open();
+	MainFrame test=new MainFrame();
+
+	test.open();
+	
+//	Thread thread=new Thread(){
+//		public void run(){
+//			try {
+//				Thread.sleep(10000);
+//				frame.repaint();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//	};
+//	thread.start();
 }
 }
+

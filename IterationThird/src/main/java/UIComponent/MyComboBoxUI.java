@@ -31,9 +31,9 @@ public class MyComboBoxUI extends BasicComboBoxUI {
 
 	protected JButton createArrowButton() {
 		arrow = new JButton();
-		arrow.setIcon(new ImageIcon("img/TFIUA[5%}EG%VQAF5B[0D10.png"));//XUtil.defaultComboBoxArrowIcon
+		arrow.setIcon(new ImageIcon("img/arrowright.png"));
 		arrow.setRolloverEnabled(true);
-		arrow.setRolloverIcon(new ImageIcon("img/TFIUA[5%}EG%VQAF5B[0D10.png"));//XUtil.defaultComboBoxArrowIcon_Into
+		arrow.setRolloverIcon(new ImageIcon("img/arrowdown.png"));//XUtil.defaultComboBoxArrowIcon_Into
 		arrow.setBorder(null);
 		arrow.setBackground(Color.BLUE);//XUtil.defaultComboBoxColor
 		arrow.setOpaque(false);
@@ -57,7 +57,7 @@ public class MyComboBoxUI extends BasicComboBoxUI {
 
 	public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
 		Font oldFont = comboBox.getFont();
-		comboBox.setFont(new Font("����", Font.PLAIN, 12));//TODO XUtil.defaultComboBoxFont
+		comboBox.setFont(new Font("黑体", Font.PLAIN, 12));//TODO XUtil.defaultComboBoxFont
 
 		super.paintCurrentValue(g, bounds, hasFocus);
 		comboBox.setFont(oldFont);

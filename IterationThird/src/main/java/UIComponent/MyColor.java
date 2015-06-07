@@ -21,7 +21,8 @@ public enum MyColor{
 	    PURPLE(127,102,149),
 	    BLACK(80,51,51),
 	    DARKWHITE(220,220,220),
-	    BLUE(77,137,193);
+	    BLUE(77,137,193),
+	    LIGHTBLUE(232,242,254);
 	    
 
 	    private final int r;

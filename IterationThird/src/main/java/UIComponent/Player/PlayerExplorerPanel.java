@@ -108,15 +108,6 @@ public void init(){
 	this.setLayout(null);
 }
 public void initTable(){
-	for(int i=0;i<200;i++){
-		Object[] ob=new Object[4];
-		ob[0]=new ImageIcon("img/search.png");
-		ob[1]="Lebron James";
-		ob[2]="NOP";
-		ob[3]="A";
-		model.addRow(ob);
-		list.add((String) ob[1]);
-	}
 	Object[] ob=new Object[4];
 	ob[0]=new ImageIcon("img/search.png");
 	ob[1]="Aaron Brooks";
@@ -124,6 +115,16 @@ public void initTable(){
 	ob[3]="A";
 	model.addRow(ob);
 	list.add((String) ob[1]);
+	for(int i=0;i<200;i++){
+		ob=new Object[4];
+		ob[0]=new ImageIcon("img/search.png");
+		ob[1]="Lebron James";
+		ob[2]="NOP";
+		ob[3]="A";
+		model.addRow(ob);
+		list.add((String) ob[1]);
+	}
+
 }
 public void addComponent(){
 	left.add(title);

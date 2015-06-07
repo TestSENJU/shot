@@ -70,132 +70,133 @@ public void initLabel(){
 	west=new JLabel("西部分区");
 	west.setForeground(MyColor.BLUE.getColor());
 	west.setFont(new Font("黑体",Font.PLAIN,20));
-	west.setBounds(30, 790, 370, 50);
+	west.setBounds(30, 790, 350, 50);
 	
 	east=new JLabel("东部分区");
 	east.setForeground(MyColor.BLUE.getColor());
 	east.setFont(new Font("黑体",Font.PLAIN,20));
-	east.setBounds(30,10,370,50);
-//	JLabel eastsouthicons[];
+	east.setBounds(30,10,350,50);
+
 	eastsouthicons=new JLabel[5];
 	for(int i=0;i<5;i++){
 		eastsouthicons[i]=new JLabel(new ImageIcon(eastsouthpath[i]));
-		eastsouthicons[i].setBounds(15, 110+130*i, 100, 100);
+		eastsouthicons[i].setBounds(10, 110+130*i, 100, 100);
+	}
+	eastsouthtexts=new JLabel[5];
+	for(int i=0;i<5;i++){
+		eastsouthtexts[i]=new JLabel("<HTML><U>"+eastsouth[i]+"</U></HTML>");
+		eastsouthtexts[i].setForeground(MyColor.BLACK.getColor());
+		eastsouthtexts[i].setFont(new Font("黑体",Font.PLAIN,12));
+		eastsouthtexts[i].setBounds(0, 210+130*i, 130, 30);
+		eastsouthtexts[i].setHorizontalAlignment(SwingConstants.CENTER);
 	}
 //	JLabel centericons[];
 	centericons=new JLabel[5];
 	for(int i=0;i<5;i++){
 		centericons[i]=new JLabel(new ImageIcon(centerpath[i]));
-		centericons[i].setBounds(145, 110+130*i, 100, 100);
-	}
-//	JLabel westoceanicons[];
-	westoceanicons=new JLabel[5];
-	for(int i=0;i<5;i++){
-		westoceanicons[i]=new JLabel(new ImageIcon(westoceanpath[i]));
-		westoceanicons[i].setBounds(275, 110+130*i, 100, 100);
-	}
-//	JLabel westsouthicons[];
-	westsouthicons=new JLabel[5];
-	for(int i=0;i<5;i++){
-		westsouthicons[i]=new JLabel(new ImageIcon(westsouthpath[i]));
-		westsouthicons[i].setBounds(15, 900+130*i, 100, 100);
-	}
-//	JLabel westnorthicons[];
-	westnorthicons=new JLabel[5];
-	for(int i=0;i<5;i++){
-		westnorthicons[i]=new JLabel(new ImageIcon(westnorthpath[i]));
-		westnorthicons[i].setBounds(145, 900+130*i, 100, 100);
-	}
-//	JLabel oceanicons[];
-	oceanicons=new JLabel[5];
-	for(int i=0;i<5;i++){
-		oceanicons[i]=new JLabel(new ImageIcon(oceanpath[i]));
-		oceanicons[i].setBounds(275, 900+130*i, 100, 100);
-	}
-	
-	eastsouthtexts=new JLabel[5];
-	for(int i=0;i<5;i++){
-		eastsouthtexts[i]=new JLabel("<HTML><U>"+eastsouth[i]+"</U></HTML>");
-		eastsouthtexts[i].setForeground(MyColor.BLACK.getColor());
-		eastsouthtexts[i].setFont(new Font("黑体",Font.PLAIN,14));
-		eastsouthtexts[i].setBounds(5, 210+130*i, 130, 30);
-		eastsouthtexts[i].setHorizontalAlignment(SwingConstants.CENTER);
+		centericons[i].setBounds(140, 110+130*i, 100, 100);
 	}
 	centertexts=new JLabel[5];
 	for(int i=0;i<5;i++){
 		centertexts[i]=new JLabel("<HTML><U>"+center[i]+"</U></HTML>");
 		centertexts[i].setForeground(MyColor.BLACK.getColor());
-		centertexts[i].setFont(new Font("黑体",Font.PLAIN,14));
-		centertexts[i].setBounds(135, 210+130*i, 130, 30);
+		centertexts[i].setFont(new Font("黑体",Font.PLAIN,12));
+		centertexts[i].setBounds(126, 210+130*i, 130, 30);
 		centertexts[i].setHorizontalAlignment(SwingConstants.CENTER);
+	}
+//	JLabel westoceanicons[];
+	westoceanicons=new JLabel[5];
+	for(int i=0;i<5;i++){
+		westoceanicons[i]=new JLabel(new ImageIcon(westoceanpath[i]));
+		westoceanicons[i].setBounds(270, 110+130*i, 100, 100);
 	}
 	westoceantexts=new JLabel[5];
 	for(int i=0;i<5;i++){
 		westoceantexts[i]=new JLabel("<HTML><U>"+westocean[i]+"</U></HTML>");
 		westoceantexts[i].setForeground(MyColor.BLACK.getColor());
-		westoceantexts[i].setFont(new Font("黑体",Font.PLAIN,14));
-		westoceantexts[i].setBounds(265, 210+130*i, 130, 30);
+		westoceantexts[i].setFont(new Font("黑体",Font.PLAIN,12));
+		westoceantexts[i].setBounds(254, 210+130*i, 130, 30);
 		westoceantexts[i].setHorizontalAlignment(SwingConstants.CENTER);
+	}
+//	JLabel westsouthicons[];
+	westsouthicons=new JLabel[5];
+	for(int i=0;i<5;i++){
+		westsouthicons[i]=new JLabel(new ImageIcon(westsouthpath[i]));
+		westsouthicons[i].setBounds(10, 900+130*i, 100, 100);
 	}
 	westsouthtexts=new JLabel[5];
 	for(int i=0;i<5;i++){
 		westsouthtexts[i]=new JLabel("<HTML><U>"+westsouth[i]+"</U></HTML>");
 		westsouthtexts[i].setForeground(MyColor.BLACK.getColor());
-		westsouthtexts[i].setFont(new Font("黑体",Font.PLAIN,14));
-		westsouthtexts[i].setBounds(5, 1000+130*i, 130, 30);
+		westsouthtexts[i].setFont(new Font("黑体",Font.PLAIN,12));
+		westsouthtexts[i].setBounds(0, 1000+130*i, 130, 30);
 		westsouthtexts[i].setHorizontalAlignment(SwingConstants.CENTER);
+	}
+//	JLabel westnorthicons[];
+	westnorthicons=new JLabel[5];
+	for(int i=0;i<5;i++){
+		westnorthicons[i]=new JLabel(new ImageIcon(westnorthpath[i]));
+		westnorthicons[i].setBounds(140, 900+130*i, 100, 100);
 	}
 	westnorthtexts=new JLabel[5];
 	for(int i=0;i<5;i++){
 		westnorthtexts[i]=new JLabel("<HTML><U>"+westnorth[i]+"</U></HTML>");
 		westnorthtexts[i].setForeground(MyColor.BLACK.getColor());
-		westnorthtexts[i].setFont(new Font("黑体",Font.PLAIN,14));
-		westnorthtexts[i].setBounds(135, 1000+130*i, 130, 30);
+		westnorthtexts[i].setFont(new Font("黑体",Font.PLAIN,12));
+		westnorthtexts[i].setBounds(126, 1000+130*i, 130, 30);
 		westnorthtexts[i].setHorizontalAlignment(SwingConstants.CENTER);
 	}
+//	JLabel oceanicons[];
+	oceanicons=new JLabel[5];
+	for(int i=0;i<5;i++){
+		oceanicons[i]=new JLabel(new ImageIcon(oceanpath[i]));
+		oceanicons[i].setBounds(270, 900+130*i, 100, 100);
+	}
+	
+
 	oceantexts=new JLabel[5];
 	for(int i=0;i<5;i++){
 		oceantexts[i]=new JLabel("<HTML><U>"+ocean[i]+"</U></HTML>");
 		oceantexts[i].setForeground(MyColor.BLACK.getColor());
 		oceantexts[i].setFont(new Font("黑体",Font.PLAIN,14));
-		oceantexts[i].setBounds(265, 1000+130*i, 130, 30);
+		oceantexts[i].setBounds(254, 1000+130*i, 130, 30);
 		oceantexts[i].setHorizontalAlignment(SwingConstants.CENTER);
 	}
 	
 	eastsouthlabel=new JLabel("东南分区");
 	eastsouthlabel.setForeground(MyColor.PURPLE.getColor());
 	eastsouthlabel.setFont(new Font("黑体",Font.PLAIN,18));
-	eastsouthlabel.setBounds(5, 70, 130, 30);
+	eastsouthlabel.setBounds(0, 70, 130, 30);
 	eastsouthlabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 	centerlabel=new JLabel("中央分区");
 	centerlabel.setForeground(MyColor.PURPLE.getColor());
 	centerlabel.setFont(new Font("黑体",Font.PLAIN,18));
-	centerlabel.setBounds(135, 70, 130, 30);
+	centerlabel.setBounds(126, 70, 130, 30);
 	centerlabel.setHorizontalAlignment(SwingConstants.CENTER);
 	
 	westoceanlabel=new JLabel("大西洋分区");
 	westoceanlabel.setForeground(MyColor.PURPLE.getColor());
 	westoceanlabel.setFont(new Font("黑体",Font.PLAIN,18));
-	westoceanlabel.setBounds(265, 70, 130, 30);
+	westoceanlabel.setBounds(254, 70, 130, 30);
 	westoceanlabel.setHorizontalAlignment(SwingConstants.CENTER);
 	
 	westsouthlabel=new JLabel("西南分区");
 	westsouthlabel.setForeground(MyColor.PURPLE.getColor());
 	westsouthlabel.setFont(new Font("黑体",Font.PLAIN,18));
-	westsouthlabel.setBounds(5, 860, 130, 30);
+	westsouthlabel.setBounds(0, 860, 130, 30);
 	westsouthlabel.setHorizontalAlignment(SwingConstants.CENTER);
 	
 	westnorthlabel=new JLabel("西北分区");
 	westnorthlabel.setForeground(MyColor.PURPLE.getColor());
 	westnorthlabel.setFont(new Font("黑体",Font.PLAIN,18));
-	westnorthlabel.setBounds(135, 860, 130, 30);
+	westnorthlabel.setBounds(126, 860, 130, 30);
 	westnorthlabel.setHorizontalAlignment(SwingConstants.CENTER);
 	
 	oceanlabel=new JLabel("太平洋分区");
 	oceanlabel.setForeground(MyColor.PURPLE.getColor());
 	oceanlabel.setFont(new Font("黑体",Font.PLAIN,18));
-	oceanlabel.setBounds(265, 860, 130, 30);
+	oceanlabel.setBounds(254, 860, 130, 30);
 	oceanlabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 	tip=new JLabel("选择左侧列表中的球队来显示详细信息");
@@ -208,7 +209,7 @@ public void initPanel(){
 	   jp=new JPanel();
 	   jp.setLayout(null);
 	   jp.setBackground(MyColor.WHITE.getColor());
-	   jp.setPreferredSize(new Dimension(400,1600));
+	   jp.setPreferredSize(new Dimension(380,1600));
 	        jp.add(east);
 			jp.add(eastsouthlabel);
 			jp.add(centerlabel);
@@ -270,13 +271,13 @@ public void initPanel(){
 		    left.setBounds(0, 0, 400, 580);
 }
 public void initFrame(){
-	left.add(jsp);
+	//left.add(jsp);
 	
 	this.setLayout(null);
 	this.setBounds(0, 20, 900, 580);
 	this.setBackground(MyColor.WHITE.getColor());
 	this.setBorder(new MatteBorder(0,1,1,1,MyColor.GREY.getColor()));
-	this.add(left);
+	this.add(jsp);
 	this.add(tip);
 
 }
@@ -497,8 +498,6 @@ public void setListener(){
              }
 			}
 		});
-	}
-	
+	}	
 }
-
 }

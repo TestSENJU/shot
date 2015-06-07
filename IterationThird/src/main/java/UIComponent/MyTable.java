@@ -28,10 +28,10 @@ public class MyTable extends JTable{
            tableHeader.setOpaque(false);
            tableHeader.setBorder(new MatteBorder(1,1,1,1,MyColor.GREY.getColor()));
            
-           tableHeader.setBackground(MyColor.WHITE.getColor());
-           tableHeader.setReorderingAllowed(false);//����в����ƶ�  
+           tableHeader.setBackground(MyColor.LIGHTBLUE.getColor());
+           tableHeader.setReorderingAllowed(false);
            DefaultTableCellRenderer hr = (DefaultTableCellRenderer) tableHeader.getDefaultRenderer();  
-           hr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);//��������  
+           hr.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
            return tableHeader;  
 	 }  
 

@@ -24,5 +24,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="commons-httpclient-3.0.jar"/>
 	<classpathentry kind="lib" path="htmlparser.jar"/>
+	<classpathentry kind="lib" path="jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="jfreechart-1.0.19.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
